@@ -1,16 +1,39 @@
 {
   "name": "wrightstream",
   "version": "0.1.0",
+  "description": "The ultimate workflow tool for artisans",
   "private": true,
-  "dependencies": {
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "react-scripts": "1.1.4"
-  },
+  "main": "./public/index.html",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "keywords": [
+    "html",
+    "css",
+    "sass",
+    "javascript",
+    "jquery",
+    "react",
+    "redux",
+    "bulma",
+    "axios"
+  ],
+  "author": [
+    "Claudia Ligidakis <cligidakis@gmail.com>",
+    "Vikanda Gonzales <vikanda.gonzales@gmail.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "jquery": "^3.3.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-redux": "^5.0.7",
+    "react-scripts": "1.1.4",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.2.0"
   }
 }
