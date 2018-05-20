@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./public/assets/wrightstream-logo.svg" alt="WrightStream" width="325">
+  <img src="./public/assets/wrightstream-logo.svg" alt="WrightStream" width="300">
   <br>
   The ultimate workflow tool for artisans
 </p>
