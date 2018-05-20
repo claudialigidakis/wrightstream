@@ -4,6 +4,8 @@
   The ultimate workflow tool for artisans
 </p>
 
+---
+
 ### Philosophy
 Our mission is to assist artisans with business planning so they can focus on creating.
 
