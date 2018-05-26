@@ -7,10 +7,10 @@
 ---
 
 
-## Philosophy
+# Philosophy
 Our mission is to assist artisans with business planning so they can focus on  what they do best — creating.
 
-## What is WrightStream?
+# What is WrightStream?
 
 WrightStream is a web, tablet, and mobile application designed to make day-to-day business operations smoother for makers, builders, and crafters by automating their workflow.
 
@@ -21,7 +21,7 @@ WrightStream is a web, tablet, and mobile application designed to make day-to-da
 ### Built for Growth
 
 
-## Features
+# Features
 
 ### Workflow Dashboard
 Our app imports all purchases from e-commerce sites like Etsy and Shopify and creates a dashboard that serves as a hub for everything your customers have bought from your store. Each purchase will show what products were ordered, the supplies needed and steps required to make each product, in addition to other post-production operations, such as quality check and delivery.
@@ -35,7 +35,7 @@ An innovative feature we’ve decided to implement is the estimator, which is es
 ### Staff Management
 We know how difficult it is to manage more than a couple of people in a workshop setting, especially when every product is custom-made. Our app allows shop owners and managers to assign tasks to employees, which employees can then see in their personalized dashboard. That way, they can minimize distractions and focus on creating without compromising an organized workflow.
 
-## Creators
+# Creators
 
 **Claudia Ligidakis**
 - https://github.com/claudialigidakis
@@ -43,5 +43,5 @@ We know how difficult it is to manage more than a couple of people in a workshop
 **Vikanda Gonzales**
 - https://github.com/vikandagonzales
 
-## Copyright
+# Copyright
 WrightStream &copy; 2018 Claudia Ligidakis & Vikanda Gonzales
