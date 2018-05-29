@@ -41,11 +41,11 @@ An innovative feature we’ve decided to implement is the estimator, which is es
 We know how difficult it is to manage more than a couple of people in a workshop setting, especially when every product is custom-made. Our app allows shop owners and managers to assign tasks to employees, which employees can then see in their personalized dashboard. That way, they can minimize distractions and focus on creating without compromising an organized workflow.
 
 ## Creators
-WrightStream was created by two developers, [Claudia](https://github.com/claudialigidakis) and [Vika](https://github.com/vikandagonzales). As former classmates in the Galvanize Web Development program, the two quickly bonded over their shared interest in creating things to solve problems.
+WrightStream was created by two developers, [Claudia](https://github.com/claudialigidakis) and [Vika](https://github.com/vikandagonzales). As former classmates in the Galvanize Web Development program, the two quickly bonded over their shared passion for making things and solving problems. With WrightStream, they're doing both!
 
-Claudia and Vika make the dream team — having diverse backgrounds, perspectives, and personalities ensured all bases would be covered, from the planning stages all the way to execution. While Claudia has a knack for formulating ideas to fix real-world issues, Vika meticulously plots small-scale solutions to steadily fulfill Claudia’s big picture. Previously a designer, Vika loved the front-end and everything beautiful, spending most of her time crafting an experience that is as intuitive as possible. Meanwhile, Claudia took care of the back-end. She loved getting her hands dirty with connecting all the pieces behind the scenes to make the result seamless and functional.
+Claudia and Vika make the dream team — having diverse backgrounds, perspectives, and personalities ensured all bases would be covered, from the planning stages all the way to execution. While Claudia has a knack for formulating ideas to fix real-world issues, Vika meticulously plots small-scale solutions to steadily fulfill Claudia’s big picture. Previously a designer, Vika loves the front-end and everything beautiful, spending most of her time crafting an experience that is as intuitive as possible. Meanwhile, Claudia took care of the back-end as she loves connecting the pieces behind the scenes to make the result seamless and functional.
 
-The two don’t intend on stopping after WrightStream — together, they hope to continue creating to solve problems and help others.
+The two don’t intend on stopping after WrightStream. Together, they hope to continue creating to solve problems and help others.
 
 **Claudia Ligidakis**
 - https://github.com/claudialigidakis
