@@ -23,12 +23,12 @@ class Header extends React.Component {
             <Navbar.Burger />
           </Navbar.Brand>
           <Navbar.Menu>
-            {this.props.user.name ?
+            {this.props.user.first_name ?
               (
                 <Navbar.Container position="end">
                   <Navbar.Item Dropdown hoverable>
                     <Navbar.Link>
-                      Name
+                      {this.props.user.first_name}
                     </Navbar.Link>
                     <Navbar.Dropdown boxed>
                       <Navbar.Item href="/settings">
