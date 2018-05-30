@@ -1,16 +1,13 @@
 // REACT
 import React from 'react';
 
-// ROUTER
-import { Link } from 'react-router-dom';
-
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { userLogout } from '../actions/auth.actions';
 
 // BULMA
-import { Navbar } from 'react-bulma-components/full';
+import { Navbar, Input } from 'react-bulma-components/full';
 
 // ==========
 
@@ -20,7 +17,7 @@ class Header extends React.Component {
       <div>
         <Navbar>
           <Navbar.Brand>
-            <Navbar.Item href="#">
+            <Navbar.Item href="/">
               WrightStream
             </Navbar.Item>
             <Navbar.Burger />
