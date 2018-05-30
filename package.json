@@ -31,6 +31,8 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/react-fontawesome": "0.0.20",
     "@vizuaalog/bulmajs": "^0.3.1",
     "autoprefixer": "^8.5.0",
     "axios": "^0.18.0",
@@ -40,11 +42,14 @@
     "node-sass": "^4.9.0",
     "postcss-cli": "^5.0.0",
     "react": "^16.3.2",
+    "react-bulma-components": "^1.4.5",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
-    "reactbulma": "^3.0.4",
     "redux": "^4.0.0",
+    "redux-form": "^7.3.0",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0"
   }
 }
