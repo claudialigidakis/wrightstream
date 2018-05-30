@@ -10,37 +10,37 @@ import { userLogin } from '../actions/auth.actions';
 
 class Login extends React.Component {
   state = {
-    // shop: '',
+    shop_id: '',
     email: '',
     password: ''
-  }
+  };
 
   handleLogin = e => {
-    e.preventDefault()
-    this.props.userLogin(this.state, this.props.history)
-  }
+    e.preventDefault();
+    this.props.userLogin(this.state, this.props.history);
+  };
 
-  render() {
+  render () {
     return (
-      <section className="hero is-fullheight is-dark is-bold">
+      <section className="hero is-medium is-dark is-bold">
         <div className="hero-body">
           <div className="container">
             <div className="columns">
               <div className="column is-4-desktop is-offset-4-desktop">
                 <form onSubmit={this.handleLogin}>
-                  {/* <div className="field">
+                  <div className="field">
                     <p className="control">
                       <input
                         className="input"
                         type="text"
                         placeholder="Shop"
                         id="shop"
-                        value={this.state.shop}
-                        onChange={e => this.setState({shop: e.target.value})}
+                        value={this.state.shop_id}
+                        onChange={e => this.setState({shop_id: e.target.value})}
                         required
                       />
                     </p>
-                  </div> */}
+                  </div>
                   <div className="field">
                     <p className="control">
                       <input
@@ -81,9 +81,9 @@ class Login extends React.Component {
           </div>
         </div>
       </section>
-    )
-  }
-}
+    );
+  };
+};
 
 const mapStateToProps = state => ({showLoginError: state.auth.showLoginError});
 const mapDispatchToProps = dispatch => ({userLogin: bindActionCreators(userLogin, dispatch)});

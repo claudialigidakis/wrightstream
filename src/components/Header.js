@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { userLogout } from '../actions/auth.actions';
 
 // BULMA
-import { Navbar, Input } from 'react-bulma-components/full';
+import { Navbar } from 'react-bulma-components/full';
 
 // ==========
 
