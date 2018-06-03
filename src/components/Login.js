@@ -4,13 +4,12 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { userLogin } from '../actions/auth.actions';
+import { userLogin } from '../actions/auth';
 
 // ==========
 
 class Login extends React.Component {
   state = {
-    shop_id: '',
     email: '',
     password: ''
   };
@@ -28,19 +27,6 @@ class Login extends React.Component {
             <div className="columns">
               <div className="column is-4-desktop is-offset-4-desktop">
                 <form onSubmit={this.handleLogin}>
-                  <div className="field">
-                    <p className="control">
-                      <input
-                        className="input"
-                        type="text"
-                        placeholder="Shop"
-                        id="shop"
-                        value={this.state.shop_id}
-                        onChange={e => this.setState({shop_id: e.target.value})}
-                        required
-                      />
-                    </p>
-                  </div>
                   <div className="field">
                     <p className="control">
                       <input
