@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { userSignup } from '../actions/auth.actions';
+import { userSignup } from '../actions/auth';
 
 // ==========
 
@@ -29,9 +29,10 @@ class Signup extends React.Component {
         isValid: false
       });
     } else {
-      let newUser = {shop_name, first_name, last_name, email, password};
+      let newShop = {shop_name};
+      let newUser = {first_name, last_name, email, password};
       console.log('newUser', newUser);
-      this.props.userSignup(newUser, this.props.history);
+      this.props.userSignup(newShop, newUser, this.props.history);
     }
   }
 
@@ -51,7 +52,7 @@ class Signup extends React.Component {
                             className="input"
                             type="text"
                             placeholder="Shop Name"
-                            id="shop-name"
+                            id="shop_name"
                             value={this.state.shop_name}
                             onChange={e => this.setState({shop_name: e.target.value})}
                             required
@@ -66,7 +67,7 @@ class Signup extends React.Component {
                                 className="input"
                                 type="text"
                                 placeholder="First Name"
-                                id="first-name"
+                                id="first_name"
                                 value={this.state.first_name}
                                 onChange={e => this.setState({first_name: e.target.value})}
                                 required
@@ -79,7 +80,7 @@ class Signup extends React.Component {
                                 className="input"
                                 type="text"
                                 placeholder="Last Name"
-                                id="last-name"
+                                id="last_name"
                                 value={this.state.last_name}
                                 onChange={e => this.setState({last_name: e.target.value})}
                                 required
@@ -122,7 +123,7 @@ class Signup extends React.Component {
                                 className={this.state.passwordClasses}
                                 type="password"
                                 placeholder="Verify Password"
-                                id="verify-password"
+                                id="verify_password"
                                 value={this.state.verify_password}
                                 onChange={e => this.setState({verify_password: e.target.value})}
                                 required

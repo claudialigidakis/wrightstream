@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { userLogout } from '../actions/auth.actions';
+import { userLogout } from '../actions/auth';
 
 // BULMA
 import { Navbar } from 'react-bulma-components/full';

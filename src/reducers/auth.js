@@ -6,7 +6,7 @@ import {
   USER_SIGNUP_SUCCESS,
   USER_SIGNUP_FAILED,
   USER_LOGOUT
-} from '../actions/auth.actions'
+} from '../actions/auth.actions';
 
 let initialState = {
   isLoading: false,
@@ -15,23 +15,23 @@ let initialState = {
   showSignupError: false
 };
 
-export default(state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case USER_LOGIN_PENDING:
-      return {...state, isLoading: true}
+      return {...state, isLoading: true};
     case USER_LOGIN_SUCCESS:
-      return {...state, isLoading: false, user: action.payload}
+      return {...state, isLoading: false, user: action.payload};
     case USER_LOGIN_FAILED:
-      return {...state, isLoading: false, showLoginError: true}
+      return {...state, isLoading: false, showLoginError: true};
     case USER_SIGNUP_PENDING:
-      return {...state, isLoading: true}
+      return {...state, isLoading: true};
     case USER_SIGNUP_SUCCESS:
-      return {...state, isLoading: false}
+      return {...state, isLoading: false};
     case USER_SIGNUP_FAILED:
-      return {...state, isLoading: false, showSignupError: true}
+      return {...state, isLoading: false, showSignupError: true};
     case USER_LOGOUT:
-      return {...state, user: {}}
+      return {...state, user: {}};
     default:
       return state;
   }
-}
+};
