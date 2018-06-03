@@ -6,7 +6,7 @@ import {
   USER_SIGNUP_SUCCESS,
   USER_SIGNUP_FAILED,
   USER_LOGOUT
-} from '../actions/auth.actions';
+} from '../actions/auth';
 
 let initialState = {
   isLoading: false,

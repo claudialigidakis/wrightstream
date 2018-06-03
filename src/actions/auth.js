@@ -18,9 +18,9 @@ export const userLogin = ({email, password}, history) => (
     request('/auth/token', 'post', {email, password})
     .then(response => {
       localStorage.setItem('token', response.data.token);
-    //   return request('/auth/token');
-    // })
-    // .then(response => {
+      return request('/auth/token');
+    })
+    .then(response => {
       dispatch({
         type: USER_LOGIN_SUCCESS,
         payload: response
@@ -39,39 +39,28 @@ export const userLogin = ({email, password}, history) => (
 
 export const userSignup = (newShop, newUser, history) => (
   dispatch => {
+    console.log({newShop});
     dispatch({type: USER_SIGNUP_PENDING});
-    request('/shops', 'post', {newShop})
+    request('/shops', 'post', newShop)
     .then(response => {
-      dispatch({
-        type: SHOP_SIGNUP_SUCCESS,
-        payload: response
-      });
-      history.push('/login');
-    })
-    .catch(error => {
-      dispatch({
-        type: SHOP_SIGNUP_FAILED,
-        payload: error
-      });
-    })
-    .then(response => {
-      console.log(response);
-      // sign up staff after shop
-      console.log(response.data.shop_id);
-      request(`/shops/${response.data.shop_id}/staff`, 'post', {newUser})
+      const shop_id = response.data.data[0].id
+      console.log(shop_id);
+      console.log({newUser});
+      request(`/shops/${shop_id}/staff`, 'post', newUser)
       .then(response => {
         dispatch({
           type: USER_SIGNUP_SUCCESS,
           payload: response
         });
+        history.push('/login');
       })
       .catch(error => {
         dispatch({
           type: USER_SIGNUP_FAILED,
           payload: error
         });
-        request(`/shops/${response.data.shop_id}`, 'delete')
-        // delete the shop that was made
+        // request(`/shops/${response.data.shop_id}`, 'delete');
+        // delete the shop that was made (does not work yet)
       });
     });
   }
