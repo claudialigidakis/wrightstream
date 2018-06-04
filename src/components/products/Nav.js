@@ -10,7 +10,6 @@ import { userLogout } from '../../actions/auth';
 
 class Nav extends React.Component {
   render () {
-    console.log(this.props.user)
     return (
       <div className="tabs is-centered">
         <ul>
@@ -22,7 +21,6 @@ class Nav extends React.Component {
     );
   };
 };
-
 
 const mapStateToProps = state => ({
   user: state.auth.user,

@@ -17,11 +17,17 @@ class Products extends React.Component {
   render () {
     console.log(this.props.user)
     return (
-      <div>
-        <Bar />
-        <Nav />
-        <Main />
-      </div>
+      <section className="">
+        <div className="columns is-fullheight">
+          <div className="column is-3 bar">
+            <Bar />
+          </div>
+          <div className="column is-9">
+            <Nav />
+            <Main />
+          </div>
+        </div>
+      </section>
     );
   };
 };

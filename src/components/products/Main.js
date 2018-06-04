@@ -13,7 +13,8 @@ class Main extends React.Component {
     console.log(this.props.user)
     return (
       <div>
-this is the products
+
+        this is the products
       </div>
     );
   };
