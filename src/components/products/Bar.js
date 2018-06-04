@@ -4,11 +4,11 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { userLogout } from '../actions/auth';
+import { userLogout } from '../../actions/auth';
 
 // ==========
 
-class ProductsBar extends React.Component {
+class Bar extends React.Component {
   render () {
     return (
       <aside className="menu">
@@ -46,4 +46,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   userLogout
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsBar);
+export default connect(mapStateToProps, mapDispatchToProps)(Bar);

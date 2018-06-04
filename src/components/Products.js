@@ -7,9 +7,9 @@ import { connect } from 'react-redux';
 import { userLogout } from '../actions/auth';
 
 // COMPONENTS
-import ProductsBar from './ProductsBar';
-import ProductsNav from './ProductsNav';
-import ProductsProducts from './ProductsProducts';
+import Bar from './products/Bar';
+import Nav from './products/Nav';
+import Main from './products/Main';
 
 // ==========
 
@@ -18,9 +18,9 @@ class Products extends React.Component {
     console.log(this.props.user)
     return (
       <div>
-        <ProductsBar />
-        <ProductsNav />
-        <ProductsProducts />
+        <Bar />
+        <Nav />
+        <Main />
       </div>
     );
   };
