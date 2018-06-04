@@ -1,23 +1,4 @@
-/*
-// 1. Import the initial variables
-@import "../node_modules/bulma/sass/utilities/initial-variables";
-
-// 2. Set your own initial variables
-// Update the blue shade, used for links
-$blue: #06bcef;
-// Add pink and its invert
-$pink: #ff8080;
-$pink-invert: #fff;
-// Update the sans-serif font family
-$family-sans-serif: "Helvetica", "Arial", sans-serif;
-
-// 3. Set the derived variables
-// Use the new pink as the primary color
-$primary: $pink;
-$primary-invert: $pink-invert;
-
-// 4. Import the rest of Bulma
-*/
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,400i,700,700i");
 /*! bulma.io v0.7.1 | MIT License | github.com/jgthms/bulma */
 @keyframes spinAround {
   from {
@@ -282,7 +263,7 @@ button,
 input,
 select,
 textarea {
-  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif; }
+  font-family: "Nunito", sans-serif; }
 
 code,
 pre {
@@ -6438,3 +6419,12 @@ label.panel-block {
 .footer {
   background-color: #fafafa;
   padding: 3rem 1.5rem 6rem; }
+
+body {
+  padding-top: 52px; }
+
+.profile {
+  border-radius: 50%;
+  height: 28px;
+  margin-right: .6rem;
+  width: 28px; }

@@ -8,9 +8,10 @@ export const USER_SIGNUP_PENDING = 'USER_SIGNUP_PENDING';
 export const USER_SIGNUP_SUCCESS = 'USER_SIGNUP_SUCCESS';
 export const USER_SIGNUP_FAILED = 'USER_SIGNUP_FAILED';
 
-export const USER_LOGOUT = 'USER_LOGOUT';
+export const GET_USER = 'GET_USER';
+export const NOT_LOGGED_IN = 'NOT_LOGGED_IN';
 
-//const BASE_URL = 'http://localhost:8082';
+export const USER_LOGOUT = 'USER_LOGOUT';
 
 export const userLogin = ({email, password}, history) => (
   dispatch => {
@@ -23,7 +24,7 @@ export const userLogin = ({email, password}, history) => (
     .then(response => {
       dispatch({
         type: USER_LOGIN_SUCCESS,
-        payload: response
+        payload: response.data
       });
       history.push('/settings');
     })
@@ -39,20 +40,17 @@ export const userLogin = ({email, password}, history) => (
 
 export const userSignup = (newShop, newUser, history) => (
   dispatch => {
-    console.log({newShop});
     dispatch({type: USER_SIGNUP_PENDING});
     request('/shops', 'post', newShop)
     .then(response => {
       const shop_id = response.data.data[0].id
-      console.log(shop_id);
-      console.log({newUser});
       request(`/shops/${shop_id}/staff`, 'post', newUser)
       .then(response => {
         dispatch({
           type: USER_SIGNUP_SUCCESS,
-          payload: response
+          payload: response.data
         });
-        history.push('/login');
+        history.push('/');
       })
       .catch(error => {
         dispatch({
@@ -66,8 +64,27 @@ export const userSignup = (newShop, newUser, history) => (
   }
 );
 
+export const getUser = () => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      dispatch({
+        type: GET_USER,
+        payload: response.data
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: NOT_LOGGED_IN,
+        payload: error
+      });
+    });
+  }
+);
+
 export const userLogout = () => (
   dispatch => {
+    localStorage.removeItem('token');
     dispatch({type: USER_LOGOUT});
   }
 );
