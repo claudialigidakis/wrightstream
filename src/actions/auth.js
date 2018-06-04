@@ -8,9 +8,10 @@ export const USER_SIGNUP_PENDING = 'USER_SIGNUP_PENDING';
 export const USER_SIGNUP_SUCCESS = 'USER_SIGNUP_SUCCESS';
 export const USER_SIGNUP_FAILED = 'USER_SIGNUP_FAILED';
 
-export const USER_LOGOUT = 'USER_LOGOUT';
+export const GET_USER = 'GET_USER';
+export const NOT_LOGGED_IN = 'NOT_LOGGED_IN';
 
-//const BASE_URL = 'http://localhost:8082';
+export const USER_LOGOUT = 'USER_LOGOUT';
 
 export const userLogin = ({email, password}, history) => (
   dispatch => {
@@ -18,12 +19,12 @@ export const userLogin = ({email, password}, history) => (
     request('/auth/token', 'post', {email, password})
     .then(response => {
       localStorage.setItem('token', response.data.token);
-    //   return request('/auth/token');
-    // })
-    // .then(response => {
+      return request('/auth/token');
+    })
+    .then(response => {
       dispatch({
         type: USER_LOGIN_SUCCESS,
-        payload: response
+        payload: response.data
       });
       history.push('/settings');
     })
@@ -40,38 +41,42 @@ export const userLogin = ({email, password}, history) => (
 export const userSignup = (newShop, newUser, history) => (
   dispatch => {
     dispatch({type: USER_SIGNUP_PENDING});
-    request('/shops', 'post', {newShop})
+    request('/shops', 'post', newShop)
     .then(response => {
-      dispatch({
-        type: SHOP_SIGNUP_SUCCESS,
-        payload: response
-      });
-      history.push('/login');
-    })
-    .catch(error => {
-      dispatch({
-        type: SHOP_SIGNUP_FAILED,
-        payload: error
-      });
-    })
-    .then(response => {
-      console.log(response);
-      // sign up staff after shop
-      console.log(response.data.shop_id);
-      request(`/shops/${response.data.shop_id}/staff`, 'post', {newUser})
+      const shop_id = response.data.data[0].id
+      request(`/shops/${shop_id}/staff`, 'post', newUser)
       .then(response => {
         dispatch({
           type: USER_SIGNUP_SUCCESS,
-          payload: response
+          payload: response.data
         });
+        history.push('/');
       })
       .catch(error => {
         dispatch({
           type: USER_SIGNUP_FAILED,
           payload: error
         });
-        request(`/shops/${response.data.shop_id}`, 'delete')
-        // delete the shop that was made
+        // request(`/shops/${response.data.shop_id}`, 'delete');
+        // delete the shop that was made (does not work yet)
+      });
+    });
+  }
+);
+
+export const getUser = () => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      dispatch({
+        type: GET_USER,
+        payload: response.data
+      });
+    })
+    .catch(error => {
+      dispatch({
+        type: NOT_LOGGED_IN,
+        payload: error
       });
     });
   }
@@ -79,6 +84,7 @@ export const userSignup = (newShop, newUser, history) => (
 
 export const userLogout = () => (
   dispatch => {
+    localStorage.removeItem('token');
     dispatch({type: USER_LOGOUT});
   }
 );
