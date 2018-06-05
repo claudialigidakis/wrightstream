@@ -8,9 +8,9 @@ class Nav extends React.Component {
     return (
       <div className="tabs is-centered is-large">
         <ul>
-          <li className="is-active" href="/"><a>Products</a></li>
-          <li><a href="/supplies">Supplies</a></li>
-          <li><a href="/sources">Sources</a></li>
+          <li className="is-active" href="/products"><a>Products</a></li>
+          <li><a href="/products/supplies">Supplies</a></li>
+          <li><a href="/products/sources">Sources</a></li>
         </ul>
       </div>
     );
