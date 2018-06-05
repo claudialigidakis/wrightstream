@@ -5,14 +5,16 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // COMPONENTS
-import Bar from './products/Bar';
 import Nav from './products/Nav';
 import Main from './products/Products';
 import Items from './products/Items';
 import Bundles from './products/Bundles';
 import Category from './products/Category';
+import Categories from './products/Categories';
 import Supplies from './products/Supplies';
+import Kinds from './products/Kinds';
 import Sources from './products/Sources';
+import Types from './products/Types';
 
 // ==========
 
@@ -22,11 +24,17 @@ class Products extends React.Component {
       <section className="">
         <div className="columns is-fullheight is-marginless">
           <div className="column is-3 bar">
-            <Bar />
+            <BrowserRouter>
+              <Switch>
+                <Route path="/products/supplies" component={Kinds} />
+                <Route path="/products/sources" component={Types} />
+                <Route path="/products" component={Categories} />
+              </Switch>
+            </BrowserRouter>
           </div>
           <div className="column is-9 products-content">
             <Nav />
-            <div className="columns products-container">
+            <div className="products-container">
               <BrowserRouter>
                 <Switch>
                   <Route exact path="/products" component={Main} />

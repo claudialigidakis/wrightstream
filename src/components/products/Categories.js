@@ -8,7 +8,7 @@ import { getCategories } from '../../actions/products';
 
 // ==========
 
-class Bar extends React.Component {
+class Categories extends React.Component {
   componentDidMount () {
     this.props.getCategories();
   };
@@ -20,6 +20,7 @@ class Bar extends React.Component {
           Browse
         </p>
         <ul className="menu-list">
+          <li><a href="/products">Recently Added</a></li>
           <li><a href="/products/items">All Items</a></li>
           <li><a href="/products/bundles">All Bundles</a></li>
           <li><a className="disable">Favorites</a></li>
@@ -49,9 +50,10 @@ class Bar extends React.Component {
           Sort
         </p>
         <ul className="menu-list">
-          <li><a className="disable">Price</a></li>
+          <li><a className="disable">Name</a></li>
+          <li><a className="disable">Date Added</a></li>
+          <li><a className="disable">Category</a></li>
           <li><a className="disable">Popularity</a></li>
-          <li><a className="disable">Date</a></li>
         </ul>
       </aside>
     );
@@ -66,4 +68,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getCategories
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Bar);
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);

@@ -20,17 +20,26 @@ class Category extends React.Component {
   };
 
   render () {
-    return this.props.productsByCategory.map(product => {
-      return (
-        <Product
-          key={product.id}
-          id={product.id}
-          name={product.name}
-          category_id={product.category_id}
-          photo={product.photo}
-        />
-      );
-    });
+    return (
+      <div className="columns">
+        {
+          this.props.productsByCategory.map(product => {
+            return (
+              <Product
+                key={product.id}
+                id={product.id}
+                product={product.supplies ? 'item' : 'bundle'}
+                name={product.name}
+                category_id={product.category_id}
+                photo={product.photo}
+                ingredients={product.supplies ? product.supplies : product.items}
+                steps={product.steps}
+              />
+            );
+          })
+        }
+      </div>
+    );
   };
 };
 

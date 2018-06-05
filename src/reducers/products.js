@@ -5,7 +5,9 @@ import {
   GET_CATEGORIES,
   GET_PRODUCTS_BY_CATEGORY,
   GET_SUPPLIES,
-  GET_SOURCES
+  GET_KINDS,
+  GET_SOURCES,
+  GET_TYPES
 } from '../actions/products';
 
 let initialState = {
@@ -15,7 +17,9 @@ let initialState = {
   categories: [],
   productsByCategory: [],
   supplies: [],
-  sources: []
+  kinds: [],
+  sources: [],
+  types: []
 };
 
 export default (state = initialState, action) => {
@@ -32,8 +36,12 @@ export default (state = initialState, action) => {
       return {...state, productsByCategory: action.payload};
     case GET_SUPPLIES:
       return {...state, supplies: action.payload};
+    case GET_KINDS:
+      return {...state, kinds: action.payload};
     case GET_SOURCES:
       return {...state, sources: action.payload};
+    case GET_TYPES:
+      return {...state, types: action.payload};
     default:
       return state;
   }
