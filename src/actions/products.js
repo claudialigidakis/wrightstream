@@ -6,7 +6,9 @@ export const GET_BUNDLES = 'GET_BUNDLES';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_PRODUCTS_BY_CATEGORY = 'GET_PRODUCTS_BY_CATEGORY';
 export const GET_SUPPLIES = 'GET_SUPPLIES';
+export const GET_KINDS = 'GET_KINDS';
 export const GET_SOURCES = 'GET_SOURCES';
+export const GET_TYPES = 'GET_TYPES';
 
 export const getProducts = () => (
   dispatch => {
@@ -110,6 +112,22 @@ export const getSupplies = () => (
   }
 );
 
+export const getKinds = () => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id
+      request(`/kinds/${shop_id}/allKinds`)
+      .then(response => {
+        dispatch({
+          type: GET_KINDS,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
 export const getSources = () => (
   dispatch => {
     request('/auth/token')
@@ -119,6 +137,22 @@ export const getSources = () => (
       .then(response => {
         dispatch({
           type: GET_SOURCES,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const getTypes = () => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id
+      request(`/types/${shop_id}/allTypes`)
+      .then(response => {
+        dispatch({
+          type: GET_TYPES,
           payload: response.data.data
         });
       });
