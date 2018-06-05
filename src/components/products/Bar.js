@@ -4,11 +4,15 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { userLogout } from '../../actions/auth';
+import { getCategories } from '../../actions/products';
 
 // ==========
 
 class Bar extends React.Component {
+  componentDidMount () {
+    this.props.getCategories();
+  };
+
   render () {
     return (
       <aside className="menu">
@@ -16,34 +20,50 @@ class Bar extends React.Component {
           Browse
         </p>
         <ul className="menu-list">
-          <li><a>All Items</a></li>
-          <li><a>All Bundles</a></li>
-          <li><a>Favorites</a></li>
-          <li><a>Archived</a></li>
+          <li><a href="/products/items">All Items</a></li>
+          <li><a href="/products/bundles">All Bundles</a></li>
+          <li><a className="disable">Favorites</a></li>
+          <li><a className="disable">Archived</a></li>
         </ul>
         <p className="menu-label">
           Categories
         </p>
         <ul className="menu-list">
-          <li><a>Blankets</a></li>
-          <li><a>Cardigans</a></li>
-          <li><a>Hats</a></li>
-          <li><a>Scarves</a></li>
-          <li><a>Sweaters</a></li>
+          {
+            this.props.categories.map(category => {
+              return (
+                <li key={category.id}><a href={`/products/category?id=${category.id}`}>{category.name}</a></li>
+              )
+            })
+          }
+        </ul>
+        <p className="menu-label">
+          Filter
+        </p>
+        <ul className="menu-list">
+          <li><a className="disable">Color</a></li>
+          <li><a className="disable">Difficulty</a></li>
+          <li><a className="disable">Material</a></li>
+        </ul>
+        <p className="menu-label">
+          Sort
+        </p>
+        <ul className="menu-list">
+          <li><a className="disable">Price</a></li>
+          <li><a className="disable">Popularity</a></li>
+          <li><a className="disable">Date</a></li>
         </ul>
       </aside>
     );
   };
 };
 
-
 const mapStateToProps = state => ({
-  user: state.auth.user,
-  authorized: state.auth.authorized
+  categories: state.products.categories
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  userLogout
+  getCategories
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Bar);

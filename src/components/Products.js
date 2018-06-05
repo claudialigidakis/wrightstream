@@ -1,30 +1,39 @@
 // REACT
 import React from 'react';
 
-// REDUX
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { userLogout } from '../actions/auth';
+// ROUTER
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // COMPONENTS
 import Bar from './products/Bar';
 import Nav from './products/Nav';
 import Main from './products/Main';
+import Items from './products/Items';
+import Bundles from './products/Bundles';
+import Category from './products/Category';
 
 // ==========
 
 class Products extends React.Component {
   render () {
-    console.log(this.props.user)
     return (
       <section className="">
-        <div className="columns is-fullheight">
+        <div className="columns is-fullheight is-marginless">
           <div className="column is-3 bar">
             <Bar />
           </div>
-          <div className="column is-9">
+          <div className="column is-9 products-content">
             <Nav />
-            <Main />
+            <div className="columns products-container">
+              <BrowserRouter>
+                <Switch>
+                  <Route exact path="/products" component={Main} />
+                  <Route path="/products/items" component={Items} />
+                  <Route path="/products/bundles" component={Bundles} />
+                  <Route path="/products/category" component={Category} />
+                </Switch>
+              </BrowserRouter>
+            </div>
           </div>
         </div>
       </section>
@@ -32,14 +41,4 @@ class Products extends React.Component {
   };
 };
 
-
-const mapStateToProps = state => ({
-  user: state.auth.user,
-  authorized: state.auth.authorized
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-  userLogout
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default Products;

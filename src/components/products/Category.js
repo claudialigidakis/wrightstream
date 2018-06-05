@@ -4,20 +4,23 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getProducts } from '../../actions/products';
+import { getProductsByCategory } from '../../actions/products';
+
+// HELPERS
+import query from '../../helpers/query';
 
 // COMPONENTS
 import Product from './Product';
 
 // ==========
 
-class Main extends React.Component {
+class Category extends React.Component {
   componentDidMount () {
-    this.props.getProducts();
+    this.props.getProductsByCategory(query('id'));
   };
 
   render () {
-    return this.props.products.map(product => {
+    return this.props.productsByCategory.map(product => {
       return (
         <Product
           key={product.id}
@@ -32,11 +35,11 @@ class Main extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  products: state.products.products
+  productsByCategory: state.products.productsByCategory
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getProducts
+  getProductsByCategory
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Category);

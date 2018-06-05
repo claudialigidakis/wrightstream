@@ -23,3 +23,13 @@ $menu-label-color: $slate;
 $menu-item-color: $quartz;
 $menu-item-hover-color: $quartz;
 $menu-item-hover-background-color: lighten($koamaru, 5);
+
+// TABS
+$tabs-border-bottom-color: $mist;
+$tabs-link-color: $quartz;
+$tabs-link-hover-color: $quartz;
+$tabs-link-hover-border-bottom-color: $periwinkle;
+$tabs-link-active-color: $indigo;
+$tabs-link-active-border-bottom-color: $indigo;
+$tabs-border-bottom-width: 2px;
+$tabs-link-padding: 0.5em 2em;

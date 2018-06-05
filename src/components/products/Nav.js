@@ -1,17 +1,12 @@
 // REACT
 import React from 'react';
 
-// REDUX
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { userLogout } from '../../actions/auth';
-
 // ==========
 
 class Nav extends React.Component {
   render () {
     return (
-      <div className="tabs is-centered">
+      <div className="tabs is-centered is-large">
         <ul>
           <li className="is-active" href="/"><a>Products</a></li>
           <li><a href="/supplies">Supplies</a></li>
@@ -22,13 +17,4 @@ class Nav extends React.Component {
   };
 };
 
-const mapStateToProps = state => ({
-  user: state.auth.user,
-  authorized: state.auth.authorized
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-  userLogout
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+export default Nav;
