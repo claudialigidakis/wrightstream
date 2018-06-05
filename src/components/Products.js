@@ -12,8 +12,10 @@ import Bundles from './products/Bundles';
 import Category from './products/Category';
 import Categories from './products/Categories';
 import Supplies from './products/Supplies';
+import Kind from './products/Kind';
 import Kinds from './products/Kinds';
 import Sources from './products/Sources';
+import Type from './products/Type';
 import Types from './products/Types';
 
 // ==========
@@ -41,8 +43,10 @@ class Products extends React.Component {
                   <Route path="/products/items" component={Items} />
                   <Route path="/products/bundles" component={Bundles} />
                   <Route path="/products/category" component={Category} />
-                  <Route path="/products/supplies" component={Supplies} />
-                  <Route path="/products/sources" component={Sources} />
+                  <Route exact path="/products/supplies" component={Supplies} />
+                  <Route path="/products/supplies/kind" component={Kind} />
+                  <Route exact path="/products/sources" component={Sources} />
+                  <Route path="/products/sources/type" component={Type} />
                 </Switch>
               </BrowserRouter>
             </div>

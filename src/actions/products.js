@@ -7,8 +7,10 @@ export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_PRODUCTS_BY_CATEGORY = 'GET_PRODUCTS_BY_CATEGORY';
 export const GET_SUPPLIES = 'GET_SUPPLIES';
 export const GET_KINDS = 'GET_KINDS';
+export const GET_SUPPLIES_BY_KIND = 'GET_SUPPLIES_BY_KIND';
 export const GET_SOURCES = 'GET_SOURCES';
 export const GET_TYPES = 'GET_TYPES';
+export const GET_SOURCES_BY_TYPE = 'GET_SOURCES_BY_TYPE';
 
 export const getProducts = () => (
   dispatch => {
@@ -134,6 +136,25 @@ export const getKinds = () => (
   }
 );
 
+export const getSuppliesByKind = (id) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id
+      request(`/supplies/${shop_id}/allSupplies`)
+      .then(response => {
+        return response.data.data.filter(supply => supply.kind_id === parseInt(id, 10));
+      })
+      .then(response => {
+        dispatch({
+          type: GET_SUPPLIES_BY_KIND,
+          payload: response
+        });
+      });
+    });
+  }
+);
+
 export const getSources = () => (
   dispatch => {
     request('/auth/token')
@@ -160,6 +181,25 @@ export const getTypes = () => (
         dispatch({
           type: GET_TYPES,
           payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const getSourcesByType = (id) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id
+      request(`/sources/${shop_id}/allSources`)
+      .then(response => {
+        return response.data.data.filter(source => source.type_id === parseInt(id, 10));
+      })
+      .then(response => {
+        dispatch({
+          type: GET_SOURCES_BY_TYPE,
+          payload: response
         });
       });
     });
