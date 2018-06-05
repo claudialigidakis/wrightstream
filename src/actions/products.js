@@ -5,6 +5,8 @@ export const GET_ITEMS = 'GET_ITEMS';
 export const GET_BUNDLES = 'GET_BUNDLES';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_PRODUCTS_BY_CATEGORY = 'GET_PRODUCTS_BY_CATEGORY';
+export const GET_SUPPLIES = 'GET_SUPPLIES';
+export const GET_SOURCES = 'GET_SOURCES';
 
 export const getProducts = () => (
   dispatch => {
@@ -86,6 +88,38 @@ export const getProductsByCategory = (id) => (
         dispatch({
           type: GET_PRODUCTS_BY_CATEGORY,
           payload: response
+        });
+      });
+    });
+  }
+);
+
+export const getSupplies = () => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id
+      request(`/supplies/${shop_id}/allSupplies`)
+      .then(response => {
+        dispatch({
+          type: GET_SUPPLIES,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const getSources = () => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id
+      request(`/sources/${shop_id}/allSources`)
+      .then(response => {
+        dispatch({
+          type: GET_SOURCES,
+          payload: response.data.data
         });
       });
     });

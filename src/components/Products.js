@@ -7,10 +7,12 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // COMPONENTS
 import Bar from './products/Bar';
 import Nav from './products/Nav';
-import Main from './products/Main';
+import Main from './products/Products';
 import Items from './products/Items';
 import Bundles from './products/Bundles';
 import Category from './products/Category';
+import Supplies from './products/Supplies';
+import Sources from './products/Sources';
 
 // ==========
 
@@ -31,6 +33,8 @@ class Products extends React.Component {
                   <Route path="/products/items" component={Items} />
                   <Route path="/products/bundles" component={Bundles} />
                   <Route path="/products/category" component={Category} />
+                  <Route path="/products/supplies" component={Supplies} />
+                  <Route path="/products/sources" component={Sources} />
                 </Switch>
               </BrowserRouter>
             </div>
