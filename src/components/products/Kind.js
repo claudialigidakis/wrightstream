@@ -4,21 +4,23 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getSupplies } from '../../actions/products';
+import { getSuppliesByKind } from '../../actions/products';
+
+// HELPERS
+import query from '../../helpers/query';
 
 // COMPONENTS
 import Supply from './Supply';
 
 // ==========
 
-class Supplies extends React.Component {
+class Kind extends React.Component {
   componentDidMount () {
-    this.props.getSupplies();
+    this.props.getSuppliesByKind(query('id'));
   };
 
   render () {
-
-    return this.props.supplies.map(supply => {
+    return this.props.suppliesByKind.map(supply => {
       return (
         <Supply
           key={supply.id}
@@ -28,17 +30,16 @@ class Supplies extends React.Component {
           source_id={supply.source_id}
         />
       );
-    });
-    
+    })
   };
 };
 
 const mapStateToProps = state => ({
-  supplies: state.products.supplies
+  suppliesByKind: state.products.suppliesByKind
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getSupplies
+  getSuppliesByKind
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Supplies);
+export default connect(mapStateToProps, mapDispatchToProps)(Kind);
