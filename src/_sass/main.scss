@@ -1,12 +1,9 @@
 @charset "utf-8";
 
 @import "../../node_modules/bulma/sass/utilities/initial-variables";
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,400i,700,700i');
+@import url("https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900");
 
-$pink: #ff8080;
-$pink-invert: #fff;
-
-$family-sans-serif: "Nunito", sans-serif;
+@import "variables";
 
 @import "../../node_modules/bulma/bulma";
 @import "overrides";
