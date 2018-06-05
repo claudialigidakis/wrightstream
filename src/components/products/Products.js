@@ -17,17 +17,26 @@ class Main extends React.Component {
   };
 
   render () {
-    return this.props.products.map(product => {
-      return (
-        <Product
-          key={product.id}
-          id={product.id}
-          name={product.name}
-          category_id={product.category_id}
-          photo={product.photo}
-        />
-      );
-    });
+    return (
+      <div className="columns">
+        {
+          this.props.products.map(product => {
+            return (
+              <Product
+                key={product.id}
+                id={product.id}
+                product="item"
+                name={product.name}
+                category_id={product.category_id}
+                photo={product.photo}
+                ingredients={product.supplies}
+                steps={product.steps}
+              />
+            );
+          })
+        }
+      </div>
+    );
   };
 };
 

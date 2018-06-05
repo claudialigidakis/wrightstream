@@ -84,7 +84,13 @@ export const getProductsByCategory = (id) => (
       const shop_id = response.data.shops_id
       request(`/items/${shop_id}/allItems`)
       .then(response => {
-        return response.data.data.filter(product => product.category_id === parseInt(id, 10))
+        return response.data.data.filter(item => item.category_id === parseInt(id, 10));
+      })
+      .then(resItems => {
+        return request(`/bundles/${shop_id}/allBundles`)
+        .then(resBundles => {
+          return resItems.concat(resBundles.data.data.filter(bundle => bundle.category_id === parseInt(id, 10)));
+        });
       })
       .then(response => {
         dispatch({

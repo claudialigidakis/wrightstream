@@ -34,7 +34,7 @@ class Products extends React.Component {
           </div>
           <div className="column is-9 products-content">
             <Nav />
-            <div className="columns products-container">
+            <div className="products-container">
               <BrowserRouter>
                 <Switch>
                   <Route exact path="/products" component={Main} />

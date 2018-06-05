@@ -17,17 +17,26 @@ class Items extends React.Component {
   };
 
   render () {
-    return this.props.items.map(item => {
-      return (
-        <Product
-          key={item.id}
-          id={item.id}
-          name={item.name}
-          category_id={item.category_id}
-          photo={item.photo}
-        />
-      );
-    });
+    return (
+      <div className="columns">
+        {
+          this.props.items.map(item => {
+            return (
+              <Product
+                key={item.id}
+                id={item.id}
+                product="item"
+                name={item.name}
+                category_id={item.category_id}
+                photo={item.photo}
+                ingredients={item.supplies}
+                steps={item.steps}
+              />
+            );
+          })
+        }
+      </div>
+    );
   };
 };
 
