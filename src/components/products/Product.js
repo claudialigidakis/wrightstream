@@ -58,52 +58,67 @@ class Product extends React.Component {
             <a href="" className="card-footer-item"><span className="lnr-trash2"></span></a>
           </footer>
         </div>
+
+
+
+
+
+
         <div className={this.state.modalClasses}>
           <div className="modal-background" onClick={this.toggle}></div>
-          <div className="modal-card">
-            <header className="modal-card-head">
-              <p className="modal-card-title">Modal title</p>
-              <button className="delete" aria-label="close" onClick={this.toggle}></button>
-            </header>
-            <section className="modal-card-body">
+          <div className="modal-content">
+            <p class="image is-2by1">
               <img src={this.props.photo} alt={this.props.name} />
-              {this.props.name}<br />
-              {this.props.product === 'item' ? 'Item' : 'Bundle'} &bull; {
-                this.props.categories.find(category => category.id === this.props.category_id) ?
-                (
-                  this.props.categories.find(category => category.id === this.props.category_id).name
-                ) : null
-              }
-              <h2>{this.props.product === 'item' ? 'Supplies' : 'Items'}</h2>
-              <ul>
-                {
-                  this.props.ingredients.map((ingredient, i) => {
-                    return (
-                      <li key={i}>
-                        {ingredient.stock_qty} {ingredient.stock_qty_measure} {ingredient.name}
-                      </li>
-                    );
-                  })
-                }
-              </ul>
-              <h2>Steps</h2>
-              <ol>
-                {
-                  Object.values(JSON.parse(this.props.steps)).map((step, i) => {
-                    return (
-                      <li key={i}>
-                        {step}
-                      </li>
-                    );
-                  })
-                }
-              </ol>
-            </section>
-            <footer className="modal-card-foot">
-              <button className="button is-success">Save changes</button>
-              <button className="button" onClick={this.toggle}>Cancel</button>
-            </footer>
+            </p>
+            <div className="modal-container">
+              <div>
+                <h1 className="title is-3">{this.props.name}</h1>
+                <small>
+                  {this.props.product === 'item' ? 'Item' : 'Bundle'}
+                  {
+                    this.props.categories.find(category => category.id === this.props.category_id) ?
+                    (
+                      <span>
+                        <span className="product-bullet"> &bull; </span>
+                        {this.props.categories.find(category => category.id === this.props.category_id).name}
+                      </span>
+                    ) : null
+                  }
+                </small>
+              </div>
+              <div>
+                <h2 className="subtitle is-5">{this.props.product === 'item' ? 'Supplies' : 'Items'}</h2>
+                <ul>
+                  {
+                    this.props.ingredients.map((ingredient, i) => {
+                      return (
+                        <li key={i}>
+                          <span className="supply-qty">{ingredient.stock_qty}</span>
+                          <span className="supply-unit">{ingredient.stock_qty_measure}</span>
+                          {ingredient.name}
+                        </li>
+                      );
+                    })
+                  }
+                </ul>
+              </div>
+              <div>
+                <h2 className="subtitle is-5">Steps</h2>
+                <ol>
+                  {
+                    Object.values(JSON.parse(this.props.steps)).map((step, i) => {
+                      return (
+                        <li key={i}>
+                          {step}
+                        </li>
+                      );
+                    })
+                  }
+                </ol>
+              </div>
+            </div>
           </div>
+          <button className="modal-close is-large" aria-label="close" onClick={this.toggle}></button>
         </div>
       </div>
     );
