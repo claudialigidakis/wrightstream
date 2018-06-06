@@ -117,6 +117,11 @@ class Product extends React.Component {
                 </ol>
               </div>
             </div>
+            <div className="product-control">
+              <div><a href=""><span className="lnr-heart"></span></a></div>
+              <div><a href=""><span className="lnr-pencil"></span></a></div>
+              <div><a href=""><span className="lnr-trash2"></span></a></div>
+            </div>
           </div>
           <button className="modal-close is-large" aria-label="close" onClick={this.toggle}></button>
         </div>
