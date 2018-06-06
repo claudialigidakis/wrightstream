@@ -13,7 +13,9 @@ class Settings extends React.Component {
     super(props)
     this.state = {
       loginUrl: '',
-      self:''
+      self:'',
+      products:'',
+      purchases:''
     }
   }
 
@@ -26,10 +28,25 @@ class Settings extends React.Component {
       this.setState({self:response.data})
     })
   }
+  handleEtsyProductsClick = () => {
+    request('/etsy/findAllListingActive')
+    .then(response => {
+      this.setState({products:response.data.results})
+    })
+  }
+  handleEtsyPurchasesClick = () => {
+    request('/etsy/findAllPurchases')
+    .then(response => {
+      console.log(response.data.results);;
+      this.setState({purchases:response.data.results})
+    })
+  }
+
   componentDidMount = async () => {
     const response = await request('/auth/etsy/loginUrl')
     this.setState({loginUrl: response.data.loginUrl})
   }
+
   render () {
     console.log(this.props.user, this.state)
     return (
@@ -51,8 +68,12 @@ class Settings extends React.Component {
         <button className="button">Link Shopify</button>
         <div>
           <button onClick={this.handleEtsySelfClick}>Get Self</button>
+          <button onClick={this.handleEtsyProductsClick}>Get Products</button>
+          <button onClick={this.handleEtsyPurchasesClick}>Get Purchases</button>
           <div>
-            {JSON.stringify(this.state.self)}
+            {"self:", JSON.stringify(this.state.self)}
+            {"products:", JSON.stringify(this.state.products)}
+            {"purchases:", JSON.stringify(this.state.purchases)}
           </div>
         </div>
       </div>
