@@ -6,7 +6,7 @@ import React from 'react';
 class Nav extends React.Component {
   render () {
     return (
-      <div className="tabs is-centered is-large">
+      <div className="tabs is-centered is-large products-tabs">
         <ul>
           <li className="is-active" href="/products"><a>Products</a></li>
           <li><a href="/products/supplies">Supplies</a></li>

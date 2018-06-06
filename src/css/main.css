@@ -4904,7 +4904,7 @@ label.panel-block {
     display: flex;
     justify-content: center;
     margin-bottom: -2px;
-    padding: 0.5em 2em;
+    padding: 0.5em 1em;
     vertical-align: top; }
     .tabs a:hover {
       border-bottom-color: #bbc3dd;
@@ -6496,7 +6496,8 @@ nav {
   border-radius: 50%; }
 
 .products-content {
-  padding: 2rem; }
+  padding: 2rem;
+  position: relative; }
   .products-content .columns {
     flex-wrap: wrap; }
   .products-content .column {
@@ -6504,8 +6505,23 @@ nav {
   .products-content .products-container {
     padding: 1rem 0; }
 
-.tabs ul {
-  border-bottom-color: #f0f1f6; }
+.products-control {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem; }
+  .products-control > div:not(:last-child) {
+    margin-right: .5rem; }
+  .products-control .dropdown-menu {
+    min-width: 0;
+    padding-top: 0; }
+  .products-control .dropdown-item {
+    padding-right: 2rem; }
+
+.products-tabs ul {
+  border-bottom-color: #f0f1f6;
+  margin-bottom: 1rem; }
+  .products-tabs ul a {
+    padding: 0.5em 2em; }
 
 .card {
   border-bottom: solid 2px #e2e4f0;
