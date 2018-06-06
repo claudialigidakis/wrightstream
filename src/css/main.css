@@ -6537,6 +6537,20 @@ nav {
   border-bottom: 2px solid #bbc3dd; }
   .modal-content img {
     object-fit: cover; }
+  .modal-content .product-control {
+    margin-top: -10rem;
+    padding: 1.5rem 2rem; }
+    .modal-content .product-control div {
+      color: #bbc3dd;
+      text-align: right;
+      display: block; }
+    .modal-content .product-control a {
+      color: #bbc3dd;
+      font-size: 1.25rem; }
+    .modal-content .product-control a:hover {
+      color: #636fa6; }
+    .modal-content .product-control div:not(:last-child) {
+      margin-bottom: .5rem; }
 
 .modal-container {
   padding: 2.5rem 3rem; }

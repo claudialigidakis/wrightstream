@@ -141,6 +141,30 @@ nav {
   img {
     object-fit: cover;
   }
+
+  .product-control {
+    margin-top: -10rem;
+    padding: 1.5rem 2rem;
+
+    div {
+      color: $periwinkle;
+      text-align: right;
+      display: block;
+    }
+
+    a {
+      color: $periwinkle;
+      font-size: 1.25rem;
+    }
+
+    a:hover {
+      color: $indigo;
+    }
+
+    div:not(:last-child) {
+      margin-bottom: .5rem;
+    }
+  }
 }
 
 .modal-container {
