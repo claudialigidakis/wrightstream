@@ -11,7 +11,7 @@ class Product extends React.Component {
     super(props);
     this.state = {
       modal: false,
-      modalClasses: 'modal',
+      modalClasses: 'modal'
     };
     this.toggle = this.toggle.bind(this);
   };
@@ -67,7 +67,7 @@ class Product extends React.Component {
         <div className={this.state.modalClasses}>
           <div className="modal-background" onClick={this.toggle}></div>
           <div className="modal-content">
-            <p class="image is-2by1">
+            <p className="image is-2by1">
               <img src={this.props.photo} alt={this.props.name} />
             </p>
             <div className="modal-container">

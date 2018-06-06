@@ -112,7 +112,6 @@ nav {
 
 .products-tabs ul {
   border-bottom-color: $slate;
-  margin-bottom: 1rem;
 
   a {
     padding: 0.5em 2em;
@@ -249,5 +248,35 @@ nav {
     li {
       padding-left: .25rem;
     }
+  }
+}
+
+.products-table {
+  border-bottom: 2px solid $lavender;
+
+  thead {
+    background-color: $periwinkle;
+
+    th {
+      color: $white;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: none;
+      padding: 1rem 1.25rem;
+    }
+  }
+
+  td {
+    border: none;
+    padding: .75rem 1.25rem;
+  }
+
+  td:first-child {
+    min-width: 40%;
+  }
+
+  td:last-child {
+    min-width: 35%;
   }
 }
