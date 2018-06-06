@@ -6,6 +6,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // COMPONENTS
 import Nav from './products/Nav';
+import Control from './products/Control';
 import Main from './products/Products';
 import Items from './products/Items';
 import Bundles from './products/Bundles';
@@ -36,6 +37,7 @@ class Products extends React.Component {
           </div>
           <div className="column is-9 products-content">
             <Nav />
+            <Control />
             <div className="products-container">
               <BrowserRouter>
                 <Switch>
