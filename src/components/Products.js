@@ -26,7 +26,7 @@ import Types from './products/Types';
 class Products extends React.Component {
   render () {
     return (
-      <section className="">
+      <section className="products">
         <div className="columns is-fullheight is-marginless">
           <div className="column is-3 bar">
             <BrowserRouter>

@@ -11,6 +11,9 @@ $lavender: #d9def1;
 $periwinkle: #bbc3dd;
 $indigo: #636fa6;
 $koamaru: #21242d;
+$green: #83bf8a;
+$yellow: #ebcd6f;
+$red: #d66667;
 
 $primary: $indigo;
 $link: $primary;
@@ -36,3 +39,7 @@ $tabs-link-hover-border-bottom-color: $periwinkle;
 $tabs-link-active-color: $indigo;
 $tabs-link-active-border-bottom-color: $indigo;
 $tabs-border-bottom-width: 2px;
+
+// PROGRESS
+$progress-bar-background-color: $mist;
+$progress-value-background-color: $periwinkle;

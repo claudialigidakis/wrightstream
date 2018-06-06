@@ -27,7 +27,7 @@ class Header extends React.Component {
             (
               <div className="navbar-end">
                 <div className="navbar-main">
-                  <a className="navbar-item is-active" href="/products">
+                  <a className="navbar-item" href="/products">
                     Products
                   </a>
                   <a className="navbar-item" href="/inventory">
