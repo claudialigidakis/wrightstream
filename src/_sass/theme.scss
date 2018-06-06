@@ -76,6 +76,7 @@ nav {
 
 .products-content {
   padding: 2rem;
+  position: relative;
 
   .columns {
     flex-wrap: wrap;
@@ -90,8 +91,32 @@ nav {
   }
 }
 
-.tabs ul {
+.products-control {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+
+  >div:not(:last-child) {
+    margin-right: .5rem;
+  }
+
+  .dropdown-menu {
+    min-width: 0;
+    padding-top: 0;
+  }
+
+  .dropdown-item {
+    padding-right: 2rem;
+  }
+}
+
+.products-tabs ul {
   border-bottom-color: $slate;
+  margin-bottom: 1rem;
+
+  a {
+    padding: 0.5em 2em;
+  }
 }
 
 .card {

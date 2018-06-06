@@ -36,8 +36,8 @@ class Products extends React.Component {
             </BrowserRouter>
           </div>
           <div className="column is-9 products-content">
-            <Nav />
             <Control />
+            <Nav />
             <div className="products-container">
               <BrowserRouter>
                 <Switch>
