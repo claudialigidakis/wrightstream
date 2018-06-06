@@ -1,6 +1,11 @@
-.profile {
-  border-radius: 50%;
-  height: 28px;
-  margin-right: .6rem;
-  width: 28px;
+.hide {
+  display: none;
+}
+
+.disable {
+  pointer-events: none;
+}
+
+.pointer {
+  cursor: pointer;
 }

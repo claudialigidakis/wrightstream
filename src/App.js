@@ -48,6 +48,8 @@ const mapStateToProps = state => ({
   authorized: state.auth.authorized
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getUser }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getUser
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

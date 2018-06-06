@@ -1,0 +1,39 @@
+// FONTS
+$family-sans-serif: "Work Sans", sans-serif;
+
+// COLORS
+$slate: #f0f1f6;
+$quartz: #9295a5;
+$stone: #76757b;
+$ash: #333333;
+$mist: #e2e4f0;
+$lavender: #d9def1;
+$periwinkle: #bbc3dd;
+$indigo: #636fa6;
+$koamaru: #21242d;
+
+$primary: $indigo;
+$link: $primary;
+
+// HEADER
+$navbar-height: 5rem;
+$navbar-item-img-max-height: 2.75rem;
+$navbar-item-color: $quartz;
+$navbar-dropdown-arrow: $periwinkle;
+$navbar-dropdown-border-top: 2px solid $mist;
+
+// BAR
+$menu-label-color: $slate;
+$menu-item-color: $quartz;
+$menu-item-hover-color: $quartz;
+$menu-item-hover-background-color: lighten($koamaru, 5);
+
+// TABS
+$tabs-border-bottom-color: $mist;
+$tabs-link-color: $quartz;
+$tabs-link-hover-color: $quartz;
+$tabs-link-hover-border-bottom-color: $periwinkle;
+$tabs-link-active-color: $indigo;
+$tabs-link-active-border-bottom-color: $indigo;
+$tabs-border-bottom-width: 2px;
+$tabs-link-padding: 0.5em 2em;

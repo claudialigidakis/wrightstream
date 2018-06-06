@@ -1,3 +1,19 @@
-body {
-  padding-top: 52px;
+.columns.is-fullheight {
+  min-height: calc(100vh - #{$navbar-height});
+  max-height: calc(100vh - #{$navbar-height});
+  height: calc(100vh - #{$navbar-height});
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+
+  .column {
+    overflow-y: auto;
+  }
+}
+
+.navbar-link::after, .select:not(.is-multiple):not(.is-loading)::after {
+  height: .5rem;
+  width: .5rem;
+  border-width: 1px;
+  border-radius: 0;
 }
