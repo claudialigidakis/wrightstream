@@ -166,8 +166,7 @@ nav {
     object-fit: cover;
   }
 
-  .product-control {
-    margin-top: -10rem;
+  .product-control, .supply-control, .source-control {
     padding: 1.5rem 2rem;
 
     div {
@@ -188,6 +187,14 @@ nav {
     div:not(:last-child) {
       margin-bottom: .5rem;
     }
+  }
+
+  .product-control {
+    margin-top: -10rem;
+  }
+
+  .supply-control, .source-control {
+    margin-top: -7rem;
   }
 }
 
@@ -217,6 +224,12 @@ nav {
     }
   }
 
+  em {
+    color: $quartz;
+    font-size: .8rem;
+    margin-right: .5rem;
+  }
+
   >div:not(:last-child) {
     margin-bottom: 2rem;
   }
@@ -232,7 +245,6 @@ nav {
       margin-right: .25rem;
       min-width: 40px;
       display: inline-block;
-
     }
 
     .supply-unit {

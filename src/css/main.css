@@ -6552,20 +6552,23 @@ nav {
   border-bottom: 2px solid #bbc3dd; }
   .modal-content img {
     object-fit: cover; }
-  .modal-content .product-control {
-    margin-top: -10rem;
+  .modal-content .product-control, .modal-content .supply-control, .modal-content .source-control {
     padding: 1.5rem 2rem; }
-    .modal-content .product-control div {
+    .modal-content .product-control div, .modal-content .supply-control div, .modal-content .source-control div {
       color: #bbc3dd;
       text-align: right;
       display: block; }
-    .modal-content .product-control a {
+    .modal-content .product-control a, .modal-content .supply-control a, .modal-content .source-control a {
       color: #bbc3dd;
       font-size: 1.25rem; }
-    .modal-content .product-control a:hover {
+    .modal-content .product-control a:hover, .modal-content .supply-control a:hover, .modal-content .source-control a:hover {
       color: #636fa6; }
-    .modal-content .product-control div:not(:last-child) {
+    .modal-content .product-control div:not(:last-child), .modal-content .supply-control div:not(:last-child), .modal-content .source-control div:not(:last-child) {
       margin-bottom: .5rem; }
+  .modal-content .product-control {
+    margin-top: -10rem; }
+  .modal-content .supply-control, .modal-content .source-control {
+    margin-top: -7rem; }
 
 .modal-container {
   padding: 2.5rem 3rem; }
@@ -6584,6 +6587,10 @@ nav {
     text-transform: uppercase; }
     .modal-container small .product-bullet {
       color: #bbc3dd; }
+  .modal-container em {
+    color: #9295a5;
+    font-size: .8rem;
+    margin-right: .5rem; }
   .modal-container > div:not(:last-child) {
     margin-bottom: 2rem; }
   .modal-container ul, .modal-container ol {
