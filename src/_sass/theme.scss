@@ -118,7 +118,7 @@ nav {
   }
 }
 
-.card {
+.products .card {
   border-bottom: solid 2px $mist;
   box-shadow: none;
 
@@ -166,8 +166,7 @@ nav {
     object-fit: cover;
   }
 
-  .product-control {
-    margin-top: -10rem;
+  .product-control, .supply-control, .source-control {
     padding: 1.5rem 2rem;
 
     div {
@@ -188,6 +187,14 @@ nav {
     div:not(:last-child) {
       margin-bottom: .5rem;
     }
+  }
+
+  .product-control {
+    margin-top: -10rem;
+  }
+
+  .supply-control, .source-control {
+    margin-top: -7rem;
   }
 }
 
@@ -217,6 +224,12 @@ nav {
     }
   }
 
+  em {
+    color: $quartz;
+    font-size: .8rem;
+    margin-right: .5rem;
+  }
+
   >div:not(:last-child) {
     margin-bottom: 2rem;
   }
@@ -232,7 +245,6 @@ nav {
       margin-right: .25rem;
       min-width: 40px;
       display: inline-block;
-
     }
 
     .supply-unit {
@@ -278,5 +290,167 @@ nav {
 
   td:last-child {
     min-width: 35%;
+  }
+}
+
+.workstream {
+  min-height: calc(100vh - #{$navbar-height});
+  overflow-x: auto;
+
+  .title {
+    color: $quartz;
+    font-weight: 500;
+    margin-bottom: .75rem;
+
+    a {
+      color: $periwinkle;
+      font-size: 1.25rem;
+      padding-left: .5rem;
+    }
+
+    a:hover {
+      color: $indigo;
+    }
+  }
+
+  .column {
+    padding: 1.5rem;
+  }
+
+  .column:not(:first-child) {
+    padding-left: 0;
+  }
+
+  .column-container {
+    background-color: $mist;
+    padding: .75rem;
+  }
+
+  .column-button {
+    background-color: $periwinkle;
+    color: $white;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: .5rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $indigo;
+    }
+  }
+}
+
+.workstream .card {
+  background-color: transparent;
+  box-shadow: none;
+
+  &:not(:last-child) {
+    margin-bottom: .75rem;
+  }
+
+  .card-header {
+    background-color: $slate;
+    height: 5px;
+
+    &.status-green {
+      background-color: $green;
+    }
+
+    &.status-yellow {
+      background-color: $yellow;
+    }
+
+    &.status-red {
+      background-color: $red;
+    }
+  }
+
+  .card-content {
+    background-color: $white;
+    padding: 1rem .3rem;
+    cursor: pointer;
+  }
+
+  .column {
+    padding: 0 .2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .store-logo {
+    background-color: $lavender;
+    color: $white;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .purchase-profile {
+    justify-content: flex-end;
+
+    img, .empty-photo {
+      background-color: $slate;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+
+      &:hover {
+        background-color: $mist;
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .purchase-drag {
+    color: $periwinkle;
+    font-size: 1.3rem;
+    cursor: pointer;
+
+    &:hover {
+      color: $indigo;
+    }
+  }
+
+  .purchase-progress {
+    margin-top: -.5rem;
+
+    a {
+      color: $quartz;
+      font-size: .8rem;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    a:hover {
+      color: lighten($quartz, 20%);
+    }
+
+    .progress {
+      height: .4rem;
+    }
+  }
+
+  .card-footer {
+    background-color: $slate;
+    color: lighten($quartz,10%);
+    font-size: .9rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    justify-content: center;
+    border: none;
+    border-radius: 0 0 6px 6px;
+    padding: .25rem .7rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $indigo;
+      color: $mist;
+    }
   }
 }
