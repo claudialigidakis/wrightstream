@@ -6601,3 +6601,22 @@ nav {
     margin-left: 2.75rem; }
     .modal-container ol li {
       padding-left: .25rem; }
+
+.products-table {
+  border-bottom: 2px solid #d9def1; }
+  .products-table thead {
+    background-color: #bbc3dd; }
+    .products-table thead th {
+      color: white;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: none;
+      padding: 1rem 1.25rem; }
+  .products-table td {
+    border: none;
+    padding: .75rem 1.25rem; }
+  .products-table td:first-child {
+    min-width: 40%; }
+  .products-table td:last-child {
+    min-width: 35%; }

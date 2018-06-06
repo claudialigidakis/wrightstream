@@ -17,18 +17,32 @@ class Sources extends React.Component {
   };
 
   render () {
-
-    return this.props.sources.map(source => {
-      return (
-        <Source
-          key={source.id}
-          id={source.id}
-          name={source.name}
-          type_id={source.type_id}
-          link={source.link}
-        />
-      );
-    });
+    return (
+      <table className="table is-striped is-hoverable is-fullwidth products-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            this.props.sources.map(source => {
+              return (
+                <Source
+                  key={source.id}
+                  id={source.id}
+                  name={source.name}
+                  type_id={source.type_id}
+                  link={source.link}
+                />
+              );
+            })
+          }
+        </tbody>
+      </table>
+    );
   };
 };
 

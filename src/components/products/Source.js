@@ -2,24 +2,31 @@
 import React from 'react';
 
 // REDUX
-//import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 // ==========
 
 class Source extends React.Component {
   render () {
     return (
-      <div>
-        <h1>{this.props.name} {this.props.type_id} {this.props.link}</h1>
-      </div>
+      <tr>
+        <td>{this.props.name}</td>
+        <td>
+          {
+            this.props.types.find(type => type.id === this.props.type_id) ?
+            (
+              this.props.types.find(type => type.id === this.props.type_id).name
+            ) : null
+          }
+        </td>
+        <td>{this.props.link}</td>
+      </tr>
     );
   };
 };
-//
-// const mapStateToProps = state => ({
-//   categories: state.products.categories
-// });
-//
-// export default connect(mapStateToProps, null)(Product);
 
-export default Source
+const mapStateToProps = state => ({
+  types: state.products.types
+});
+
+export default connect(mapStateToProps, null)(Source);

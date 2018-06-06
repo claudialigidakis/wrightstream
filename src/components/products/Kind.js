@@ -20,17 +20,32 @@ class Kind extends React.Component {
   };
 
   render () {
-    return this.props.suppliesByKind.map(supply => {
-      return (
-        <Supply
-          key={supply.id}
-          id={supply.id}
-          name={supply.name}
-          kind_id={supply.kind_id}
-          source_id={supply.source_id}
-        />
-      );
-    })
+    return (
+      <table className="table is-striped is-hoverable is-fullwidth products-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Kind</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            this.props.suppliesByKind.map(supply => {
+              return (
+                <Supply
+                  key={supply.id}
+                  id={supply.id}
+                  name={supply.name}
+                  kind_id={supply.kind_id}
+                  source_id={supply.source_id}
+                />
+              );
+            })
+          }
+        </tbody>
+      </table>
+    );
   };
 };
 
