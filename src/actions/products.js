@@ -7,6 +7,9 @@ export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_PRODUCTS_BY_CATEGORY = 'GET_PRODUCTS_BY_CATEGORY';
 export const GET_SUPPLIES = 'GET_SUPPLIES';
 export const GET_KINDS = 'GET_KINDS';
+export const ADD_KIND = 'ADD_KIND';
+export const EDIT_KIND = 'DELETE_KIND';
+export const DELETE_KIND = 'DELETE_KIND';
 export const GET_SUPPLIES_BY_KIND = 'GET_SUPPLIES_BY_KIND';
 export const GET_SOURCES = 'GET_SOURCES';
 export const ADD_SOURCE = 'ADD_SOURCE';
@@ -135,6 +138,63 @@ export const getKinds = () => (
       .then(response => {
         dispatch({
           type: GET_KINDS,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const addKind = (name) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/kinds/${shop_id}`, 'post', {name})
+      .then(response => {
+        return request(`/kinds/${shop_id}/allKinds`);
+      })
+      .then(response => {
+        dispatch({
+          type: ADD_KIND,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const editKind = (id, name) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/kinds/${id}`, 'put', {name})
+      .then(response => {
+        return request(`/kinds/${shop_id}/allKinds`);
+      })
+      .then(response => {
+        dispatch({
+          type: EDIT_KIND,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const deleteKind = (id) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/types/${id}`, 'delete')
+      .then(response => {
+        return request(`/types/${shop_id}/allTypes`);
+      })
+      .then(response => {
+        dispatch({
+          type: DELETE_KIND,
           payload: response.data.data
         });
       });
