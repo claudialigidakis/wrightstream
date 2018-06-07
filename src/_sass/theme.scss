@@ -263,6 +263,144 @@ nav {
   }
 }
 
+.modal-purchase {
+  width: 900px;
+  height: calc(100vh - 40px);
+
+  >.columns {
+    height: 100%;
+  }
+
+  >.columns>.column {
+    padding: 0;
+    
+    overflow-y: auto;
+  }
+
+  .modal-sidebar {
+    background-color: $koamaru;
+    color: $white;
+  }
+
+  .purchase-status {
+    background-color: $mist;
+    color: $text;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: .25rem;
+  }
+
+  .level {
+    margin-bottom: 0;
+  }
+
+  .purchase-header {
+    padding: 1.5rem;
+
+    .title {
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+  }
+
+  .purchase-row {
+    border-top: 1px solid lighten($koamaru, 3%);
+    padding: 1rem 1.5rem;
+
+    .title {
+      color: $slate;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    i {
+      margin-left: .75rem;
+    }
+
+    .progress {
+      width: 100px;
+      height: .4rem;
+    }
+
+    .purchase-profile img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .purchase-row-child {
+    background-color: lighten($koamaru, 3%);
+    color: $quartz;
+    font-size: .9rem;
+    padding: .5rem 1.5rem .5rem 2.5rem;
+
+    li {
+      margin: .4rem 0;
+    }
+
+    .purchase-profile img {
+      width: 20px;
+      height: 20px;
+    }
+
+    span {
+      margin-right: .75rem;
+    }
+
+    .lnr-check {
+      color: $green;
+    }
+
+    .lnr-cross2 {
+      color: $red;
+    }
+
+    label {
+      font-size: .9rem;
+      margin: 0;
+    }
+
+    .is-checkradio[type="radio"] + label,
+    .is-checkradio[type="checkbox"] + label {
+      padding-top: .1rem;
+    }
+
+    .is-checkradio[type="radio"] + label::before,
+    .is-checkradio[type="radio"]:checked + label::before,
+    .is-checkradio[type="checkbox"] + label::before,
+    .is-checkradio[type="checkbox"]:checked + label::before {
+      background-color: lighten($koamaru, 10%);
+      border: none;
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .is-checkradio[type="checkbox"] + label::after,
+    .is-checkradio[type="checkbox"]:checked + label::after {
+      border-color: $quartz;
+      top: .25rem;
+      left: .45rem;
+    }
+
+    .is-checkradio[type="radio"] + label::after,
+    .is-checkradio[type="radio"]:checked + label::after {
+      background-color: $quartz;
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  .purchase-profile {
+
+    img, .empty-photo {
+      width: 35px;
+      height: 35px;
+    }
+  }
+}
+
 .products-table {
   border-bottom: 2px solid $lavender;
 
@@ -313,12 +451,12 @@ nav {
     }
   }
 
-  .column {
+  > .columns > .column {
     padding: 1.5rem;
-  }
 
-  .column:not(:first-child) {
-    padding-left: 0;
+    &:not(:first-child) {
+      padding-left: 0;
+    }
   }
 
   .column-container {
@@ -338,6 +476,30 @@ nav {
 
     &:hover {
       background-color: $indigo;
+    }
+  }
+
+  .store-logo {
+    background-color: $lavender;
+    color: $white;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .purchase-profile {
+
+    img, .empty-photo {
+      background-color: $slate;
+      border-radius: 50%;
+
+      &:hover {
+        background-color: $mist;
+        transform: scale(1.1);
+      }
     }
   }
 }
@@ -380,33 +542,6 @@ nav {
     justify-content: center;
   }
 
-  .store-logo {
-    background-color: $lavender;
-    color: $white;
-    width: 25px;
-    height: 25px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .purchase-profile {
-    justify-content: flex-end;
-
-    img, .empty-photo {
-      background-color: $slate;
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-
-      &:hover {
-        background-color: $mist;
-        transform: scale(1.1);
-      }
-    }
-  }
-
   .purchase-drag {
     color: $periwinkle;
     font-size: 1.3rem;
@@ -433,6 +568,15 @@ nav {
 
     .progress {
       height: .4rem;
+    }
+  }
+
+  .purchase-profile {
+    justify-content: flex-end;
+
+    img, .empty-photo {
+      width: 25px;
+      height: 25px;
     }
   }
 
