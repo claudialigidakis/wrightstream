@@ -10,6 +10,8 @@ export const GET_KINDS = 'GET_KINDS';
 export const GET_SUPPLIES_BY_KIND = 'GET_SUPPLIES_BY_KIND';
 export const GET_SOURCES = 'GET_SOURCES';
 export const ADD_SOURCE = 'ADD_SOURCE';
+export const EDIT_SOURCE = 'EDIT_SOURCE';
+export const DELETE_SOURCE = 'DELETE_SOURCE';
 export const GET_TYPES = 'GET_TYPES';
 export const ADD_TYPE = 'ADD_TYPE';
 export const EDIT_TYPE = 'EDIT_TYPE';
@@ -187,6 +189,45 @@ export const addSource = (name, type_id, link) => (
       .then(response => {
         dispatch({
           type: ADD_SOURCE,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const editSource = (id, name, link, type_id) => (
+  dispatch => {
+    console.log(id, name, link, type_id);
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/sources/${id}`, 'put', {name, link, type_id})
+      .then(response => {
+        return request(`/sources/${shop_id}/allSources`);
+      })
+      .then(response => {
+        dispatch({
+          type: EDIT_SOURCE,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const deleteSource = (id) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/sources/${id}`, 'delete')
+      .then(response => {
+        return request(`/sources/${shop_id}/allSources`);
+      })
+      .then(response => {
+        dispatch({
+          type: DELETE_SOURCE,
           payload: response.data.data
         });
       });

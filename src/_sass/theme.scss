@@ -5,7 +5,7 @@ body {
 }
 
 nav {
-  
+
   border-bottom: solid 2px transparentize($mist, .7);
 
   .navbar-main {
@@ -420,6 +420,7 @@ nav {
   td {
     border: none;
     padding: .75rem 1.25rem;
+    cursor: pointer;
   }
 
   td:first-child {

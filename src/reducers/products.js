@@ -9,6 +9,8 @@ import {
   GET_SUPPLIES_BY_KIND,
   GET_SOURCES,
   ADD_SOURCE,
+  EDIT_SOURCE,
+  DELETE_SOURCE,
   GET_TYPES,
   ADD_TYPE,
   EDIT_TYPE,
@@ -51,6 +53,10 @@ export default (state = initialState, action) => {
     case GET_SOURCES:
       return {...state, sources: action.payload};
     case ADD_SOURCE:
+      return {...state, sources: action.payload};
+    case EDIT_SOURCE:
+      return {...state, sources: action.payload};
+    case DELETE_SOURCE:
       return {...state, sources: action.payload};
     case GET_TYPES:
       return {...state, types: action.payload};
