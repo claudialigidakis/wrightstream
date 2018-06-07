@@ -4,8 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getTypes } from '../../actions/products';
-//import { addSource } from '../../actions/products';
+import { getTypes, addSource } from '../../actions/products';
 
 // ==========
 
@@ -27,9 +26,10 @@ class SourceAdd extends React.Component {
         invalid: true
       });
     } else {
-      //this.props.createReview(this.state.title, this.state.text, this.state.stars, this.props.user.id, this.props.snackId);
-      console.log(this.state.name, this.state.type, this.state.link)
+      const type_id = this.props.types.find(type => type.name === this.state.type).id;
+      this.props.addSource(this.state.name, type_id, this.state.link);
       this.clear();
+      this.props.toggle();
     }
   };
 
@@ -66,8 +66,12 @@ class SourceAdd extends React.Component {
             <div className="field">
               <div className="control">
                 <div className="select">
-                  <select value={this.state.type} onChange={event => this.setState({type: event.target.value})}>
-                    <option disabled>Select type</option>
+                  <select
+                    id="type"
+                    value={this.state.type}
+                    onChange={event => this.setState({type: event.target.value})}
+                    >
+                    <option value="Select type" disabled>Select type</option>
                     {
                       this.props.types.map(type => {
                         return (
@@ -93,15 +97,14 @@ class SourceAdd extends React.Component {
             </div>
           </div>
         </div>
-
-        <div className="control has-text-centered">
-          <button className="button is-primary is-outlined">Add Source</button>
-        </div>
-        {this.props.invalid ? (
-          <p id="error" className="help is-danger">
+        {this.state.invalid ? (
+          <p id="error" className="help is-danger has-text-centered">
             Please fill out all information correctly.
           </p>
         ) : null}
+        <div className="control has-text-centered">
+          <button className="button is-primary is-outlined">Add Source</button>
+        </div>
       </form>
     );
   };
@@ -112,7 +115,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getTypes
+  getTypes,
+  addSource
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SourceAdd);

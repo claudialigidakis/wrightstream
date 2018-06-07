@@ -79,10 +79,10 @@ class SourceControl extends React.Component {
           <div className="modal-content">
             <div className="modal-container">
               {
-                this.state.action === 'addSource' ? <SourceAdd /> : (
-                  this.state.action === 'addType' ? <TypeAdd /> : (
-                    this.state.action === 'editType' ? <TypeEdit /> : (
-                      this.state.action === 'deleteType' ? <TypeDelete /> : null
+                this.state.action === 'addSource' ? <SourceAdd toggle={this.toggle} /> : (
+                  this.state.action === 'addType' ? <TypeAdd toggle={this.toggle} /> : (
+                    this.state.action === 'editType' ? <TypeEdit toggle={this.toggle} /> : (
+                      this.state.action === 'deleteType' ? <TypeDelete toggle={this.toggle} /> : null
                     )
                   )
                 )
