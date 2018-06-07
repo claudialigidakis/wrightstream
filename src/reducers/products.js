@@ -6,6 +6,9 @@ import {
   GET_PRODUCTS_BY_CATEGORY,
   GET_SUPPLIES,
   GET_KINDS,
+  ADD_KIND,
+  EDIT_KIND,
+  DELETE_KIND,
   GET_SUPPLIES_BY_KIND,
   GET_SOURCES,
   ADD_SOURCE,
@@ -46,6 +49,14 @@ export default (state = initialState, action) => {
       return {...state, productsByCategory: action.payload};
     case GET_SUPPLIES:
       return {...state, supplies: action.payload};
+    case GET_KINDS:
+      return {...state, kinds: action.payload};
+    case ADD_KIND:
+      return {...state, kinds: action.payload};
+    case EDIT_KIND:
+      return {...state, kinds: action.payload};
+    case DELETE_KIND:
+      return {...state, kinds: action.payload};
     case GET_KINDS:
       return {...state, kinds: action.payload};
     case GET_SUPPLIES_BY_KIND:

@@ -35,7 +35,7 @@ class SourceControl extends React.Component {
     }
   };
 
-  render = () => {
+  render () {
     return (
       <div className="products-control buttons is-right">
         <div className="dropdown is-hoverable is-right">
@@ -72,7 +72,6 @@ class SourceControl extends React.Component {
             </div>
           </div>
         </div>
-
         <div className={this.state.modalClasses}>
           <div className="modal-background" onClick={this.toggle}></div>
           <div className="modal-content">
