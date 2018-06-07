@@ -4,28 +4,28 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getTypes, deleteType } from '../../actions/products';
+import { getKinds, deleteKind } from '../../actions/products';
 
 // ==========
 
-class TypeDelete extends React.Component {
+class KindDelete extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      type: 'Select type',
+      kind: 'Select kind',
       invalid: false
     };
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    if (event.target.type.value === 'Select type') {
+    if (event.target.kind.value === 'Select kind') {
       this.setState({
         invalid: true
       });
     } else {
-      const type_id = this.props.types.find(type => type.name === this.state.type).id;
-      this.props.deleteType(type_id);
+      const kind_id = this.props.kinds.find(kind => kind.name === this.state.kind).id;
+      this.props.deleteKind(kind_id);
       this.clear();
       this.props.toggle();
     }
@@ -33,13 +33,13 @@ class TypeDelete extends React.Component {
 
   clear = () => {
     this.setState({
-      type: 'Select type',
+      kind: 'Select kind',
       invalid: false
     });
   };
 
   componentDidMount () {
-    this.props.getTypes();
+    this.props.getKinds();
   };
 
   render () {
@@ -49,15 +49,15 @@ class TypeDelete extends React.Component {
           <div className="control">
             <div className="select">
               <select
-                id="type"
-                value={this.state.type}
-                onChange={event => this.setState({type: event.target.value})}
+                id="kind"
+                value={this.state.kind}
+                onChange={event => this.setState({kind: event.target.value})}
                 >
-                <option value="Select type" disabled>Select type</option>
+                <option value="Select kind" disabled>Select kind</option>
                 {
-                  this.props.types.map(type => {
+                  this.props.kinds.map(kind => {
                     return (
-                      <option key={type.id} value={type.name}>{type.name}</option>
+                      <option key={kind.id} value={kind.name}>{kind.name}</option>
                     )
                   })
                 }
@@ -67,11 +67,11 @@ class TypeDelete extends React.Component {
         </div>
         {this.state.invalid ? (
           <p id="error" className="help is-danger has-text-centered">
-            Please select a valid type to delete.
+            Please select a valid kind to delete.
           </p>
         ) : null}
         <div className="control has-text-centered">
-          <button className="button is-primary is-outlined">Delete Type</button>
+          <button className="button is-primary is-outlined">Delete Kind</button>
         </div>
       </form>
     );
@@ -79,12 +79,12 @@ class TypeDelete extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  types: state.products.types
+  kinds: state.products.kinds
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getTypes,
-  deleteType
+  getKinds,
+  deleteKind
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(TypeDelete);
+export default connect(mapStateToProps, mapDispatchToProps)(KindDelete);

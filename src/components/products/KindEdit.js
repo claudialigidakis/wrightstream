@@ -4,29 +4,29 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getTypes, editType } from '../../actions/products';
+import { getKinds, editKind } from '../../actions/products';
 
 // ==========
 
-class TypeEdit extends React.Component {
+class KindEdit extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       name: '',
-      type: 'Select type',
+      kind: 'Select kind',
       invalid: false
     };
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    if (!event.target.name.value || event.target.type.value === 'Select type') {
+    if (!event.target.name.value || event.target.kind.value === 'Select kind') {
       this.setState({
         invalid: true
       });
     } else {
-      const type_id = this.props.types.find(type => type.name === this.state.type).id;
-      this.props.editType(type_id, this.state.name);
+      const kind_id = this.props.kinds.find(kind => kind.name === this.state.kind).id;
+      this.props.editKind(kind_id, this.state.name);
       this.clear();
       this.props.toggle();
     }
@@ -35,13 +35,13 @@ class TypeEdit extends React.Component {
   clear = () => {
     this.setState({
       name: '',
-      type: 'Select type',
+      kind: 'Select kind',
       invalid: false
     });
   };
 
   componentDidMount () {
-    this.props.getTypes();
+    this.props.getKinds();
   };
 
   render () {
@@ -53,15 +53,15 @@ class TypeEdit extends React.Component {
               <div className="control">
                 <div className="select">
                   <select
-                    id="type"
-                    value={this.state.type}
-                    onChange={event => this.setState({type: event.target.value})}
+                    id="kind"
+                    value={this.state.kind}
+                    onChange={event => this.setState({kind: event.target.value})}
                     >
-                    <option value="Select type" disabled>Select type</option>
+                    <option value="Select kind" disabled>Select kind</option>
                     {
-                      this.props.types.map(type => {
+                      this.props.kinds.map(kind => {
                         return (
-                          <option key={type.id} value={type.name}>{type.name}</option>
+                          <option key={kind.id} value={kind.name}>{kind.name}</option>
                         )
                       })
                     }
@@ -89,7 +89,7 @@ class TypeEdit extends React.Component {
           </p>
         ) : null}
         <div className="control has-text-centered">
-          <button className="button is-primary is-outlined">Edit Type</button>
+          <button className="button is-primary is-outlined">Edit Kind</button>
         </div>
       </form>
     );
@@ -97,12 +97,12 @@ class TypeEdit extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  types: state.products.types
+  kinds: state.products.kinds
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getTypes,
-  editType
+  getKinds,
+  editKind
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(TypeEdit);
+export default connect(mapStateToProps, mapDispatchToProps)(KindEdit);

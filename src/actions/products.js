@@ -188,9 +188,9 @@ export const deleteKind = (id) => (
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/types/${id}`, 'delete')
+      request(`/kinds/${id}`, 'delete')
       .then(response => {
-        return request(`/types/${shop_id}/allTypes`);
+        return request(`/kinds/${shop_id}/allKinds`);
       })
       .then(response => {
         dispatch({
