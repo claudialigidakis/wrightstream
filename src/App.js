@@ -15,6 +15,7 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import Settings from './components/Settings';
 import Products from './components/Products';
+import WorkStream from './components/WorkStream';
 import EtsyCallback from './components/EtsyCallback'
 
 // ==========
@@ -35,6 +36,7 @@ class App extends React.Component {
             <Route path="/signup" component={Signup} />
             <Route path="/settings" component={Settings} />
             <Route path="/products" component={Products} />
+            <Route path="/workstream" component={WorkStream} />
             <Route path="/auth/callback/etsy" component={EtsyCallback} />
           </Switch>
         </BrowserRouter>

@@ -9,14 +9,20 @@ export const GET_SUPPLIES = 'GET_SUPPLIES';
 export const GET_KINDS = 'GET_KINDS';
 export const GET_SUPPLIES_BY_KIND = 'GET_SUPPLIES_BY_KIND';
 export const GET_SOURCES = 'GET_SOURCES';
+export const ADD_SOURCE = 'ADD_SOURCE';
+export const EDIT_SOURCE = 'EDIT_SOURCE';
+export const DELETE_SOURCE = 'DELETE_SOURCE';
 export const GET_TYPES = 'GET_TYPES';
+export const ADD_TYPE = 'ADD_TYPE';
+export const EDIT_TYPE = 'EDIT_TYPE';
+export const DELETE_TYPE = 'DELETE_TYPE';
 export const GET_SOURCES_BY_TYPE = 'GET_SOURCES_BY_TYPE';
 
 export const getProducts = () => (
   dispatch => {
     request('/auth/token')
     .then(response => {
-      const shop_id = response.data.shops_id
+      const shop_id = response.data.shops_id;
       request(`/items/${shop_id}/allItems`)
       .then(response => {
         return response.data.data.slice(response.data.data.length-6, response.data.data.length)
@@ -35,7 +41,7 @@ export const getItems = () => (
   dispatch => {
     request('/auth/token')
     .then(response => {
-      const shop_id = response.data.shops_id
+      const shop_id = response.data.shops_id;
       request(`/items/${shop_id}/allItems`)
       .then(response => {
         dispatch({
@@ -51,7 +57,7 @@ export const getBundles = () => (
   dispatch => {
     request('/auth/token')
     .then(response => {
-      const shop_id = response.data.shops_id
+      const shop_id = response.data.shops_id;
       request(`/bundles/${shop_id}/allBundles`)
       .then(response => {
         dispatch({
@@ -67,7 +73,7 @@ export const getCategories = () => (
   dispatch => {
     request('/auth/token')
     .then(response => {
-      const shop_id = response.data.shops_id
+      const shop_id = response.data.shops_id;
       request(`/categories/${shop_id}/allCategories`)
       .then(response => {
         dispatch({
@@ -83,7 +89,7 @@ export const getProductsByCategory = (id) => (
   dispatch => {
     request('/auth/token')
     .then(response => {
-      const shop_id = response.data.shops_id
+      const shop_id = response.data.shops_id;
       request(`/items/${shop_id}/allItems`)
       .then(response => {
         return response.data.data.filter(item => item.category_id === parseInt(id, 10));
@@ -108,7 +114,7 @@ export const getSupplies = () => (
   dispatch => {
     request('/auth/token')
     .then(response => {
-      const shop_id = response.data.shops_id
+      const shop_id = response.data.shops_id;
       request(`/supplies/${shop_id}/allSupplies`)
       .then(response => {
         dispatch({
@@ -124,7 +130,7 @@ export const getKinds = () => (
   dispatch => {
     request('/auth/token')
     .then(response => {
-      const shop_id = response.data.shops_id
+      const shop_id = response.data.shops_id;
       request(`/kinds/${shop_id}/allKinds`)
       .then(response => {
         dispatch({
@@ -140,7 +146,7 @@ export const getSuppliesByKind = (id) => (
   dispatch => {
     request('/auth/token')
     .then(response => {
-      const shop_id = response.data.shops_id
+      const shop_id = response.data.shops_id;
       request(`/supplies/${shop_id}/allSupplies`)
       .then(response => {
         return response.data.data.filter(supply => supply.kind_id === parseInt(id, 10));
@@ -159,7 +165,7 @@ export const getSources = () => (
   dispatch => {
     request('/auth/token')
     .then(response => {
-      const shop_id = response.data.shops_id
+      const shop_id = response.data.shops_id;
       request(`/sources/${shop_id}/allSources`)
       .then(response => {
         dispatch({
@@ -171,11 +177,69 @@ export const getSources = () => (
   }
 );
 
+export const addSource = (name, type_id, link) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/sources/${shop_id}`, 'post', {name, type_id, link})
+      .then(response => {
+        return request(`/sources/${shop_id}/allSources`);
+      })
+      .then(response => {
+        dispatch({
+          type: ADD_SOURCE,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const editSource = (id, name, link, type_id) => (
+  dispatch => {
+    console.log(id, name, link, type_id);
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/sources/${id}`, 'put', {name, link, type_id})
+      .then(response => {
+        return request(`/sources/${shop_id}/allSources`);
+      })
+      .then(response => {
+        dispatch({
+          type: EDIT_SOURCE,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const deleteSource = (id) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/sources/${id}`, 'delete')
+      .then(response => {
+        return request(`/sources/${shop_id}/allSources`);
+      })
+      .then(response => {
+        dispatch({
+          type: DELETE_SOURCE,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
 export const getTypes = () => (
   dispatch => {
     request('/auth/token')
     .then(response => {
-      const shop_id = response.data.shops_id
+      const shop_id = response.data.shops_id;
       request(`/types/${shop_id}/allTypes`)
       .then(response => {
         dispatch({
@@ -187,11 +251,68 @@ export const getTypes = () => (
   }
 );
 
+export const addType = (name) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/types/${shop_id}`, 'post', {name})
+      .then(response => {
+        return request(`/types/${shop_id}/allTypes`);
+      })
+      .then(response => {
+        dispatch({
+          type: ADD_TYPE,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const editType = (id, name) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/types/${id}`, 'put', {name})
+      .then(response => {
+        return request(`/types/${shop_id}/allTypes`);
+      })
+      .then(response => {
+        dispatch({
+          type: EDIT_TYPE,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const deleteType = (id) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/types/${id}`, 'delete')
+      .then(response => {
+        return request(`/types/${shop_id}/allTypes`);
+      })
+      .then(response => {
+        dispatch({
+          type: DELETE_TYPE,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
 export const getSourcesByType = (id) => (
   dispatch => {
     request('/auth/token')
     .then(response => {
-      const shop_id = response.data.shops_id
+      const shop_id = response.data.shops_id;
       request(`/sources/${shop_id}/allSources`)
       .then(response => {
         return response.data.data.filter(source => source.type_id === parseInt(id, 10));
