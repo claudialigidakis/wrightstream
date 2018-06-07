@@ -19,9 +19,9 @@ class SourceAdd extends React.Component {
     };
   };
 
-  handleAdd = event => {
+  handleSubmit = event => {
     event.preventDefault();
-    if (!event.target.name.value || !event.target.type.value || !event.target.link.value) {
+    if (!event.target.name.value || event.target.type.value === 'Select type' || !event.target.link.value) {
       this.setState({
         invalid: true
       });
@@ -48,7 +48,7 @@ class SourceAdd extends React.Component {
 
   render () {
     return (
-      <form onSubmit={this.handleAdd}>
+      <form onSubmit={this.handleSubmit}>
         <div className="field">
           <div className="control">
             <input

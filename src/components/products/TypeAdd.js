@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-//import { addSource } from '../../actions/products';
+import { addType } from '../../actions/products';
 
 // ==========
 
@@ -17,16 +17,16 @@ class TypeAdd extends React.Component {
     };
   };
 
-  handleAdd = event => {
+  handleSubmit = event => {
     event.preventDefault();
     if (!event.target.name.value) {
       this.setState({
         invalid: true
       });
     } else {
-      //this.props.createReview(this.state.title, this.state.text, this.state.stars, this.props.user.id, this.props.snackId);
-      console.log(this.state.name)
+      this.props.addType(this.state.name);
       this.clear();
+      this.props.toggle();
     }
   };
 
@@ -39,27 +39,27 @@ class TypeAdd extends React.Component {
 
   render () {
     return (
-      <form onSubmit={this.handleAdd}>
+      <form onSubmit={this.handleSubmit}>
         <div className="field">
           <div className="control">
             <input
               className="input"
               type="text"
-              placeholder="Source Name"
+              placeholder="Type Name"
               id="name"
               value={this.state.name}
               onChange={event => this.setState({name: event.target.value})}
             />
           </div>
         </div>
-        <div className="control has-text-centered">
-          <button className="button is-primary is-outlined">Add Type</button>
-        </div>
-        {this.props.invalid ? (
-          <p id="error" className="help is-danger">
+        {this.state.invalid ? (
+          <p id="error" className="help is-danger has-text-centered">
             Please fill out all information correctly.
           </p>
         ) : null}
+        <div className="control has-text-centered">
+          <button className="button is-primary is-outlined">Add Type</button>
+        </div>
       </form>
     );
   };
@@ -70,7 +70,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-
+  addType
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(TypeAdd);

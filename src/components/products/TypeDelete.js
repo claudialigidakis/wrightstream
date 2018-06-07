@@ -4,8 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getTypes } from '../../actions/products';
-//import { addSource } from '../../actions/products';
+import { getTypes, deleteType } from '../../actions/products';
 
 // ==========
 
@@ -18,16 +17,17 @@ class TypeDelete extends React.Component {
     };
   };
 
-  handleDelete = event => {
+  handleSubmit = event => {
     event.preventDefault();
-    if (!event.target.type.value) {
+    if (event.target.type.value === 'Select type') {
       this.setState({
         invalid: true
       });
     } else {
-      //this.props.createReview(this.state.title, this.state.text, this.state.stars, this.props.user.id, this.props.snackId);
-      console.log(this.state.type)
+      const type_id = this.props.types.find(type => type.name === this.state.type).id;
+      this.props.deleteType(type_id);
       this.clear();
+      this.props.toggle();
     }
   };
 
@@ -44,12 +44,16 @@ class TypeDelete extends React.Component {
 
   render () {
     return (
-      <form onSubmit={this.handleAdd}>
+      <form onSubmit={this.handleSubmit}>
         <div className="field">
           <div className="control">
             <div className="select">
-              <select value={this.state.type} onChange={event => this.setState({type: event.target.value})}>
-                <option disabled>Select type</option>
+              <select
+                id="type"
+                value={this.state.type}
+                onChange={event => this.setState({type: event.target.value})}
+                >
+                <option value="Select type" disabled>Select type</option>
                 {
                   this.props.types.map(type => {
                     return (
@@ -61,15 +65,14 @@ class TypeDelete extends React.Component {
             </div>
           </div>
         </div>
-
-        <div className="control has-text-centered">
-          <button className="button is-primary is-outlined">Delete Type</button>
-        </div>
-        {this.props.invalid ? (
-          <p id="error" className="help is-danger">
+        {this.state.invalid ? (
+          <p id="error" className="help is-danger has-text-centered">
             Please select a valid type to delete.
           </p>
         ) : null}
+        <div className="control has-text-centered">
+          <button className="button is-primary is-outlined">Delete Type</button>
+        </div>
       </form>
     );
   };
@@ -80,7 +83,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getTypes
+  getTypes,
+  deleteType
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(TypeDelete);

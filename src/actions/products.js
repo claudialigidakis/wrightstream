@@ -11,6 +11,9 @@ export const GET_SUPPLIES_BY_KIND = 'GET_SUPPLIES_BY_KIND';
 export const GET_SOURCES = 'GET_SOURCES';
 export const ADD_SOURCE = 'ADD_SOURCE';
 export const GET_TYPES = 'GET_TYPES';
+export const ADD_TYPE = 'ADD_TYPE';
+export const EDIT_TYPE = 'EDIT_TYPE';
+export const DELETE_TYPE = 'DELETE_TYPE';
 export const GET_SOURCES_BY_TYPE = 'GET_SOURCES_BY_TYPE';
 
 export const getProducts = () => (
@@ -200,6 +203,63 @@ export const getTypes = () => (
       .then(response => {
         dispatch({
           type: GET_TYPES,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const addType = (name) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/types/${shop_id}`, 'post', {name})
+      .then(response => {
+        return request(`/types/${shop_id}/allTypes`);
+      })
+      .then(response => {
+        dispatch({
+          type: ADD_TYPE,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const editType = (id, name) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/types/${id}`, 'put', {name})
+      .then(response => {
+        return request(`/types/${shop_id}/allTypes`);
+      })
+      .then(response => {
+        dispatch({
+          type: EDIT_TYPE,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const deleteType = (id) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/types/${id}`, 'delete')
+      .then(response => {
+        return request(`/types/${shop_id}/allTypes`);
+      })
+      .then(response => {
+        dispatch({
+          type: DELETE_TYPE,
           payload: response.data.data
         });
       });
