@@ -1,6 +1,12 @@
 // REACT
 import React from 'react';
 
+// COMPONENTS
+import SourceAdd from './SourceAdd';
+import TypeAdd from './TypeAdd';
+import TypeEdit from './TypeEdit';
+import TypeDelete from './TypeDelete';
+
 // ==========
 
 class SourceControl extends React.Component {
@@ -8,26 +14,28 @@ class SourceControl extends React.Component {
     super(props);
     this.state = {
       modal: false,
-      modalClasses: 'modal'
+      modalClasses: 'modal',
+      action: ''
     };
-    this.toggle = this.toggle.bind(this);
   };
 
-  toggle () {
+  toggle = event => {
     if (!this.state.modal) {
       this.setState({
         modal: true,
-        modalClasses: this.state.modalClasses + ' is-active'
+        modalClasses: this.state.modalClasses + ' is-active',
+        action: event.target.id
       });
     } else {
       this.setState({
         modal: false,
-        modalClasses: 'modal'
+        modalClasses: 'modal',
+        action: ''
       });
     }
   };
 
-  render () {
+  render = () => {
     return (
       <div className="products-control buttons is-right">
         <div className="dropdown is-hoverable is-right">
@@ -38,7 +46,7 @@ class SourceControl extends React.Component {
           </div>
           <div className="dropdown-menu">
             <div className="dropdown-content">
-              <a className="dropdown-item" onClick={this.toggle}>
+              <a className="dropdown-item" id="add-source" onClick={event => this.toggle(event)}>
                 Add Source
               </a>
             </div>
@@ -52,13 +60,13 @@ class SourceControl extends React.Component {
           </div>
           <div className="dropdown-menu">
             <div className="dropdown-content">
-              <a className="dropdown-item">
+              <a className="dropdown-item" id="add-type" onClick={event => this.toggle(event)}>
                 Add Type
               </a>
-              <a className="dropdown-item">
-                Rename Type
+              <a className="dropdown-item" id="edit-type" onClick={event => this.toggle(event)}>
+                Edit Type
               </a>
-              <a className="dropdown-item">
+              <a className="dropdown-item" id="delete-type" onClick={event => this.toggle(event)}>
                 Delete Type
               </a>
             </div>
@@ -69,60 +77,18 @@ class SourceControl extends React.Component {
           <div className="modal-background" onClick={this.toggle}></div>
           <div className="modal-content">
             <div className="modal-container">
-
-                <form>
-                  <div className="field">
-                    <p className="control">
-                      <input
-                        className="input"
-                        type="email"
-                        placeholder="Source Name"
-                        id="email"
-                        // value={this.state.email}
-                        // onChange={e => this.setState({email: e.target.value})}
-                        required
-                      />
-                    </p>
-                  </div>
-                  <div className="field">
-                    <p className="control">
-                      <input
-                        className="input"
-                        type="email"
-                        placeholder="Type"
-                        id="email"
-                        // value={this.state.email}
-                        // onChange={e => this.setState({email: e.target.value})}
-                        required
-                      />
-                    </p>
-                  </div>
-                  <div className="field">
-                    <p className="control">
-                      <input
-                        className="input"
-                        type="password"
-                        placeholder="Link"
-                        id="password"
-                        // value={this.state.password}
-                        // onChange={e => this.setState({password: e.target.value})}
-                        required
-                      />
-                    </p>
-                  </div>
-                  <div className="control has-text-centered">
-                    <button className="button is-primary is-outlined">Add Source</button>
-                  </div>
-                  {this.props.showLoginError ? (
-                    <p id="error" className="help is-danger">
-                      Please fill out all information correctly.
-                    </p>
-                  ) : null}
-                </form>
-
+              {
+                this.state.action === 'add-source' ? <SourceAdd toggle={this.toggle} /> : (
+                  this.state.action === 'add-type' ? <TypeAdd toggle={this.toggle} /> : (
+                    this.state.action === 'edit-type' ? <TypeEdit toggle={this.toggle} /> : (
+                      this.state.action === 'delete-type' ? <TypeDelete toggle={this.toggle} /> : null
+                    )
+                  )
+                )
+              }
             </div>
           </div>
-          <button className="modal-close is-large" aria-label="close" onClick={this.toggle}></button>
+          <button className="modal-close is-large"  onClick={this.toggle}></button>
         </div>
       </div>
     );

@@ -11,7 +11,8 @@
   }
 }
 
-.navbar-link::after, .select:not(.is-multiple):not(.is-loading)::after {
+.navbar-link::after,
+.select:not(.is-multiple):not(.is-loading)::after {
   height: .5rem;
   width: .5rem;
   border-width: 1px;

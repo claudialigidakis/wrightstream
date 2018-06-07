@@ -9,12 +9,43 @@ import { userLogout } from '../actions/auth';
 // ==========
 
 class Header extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      productsClasses: 'navbar-item',
+      inventoryClasses: 'navbar-item',
+      workstreamClasses: 'navbar-item'
+    };
+  };
+
+  componentDidMount () {
+    if (window.location.pathname.includes('/products')) {
+      this.setState({
+        productsClasses: 'navbar-item is-active',
+        inventoryClasses: 'navbar-item',
+        workstreamClasses: 'navbar-item'
+      });
+    } else if (window.location.pathname.includes('/inventory')) {
+      this.setState({
+        productsClasses: 'navbar-item',
+        inventoryClasses: 'navbar-item is-active',
+        workstreamClasses: 'navbar-item'
+      });
+    } else if (window.location.pathname.includes('/workstream')) {
+      this.setState({
+        productsClasses: 'navbar-item',
+        inventoryClasses: 'navbar-item',
+        workstreamClasses: 'navbar-item is-active'
+      });
+    }
+  };
+
   render () {
     return (
       <nav className="navbar is-fixed-top">
         <div className="navbar-brand">
           <a className="navbar-item" href="/">
-            WrightStream
+            <img src="../assets/wrightstream-logo-horizontal.svg" alt="WrightStream" />
           </a>
           <a role="button" className="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
             <span aria-hidden="true"></span>
@@ -27,15 +58,9 @@ class Header extends React.Component {
             (
               <div className="navbar-end">
                 <div className="navbar-main">
-                  <a className="navbar-item" href="/products">
-                    Products
-                  </a>
-                  <a className="navbar-item" href="/inventory">
-                    Inventory
-                  </a>
-                  <a className="navbar-item" href="/workstream">
-                    WorkStream
-                  </a>
+                  <a className={this.state.productsClasses} href="/products">Products</a>
+                  <a className={this.state.inventoryClasses} href="/inventory">Inventory</a>
+                  <a className={this.state.workstreamClasses} href="/workstream">WorkStream</a>
                 </div>
                 <div className="navbar-item has-dropdown is-hoverable">
                   <a className="navbar-link is-hidden-touch">
