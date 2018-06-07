@@ -45,7 +45,7 @@ class Header extends React.Component {
       <nav className="navbar is-fixed-top">
         <div className="navbar-brand">
           <a className="navbar-item" href="/">
-            WrightStream
+            <img src="../assets/wrightstream-logo-horizontal.svg" alt="WrightStream" />
           </a>
           <a role="button" className="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
             <span aria-hidden="true"></span>

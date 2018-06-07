@@ -53,9 +53,9 @@ class Product extends React.Component {
                 ) : null
               }
             </a>
-            <a href="" className="card-footer-item"><span className="lnr-heart"></span></a>
-            <a href="" className="card-footer-item"><span className="lnr-pencil"></span></a>
-            <a href="" className="card-footer-item"><span className="lnr-trash2"></span></a>
+            <a className="card-footer-item"><span className="lnr-heart"></span></a>
+            <a className="card-footer-item"><span className="lnr-pencil"></span></a>
+            <a className="card-footer-item"><span className="lnr-trash2"></span></a>
           </footer>
         </div>
 
@@ -118,9 +118,9 @@ class Product extends React.Component {
               </div>
             </div>
             <div className="product-control">
-              <div><a href=""><span className="lnr-heart"></span></a></div>
-              <div><a href=""><span className="lnr-pencil"></span></a></div>
-              <div><a href=""><span className="lnr-trash2"></span></a></div>
+              <div><a><span className="lnr-heart"></span></a></div>
+              <div><a><span className="lnr-pencil"></span></a></div>
+              <div><a><span className="lnr-trash2"></span></a></div>
             </div>
           </div>
           <button className="modal-close is-large" aria-label="close" onClick={this.toggle}></button>

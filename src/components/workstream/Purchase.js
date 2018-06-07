@@ -35,7 +35,7 @@ class Purchase extends React.Component {
     return (
       <div>
         <div className="card">
-          <header class="card-header status-green"></header>
+          <header className="card-header status-green"></header>
           <div className="card-content">
             <div className="content">
               <div className="columns is-marginless">
@@ -97,12 +97,12 @@ class Purchase extends React.Component {
                   <div className="level-left">
                     <div className="level-item">
                       <h2 className="title is-5 is-marginless">Supplies</h2>
-                      <i class="fas fa-chevron-down"></i>
+                      <i className="fas fa-chevron-down"></i>
                     </div>
                   </div>
                   <div className="level-right">
                     <div className="level-item">
-                      <progress class="progress is-small" value="60" max="100" />
+                      <progress className="progress is-small" value="60" max="100" />
                     </div>
                   </div>
                 </div>
@@ -143,12 +143,12 @@ class Purchase extends React.Component {
                   <div className="level-left">
                     <div className="level-item">
                       <h2 className="title is-5 is-marginless">Products</h2>
-                      <i class="fas fa-chevron-down"></i>
+                      <i className="fas fa-chevron-down"></i>
                     </div>
                   </div>
                   <div className="level-right">
                     <div className="level-item">
-                      <progress class="progress is-small" value="20" max="100" />
+                      <progress className="progress is-small" value="20" max="100" />
                     </div>
                   </div>
                 </div>
@@ -263,7 +263,7 @@ class Purchase extends React.Component {
                   <div className="level-left">
                     <div className="level-item">
                       <h2 className="title is-5 is-marginless">Delivery</h2>
-                      <i class="fas fa-chevron-up"></i>
+                      <i className="fas fa-chevron-up"></i>
                     </div>
                   </div>
                 </div>
@@ -272,7 +272,7 @@ class Purchase extends React.Component {
                   <div className="level-left">
                     <div className="level-item">
                       <h2 className="title is-5 is-marginless">Notes</h2>
-                      <i class="fas fa-chevron-up"></i>
+                      <i className="fas fa-chevron-up"></i>
                     </div>
                   </div>
                 </div>

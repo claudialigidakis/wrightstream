@@ -5,7 +5,7 @@ body {
 }
 
 nav {
-  padding: 0 2rem;
+  
   border-bottom: solid 2px transparentize($mist, .7);
 
   .navbar-main {
@@ -273,7 +273,7 @@ nav {
 
   >.columns>.column {
     padding: 0;
-    
+
     overflow-y: auto;
   }
 
