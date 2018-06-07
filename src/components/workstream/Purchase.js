@@ -52,7 +52,7 @@ class Purchase extends React.Component {
                 </div>
                 <div className="column is-2 purchase-profile">
                   {/* <div className="empty-photo"></div> */}
-                  <img src={this.props.user.photo} />
+                  <img src={this.props.user.photo} alt={`${this.props.user.firstname} ${this.props.user.lastname}`} />
                 </div>
                 <div className="column is-2 purchase-drag">
                   <span className="lnr-line-spacing"></span>
@@ -87,7 +87,7 @@ class Purchase extends React.Component {
                   <div className="level-right">
                     <div className="level-item">
                       <div className="purchase-profile">
-                        <img src={this.props.user.photo} />
+                        <img src={this.props.user.photo} alt={`${this.props.user.firstname} ${this.props.user.lastname}`} />
                       </div>
                     </div>
                   </div>
@@ -168,7 +168,7 @@ class Purchase extends React.Component {
                         <div className="level-right">
                           <div className="level-item">
                             <div className="purchase-profile">
-                              <img src={this.props.user.photo} />
+                              <img src={this.props.user.photo} alt={`${this.props.user.firstname} ${this.props.user.lastname}`} />
                             </div>
                           </div>
                         </div>
@@ -187,7 +187,7 @@ class Purchase extends React.Component {
                         <div className="level-right">
                           <div className="level-item">
                             <div className="purchase-profile">
-                              <img src={this.props.user.photo} />
+                              <img src={this.props.user.photo} alt={`${this.props.user.firstname} ${this.props.user.lastname}`} />
                             </div>
                           </div>
                         </div>
@@ -224,7 +224,7 @@ class Purchase extends React.Component {
                   <div className="level-right">
                     <div className="level-item">
                       <div className="purchase-profile">
-                        <img src={this.props.user.photo} />
+                        <img src={this.props.user.photo} alt={`${this.props.user.firstname} ${this.props.user.lastname}`} />
                       </div>
                     </div>
                   </div>
