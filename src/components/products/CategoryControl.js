@@ -78,7 +78,7 @@ class CategoryControl extends React.Component {
         </div>
         <div className={this.state.modalClasses}>
           <div className="modal-background" onClick={this.toggle}></div>
-          <div className="modal-content">
+          <div className="modal-content modal-form">
             <div className="modal-container">
               {
                 this.state.action === 'add-item' ? <ItemAdd toggle={this.toggle} /> : (

@@ -126,7 +126,7 @@ class Supply extends React.Component {
           </div>
           <div className={this.state.modalControlClasses}>
             <div className="modal-background" onClick={this.toggleControl}></div>
-            <div className="modal-content">
+            <div className="modal-content modal-form">
               <div className="modal-container">
                 {
                   this.state.action === 'edit' ? <SupplyEdit supply={this.props} toggle={this.toggleControl} /> : (

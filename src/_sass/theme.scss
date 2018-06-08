@@ -619,3 +619,11 @@ nav {
     }
   }
 }
+
+.modal-content.modal-form {
+  width: 500px;
+
+  .select, select {
+    width: 100%;
+  }
+}

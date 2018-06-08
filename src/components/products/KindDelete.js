@@ -66,6 +66,7 @@ class KindDelete extends React.Component {
             Please select a valid kind to delete.
           </p>
         ) : null}
+        <br />
         <div className="control has-text-centered">
           <button className="button is-primary is-outlined">Delete Kind</button>
         </div>

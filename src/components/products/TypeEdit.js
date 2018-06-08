@@ -84,6 +84,7 @@ class TypeEdit extends React.Component {
             Please fill out all information correctly.
           </p>
         ) : null}
+        <br />
         <div className="control has-text-centered">
           <button className="button is-primary is-outlined">Edit Type</button>
         </div>

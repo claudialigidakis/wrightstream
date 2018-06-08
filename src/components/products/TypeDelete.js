@@ -65,6 +65,7 @@ class TypeDelete extends React.Component {
             </div>
           </div>
         </div>
+        <br />
         {this.state.invalid ? (
           <p id="error" className="help is-danger has-text-centered">
             Please select a valid type to delete.
