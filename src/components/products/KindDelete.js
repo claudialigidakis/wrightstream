@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getKinds, deleteKind } from '../../actions/products';
+import { deleteKind } from '../../actions/products';
 
 // ==========
 
@@ -36,10 +36,6 @@ class KindDelete extends React.Component {
       kind: 'default',
       invalid: false
     });
-  };
-
-  componentDidMount () {
-    this.props.getKinds();
   };
 
   render () {
@@ -83,7 +79,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getKinds,
   deleteKind
 }, dispatch);
 

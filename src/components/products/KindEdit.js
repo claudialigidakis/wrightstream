@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getKinds, editKind } from '../../actions/products';
+import { editKind } from '../../actions/products';
 
 // ==========
 
@@ -38,10 +38,6 @@ class KindEdit extends React.Component {
       kind: 'default',
       invalid: false
     });
-  };
-
-  componentDidMount () {
-    this.props.getKinds();
   };
 
   render () {
@@ -101,7 +97,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getKinds,
   editKind
 }, dispatch);
 

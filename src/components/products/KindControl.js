@@ -2,14 +2,14 @@
 import React from 'react';
 
 // COMPONENTS
-import SourceAdd from './SourceAdd';
-import TypeAdd from './TypeAdd';
-import TypeEdit from './TypeEdit';
-import TypeDelete from './TypeDelete';
+import SupplyAdd from './SupplyAdd';
+import KindAdd from './KindAdd';
+import KindEdit from './KindEdit';
+import KindDelete from './KindDelete';
 
 // ==========
 
-class SourceControl extends React.Component {
+class KindControl extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -46,8 +46,8 @@ class SourceControl extends React.Component {
           </div>
           <div className="dropdown-menu">
             <div className="dropdown-content">
-              <a className="dropdown-item" id="add-source" onClick={event => this.toggle(event)}>
-                Add Source
+              <a className="dropdown-item" id="add-supply" onClick={event => this.toggle(event)}>
+                Add Supply
               </a>
             </div>
           </div>
@@ -60,14 +60,14 @@ class SourceControl extends React.Component {
           </div>
           <div className="dropdown-menu">
             <div className="dropdown-content">
-              <a className="dropdown-item" id="add-type" onClick={event => this.toggle(event)}>
-                Add Type
+              <a className="dropdown-item" id="add-kind" onClick={event => this.toggle(event)}>
+                Add Kind
               </a>
-              <a className="dropdown-item" id="edit-type" onClick={event => this.toggle(event)}>
-                Edit Type
+              <a className="dropdown-item" id="edit-kind" onClick={event => this.toggle(event)}>
+                Edit Kind
               </a>
-              <a className="dropdown-item" id="delete-type" onClick={event => this.toggle(event)}>
-                Delete Type
+              <a className="dropdown-item" id="delete-kind" onClick={event => this.toggle(event)}>
+                Delete Kind
               </a>
             </div>
           </div>
@@ -77,21 +77,21 @@ class SourceControl extends React.Component {
           <div className="modal-content">
             <div className="modal-container">
               {
-                this.state.action === 'add-source' ? <SourceAdd toggle={this.toggle} /> : (
-                  this.state.action === 'add-type' ? <TypeAdd toggle={this.toggle} /> : (
-                    this.state.action === 'edit-type' ? <TypeEdit toggle={this.toggle} /> : (
-                      this.state.action === 'delete-type' ? <TypeDelete toggle={this.toggle} /> : null
+                this.state.action === 'add-supply' ? <SupplyAdd toggle={this.toggle} /> : (
+                  this.state.action === 'add-kind' ? <KindAdd toggle={this.toggle} /> : (
+                    this.state.action === 'edit-kind' ? <KindEdit toggle={this.toggle} /> : (
+                      this.state.action === 'delete-kind' ? <KindDelete toggle={this.toggle} /> : null
                     )
                   )
                 )
               }
             </div>
           </div>
-          <button className="modal-close is-large"  onClick={this.toggle}></button>
+          <button className="modal-close is-large" onClick={this.toggle}></button>
         </div>
       </div>
     );
   };
 };
 
-export default SourceControl;
+export default KindControl;

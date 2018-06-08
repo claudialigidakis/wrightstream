@@ -3,7 +3,7 @@ import React from 'react';
 
 // ==========
 
-class ProductControl extends React.Component {
+class CategoryControl extends React.Component {
   render () {
     return (
       <div className="products-control buttons is-right">
@@ -49,4 +49,4 @@ class ProductControl extends React.Component {
   };
 };
 
-export default ProductControl;
+export default CategoryControl;

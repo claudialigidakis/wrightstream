@@ -65,12 +65,8 @@ class TypeAdd extends React.Component {
   };
 };
 
-const mapStateToProps = state => ({
-
-});
-
 const mapDispatchToProps = dispatch => bindActionCreators({
   addType
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(TypeAdd);
+export default connect(null, mapDispatchToProps)(TypeAdd);

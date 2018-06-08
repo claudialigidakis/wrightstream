@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getTypes, editType } from '../../actions/products';
+import { editType } from '../../actions/products';
 
 // ==========
 
@@ -38,10 +38,6 @@ class TypeEdit extends React.Component {
       type: 'default',
       invalid: false
     });
-  };
-
-  componentDidMount () {
-    this.props.getTypes();
   };
 
   render () {
@@ -101,7 +97,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getTypes,
   editType
 }, dispatch);
 

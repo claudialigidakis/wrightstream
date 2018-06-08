@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getTypes, editSource } from '../../actions/products';
+import { editSource } from '../../actions/products';
 
 // ==========
 
@@ -30,10 +30,6 @@ class SourceEdit extends React.Component {
       this.props.editSource(this.props.source.id, this.state.name, this.state.link, type_id);
       this.props.toggle();
     }
-  };
-
-  componentDidMount = () => {
-    this.props.getTypes();
   };
 
   render = () => {
@@ -105,7 +101,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getTypes,
   editSource
 }, dispatch);
 

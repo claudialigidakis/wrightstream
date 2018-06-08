@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getTypes, addSource } from '../../actions/products';
+import { addSource } from '../../actions/products';
 
 // ==========
 
@@ -40,10 +40,6 @@ class SourceAdd extends React.Component {
       link: '',
       invalid: false
     });
-  };
-
-  componentDidMount () {
-    this.props.getTypes();
   };
 
   render () {
@@ -115,7 +111,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getTypes,
   addSource
 }, dispatch);
 
