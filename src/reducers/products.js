@@ -3,7 +3,10 @@ import {
   GET_PRODUCTS,
   GET_ITEMS,
   ADD_ITEM,
+  DELETE_ITEM,
   GET_BUNDLES,
+  ADD_BUNDLE,
+  DELETE_BUNDLE,
   GET_CATEGORIES,
   ADD_CATEGORY,
   EDIT_CATEGORY,
@@ -55,6 +58,10 @@ export default (state = initialState, action) => {
     case ADD_ITEM:
       return {...state, items: action.payload};
     case GET_BUNDLES:
+      return {...state, bundles: action.payload};
+    case ADD_BUNDLE:
+      return {...state, bundles: action.payload};
+    case DELETE_BUNDLE:
       return {...state, bundles: action.payload};
     case GET_CATEGORIES:
       return {...state, categories: action.payload};

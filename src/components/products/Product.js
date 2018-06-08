@@ -4,6 +4,10 @@ import React from 'react';
 // REDUX
 import { connect } from 'react-redux';
 
+// COMPONENTS
+import ItemEdit from './ItemEdit';
+import ItemDelete from './ItemDelete';
+
 // ==========
 
 class Product extends React.Component {
@@ -11,21 +15,44 @@ class Product extends React.Component {
     super(props);
     this.state = {
       modal: false,
-      modalClasses: 'modal'
+      modalClasses: 'modal',
+      modalControl: false,
+      modalControlClasses: 'modal',
+      modalDisable: false,
+      action: ''
     };
-    this.toggle = this.toggle.bind(this);
   };
 
-  toggle () {
-    if (!this.state.modal) {
+  toggle = () => {
+    if (!this.state.modalDisable) {
+      if (!this.state.modal) {
+        this.setState({
+          modal: true,
+          modalClasses: this.state.modalClasses + ' is-active'
+        });
+      } else {
+        this.setState({
+          modal: false,
+          modalClasses: 'modal'
+        });
+      }
+    }
+  };
+
+  toggleControl = event => {
+    if (!this.state.modalControl) {
       this.setState({
-        modal: true,
-        modalClasses: this.state.modalClasses + ' is-active'
+        modalControl: true,
+        modalControlClasses: this.state.modalControlClasses + ' is-active',
+        modalDisable: true,
+        action: event.target.id
       });
     } else {
       this.setState({
-        modal: false,
-        modalClasses: 'modal'
+        modalControl: false,
+        modalControlClasses: 'modal',
+        modalDisable: false,
+        action: ''
       });
     }
   };
@@ -118,12 +145,37 @@ class Product extends React.Component {
               </div>
             </div>
             <div className="product-control">
-              <div><a><span className="lnr-heart"></span></a></div>
-              <div><a><span className="lnr-pencil"></span></a></div>
-              <div><a><span className="lnr-trash2"></span></a></div>
+              <div>
+                <a>
+                  <span id="favorite" className="lnr-heart"></span>
+                </a>
+              </div>
+              <div>
+                <a onClick={event => this.toggleControl(event)}>
+                  <span id="edit" className="lnr-pencil"></span>
+                </a>
+              </div>
+              <div>
+                <a onClick={event => this.toggleControl(event)}>
+                  <span id="delete" className="lnr-trash2"></span>
+                </a>
+              </div>
             </div>
           </div>
-          <button className="modal-close is-large" aria-label="close" onClick={this.toggle}></button>
+          <button className="modal-close is-large" onClick={this.toggle}></button>
+        </div>
+        <div className={this.state.modalControlClasses}>
+          <div className="modal-background" onClick={this.toggleControl}></div>
+          <div className="modal-content">
+            <div className="modal-container">
+              {
+                this.state.action === 'edit' ? <ItemEdit item={this.props} toggle={this.toggleControl} /> : (
+                  this.state.action === 'delete' ? <ItemDelete item={this.props} toggle={this.toggleControl} toggleParent={this.toggle} /> : null
+                )
+              }
+            </div>
+          </div>
+          <button className="modal-close is-large"  onClick={this.toggleControl}></button>
         </div>
       </div>
     );

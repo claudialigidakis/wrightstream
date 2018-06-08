@@ -7388,13 +7388,19 @@ nav {
     background-color: #21242d;
     color: white; }
   .modal-purchase .purchase-status {
-    background-color: #e2e4f0;
+    background-color: #bbc3dd;
     color: #4a4a4a;
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
     text-align: center;
     padding: .25rem; }
+    .modal-purchase .purchase-status.status-green {
+      background-color: #83bf8a; }
+    .modal-purchase .purchase-status.status-yellow {
+      background-color: #ebcd6f; }
+    .modal-purchase .purchase-status.status-red {
+      background-color: #d66667; }
   .modal-purchase .level {
     margin-bottom: 0; }
   .modal-purchase .purchase-header {
@@ -7513,11 +7519,17 @@ nav {
     .workstream .column-button:hover {
       background-color: #636fa6; }
   .workstream .store-logo {
-    background-color: #d9def1;
+    background-color: #636fa6;
     color: white;
     width: 25px;
     height: 25px;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+  .workstream .store-logo-img {
+    width: 25px;
+    height: 25px;
     display: flex;
     align-items: center;
     justify-content: center; }

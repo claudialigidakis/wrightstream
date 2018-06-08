@@ -64,6 +64,7 @@ class ItemAdd extends React.Component {
   }
 
   render () {
+              console.log(this.props);
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="field">

@@ -283,13 +283,25 @@ nav {
   }
 
   .purchase-status {
-    background-color: $mist;
+    background-color: $periwinkle;
     color: $text;
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
     text-align: center;
     padding: .25rem;
+
+    &.status-green {
+      background-color: $green;
+    }
+
+    &.status-yellow {
+      background-color: $yellow;
+    }
+
+    &.status-red {
+      background-color: $red;
+    }
   }
 
   .level {
@@ -481,11 +493,19 @@ nav {
   }
 
   .store-logo {
-    background-color: $lavender;
+    background-color: $indigo;
     color: $white;
     width: 25px;
     height: 25px;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .store-logo-img {
+    width: 25px;
+    height: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
