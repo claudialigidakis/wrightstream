@@ -4,6 +4,9 @@ export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const GET_ITEMS = 'GET_ITEMS';
 export const GET_BUNDLES = 'GET_BUNDLES';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const ADD_CATEGORY = 'ADD_CATEGORY';
+export const EDIT_CATEGORY = 'EDIT_CATEGORY';
+export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 export const GET_PRODUCTS_BY_CATEGORY = 'GET_PRODUCTS_BY_CATEGORY';
 export const GET_SUPPLIES = 'GET_SUPPLIES';
 export const ADD_SUPPLY = 'ADD_SUPPLY';
@@ -84,6 +87,63 @@ export const getCategories = () => (
       .then(response => {
         dispatch({
           type: GET_CATEGORIES,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const addCategory = (name) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/categories/${shop_id}`, 'post', {name})
+      .then(response => {
+        return request(`/categories/${shop_id}/allCategories`);
+      })
+      .then(response => {
+        dispatch({
+          type: ADD_CATEGORY,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const editCategory = (id, name) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/categories/${id}`, 'put', {name})
+      .then(response => {
+        return request(`/categories/${shop_id}/allCategories`);
+      })
+      .then(response => {
+        dispatch({
+          type: EDIT_CATEGORY,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const deleteCategory = (id) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/categories/${id}`, 'delete')
+      .then(response => {
+        return request(`/categories/${shop_id}/allCategories`);
+      })
+      .then(response => {
+        dispatch({
+          type: DELETE_CATEGORY,
           payload: response.data.data
         });
       });
