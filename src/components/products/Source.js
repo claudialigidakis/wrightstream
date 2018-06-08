@@ -18,21 +18,24 @@ class Source extends React.Component {
       modalClasses: 'modal',
       modalControl: false,
       modalControlClasses: 'modal',
-      action: ''
+      modalDisable: false,
+      action: '',
     };
   };
 
   toggle = () => {
-    if (!this.state.modal) {
-      this.setState({
-        modal: true,
-        modalClasses: this.state.modalClasses + ' is-active'
-      });
-    } else {
-      this.setState({
-        modal: false,
-        modalClasses: 'modal'
-      });
+    if (!this.state.modalDisable) {
+      if (!this.state.modal) {
+        this.setState({
+          modal: true,
+          modalClasses: this.state.modalClasses + ' is-active'
+        });
+      } else {
+        this.setState({
+          modal: false,
+          modalClasses: 'modal'
+        });
+      }
     }
   };
 
@@ -41,12 +44,14 @@ class Source extends React.Component {
       this.setState({
         modalControl: true,
         modalControlClasses: this.state.modalControlClasses + ' is-active',
+        modalDisable: true,
         action: event.target.id
       });
     } else {
       this.setState({
         modalControl: false,
         modalControlClasses: 'modal',
+        modalDisable: false,
         action: ''
       });
     }

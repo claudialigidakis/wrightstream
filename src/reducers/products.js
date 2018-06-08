@@ -60,8 +60,6 @@ export default (state = initialState, action) => {
       return {...state, kinds: action.payload};
     case DELETE_KIND:
       return {...state, kinds: action.payload};
-    case GET_KINDS:
-      return {...state, kinds: action.payload};
     case GET_SUPPLIES_BY_KIND:
       return {...state, suppliesByKind: action.payload};
     case GET_SOURCES:

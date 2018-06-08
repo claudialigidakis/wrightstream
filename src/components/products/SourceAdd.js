@@ -13,7 +13,7 @@ class SourceAdd extends React.Component {
     super(props);
     this.state = {
       name: '',
-      type: 'Select type',
+      type: 'default',
       link: '',
       invalid: false
     };
@@ -21,7 +21,7 @@ class SourceAdd extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    if (!event.target.name.value || event.target.type.value === 'Select type' || !event.target.link.value) {
+    if (!event.target.name.value || event.target.type.value === 'default' || !event.target.link.value) {
       this.setState({
         invalid: true
       });
@@ -36,7 +36,7 @@ class SourceAdd extends React.Component {
   clear = () => {
     this.setState({
       name: '',
-      type: 'Select type',
+      type: 'default',
       link: '',
       invalid: false
     });
@@ -71,7 +71,7 @@ class SourceAdd extends React.Component {
                     value={this.state.type}
                     onChange={event => this.setState({type: event.target.value})}
                     >
-                    <option value="Select type" disabled>Select type</option>
+                    <option value="default" disabled className="is-disabled">Type</option>
                     {
                       this.props.types.map(type => {
                         return (

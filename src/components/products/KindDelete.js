@@ -12,14 +12,14 @@ class KindDelete extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      kind: 'Select kind',
+      kind: 'default',
       invalid: false
     };
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    if (event.target.kind.value === 'Select kind') {
+    if (event.target.kind.value === 'default') {
       this.setState({
         invalid: true
       });
@@ -33,7 +33,7 @@ class KindDelete extends React.Component {
 
   clear = () => {
     this.setState({
-      kind: 'Select kind',
+      kind: 'default',
       invalid: false
     });
   };
@@ -53,7 +53,7 @@ class KindDelete extends React.Component {
                 value={this.state.kind}
                 onChange={event => this.setState({kind: event.target.value})}
                 >
-                <option value="Select kind" disabled>Select kind</option>
+                <option value="default" disabled>Kind</option>
                 {
                   this.props.kinds.map(kind => {
                     return (

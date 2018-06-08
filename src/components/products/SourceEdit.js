@@ -61,7 +61,7 @@ class SourceEdit extends React.Component {
                     value={this.state.type}
                     onChange={event => this.setState({type: event.target.value})}
                     >
-                    <option value="Select type" disabled>Select type</option>
+                    <option value="default" disabled>Type</option>
                     {
                       this.props.types.map(type => {
                         return (

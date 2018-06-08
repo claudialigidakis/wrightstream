@@ -12,14 +12,14 @@ class TypeDelete extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      type: 'Select type',
+      type: 'default',
       invalid: false
     };
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    if (event.target.type.value === 'Select type') {
+    if (event.target.type.value === 'default') {
       this.setState({
         invalid: true
       });
@@ -33,7 +33,7 @@ class TypeDelete extends React.Component {
 
   clear = () => {
     this.setState({
-      type: 'Select type',
+      type: 'default',
       invalid: false
     });
   };
@@ -53,7 +53,7 @@ class TypeDelete extends React.Component {
                 value={this.state.type}
                 onChange={event => this.setState({type: event.target.value})}
                 >
-                <option value="Select type" disabled>Select type</option>
+                <option value="default" disabled>Type</option>
                 {
                   this.props.types.map(type => {
                     return (

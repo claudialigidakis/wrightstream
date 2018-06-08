@@ -13,14 +13,14 @@ class TypeEdit extends React.Component {
     super(props);
     this.state = {
       name: '',
-      type: 'Select type',
+      type: 'default',
       invalid: false
     };
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    if (!event.target.name.value || event.target.type.value === 'Select type') {
+    if (!event.target.name.value || event.target.type.value === 'default') {
       this.setState({
         invalid: true
       });
@@ -35,7 +35,7 @@ class TypeEdit extends React.Component {
   clear = () => {
     this.setState({
       name: '',
-      type: 'Select type',
+      type: 'default',
       invalid: false
     });
   };
@@ -57,7 +57,7 @@ class TypeEdit extends React.Component {
                     value={this.state.type}
                     onChange={event => this.setState({type: event.target.value})}
                     >
-                    <option value="Select type" disabled>Select type</option>
+                    <option value="default" disabled>Type</option>
                     {
                       this.props.types.map(type => {
                         return (
