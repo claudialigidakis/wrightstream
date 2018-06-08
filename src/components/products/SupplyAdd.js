@@ -4,30 +4,33 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getTypes, addSource } from '../../actions/products';
+import { getSources, getKinds, addSupply } from '../../actions/products';
 
 // ==========
 
-class SourceAdd extends React.Component {
+class SupplyAdd extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       name: '',
-      type: 'Select type',
-      link: '',
+      stock: 0,
+      measure_type: 'default',
+      source: 'default',
+      kind: 'default',
       invalid: false
     };
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    if (!event.target.name.value || event.target.type.value === 'Select type' || !event.target.link.value) {
+    if (!event.target.name.value || event.target.measure_type.value === 'default' || event.target.kind.value === 'default' || event.target.source.value === 'default') {
       this.setState({
         invalid: true
       });
     } else {
-      const type_id = this.props.types.find(type => type.name === this.state.type).id;
-      this.props.addSource(this.state.name, type_id, this.state.link);
+      const source_id = this.props.sources.find(source => source.name === this.state.source).id;
+      const kind_id = this.props.kinds.find(kind => kind.name === this.state.kind).id;
+      this.props.addSupply(this.state.name, this.state.stock, this.state.measure_type, source_id, kind_id);
       this.clear();
       this.props.toggle();
     }
@@ -36,14 +39,16 @@ class SourceAdd extends React.Component {
   clear = () => {
     this.setState({
       name: '',
-      type: 'Select type',
-      link: '',
+      stock: 0,
+      measure_type: 'default',
+      source: 'default',
+      kind: 'default',
       invalid: false
     });
   };
 
   componentDidMount () {
-    this.props.getTypes();
+    this.props.getKinds();
   };
 
   render () {
@@ -54,7 +59,7 @@ class SourceAdd extends React.Component {
             <input
               className="input"
               type="text"
-              placeholder="Source Name"
+              placeholder="Supply Name"
               id="name"
               value={this.state.name}
               onChange={event => this.setState({name: event.target.value})}
@@ -63,19 +68,20 @@ class SourceAdd extends React.Component {
         </div>
         <div className="field is-horizontal">
           <div className="field-body">
+
             <div className="field">
               <div className="control">
                 <div className="select">
                   <select
-                    id="type"
-                    value={this.state.type}
-                    onChange={event => this.setState({type: event.target.value})}
+                    id="kind"
+                    value={this.state.kind}
+                    onChange={event => this.setState({kind: event.target.value})}
                     >
-                    <option value="Select type" disabled>Select type</option>
+                    <option value="default" disabled>Kind</option>
                     {
-                      this.props.types.map(type => {
+                      this.props.kinds.map(kind => {
                         return (
-                          <option key={type.id} value={type.name}>{type.name}</option>
+                          <option key={kind.id} value={kind.name}>{kind.name}</option>
                         )
                       })
                     }
@@ -85,15 +91,41 @@ class SourceAdd extends React.Component {
             </div>
             <div className="field">
               <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Link"
-                  id="link"
-                  value={this.state.link}
-                  onChange={event => this.setState({link: event.target.value})}
-                />
+                <div className="select">
+                  <select
+                    id="measure_type"
+                    value={this.state.measure_type}
+                    onChange={event => this.setState({measure_type: event.target.value})}
+                    >
+                    <option value="default" disabled>Measurement</option>
+                    <option value="length">Length</option>
+                    <option value="area">Area</option>
+                    <option value="mass">Mass</option>
+                    <option value="volume">Volume</option>
+                    <option value="unit">Unit</option>
+                  </select>
+                </div>
               </div>
+            </div>
+          </div>
+        </div>
+        <div className="field">
+          <div className="control">
+            <div className="select">
+              <select
+                id="source"
+                value={this.state.source}
+                onChange={event => this.setState({source: event.target.value})}
+                >
+                <option value="default" disabled>Source</option>
+                {
+                  this.props.sources.map(source => {
+                    return (
+                      <option key={source.id} value={source.name}>{source.name}</option>
+                    )
+                  })
+                }
+              </select>
             </div>
           </div>
         </div>
@@ -103,7 +135,7 @@ class SourceAdd extends React.Component {
           </p>
         ) : null}
         <div className="control has-text-centered">
-          <button className="button is-primary is-outlined">Add Source</button>
+          <button className="button is-primary is-outlined">Add Supply</button>
         </div>
       </form>
     );
@@ -111,12 +143,14 @@ class SourceAdd extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  types: state.products.types
+  sources: state.products.sources,
+  kinds: state.products.kinds
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getTypes,
-  addSource
+  getSources,
+  getKinds,
+  addSupply
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(SourceAdd);
+export default connect(mapStateToProps, mapDispatchToProps)(SupplyAdd);

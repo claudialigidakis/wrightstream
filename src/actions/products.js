@@ -6,6 +6,7 @@ export const GET_BUNDLES = 'GET_BUNDLES';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_PRODUCTS_BY_CATEGORY = 'GET_PRODUCTS_BY_CATEGORY';
 export const GET_SUPPLIES = 'GET_SUPPLIES';
+export const ADD_SUPPLY = 'ADD_SUPPLY';
 export const GET_KINDS = 'GET_KINDS';
 export const ADD_KIND = 'ADD_KIND';
 export const EDIT_KIND = 'DELETE_KIND';
@@ -122,6 +123,25 @@ export const getSupplies = () => (
       .then(response => {
         dispatch({
           type: GET_SUPPLIES,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const addSupply = (name, stock, measure_type, source_id, kind_id) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/supplies/${shop_id}`, 'post', {name, stock, measure_type, source_id, kind_id})
+      .then(response => {
+        return request(`/supplies/${shop_id}/allSupplies`);
+      })
+      .then(response => {
+        dispatch({
+          type: ADD_SUPPLY,
           payload: response.data.data
         });
       });

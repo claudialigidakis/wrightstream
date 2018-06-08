@@ -5,6 +5,7 @@ import {
   GET_CATEGORIES,
   GET_PRODUCTS_BY_CATEGORY,
   GET_SUPPLIES,
+  ADD_SUPPLY,
   GET_KINDS,
   ADD_KIND,
   EDIT_KIND,
@@ -48,6 +49,8 @@ export default (state = initialState, action) => {
     case GET_PRODUCTS_BY_CATEGORY:
       return {...state, productsByCategory: action.payload};
     case GET_SUPPLIES:
+      return {...state, supplies: action.payload};
+    case ADD_SUPPLY:
       return {...state, supplies: action.payload};
     case GET_KINDS:
       return {...state, kinds: action.payload};
