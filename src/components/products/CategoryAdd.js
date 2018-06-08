@@ -4,11 +4,11 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { addKind } from '../../actions/products';
+import { addCategory } from '../../actions/products';
 
 // ==========
 
-class KindAdd extends React.Component {
+class CategoryAdd extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -24,7 +24,7 @@ class KindAdd extends React.Component {
         invalid: true
       });
     } else {
-      this.props.addKind(this.state.name);
+      this.props.addCategory(this.state.name);
       this.clear();
       this.props.toggle();
     }
@@ -45,7 +45,7 @@ class KindAdd extends React.Component {
             <input
               className="input"
               type="text"
-              placeholder="Kind Name"
+              placeholder="Category Name"
               id="name"
               value={this.state.name}
               onChange={event => this.setState({name: event.target.value})}
@@ -59,7 +59,7 @@ class KindAdd extends React.Component {
         ) : null}
         <br />
         <div className="control has-text-centered">
-          <button className="button is-primary is-outlined">Add Kind</button>
+          <button className="button is-primary is-outlined">Add Category</button>
         </div>
       </form>
     );
@@ -67,7 +67,7 @@ class KindAdd extends React.Component {
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  addKind
+  addCategory
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(KindAdd);
+export default connect(null, mapDispatchToProps)(CategoryAdd);

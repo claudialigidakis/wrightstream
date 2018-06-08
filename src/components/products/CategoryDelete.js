@@ -4,28 +4,28 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { deleteKind } from '../../actions/products';
+import { deleteCategory } from '../../actions/products';
 
 // ==========
 
-class KindDelete extends React.Component {
+class CategoryDelete extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      kind: 'default',
+      category: 'default',
       invalid: false
     };
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    if (event.target.kind.value === 'default') {
+    if (event.target.category.value === 'default') {
       this.setState({
         invalid: true
       });
     } else {
-      const kind_id = this.props.kinds.find(kind => kind.name === this.state.kind).id;
-      this.props.deleteKind(kind_id);
+      const category_id = this.props.categories.find(category => category.name === this.state.category).id;
+      this.props.deleteCategory(category_id);
       this.clear();
       this.props.toggle();
     }
@@ -33,7 +33,7 @@ class KindDelete extends React.Component {
 
   clear = () => {
     this.setState({
-      kind: 'default',
+      category: 'default',
       invalid: false
     });
   };
@@ -45,15 +45,15 @@ class KindDelete extends React.Component {
           <div className="control">
             <div className="select">
               <select
-                id="kind"
-                value={this.state.kind}
-                onChange={event => this.setState({kind: event.target.value})}
+                id="category"
+                value={this.state.category}
+                onChange={event => this.setState({category: event.target.value})}
                 >
-                <option value="default" disabled>Kind</option>
+                <option value="default" disabled>Category</option>
                 {
-                  this.props.kinds.map(kind => {
+                  this.props.categories.map(category => {
                     return (
-                      <option key={kind.id} value={kind.name}>{kind.name}</option>
+                      <option key={category.id} value={category.name}>{category.name}</option>
                     )
                   })
                 }
@@ -63,12 +63,11 @@ class KindDelete extends React.Component {
         </div>
         {this.state.invalid ? (
           <p id="error" className="help is-danger has-text-centered">
-            Please select a valid kind to delete.
+            Please select a valid category to delete.
           </p>
         ) : null}
-        <br />
         <div className="control has-text-centered">
-          <button className="button is-primary is-outlined">Delete Kind</button>
+          <button className="button is-primary is-outlined">Delete Category</button>
         </div>
       </form>
     );
@@ -76,11 +75,11 @@ class KindDelete extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  kinds: state.products.kinds
+  categories: state.products.categories
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  deleteKind
+  deleteCategory
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(KindDelete);
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryDelete);

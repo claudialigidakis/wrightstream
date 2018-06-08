@@ -4,50 +4,38 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { addSupply } from '../../actions/products';
+import { editSupply } from '../../actions/products';
 
 // ==========
 
-class SupplyAdd extends React.Component {
+class SupplyEdit extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      name: '',
-      stock: 0,
-      measure_type: 'default',
-      source: 'default',
-      kind: 'default',
+      name: this.props.supply.name,
+      stock: this.props.supply.stock,
+      measure_type: this.props.supply.measure_type,
+      source: this.props.supply.sources.find(source => source.id === this.props.supply.source_id).name,
+      kind: this.props.supply.kinds.find(kind => kind.id === this.props.supply.kind_id).name,
       invalid: false
     };
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    if (!event.target.name.value || event.target.measure_type.value === 'default' || event.target.kind.value === 'default' || event.target.source.value === 'default') {
+    if (!event.target.name.value || !event.target.measure_type.value) {
       this.setState({
         invalid: true
       });
     } else {
       const source_id = this.props.sources.find(source => source.name === this.state.source).id;
       const kind_id = this.props.kinds.find(kind => kind.name === this.state.kind).id;
-      this.props.addSupply(this.state.name, this.state.stock, this.state.measure_type, source_id, kind_id);
-      this.clear();
+      this.props.editSupply(this.props.supply.id, this.state.name, this.state.stock, this.state.measure_type, source_id, kind_id);
       this.props.toggle();
     }
   };
 
-  clear = () => {
-    this.setState({
-      name: '',
-      stock: 0,
-      measure_type: 'default',
-      source: 'default',
-      kind: 'default',
-      invalid: false
-    });
-  };
-
-  render () {
+  render = () => {
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="field">
@@ -132,7 +120,7 @@ class SupplyAdd extends React.Component {
         ) : null}
         <br />
         <div className="control has-text-centered">
-          <button className="button is-primary is-outlined">Add Supply</button>
+          <button className="button is-primary is-outlined">Edit Supply</button>
         </div>
       </form>
     );
@@ -145,7 +133,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  addSupply
+  editSupply
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(SupplyAdd);
+export default connect(mapStateToProps, mapDispatchToProps)(SupplyEdit);

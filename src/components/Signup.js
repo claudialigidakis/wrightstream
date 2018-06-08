@@ -13,8 +13,10 @@ class Signup extends React.Component {
     isValid: true,
     passwordClasses: 'input',
     shop_name: '',
-    fname: '',
-    lname: '',
+    logo: '',
+    settings: [],
+    first_name: '',
+    last_name: '',
     email: '',
     password: '',
     verify_password: ''
@@ -22,16 +24,15 @@ class Signup extends React.Component {
 
   handleSignup = e => {
     e.preventDefault();
-    let { shop_name, fname, lname, email, password, verify_password } = this.state;
+    let { shop_name, logo, settings, first_name, last_name, email, password, verify_password } = this.state;
     if (!password || password !== verify_password || !verify_password) {
       this.setState({
         passwordClasses: this.state.passwordClasses + ' is-danger',
         isValid: false
       });
     } else {
-      let newShop = {shop_name};
-      let newUser = {fname, lname, email, password};
-      console.log('newUser', newUser);
+      let newShop = {shop_name, logo, settings};
+      let newUser = {first_name, last_name, email, password};
       this.props.userSignup(newShop, newUser, this.props.history);
     }
   }
@@ -68,8 +69,8 @@ class Signup extends React.Component {
                                 type="text"
                                 placeholder="First Name"
                                 id="first_name"
-                                value={this.state.fname}
-                                onChange={e => this.setState({fname: e.target.value})}
+                                value={this.state.first_name}
+                                onChange={e => this.setState({first_name: e.target.value})}
                                 required
                               />
                             </p>
@@ -81,8 +82,8 @@ class Signup extends React.Component {
                                 type="text"
                                 placeholder="Last Name"
                                 id="last_name"
-                                value={this.state.lname}
-                                onChange={e => this.setState({lname: e.target.value})}
+                                value={this.state.last_name}
+                                onChange={e => this.setState({last_name: e.target.value})}
                                 required
                               />
                             </p>

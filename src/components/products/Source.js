@@ -18,21 +18,24 @@ class Source extends React.Component {
       modalClasses: 'modal',
       modalControl: false,
       modalControlClasses: 'modal',
+      modalDisable: false,
       action: ''
     };
   };
 
   toggle = () => {
-    if (!this.state.modal) {
-      this.setState({
-        modal: true,
-        modalClasses: this.state.modalClasses + ' is-active'
-      });
-    } else {
-      this.setState({
-        modal: false,
-        modalClasses: 'modal'
-      });
+    if (!this.state.modalDisable) {
+      if (!this.state.modal) {
+        this.setState({
+          modal: true,
+          modalClasses: this.state.modalClasses + ' is-active'
+        });
+      } else {
+        this.setState({
+          modal: false,
+          modalClasses: 'modal'
+        });
+      }
     }
   };
 
@@ -41,18 +44,20 @@ class Source extends React.Component {
       this.setState({
         modalControl: true,
         modalControlClasses: this.state.modalControlClasses + ' is-active',
+        modalDisable: true,
         action: event.target.id
       });
     } else {
       this.setState({
         modalControl: false,
         modalControlClasses: 'modal',
+        modalDisable: false,
         action: ''
       });
     }
   };
 
-  render = () => {
+  render () {
     return (
       <tr onClick={this.toggle}>
         <td>
@@ -90,26 +95,25 @@ class Source extends React.Component {
               <div className="source-control">
                 <div>
                   <a onClick={event => this.toggleControl(event)}>
-                    <span id="edit-source" className="lnr-pencil"></span>
+                    <span id="edit" className="lnr-pencil"></span>
                   </a>
                 </div>
                 <div>
                   <a onClick={event => this.toggleControl(event)}>
-                    <span id="delete-source" className="lnr-trash2"></span>
+                    <span id="delete" className="lnr-trash2"></span>
                   </a>
                 </div>
               </div>
             </div>
             <button className="modal-close is-large" onClick={this.toggle}></button>
           </div>
-
           <div className={this.state.modalControlClasses}>
             <div className="modal-background" onClick={this.toggleControl}></div>
-            <div className="modal-content">
+            <div className="modal-content modal-form">
               <div className="modal-container">
                 {
-                  this.state.action === 'edit-source' ? <SourceEdit source={this.props} toggle={this.toggleControl} /> : (
-                    this.state.action === 'delete-source' ? <SourceDelete source={this.props} toggle={this.toggleControl} toggleParent={this.toggle} /> : null
+                  this.state.action === 'edit' ? <SourceEdit source={this.props} toggle={this.toggleControl} /> : (
+                    this.state.action === 'delete' ? <SourceDelete source={this.props} toggle={this.toggleControl} toggleParent={this.toggle} /> : null
                   )
                 }
               </div>

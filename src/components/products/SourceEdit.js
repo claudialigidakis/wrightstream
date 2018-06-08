@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getTypes, editSource } from '../../actions/products';
+import { editSource } from '../../actions/products';
 
 // ==========
 
@@ -32,10 +32,6 @@ class SourceEdit extends React.Component {
     }
   };
 
-  componentDidMount = () => {
-    this.props.getTypes();
-  };
-
   render = () => {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -61,7 +57,7 @@ class SourceEdit extends React.Component {
                     value={this.state.type}
                     onChange={event => this.setState({type: event.target.value})}
                     >
-                    <option value="Select type" disabled>Select type</option>
+                    <option value="default" disabled>Type</option>
                     {
                       this.props.types.map(type => {
                         return (
@@ -92,6 +88,7 @@ class SourceEdit extends React.Component {
             Please fill out all information correctly.
           </p>
         ) : null}
+        <br />
         <div className="control has-text-centered">
           <button className="button is-primary is-outlined">Edit Source</button>
         </div>
@@ -105,7 +102,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getTypes,
   editSource
 }, dispatch);
 

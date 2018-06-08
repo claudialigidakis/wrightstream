@@ -2,14 +2,15 @@
 import React from 'react';
 
 // COMPONENTS
-import SourceAdd from './SourceAdd';
-import TypeAdd from './TypeAdd';
-import TypeEdit from './TypeEdit';
-import TypeDelete from './TypeDelete';
+import ItemAdd from './ItemAdd';
+import BundleAdd from './BundleAdd';
+import CategoryAdd from './CategoryAdd';
+import CategoryEdit from './CategoryEdit';
+import CategoryDelete from './CategoryDelete';
 
 // ==========
 
-class SourceControl extends React.Component {
+class CategoryControl extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -46,8 +47,11 @@ class SourceControl extends React.Component {
           </div>
           <div className="dropdown-menu">
             <div className="dropdown-content">
-              <a className="dropdown-item" id="add-source" onClick={event => this.toggle(event)}>
-                Add Source
+              <a className="dropdown-item" id="add-item" onClick={event => this.toggle(event)}>
+                Add Item
+              </a>
+              <a className="dropdown-item" id="add-bundle" onClick={event => this.toggle(event)}>
+                Add Bundle
               </a>
             </div>
           </div>
@@ -60,38 +64,40 @@ class SourceControl extends React.Component {
           </div>
           <div className="dropdown-menu">
             <div className="dropdown-content">
-              <a className="dropdown-item" id="add-type" onClick={event => this.toggle(event)}>
-                Add Type
+              <a className="dropdown-item" id="add-category" onClick={event => this.toggle(event)}>
+                Add Category
               </a>
-              <a className="dropdown-item" id="edit-type" onClick={event => this.toggle(event)}>
-                Edit Type
+              <a className="dropdown-item" id="edit-category" onClick={event => this.toggle(event)}>
+                Edit Category
               </a>
-              <a className="dropdown-item" id="delete-type" onClick={event => this.toggle(event)}>
-                Delete Type
+              <a className="dropdown-item" id="delete-category" onClick={event => this.toggle(event)}>
+                Delete Category
               </a>
             </div>
           </div>
         </div>
         <div className={this.state.modalClasses}>
           <div className="modal-background" onClick={this.toggle}></div>
-          <div className="modal-content">
+          <div className="modal-content modal-form">
             <div className="modal-container">
               {
-                this.state.action === 'add-source' ? <SourceAdd toggle={this.toggle} /> : (
-                  this.state.action === 'add-type' ? <TypeAdd toggle={this.toggle} /> : (
-                    this.state.action === 'edit-type' ? <TypeEdit toggle={this.toggle} /> : (
-                      this.state.action === 'delete-type' ? <TypeDelete toggle={this.toggle} /> : null
+                this.state.action === 'add-item' ? <ItemAdd toggle={this.toggle} /> : (
+                  this.state.action === 'add-bundle' ? <BundleAdd toggle={this.toggle} /> : (
+                    this.state.action === 'add-category' ? <CategoryAdd toggle={this.toggle} /> : (
+                      this.state.action === 'edit-category' ? <CategoryEdit toggle={this.toggle} /> : (
+                        this.state.action === 'delete-category' ? <CategoryDelete toggle={this.toggle} /> : null
+                      )
                     )
                   )
                 )
               }
             </div>
           </div>
-          <button className="modal-close is-large"  onClick={this.toggle}></button>
+          <button className="modal-close is-large" onClick={this.toggle}></button>
         </div>
       </div>
     );
   };
 };
 
-export default SourceControl;
+export default CategoryControl;

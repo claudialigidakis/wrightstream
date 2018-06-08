@@ -6,9 +6,9 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // COMPONENTS
 import Nav from './products/Nav';
-import ProductControl from './products/ProductControl';
-import SupplyControl from './products/SupplyControl';
-import SourceControl from './products/SourceControl';
+import CategoryControl from './products/CategoryControl';
+import KindControl from './products/KindControl';
+import TypeControl from './products/TypeControl';
 import Main from './products/Products';
 import Items from './products/Items';
 import Bundles from './products/Bundles';
@@ -40,9 +40,9 @@ class Products extends React.Component {
           <div className="column is-9 products-content">
             <BrowserRouter>
               <Switch>
-                <Route path="/products/sources" component={SourceControl} />
-                <Route path="/products/supplies" component={SupplyControl} />
-                <Route path="/products" component={ProductControl} />
+                <Route path="/products/sources" component={TypeControl} />
+                <Route path="/products/supplies" component={KindControl} />
+                <Route path="/products" component={CategoryControl} />
               </Switch>
             </BrowserRouter>
             <Nav />

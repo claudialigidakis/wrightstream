@@ -57,6 +57,7 @@ class TypeAdd extends React.Component {
             Please fill out all information correctly.
           </p>
         ) : null}
+        <br />
         <div className="control has-text-centered">
           <button className="button is-primary is-outlined">Add Type</button>
         </div>
@@ -65,12 +66,8 @@ class TypeAdd extends React.Component {
   };
 };
 
-const mapStateToProps = state => ({
-
-});
-
 const mapDispatchToProps = dispatch => bindActionCreators({
   addType
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(TypeAdd);
+export default connect(null, mapDispatchToProps)(TypeAdd);

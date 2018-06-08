@@ -1,11 +1,22 @@
 import request from '../helpers/request';
 
+export const GET_LINKED_PRODUCTS = 'GET_LINKED_PRODUCTS';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const GET_ITEMS = 'GET_ITEMS';
+export const ADD_ITEM = 'ADD_ITEM';
+export const DELETE_ITEM = 'DELETE_ITEM';
 export const GET_BUNDLES = 'GET_BUNDLES';
+export const ADD_BUNDLE = 'ADD_BUNDLE';
+export const DELETE_BUNDLE = 'DELETE_BUNDLE';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const ADD_CATEGORY = 'ADD_CATEGORY';
+export const EDIT_CATEGORY = 'EDIT_CATEGORY';
+export const DELETE_CATEGORY = 'DELETE_CATEGORY';
 export const GET_PRODUCTS_BY_CATEGORY = 'GET_PRODUCTS_BY_CATEGORY';
 export const GET_SUPPLIES = 'GET_SUPPLIES';
+export const ADD_SUPPLY = 'ADD_SUPPLY';
+export const EDIT_SUPPLY = 'EDIT_SUPPLY';
+export const DELETE_SUPPLY = 'DELETE_SUPPLY';
 export const GET_KINDS = 'GET_KINDS';
 export const ADD_KIND = 'ADD_KIND';
 export const EDIT_KIND = 'DELETE_KIND';
@@ -20,6 +31,22 @@ export const ADD_TYPE = 'ADD_TYPE';
 export const EDIT_TYPE = 'EDIT_TYPE';
 export const DELETE_TYPE = 'DELETE_TYPE';
 export const GET_SOURCES_BY_TYPE = 'GET_SOURCES_BY_TYPE';
+
+export const getLinkedProducts = () => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/products/${shop_id}/allProducts`)
+      .then(response => {
+        dispatch({
+          type: GET_LINKED_PRODUCTS,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
 
 export const getProducts = () => (
   dispatch => {
@@ -56,6 +83,44 @@ export const getItems = () => (
   }
 );
 
+export const addItem = (name, categoryId, photo, stock) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/items/${shop_id}`, 'post', {name, categoryId, photo, stock})
+      .then(response => {
+        return request(`/items/${shop_id}/allItems`);
+      })
+      .then(response => {
+        dispatch({
+          type: ADD_ITEM,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const deleteItem = (id) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/items/${id}`, 'delete')
+      .then(response => {
+        return request(`/items/${shop_id}/allItems`);
+      })
+      .then(response => {
+        dispatch({
+          type: DELETE_ITEM,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
 export const getBundles = () => (
   dispatch => {
     request('/auth/token')
@@ -72,6 +137,44 @@ export const getBundles = () => (
   }
 );
 
+export const addBundle = (name, categoryId, photo, stock) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/bundles/${shop_id}`, 'post', {name, categoryId, photo, stock})
+      .then(response => {
+        return request(`/bundles/${shop_id}/allBundles`);
+      })
+      .then(response => {
+        dispatch({
+          type: ADD_BUNDLE,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const deleteBundle = (id) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/bundles/${id}`, 'delete')
+      .then(response => {
+        return request(`/bundles/${shop_id}/allBundles`);
+      })
+      .then(response => {
+        dispatch({
+          type: DELETE_BUNDLE,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
 export const getCategories = () => (
   dispatch => {
     request('/auth/token')
@@ -81,6 +184,63 @@ export const getCategories = () => (
       .then(response => {
         dispatch({
           type: GET_CATEGORIES,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const addCategory = (name) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/categories/${shop_id}`, 'post', {name})
+      .then(response => {
+        return request(`/categories/${shop_id}/allCategories`);
+      })
+      .then(response => {
+        dispatch({
+          type: ADD_CATEGORY,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const editCategory = (id, name) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/categories/${id}`, 'put', {name})
+      .then(response => {
+        return request(`/categories/${shop_id}/allCategories`);
+      })
+      .then(response => {
+        dispatch({
+          type: EDIT_CATEGORY,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const deleteCategory = (id) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/categories/${id}`, 'delete')
+      .then(response => {
+        return request(`/categories/${shop_id}/allCategories`);
+      })
+      .then(response => {
+        dispatch({
+          type: DELETE_CATEGORY,
           payload: response.data.data
         });
       });
@@ -122,6 +282,63 @@ export const getSupplies = () => (
       .then(response => {
         dispatch({
           type: GET_SUPPLIES,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const addSupply = (name, stock, measure_type, source_id, kind_id) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/supplies/${shop_id}`, 'post', {name, stock, measure_type, source_id, kind_id})
+      .then(response => {
+        return request(`/supplies/${shop_id}/allSupplies`);
+      })
+      .then(response => {
+        dispatch({
+          type: ADD_SUPPLY,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const editSupply = (id, name, stock, measure_type, source_id, kind_id) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/supplies/${id}`, 'put', {name, stock, measure_type, source_id, kind_id})
+      .then(response => {
+        return request(`/supplies/${shop_id}/allSupplies`);
+      })
+      .then(response => {
+        dispatch({
+          type: EDIT_SUPPLY,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const deleteSupply = (id) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/supplies/${id}`, 'delete')
+      .then(response => {
+        return request(`/supplies/${shop_id}/allSupplies`);
+      })
+      .then(response => {
+        dispatch({
+          type: DELETE_SUPPLY,
           payload: response.data.data
         });
       });
@@ -188,9 +405,9 @@ export const deleteKind = (id) => (
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/types/${id}`, 'delete')
+      request(`/kinds/${id}`, 'delete')
       .then(response => {
-        return request(`/types/${shop_id}/allTypes`);
+        return request(`/kinds/${shop_id}/allKinds`);
       })
       .then(response => {
         dispatch({
@@ -258,7 +475,6 @@ export const addSource = (name, type_id, link) => (
 
 export const editSource = (id, name, link, type_id) => (
   dispatch => {
-    console.log(id, name, link, type_id);
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;

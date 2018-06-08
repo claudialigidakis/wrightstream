@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getTypes, editType } from '../../actions/products';
+import { editType } from '../../actions/products';
 
 // ==========
 
@@ -13,14 +13,14 @@ class TypeEdit extends React.Component {
     super(props);
     this.state = {
       name: '',
-      type: 'Select type',
+      type: 'default',
       invalid: false
     };
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    if (!event.target.name.value || event.target.type.value === 'Select type') {
+    if (!event.target.name.value || event.target.type.value === 'default') {
       this.setState({
         invalid: true
       });
@@ -35,13 +35,9 @@ class TypeEdit extends React.Component {
   clear = () => {
     this.setState({
       name: '',
-      type: 'Select type',
+      type: 'default',
       invalid: false
     });
-  };
-
-  componentDidMount () {
-    this.props.getTypes();
   };
 
   render () {
@@ -57,7 +53,7 @@ class TypeEdit extends React.Component {
                     value={this.state.type}
                     onChange={event => this.setState({type: event.target.value})}
                     >
-                    <option value="Select type" disabled>Select type</option>
+                    <option value="default" disabled>Type</option>
                     {
                       this.props.types.map(type => {
                         return (
@@ -88,6 +84,7 @@ class TypeEdit extends React.Component {
             Please fill out all information correctly.
           </p>
         ) : null}
+        <br />
         <div className="control has-text-centered">
           <button className="button is-primary is-outlined">Edit Type</button>
         </div>
@@ -101,7 +98,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getTypes,
   editType
 }, dispatch);
 
