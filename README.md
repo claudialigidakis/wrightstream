@@ -23,7 +23,7 @@ With a smooth and intuitive interface, you no longer have to deal with messy not
 When hundreds of orders come in, it becomes a challenge to keep track of inventory changes, mass production, purchase management, and shipping procedures. With a combined, manageable workflow, your business can expand while keeping products personalized and close to the heart.
 
 ### Aids Teamwork
-Make task assignment and tracking a breeze for both you and your employees by limiting their access from parts of the workflow that don’t involve their productivity. All they need worry about is creating products — everything else doesn’t matter.
+Make task assignment and tracking a breeze for both you and your employees by limiting their access from parts of the workflow that don’t involve their productivity. All they need to worry about is creating products — everything else doesn’t matter.
 
 
 ## Features
