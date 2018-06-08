@@ -4,33 +4,43 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { addSupply } from '../../actions/products';
+import { getLinkedProducts, addBundle } from '../../actions/products';
 
 // ==========
 
-class SupplyAdd extends React.Component {
+class BundleAdd extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       name: '',
+      linkedProduct: 'default',
+      category: 'default',
+      photo: '',
       stock: 0,
-      measure_type: 'default',
-      source: 'default',
-      kind: 'default',
+      items: JSON.stringify([{id: 1, stock_qty_measure: 'lb', stock_qty: 4}, {id: 3, stock_qty_measure: 'm', stock_qty: 9}]),
+      steps: '{"1": "Get ingredients", "2": "Mix ingredients", "3": "Bake", "4":"Frost", "5":"Box"}',
       invalid: false
     };
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    if (!event.target.name.value || event.target.measure_type.value === 'default' || event.target.kind.value === 'default' || event.target.source.value === 'default') {
+    if (
+      !event.target.name.value
+      // || event.target.linkedProduct.value === 'default'
+      || event.target.category.value === 'default'
+    ) {
       this.setState({
         invalid: true
       });
     } else {
-      const source_id = this.props.sources.find(source => source.name === this.state.source).id;
-      const kind_id = this.props.kinds.find(kind => kind.name === this.state.kind).id;
-      this.props.addSupply(this.state.name, this.state.stock, this.state.measure_type, source_id, kind_id);
+      const category_id = this.props.categories.find(category => category.name === this.state.category).id;
+      // if (this.state.linkedProduct === 'custom') {
+      //   const linkedProduct_id = 0;
+      // } else {
+      //   const linkedProduct_id = this.props.linkedProducts.find(linkedProduct => linkedProduct.name === this.state.linkedProduct).id;
+      // }
+      this.props.addBundle(this.state.name, category_id, this.state.photo, this.state.stock);
       this.clear();
       this.props.toggle();
     }
@@ -39,13 +49,19 @@ class SupplyAdd extends React.Component {
   clear = () => {
     this.setState({
       name: '',
+      linkedProduct: 'default',
+      category: 'default',
+      photo: '',
       stock: 0,
-      measure_type: 'default',
-      source: 'default',
-      kind: 'default',
+      items: '[{"id": "1", "stock_qty_measure": "lb", "stock_qty": "4"}, {"id": "3", "stock_qty_measure": "m", "stock_qty": "9"}]',
+      steps: '{"1": "Get ingredients", "2": "Mix ingredients", "3": "Bake", "4":"Frost", "5":"Box"}',
       invalid: false
     });
   };
+
+  componentDidMount () {
+    this.props.getLinkedProducts();
+  }
 
   render () {
     return (
@@ -55,69 +71,59 @@ class SupplyAdd extends React.Component {
             <input
               className="input"
               type="text"
-              placeholder="Supply Name"
+              placeholder="Bundle Name"
               id="name"
               value={this.state.name}
               onChange={event => this.setState({name: event.target.value})}
             />
           </div>
         </div>
-        <div className="field is-horizontal">
-          <div className="field-body">
-
-            <div className="field">
-              <div className="control">
-                <div className="select">
-                  <select
-                    id="kind"
-                    value={this.state.kind}
-                    onChange={event => this.setState({kind: event.target.value})}
-                    >
-                    <option value="default" disabled>Kind</option>
-                    {
-                      this.props.kinds.map(kind => {
-                        return (
-                          <option key={kind.id} value={kind.name}>{kind.name}</option>
-                        )
-                      })
-                    }
-                  </select>
-                </div>
-              </div>
+        {/* <div className="field">
+          <div className="control">
+            <div className="select">
+              <select
+                id="linkedProduct"
+                value={this.state.linkedProduct}
+                onChange={event => this.setState({linkedProduct: event.target.value})}
+                >
+                <option value="default" disabled>Linked Product</option>
+                {
+                  this.props.linkedProducts.map(linkedProduct => {
+                    return (
+                      <option key={linkedProduct.id} value={linkedProduct.name}>{linkedProduct.name}</option>
+                    )
+                  })
+                }
+                <option value="custom">Custom</option>
+              </select>
             </div>
-            <div className="field">
-              <div className="control">
-                <div className="select">
-                  <select
-                    id="measure_type"
-                    value={this.state.measure_type}
-                    onChange={event => this.setState({measure_type: event.target.value})}
-                    >
-                    <option value="default" disabled>Measurement</option>
-                    <option value="length">Length</option>
-                    <option value="area">Area</option>
-                    <option value="mass">Mass</option>
-                    <option value="volume">Volume</option>
-                    <option value="unit">Unit</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+          </div>
+        </div> */}
+        <div className="field">
+          <div className="control">
+            <input
+              className="input"
+              type="text"
+              placeholder="Photo URL"
+              id="photo"
+              value={this.state.photo}
+              onChange={event => this.setState({photo: event.target.value})}
+            />
           </div>
         </div>
         <div className="field">
           <div className="control">
             <div className="select">
               <select
-                id="source"
-                value={this.state.source}
-                onChange={event => this.setState({source: event.target.value})}
+                id="category"
+                value={this.state.category}
+                onChange={event => this.setState({category: event.target.value})}
                 >
-                <option value="default" disabled>Source</option>
+                <option value="default" disabled>Category</option>
                 {
-                  this.props.sources.map(source => {
+                  this.props.categories.map(category => {
                     return (
-                      <option key={source.id} value={source.name}>{source.name}</option>
+                      <option key={category.id} value={category.name}>{category.name}</option>
                     )
                   })
                 }
@@ -131,7 +137,7 @@ class SupplyAdd extends React.Component {
           </p>
         ) : null}
         <div className="control has-text-centered">
-          <button className="button is-primary is-outlined">Add Supply</button>
+          <button className="button is-primary is-outlined">Add Bundle</button>
         </div>
       </form>
     );
@@ -139,12 +145,13 @@ class SupplyAdd extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  sources: state.products.sources,
-  kinds: state.products.kinds
+  linkedProducts: state.products.linkedProducts,
+  categories: state.products.categories
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  addSupply
+  getLinkedProducts,
+  addBundle
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(SupplyAdd);
+export default connect(mapStateToProps, mapDispatchToProps)(BundleAdd);

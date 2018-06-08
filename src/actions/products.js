@@ -1,8 +1,11 @@
 import request from '../helpers/request';
 
+export const GET_LINKED_PRODUCTS = 'GET_LINKED_PRODUCTS';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const GET_ITEMS = 'GET_ITEMS';
+export const ADD_ITEM = 'ADD_ITEM';
 export const GET_BUNDLES = 'GET_BUNDLES';
+export const ADD_BUNDLE = 'ADD_BUNDLE';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const ADD_CATEGORY = 'ADD_CATEGORY';
 export const EDIT_CATEGORY = 'EDIT_CATEGORY';
@@ -26,6 +29,22 @@ export const ADD_TYPE = 'ADD_TYPE';
 export const EDIT_TYPE = 'EDIT_TYPE';
 export const DELETE_TYPE = 'DELETE_TYPE';
 export const GET_SOURCES_BY_TYPE = 'GET_SOURCES_BY_TYPE';
+
+export const getLinkedProducts = () => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/products/${shop_id}/allProducts`)
+      .then(response => {
+        dispatch({
+          type: GET_LINKED_PRODUCTS,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
 
 export const getProducts = () => (
   dispatch => {
@@ -62,6 +81,25 @@ export const getItems = () => (
   }
 );
 
+export const addItem = (name, categoryId, photo, stock) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/items/${shop_id}`, 'post', {name, categoryId, photo, stock})
+      .then(response => {
+        return request(`/items/${shop_id}/allItems`);
+      })
+      .then(response => {
+        dispatch({
+          type: ADD_ITEM,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
 export const getBundles = () => (
   dispatch => {
     request('/auth/token')
@@ -71,6 +109,25 @@ export const getBundles = () => (
       .then(response => {
         dispatch({
           type: GET_BUNDLES,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const addBundle = (name, categoryId, photo, stock) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/bundles/${shop_id}`, 'post', {name, categoryId, photo, stock})
+      .then(response => {
+        return request(`/bundles/${shop_id}/allBundles`);
+      })
+      .then(response => {
+        dispatch({
+          type: ADD_BUNDLE,
           payload: response.data.data
         });
       });
