@@ -13,8 +13,6 @@ class Signup extends React.Component {
     isValid: true,
     passwordClasses: 'input',
     shop_name: '',
-    logo: '',
-    settings: [],
     first_name: '',
     last_name: '',
     email: '',
@@ -22,16 +20,16 @@ class Signup extends React.Component {
     verify_password: ''
   };
 
-  handleSignup = e => {
-    e.preventDefault();
-    let { shop_name, logo, settings, first_name, last_name, email, password, verify_password } = this.state;
+  handleSignup = event => {
+    event.preventDefault();
+    let { shop_name, first_name, last_name, email, password, verify_password } = this.state;
     if (!password || password !== verify_password || !verify_password) {
       this.setState({
         passwordClasses: this.state.passwordClasses + ' is-danger',
         isValid: false
       });
     } else {
-      let newShop = {shop_name, logo, settings};
+      let newShop = {shop_name};
       let newUser = {first_name, last_name, email, password};
       this.props.userSignup(newShop, newUser, this.props.history);
     }
@@ -55,7 +53,7 @@ class Signup extends React.Component {
                             placeholder="Shop Name"
                             id="shop_name"
                             value={this.state.shop_name}
-                            onChange={e => this.setState({shop_name: e.target.value})}
+                            onChange={event => this.setState({shop_name: event.target.value})}
                             required
                           />
                         </p>
@@ -70,7 +68,7 @@ class Signup extends React.Component {
                                 placeholder="First Name"
                                 id="first_name"
                                 value={this.state.first_name}
-                                onChange={e => this.setState({first_name: e.target.value})}
+                                onChange={event => this.setState({first_name: event.target.value})}
                                 required
                               />
                             </p>
@@ -83,7 +81,7 @@ class Signup extends React.Component {
                                 placeholder="Last Name"
                                 id="last_name"
                                 value={this.state.last_name}
-                                onChange={e => this.setState({last_name: e.target.value})}
+                                onChange={event => this.setState({last_name: event.target.value})}
                                 required
                               />
                             </p>
@@ -98,7 +96,7 @@ class Signup extends React.Component {
                             placeholder="Email"
                             id="email"
                             value={this.state.email}
-                            onChange={e => this.setState({email: e.target.value})}
+                            onChange={event => this.setState({email: event.target.value})}
                             required
                           />
                         </p>
@@ -113,7 +111,7 @@ class Signup extends React.Component {
                                 placeholder="Password"
                                 id="password"
                                 value={this.state.password}
-                                onChange={e => this.setState({password: e.target.value})}
+                                onChange={event => this.setState({password: event.target.value})}
                                 required
                               />
                             </p>
@@ -126,7 +124,7 @@ class Signup extends React.Component {
                                 placeholder="Verify Password"
                                 id="verify_password"
                                 value={this.state.verify_password}
-                                onChange={e => this.setState({verify_password: e.target.value})}
+                                onChange={event => this.setState({verify_password: event.target.value})}
                                 required
                               />
                             </p>
