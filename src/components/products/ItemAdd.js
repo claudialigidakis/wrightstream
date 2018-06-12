@@ -17,8 +17,8 @@ class ItemAdd extends React.Component {
       category: 'default',
       photo: '',
       stock: 0,
-      supplies: JSON.stringify([{id: 1, stock_qty_measure: 'lb', stock_qty: 4}, {id: 3, stock_qty_measure: 'm', stock_qty: 9}]),
-      steps: '{"1": "Get ingredients", "2": "Mix ingredients", "3": "Bake", "4":"Frost", "5":"Box"}',
+      supplies: [{id: 1, stock_qty_measure: 'lb', stock_qty: 4}],
+      steps: JSON.stringify({'1': 'one'}),
       invalid: false
     };
   };
@@ -40,7 +40,7 @@ class ItemAdd extends React.Component {
       // } else {
       //   const linkedProduct_id = this.props.linkedProducts.find(linkedProduct => linkedProduct.name === this.state.linkedProduct).id;
       // }
-      this.props.addItem(this.state.name, category_id, this.state.photo, this.state.stock);
+      this.props.addItem(this.state.name, category_id, this.state.photo, this.state.stock, this.state.supplies, this.state.steps);
       this.clear();
       this.props.toggle();
     }
@@ -53,8 +53,8 @@ class ItemAdd extends React.Component {
       category: 'default',
       photo: '',
       stock: 0,
-      supplies: '[{"id": "1", "stock_qty_measure": "lb", "stock_qty": "4"}, {"id": "3", "stock_qty_measure": "m", "stock_qty": "9"}]',
-      steps: '{"1": "Get ingredients", "2": "Mix ingredients", "3": "Bake", "4":"Frost", "5":"Box"}',
+      supplies: JSON.stringify([{id: 1, stock_qty_measure: 'lb', stock_qty: 4}]),
+      steps: JSON.stringify({'1': 'one'}),
       invalid: false
     });
   };
@@ -130,6 +130,64 @@ class ItemAdd extends React.Component {
                 }
               </select>
             </div>
+          </div>
+        </div>
+        <div className="field is-horizontal">
+          <div className="field-body">
+
+            <div className="field">
+              <div className="control">
+                <div className="select">
+                  <select
+                    id="supply"
+                    value={this.state.category}
+                    onChange={event => this.setState({category: event.target.value})}
+                    >
+                    <option value="default" disabled>Supply</option>
+                    {
+                      this.props.categories.map(category => {
+                        return (
+                          <option key={category.id} value={category.name}>{category.name}</option>
+                        )
+                      })
+                    }
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className="field">
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Quantity"
+                  id="photo"
+                  value={this.state.photo}
+                  onChange={event => this.setState({photo: event.target.value})}
+                />
+              </div>
+            </div>
+            <div className="field">
+              <div className="control">
+                <div className="select">
+                  <select
+                    id="category"
+                    value={this.state.category}
+                    onChange={event => this.setState({category: event.target.value})}
+                    >
+                    <option value="default" disabled>Measurement</option>
+                    {
+                      this.props.categories.map(category => {
+                        return (
+                          <option key={category.id} value={category.name}>{category.name}</option>
+                        )
+                      })
+                    }
+                  </select>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
         {this.state.invalid ? (

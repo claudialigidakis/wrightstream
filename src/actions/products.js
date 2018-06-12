@@ -83,12 +83,12 @@ export const getItems = () => (
   }
 );
 
-export const addItem = (name, categoryId, photo, stock) => (
+export const addItem = (name, categoryId, photo, stock, supplies, steps) => (
   dispatch => {
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/items/${shop_id}`, 'post', {name, categoryId, photo, stock})
+      request(`/items/${shop_id}`, 'post', {name, categoryId, photo, stock, supplies, steps})
       .then(response => {
         return request(`/items/${shop_id}/allItems`);
       })
