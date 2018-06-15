@@ -206,7 +206,8 @@ class ItemAdd extends React.Component {
 
 const mapStateToProps = state => ({
   linkedProducts: state.products.linkedProducts,
-  categories: state.products.categories
+  categories: state.products.categories,
+  supplies: state.products.supplies
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
