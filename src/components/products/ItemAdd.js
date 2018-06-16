@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getLinkedProducts, addItem } from '../../actions/products';
+import { getLinkedProducts, getSupplies, addItem } from '../../actions/products';
 
 // ==========
 
@@ -212,6 +212,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getLinkedProducts,
+  getSupplies,
   addItem
 }, dispatch);
 
