@@ -107,7 +107,7 @@ export const deleteItem = (id) => (
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/items/${id}`, 'delete')
+      request(`/items/${id}`, 'put', {deleted: true})
       .then(response => {
         return request(`/items/${shop_id}/allItems`);
       })
@@ -161,7 +161,7 @@ export const deleteBundle = (id) => (
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/bundles/${id}`, 'delete')
+      request(`/bundles/${id}`, 'put', {deleted: true})
       .then(response => {
         return request(`/bundles/${shop_id}/allBundles`);
       })

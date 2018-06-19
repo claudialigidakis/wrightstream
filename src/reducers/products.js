@@ -57,6 +57,8 @@ export default (state = initialState, action) => {
       return {...state, items: action.payload};
     case ADD_ITEM:
       return {...state, items: action.payload};
+    case DELETE_ITEM:
+      return {...state, items: action.payload};
     case GET_BUNDLES:
       return {...state, bundles: action.payload};
     case ADD_BUNDLE:
