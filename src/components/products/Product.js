@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 // COMPONENTS
 import ItemEdit from './ItemEdit';
 import ItemDelete from './ItemDelete';
+import BundleEdit from './BundleEdit';
+import BundleDelete from './BundleDelete';
 
 // ==========
 
@@ -85,12 +87,6 @@ class Product extends React.Component {
             <a className="card-footer-item"><span className="lnr-trash2"></span></a>
           </footer>
         </div>
-
-
-
-
-
-
         <div className={this.state.modalClasses}>
           <div className="modal-background" onClick={this.toggle}></div>
           <div className="modal-content">
@@ -121,7 +117,7 @@ class Product extends React.Component {
                       return (
                         <li key={i}>
                           <span className="supply-qty">{ingredient.stock_qty}</span>
-                          <span className="supply-unit">{ingredient.stock_qty_measure}</span>
+                          <span className="supply-unit">{ingredient.qty_measure}</span>
                           {ingredient.name}
                         </li>
                       );
@@ -169,8 +165,12 @@ class Product extends React.Component {
           <div className="modal-content modal-form">
             <div className="modal-container">
               {
-                this.state.action === 'edit' ? <ItemEdit item={this.props} toggle={this.toggleControl} /> : (
-                  this.state.action === 'delete' ? <ItemDelete item={this.props} toggle={this.toggleControl} toggleParent={this.toggle} /> : null
+                this.state.action === 'edit' ? (
+                  this.props.product === 'item' ? <ItemEdit item={this.props} toggle={this.toggleControl} /> : <BundleEdit bundle={this.props} toggle={this.toggleControl} />
+                ) : (
+                  this.state.action === 'delete' ? (
+                    this.props.product === 'item' ? <ItemDelete item={this.props} toggle={this.toggleControl} toggleParent={this.toggle} /> : <BundleDelete bundle={this.props} toggle={this.toggleControl} toggleParent={this.toggle} />
+                  ) : null
                 )
               }
             </div>
