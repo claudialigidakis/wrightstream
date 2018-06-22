@@ -90,9 +90,11 @@ export const addItem = (name, categoryId, photo, stock, supplies, steps) => (
       const shop_id = response.data.shops_id;
       request(`/items/${shop_id}`, 'post', {name, categoryId, photo, stock, supplies, steps})
       .then(response => {
-        return request(`/items/${shop_id}/allItems`);
+        console.log('item created', response)
+        return request(`/items/${shop_id}/allItems`)
       })
       .then(response => {
+        console.log('grabbing items')
         dispatch({
           type: ADD_ITEM,
           payload: response.data.data

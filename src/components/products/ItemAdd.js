@@ -6,6 +6,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getLinkedProducts, getSupplies, addItem } from '../../actions/products';
 
+// COMPONENTS
+import ItemAddSupply from './ItemAddSupply';
+
 // ==========
 
 class ItemAdd extends React.Component {
@@ -17,9 +20,10 @@ class ItemAdd extends React.Component {
       category: 'default',
       photo: '',
       stock: 0,
-      supplies: [{id: 1, stock_qty_measure: 'lb', stock_qty: 4}],
+      supplies: [{id: 1, qty_measure: 'lb', qty: 3}],
       steps: JSON.stringify({'1': 'one'}),
-      invalid: false
+      invalid: false,
+      inputs: [0]
     };
   };
 
@@ -46,6 +50,16 @@ class ItemAdd extends React.Component {
     }
   };
 
+  appendInput = () => {
+    const newInput = this.state.inputs.length;
+    this.setState({ inputs: this.state.inputs.concat([newInput]) });
+  }
+
+  deleteInput = () => {
+    const newInput = this.state.inputs.length;
+    this.setState({ inputs: this.state.inputs.concat([newInput]) });
+  }
+
   clear = () => {
     this.setState({
       name: '',
@@ -53,9 +67,10 @@ class ItemAdd extends React.Component {
       category: 'default',
       photo: '',
       stock: 0,
-      supplies: JSON.stringify([{id: 1, stock_qty_measure: 'lb', stock_qty: 4}]),
+      supplies: [{id: 1, qty_measure: 'lb', qty: 3}],
       steps: JSON.stringify({'1': 'one'}),
-      invalid: false
+      invalid: false,
+      inputs: [0]
     });
   };
 
@@ -64,7 +79,6 @@ class ItemAdd extends React.Component {
   }
 
   render () {
-              console.log(this.props);
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="field">
@@ -132,64 +146,16 @@ class ItemAdd extends React.Component {
             </div>
           </div>
         </div>
-        <div className="field is-horizontal">
-          <div className="field-body">
-
-            <div className="field">
-              <div className="control">
-                <div className="select">
-                  <select
-                    id="supply"
-                    value={this.state.category}
-                    onChange={event => this.setState({category: event.target.value})}
-                    >
-                    <option value="default" disabled>Supply</option>
-                    {
-                      this.props.categories.map(category => {
-                        return (
-                          <option key={category.id} value={category.name}>{category.name}</option>
-                        )
-                      })
-                    }
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div className="field">
-              <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Quantity"
-                  id="photo"
-                  value={this.state.photo}
-                  onChange={event => this.setState({photo: event.target.value})}
-                />
-              </div>
-            </div>
-            <div className="field">
-              <div className="control">
-                <div className="select">
-                  <select
-                    id="category"
-                    value={this.state.category}
-                    onChange={event => this.setState({category: event.target.value})}
-                    >
-                    <option value="default" disabled>Measurement</option>
-                    {
-                      this.props.categories.map(category => {
-                        return (
-                          <option key={category.id} value={category.name}>{category.name}</option>
-                        )
-                      })
-                    }
-                  </select>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
+        <h1 className="title">Supplies</h1>
+        {this.state.inputs.map(input =>
+          <ItemAddSupply
+            key={input}
+            i={input}
+            length={this.state.inputs.length-1}
+            appendInput={this.appendInput}
+            deleteInput={this.deleteInput}
+          />
+        )}
         {this.state.invalid ? (
           <p id="error" className="help is-danger has-text-centered">
             Please fill out all information correctly.
