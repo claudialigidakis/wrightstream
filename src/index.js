@@ -7,9 +7,9 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 // CSS
-import 'bulma/css/bulma.min.css'
+import 'bulma/css/bulma.min.css';
 import './css/main.css';
-import './css/linearicons.css'
+import './css/linearicons.css';
 
 // COMPONENTS
 import App from './App';

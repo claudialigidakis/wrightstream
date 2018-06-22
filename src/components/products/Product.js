@@ -116,7 +116,7 @@ class Product extends React.Component {
                     this.props.ingredients.map((ingredient, i) => {
                       return (
                         <li key={i}>
-                          <span className="supply-qty">{ingredient.stock_qty}</span>
+                          <span className="supply-qty">{ingredient.qty}</span>
                           <span className="supply-unit">{ingredient.qty_measure}</span>
                           {ingredient.name}
                         </li>
