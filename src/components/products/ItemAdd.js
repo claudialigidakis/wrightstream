@@ -9,6 +9,9 @@ import { getLinkedProducts, getSupplies, addItem } from '../../actions/products'
 // COMPONENTS
 import ItemAddSupply from './ItemAddSupply';
 
+// MISC
+const shortid = require('shortid');
+
 // ==========
 
 class ItemAdd extends React.Component {
@@ -23,8 +26,24 @@ class ItemAdd extends React.Component {
       supplies: [{id: 1, qty_measure: 'lb', qty: 3}],
       steps: JSON.stringify({'1': 'one'}),
       invalid: false,
-      inputs: [0]
+      inputs: [shortid.generate()],
+      suppliess: []
     };
+  };
+
+  clear = () => {
+    this.setState({
+      name: '',
+      linkedProduct: 'default',
+      category: 'default',
+      photo: '',
+      stock: 0,
+      supplies: [{id: 1, qty_measure: 'lb', qty: 3}],
+      steps: JSON.stringify({'1': 'one'}),
+      invalid: false,
+      inputs: [shortid.generate()],
+      suppliess: []
+    });
   };
 
   handleSubmit = event => {
@@ -51,32 +70,60 @@ class ItemAdd extends React.Component {
   };
 
   appendInput = () => {
-    const newInput = this.state.inputs.length;
-    this.setState({ inputs: this.state.inputs.concat([newInput]) });
-  }
+    const newInput = shortid.generate();
+    this.setState({inputs: this.state.inputs.concat([newInput])});
+  };
 
-  deleteInput = () => {
-    const newInput = this.state.inputs.length;
-    this.setState({ inputs: this.state.inputs.concat([newInput]) });
-  }
+  deleteInput = i => {
+    this.state.inputs.splice(i, 1);
+    this.setState({inputs: this.state.inputs});
+  };
 
-  clear = () => {
-    this.setState({
-      name: '',
-      linkedProduct: 'default',
-      category: 'default',
-      photo: '',
-      stock: 0,
-      supplies: [{id: 1, qty_measure: 'lb', qty: 3}],
-      steps: JSON.stringify({'1': 'one'}),
-      invalid: false,
-      inputs: [0]
-    });
+  addSupply = (input, id) => {
+    if (!this.state.suppliess.find(supply => supply.input === input) && !this.state.suppliess.find(supply => supply.id === id)) {
+      this.state.suppliess.push({input, id});
+      this.setState({suppliess: this.state.suppliess});
+    } else if (this.state.suppliess.find(supply => supply.input === input) && !this.state.suppliess.find(supply => supply.id === id)) {
+      const supplies = this.state.suppliess;
+      const index = supplies.findIndex(supply => supply.input === input);
+      supplies[index].id = id;
+
+      console.log(this.state.suppliess.find(supply => supply.input === input).qty_measure);
+      if (this.state.suppliess.find(supply => supply.input === input).qty_measure) {
+        supplies[index].qty_measure = this.state.suppliess.find(supply => supply.input === input).qty_measure;
+      }
+      this.setState({suppliess: supplies});
+    }
+  };
+
+  addSupplyQty = (input, qty) => {
+    if (!this.state.suppliess.find(supply => supply.input === input)) {
+      this.state.suppliess.push({input, qty});
+      this.setState({suppliess: this.state.suppliess});
+    } else {
+      const supplies = this.state.suppliess;
+      const index = supplies.findIndex(supply => supply.input === input);
+      supplies[index].qty = qty;
+      this.setState({suppliess: supplies});
+    }
+  };
+
+  addSupplyMeasure = (input, measure) => {
+    const supplies = this.state.suppliess;
+    const index = supplies.findIndex(supply => supply.input === input);
+    supplies[index].qty_measure = measure;
+    this.setState({suppliess: supplies});
+    console.log('this is what is being sent', this.state.suppliess);
+  };
+
+  deleteSupply = (input) => {
+    this.setState({suppliess: this.state.suppliess.filter(supply => supply.input !== input)});
   };
 
   componentDidMount () {
     this.props.getLinkedProducts();
-  }
+    this.props.getSupplies();
+  };
 
   render () {
     return (
@@ -147,13 +194,20 @@ class ItemAdd extends React.Component {
           </div>
         </div>
         <h1 className="title">Supplies</h1>
-        {this.state.inputs.map(input =>
+        {this.state.inputs.map((input, i) =>
           <ItemAddSupply
             key={input}
-            i={input}
+            input={input}
+            i={i}
             length={this.state.inputs.length-1}
             appendInput={this.appendInput}
             deleteInput={this.deleteInput}
+            addSupply={this.addSupply}
+            addSupplyQty={this.addSupplyQty}
+            addSupplyMeasure={this.addSupplyMeasure}
+            deleteSupply={this.deleteSupply}
+            supplies={this.props.supplies}
+            selected={this.state.suppliess}
           />
         )}
         {this.state.invalid ? (
