@@ -24,9 +24,9 @@ class ItemAdd extends React.Component {
       photo: '',
       stock: 0,
       supplies: [],
+      suppliesInputs: [shortid.generate()],
       steps: JSON.stringify({'1': 'one'}),
-      invalid: false,
-      inputs: [shortid.generate()]
+      invalid: false
     };
   };
 
@@ -38,9 +38,9 @@ class ItemAdd extends React.Component {
       photo: '',
       stock: 0,
       supplies: [],
+      suppliesInputs: [shortid.generate()],
       steps: JSON.stringify({'1': 'one'}),
-      invalid: false,
-      inputs: [shortid.generate()]
+      invalid: false
     });
   };
 
@@ -72,14 +72,14 @@ class ItemAdd extends React.Component {
     }
   };
 
-  appendInput = () => {
+  appendSuppliesInput = () => {
     const newInput = shortid.generate();
-    this.setState({inputs: this.state.inputs.concat([newInput])});
+    this.setState({suppliesInputs: this.state.suppliesInputs.concat([newInput])});
   };
 
-  deleteInput = i => {
-    this.state.inputs.splice(i, 1);
-    this.setState({inputs: this.state.inputs});
+  deleteSuppliesInput = i => {
+    this.state.suppliesInputs.splice(i, 1);
+    this.setState({suppliesInputs: this.state.suppliesInputs});
   };
 
   addSupply = (input, id) => {
@@ -192,14 +192,14 @@ class ItemAdd extends React.Component {
           </div>
         </div>
         <h1 className="title">Supplies</h1>
-        {this.state.inputs.map((input, i) =>
+        {this.state.suppliesInputs.map((input, i) =>
           <ItemAddSupply
             key={input}
             input={input}
             i={i}
-            length={this.state.inputs.length-1}
-            appendInput={this.appendInput}
-            deleteInput={this.deleteInput}
+            length={this.state.suppliesInputs.length-1}
+            appendInput={this.appendSuppliesInput}
+            deleteInput={this.deleteSuppliesInput}
             addSupply={this.addSupply}
             addSupplyQty={this.addSupplyQty}
             addSupplyMeasure={this.addSupplyMeasure}
