@@ -32,7 +32,7 @@ class ItemAddSupply extends React.Component {
       const index = this.props.selected.findIndex(supply => supply.input === this.props.input);
       delete this.props.selected[index].qty_measure;
     }
-  }
+  };
 
   componentDidMount () {
     this.props.getLength();
