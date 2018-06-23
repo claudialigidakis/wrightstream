@@ -26,6 +26,12 @@ class ItemAddSupply extends React.Component {
     });
   };
 
+  changeSupplyMeasure = () => {
+    if (this.state.selected.find(supply => supply.input === input) && this.state.selected.find(supply => supply.input === input).qty_measure) {
+      
+    }
+  }
+
   componentDidMount () {
     this.props.getLength();
     this.props.getMass();
@@ -54,6 +60,7 @@ class ItemAddSupply extends React.Component {
                     onChange={event => {
                       this.setState({id: parseInt(event.target.value, 10)});
                       this.props.addSupply(this.props.input, parseInt(event.target.value, 10));
+                      this.changeSupplyMeasure(this.props.input);
                     }}
                   >
                     <option value="default" disabled>Supply</option>
