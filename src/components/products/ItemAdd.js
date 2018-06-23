@@ -87,11 +87,6 @@ class ItemAdd extends React.Component {
       const supplies = this.state.suppliess;
       const index = supplies.findIndex(supply => supply.input === input);
       supplies[index].id = id;
-
-      console.log(this.state.suppliess.find(supply => supply.input === input).qty_measure);
-      if (this.state.suppliess.find(supply => supply.input === input).qty_measure) {
-        supplies[index].qty_measure = this.state.suppliess.find(supply => supply.input === input).qty_measure;
-      }
       this.setState({suppliess: supplies});
     }
   };

@@ -27,8 +27,10 @@ class ItemAddSupply extends React.Component {
   };
 
   changeSupplyMeasure = () => {
-    if (this.state.selected.find(supply => supply.input === input) && this.state.selected.find(supply => supply.input === input).qty_measure) {
-      
+    if (this.props.selected.find(supply => supply.input === this.props.input).qty_measure) {
+      this.setState({qty_measure: 'default'});
+      const index = this.props.selected.findIndex(supply => supply.input === this.props.input);
+      delete this.props.selected[index].qty_measure;
     }
   }
 
