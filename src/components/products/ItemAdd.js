@@ -8,6 +8,7 @@ import { getLinkedProducts, getSupplies, addItem } from '../../actions/products'
 
 // COMPONENTS
 import ItemAddSupply from './ItemAddSupply';
+import ItemAddStep from './ItemAddStep';
 
 // MISC
 const shortid = require('shortid');
@@ -26,6 +27,7 @@ class ItemAdd extends React.Component {
       supplies: [],
       suppliesInputs: [shortid.generate()],
       steps: JSON.stringify({'1': 'one'}),
+      stepsInputs: [shortid.generate()],
       invalid: false
     };
   };
@@ -40,6 +42,7 @@ class ItemAdd extends React.Component {
       supplies: [],
       suppliesInputs: [shortid.generate()],
       steps: JSON.stringify({'1': 'one'}),
+      stepsInputs: [shortid.generate()],
       invalid: false
     });
   };
@@ -208,6 +211,8 @@ class ItemAdd extends React.Component {
             selected={this.state.supplies}
           />
         )}
+        <h1 className="title">Steps</h1>
+        <ItemAddStep />
         {this.state.invalid ? (
           <p id="error" className="help is-danger has-text-centered">
             Please fill out all information correctly.
