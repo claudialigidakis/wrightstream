@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { getLinkedProducts, getItems, addBundle } from '../../actions/products';
 
 // COMPONENTS
-import ItemAddSupply from './ItemAddSupply';
+import BundleAddItem from './BundleAddItem';
 import ItemAddStep from './ItemAddStep';
 
 // MISC
@@ -24,8 +24,8 @@ class BundleAdd extends React.Component {
       category: 'default',
       photo: '',
       stock: 0,
-      supplies: [],
-      suppliesInputs: [shortid.generate()],
+      items: [],
+      itemsInputs: [shortid.generate()],
       steps: [],
       stepsInputs: [shortid.generate()],
       invalid: false
@@ -39,8 +39,8 @@ class BundleAdd extends React.Component {
       category: 'default',
       photo: '',
       stock: 0,
-      supplies: [],
-      suppliesInputs: [shortid.generate()],
+      items: [],
+      itemsInputs: [shortid.generate()],
       steps: [],
       stepsInputs: [shortid.generate()],
       invalid: false
@@ -53,16 +53,16 @@ class BundleAdd extends React.Component {
       !event.target.name.value
       // || event.target.linkedProduct.value === 'default'
       || event.target.category.value === 'default'
-      || this.state.supplies.length === 0
-      || this.state.supplies.find(supply => supply.qty === 0)
-      || this.state.supplies.find(supply => !supply.qty)
-      || this.state.supplies.find(supply => !supply.qty_measure)
+      || this.state.items.length === 0
+      || this.state.items.find(item => item.qty === 0)
+      || this.state.items.find(item => !item.qty)
       || this.state.steps.length === 0
     ) {
       this.setState({
         invalid: true
       });
     } else {
+      console.log('items', this.state.items)
       const category_id = this.props.categories.find(category => category.name === this.state.category).id;
       // if (this.state.linkedProduct === 'custom') {
       //   const linkedProduct_id = 0;
@@ -73,15 +73,15 @@ class BundleAdd extends React.Component {
       for (let i = 0; i < this.state.steps.length; i++) {
         steps[i+1] = this.state.steps[i].step;
       }
-      this.props.addBundle(this.state.name, category_id, this.state.photo, this.state.stock, this.state.supplies, JSON.stringify(steps));
+      this.props.addBundle(this.state.name, category_id, this.state.photo, this.state.stock, JSON.stringify(this.state.items), JSON.stringify(steps));
       this.clear();
       this.props.toggle();
     }
   };
 
-  appendSuppliesInput = () => {
+  appendItemsInput = () => {
     const newInput = shortid.generate();
-    this.setState({suppliesInputs: this.state.suppliesInputs.concat([newInput])});
+    this.setState({itemsInputs: this.state.itemsInputs.concat([newInput])});
   };
 
   appendStepsInput = () => {
@@ -89,9 +89,9 @@ class BundleAdd extends React.Component {
     this.setState({stepsInputs: this.state.stepsInputs.concat([newInput])});
   };
 
-  deleteSuppliesInput = i => {
-    this.state.suppliesInputs.splice(i, 1);
-    this.setState({suppliesInputs: this.state.suppliesInputs});
+  deleteItemsInput = i => {
+    this.state.itemsInputs.splice(i, 1);
+    this.setState({itemsInputs: this.state.itemsInputs});
   };
 
   deleteStepsInput = i => {
@@ -99,35 +99,28 @@ class BundleAdd extends React.Component {
     this.setState({stepsInputs: this.state.stepsInputs});
   };
 
-  addSupply = (input, id) => {
-    if (!this.state.supplies.find(supply => supply.input === input) && !this.state.supplies.find(supply => supply.id === id)) {
-      this.state.supplies.push({input, id});
-      this.setState({supplies: this.state.supplies});
-    } else if (this.state.supplies.find(supply => supply.input === input) && !this.state.supplies.find(supply => supply.id === id)) {
-      const supplies = this.state.supplies;
-      const index = supplies.findIndex(supply => supply.input === input);
-      supplies[index].id = id;
-      this.setState({supplies: supplies});
+  addItem = (input, id) => {
+    if (!this.state.items.find(item => item.input === input) && !this.state.items.find(item => item.id === id)) {
+      this.state.items.push({input, id});
+      this.setState({items: this.state.items});
+    } else if (this.state.items.find(item => item.input === input) && !this.state.items.find(item => item.id === id)) {
+      const items = this.state.items;
+      const index = items.findIndex(item => item.input === input);
+      items[index].id = id;
+      this.setState({items: items});
     }
   };
 
-  addSupplyQty = (input, qty) => {
-    if (!this.state.supplies.find(supply => supply.input === input)) {
-      this.state.supplies.push({input, qty});
-      this.setState({supplies: this.state.supplies});
+  addItemQty = (input, qty) => {
+    if (!this.state.items.find(item => item.input === input)) {
+      this.state.items.push({input, qty});
+      this.setState({items: this.state.items});
     } else {
-      const supplies = this.state.supplies;
-      const index = supplies.findIndex(supply => supply.input === input);
-      supplies[index].qty = qty;
-      this.setState({supplies: supplies});
+      const items = this.state.items;
+      const index = items.findIndex(item => item.input === input);
+      items[index].qty = qty;
+      this.setState({items: items});
     }
-  };
-
-  addSupplyMeasure = (input, measure) => {
-    const supplies = this.state.supplies;
-    const index = supplies.findIndex(supply => supply.input === input);
-    supplies[index].qty_measure = measure;
-    this.setState({supplies: supplies});
   };
 
   addStep = (input, step) => {
@@ -142,8 +135,8 @@ class BundleAdd extends React.Component {
     }
   }
 
-  deleteSupply = (input) => {
-    this.setState({supplies: this.state.supplies.filter(supply => supply.input !== input)});
+  deleteItem = (input) => {
+    this.setState({items: this.state.items.filter(item => item.input !== input)});
   };
 
   deleteStep = (input) => {
@@ -224,20 +217,19 @@ class BundleAdd extends React.Component {
             </div>
           </div>
           <h1 className="title">Items</h1>
-          {this.state.suppliesInputs.map((input, i) =>
-            <ItemAddSupply
+          {this.state.itemsInputs.map((input, i) =>
+            <BundleAddItem
               key={input}
               input={input}
               i={i}
-              length={this.state.suppliesInputs.length-1}
-              appendInput={this.appendSuppliesInput}
-              deleteInput={this.deleteSuppliesInput}
-              addSupply={this.addSupply}
-              addSupplyQty={this.addSupplyQty}
-              addSupplyMeasure={this.addSupplyMeasure}
-              deleteSupply={this.deleteSupply}
-              supplies={this.props.supplies}
-              selected={this.state.supplies}
+              length={this.state.itemsInputs.length-1}
+              appendInput={this.appendItemsInput}
+              deleteInput={this.deleteItemsInput}
+              addItem={this.addItem}
+              addItemQty={this.addItemQty}
+              deleteItem={this.deleteItem}
+              items={this.props.items}
+              selected={this.state.items}
             />
           )}
           <h1 className="title">Steps</h1>

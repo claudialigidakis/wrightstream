@@ -139,12 +139,12 @@ export const getBundles = () => (
   }
 );
 
-export const addBundle = (name, categoryId, photo, stock) => (
+export const addBundle = (name, categoryId, photo, stock, items, steps) => (
   dispatch => {
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/bundles/${shop_id}`, 'post', {name, categoryId, photo, stock})
+      request(`/bundles/${shop_id}`, 'post', {name, categoryId, photo, stock, items, steps})
       .then(response => {
         return request(`/bundles/${shop_id}/allBundles`);
       })
