@@ -116,8 +116,16 @@ class Product extends React.Component {
                     this.props.ingredients.map((ingredient, i) => {
                       return (
                         <li key={i}>
-                          <span className="supply-qty">{ingredient.qty}</span>
-                          <span className="supply-unit">{ingredient.qty_measure}</span>
+                          {
+                            this.props.product === 'item' ? (
+                              <span>
+                                <span className="supply-qty">{ingredient.qty}</span>
+                                <span className="supply-unit">{ingredient.qty_measure}</span>
+                              </span>
+                            ) : (
+                              <span className="supply-qty">{ingredient.item_qty}</span>
+                            )
+                          }
                           {ingredient.name}
                         </li>
                       );

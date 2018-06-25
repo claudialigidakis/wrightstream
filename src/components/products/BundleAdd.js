@@ -54,8 +54,8 @@ class BundleAdd extends React.Component {
       // || event.target.linkedProduct.value === 'default'
       || event.target.category.value === 'default'
       || this.state.items.length === 0
-      || this.state.items.find(item => item.qty === 0)
-      || this.state.items.find(item => !item.qty)
+      || this.state.items.find(item => item.item_qty === 0)
+      || this.state.items.find(item => !item.item_qty)
       || this.state.steps.length === 0
     ) {
       this.setState({
@@ -73,7 +73,7 @@ class BundleAdd extends React.Component {
       for (let i = 0; i < this.state.steps.length; i++) {
         steps[i+1] = this.state.steps[i].step;
       }
-      this.props.addBundle(this.state.name, category_id, this.state.photo, this.state.stock, JSON.stringify(this.state.items), JSON.stringify(steps));
+      this.props.addBundle(this.state.name, category_id, this.state.photo, this.state.stock, this.state.items, JSON.stringify(steps));
       this.clear();
       this.props.toggle();
     }
@@ -118,7 +118,7 @@ class BundleAdd extends React.Component {
     } else {
       const items = this.state.items;
       const index = items.findIndex(item => item.input === input);
-      items[index].qty = qty;
+      items[index].item_qty = qty;
       this.setState({items: items});
     }
   };
