@@ -95,7 +95,6 @@ class SupplyAdd extends React.Component {
                     >
                     <option value="default" disabled>Measurement</option>
                     <option value="length">Length</option>
-                    <option value="area">Area</option>
                     <option value="mass">Mass</option>
                     <option value="volume">Volume</option>
                     <option value="unit">Unit</option>
