@@ -26,7 +26,7 @@ class ItemAdd extends React.Component {
       stock: 0,
       supplies: [],
       suppliesInputs: [shortid.generate()],
-      steps: JSON.stringify({'1': 'one'}),
+      steps: [],
       stepsInputs: [shortid.generate()],
       invalid: false
     };
@@ -41,7 +41,7 @@ class ItemAdd extends React.Component {
       stock: 0,
       supplies: [],
       suppliesInputs: [shortid.generate()],
-      steps: JSON.stringify({'1': 'one'}),
+      steps: [],
       stepsInputs: [shortid.generate()],
       invalid: false
     });
@@ -49,7 +49,6 @@ class ItemAdd extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log('supplies', this.state.supplies);
     if (
       !event.target.name.value
       // || event.target.linkedProduct.value === 'default'
@@ -58,6 +57,7 @@ class ItemAdd extends React.Component {
       || this.state.supplies.find(supply => supply.qty === 0)
       || this.state.supplies.find(supply => !supply.qty)
       || this.state.supplies.find(supply => !supply.qty_measure)
+      || this.state.steps.length === 0
     ) {
       this.setState({
         invalid: true
@@ -69,7 +69,11 @@ class ItemAdd extends React.Component {
       // } else {
       //   const linkedProduct_id = this.props.linkedProducts.find(linkedProduct => linkedProduct.name === this.state.linkedProduct).id;
       // }
-      this.props.addItem(this.state.name, category_id, this.state.photo, this.state.stock, this.state.supplies, this.state.steps);
+      const steps = {};
+      for (let i = 0; i < this.state.steps.length; i++) {
+        steps[i+1] = this.state.steps[i].step;
+      }
+      this.props.addItem(this.state.name, category_id, this.state.photo, this.state.stock, this.state.supplies, JSON.stringify(steps));
       this.clear();
       this.props.toggle();
     }
@@ -80,9 +84,19 @@ class ItemAdd extends React.Component {
     this.setState({suppliesInputs: this.state.suppliesInputs.concat([newInput])});
   };
 
+  appendStepsInput = () => {
+    const newInput = shortid.generate();
+    this.setState({stepsInputs: this.state.stepsInputs.concat([newInput])});
+  };
+
   deleteSuppliesInput = i => {
     this.state.suppliesInputs.splice(i, 1);
     this.setState({suppliesInputs: this.state.suppliesInputs});
+  };
+
+  deleteStepsInput = i => {
+    this.state.stepsInputs.splice(i, 1);
+    this.setState({stepsInputs: this.state.stepsInputs});
   };
 
   addSupply = (input, id) => {
@@ -114,11 +128,26 @@ class ItemAdd extends React.Component {
     const index = supplies.findIndex(supply => supply.input === input);
     supplies[index].qty_measure = measure;
     this.setState({supplies: supplies});
-    console.log('this is what is being sent', this.state.supplies);
   };
+
+  addStep = (input, step) => {
+    if (!this.state.steps.find(step => step.input === input)) {
+      this.state.steps.push({input, step});
+      this.setState({steps: this.state.steps});
+    } else {
+      const steps = this.state.steps;
+      const index = steps.findIndex(step => step.input === input);
+      steps[index].step = step;
+      this.setState({steps: steps});
+    }
+  }
 
   deleteSupply = (input) => {
     this.setState({supplies: this.state.supplies.filter(supply => supply.input !== input)});
+  };
+
+  deleteStep = (input) => {
+    this.setState({steps: this.state.steps.filter(step => step.input !== input)});
   };
 
   componentDidMount () {
@@ -212,7 +241,19 @@ class ItemAdd extends React.Component {
           />
         )}
         <h1 className="title">Steps</h1>
-        <ItemAddStep />
+        {this.state.stepsInputs.map((input, i) =>
+          <ItemAddStep
+            key={input}
+            input={input}
+            i={i}
+            length={this.state.stepsInputs.length-1}
+            appendInput={this.appendStepsInput}
+            deleteInput={this.deleteStepsInput}
+            addStep={this.addStep}
+            deleteStep={this.deleteStep}
+            steps={this.state.steps}
+          />
+        )}
         {this.state.invalid ? (
           <p id="error" className="help is-danger has-text-centered">
             Please fill out all information correctly.

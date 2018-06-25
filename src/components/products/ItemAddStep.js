@@ -7,23 +7,59 @@ class ItemAddStep extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      id: 'default',
-      qty: 0,
-      qty_measure: 'default'
+      step: ''
     };
   };
 
   clear = () => {
     this.setState({
-      id: 'default',
-      qty: 0,
-      qty_measure: 'default'
+      step: ''
     });
   };
 
   render () {
     return (
-        'hi'
+      <div className="field is-horizontal">
+        <div className="field-body">
+          <div className="field" style={{ width: '92%' }}>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                placeholder="Enter your instructions..."
+                id="step"
+                value={this.state.step}
+                onChange={event => {
+                  this.setState({step: event.target.value});
+                  this.props.addStep(this.props.input, event.target.value);
+                }}
+              />
+            </div>
+          </div>
+          <div className="control" style={{ width: '8%' }}>
+            {
+              this.props.i === this.props.length ? (
+                <button
+                  style={{ width: '100%' }}
+                  type="button"
+                  className="button is-success is-outlined"
+                  onClick={() => this.props.appendInput()}
+                >+</button>
+              ) : (
+                <button
+                  style={{ width: '100%' }}
+                  type="button"
+                  className="button is-danger is-outlined"
+                  onClick={() => {
+                    this.props.deleteStep(this.props.input);
+                    this.props.deleteInput(this.props.i);
+                  }}
+                >-</button>
+              )
+            }
+          </div>
+        </div>
+      </div>
     );
   };
 };
