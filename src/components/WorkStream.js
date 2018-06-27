@@ -33,7 +33,6 @@ class WorkStream extends React.Component {
   };
 
   render () {
-    console.log(this.props)
     return (
       <section className="workstream">
         <div className="columns is-marginless">
@@ -44,7 +43,7 @@ class WorkStream extends React.Component {
               <a><span className="lnr-plus"></span></a>
             </h1>
             <div className="column-container">
-              {/* {
+              {
                 this.props.purchases.map(purchase => {
                   return (
                     <Purchase
@@ -53,7 +52,7 @@ class WorkStream extends React.Component {
                     />
                   );
                 })
-              } */}
+              }
               <Purchase1 item={this.props.items[0]} categories={this.props.categories} />
               <Purchase2 item={this.props.items[1]} categories={this.props.categories} />
               <Purchase3 item={this.props.items[2]} categories={this.props.categories} />
