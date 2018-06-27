@@ -42,8 +42,7 @@ class ItemAddSupply extends React.Component {
 
   render () {
     const remainingSupplies = this.props.supplies.filter(supply =>
-      !this.props.selected.find(selectedSupply => selectedSupply.id === supply.id)
-    );
+      !this.props.selected.find(selectedSupply => selectedSupply.id === supply.id));
     let suppliesList = remainingSupplies;
     if (this.state.id !== 'default') {
       const currentSupply = this.props.supplies.find(supply => supply.id === this.state.id);
@@ -108,7 +107,7 @@ class ItemAddSupply extends React.Component {
                       }}
                       >
                       <option value="default" disabled>Measure</option>
-                      {/* {
+                      {
                         (() => {
                           const currentSupply = this.props.supplies.find(supply => this.state.id === supply.id);
                           switch (currentSupply.measure_type) {
@@ -134,7 +133,7 @@ class ItemAddSupply extends React.Component {
                               return (<option value='unit'>unit</option>);
                           }
                         })()
-                      } */}
+                      }
                     </select>
                   )
                 }

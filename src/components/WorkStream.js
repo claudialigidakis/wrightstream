@@ -49,7 +49,7 @@ class WorkStream extends React.Component {
                     return (
                       <Purchase
                         key={purchase.id}
-                        id={purchase.id}
+                        purchase={purchase}
                       />
                     );
                   }
@@ -74,7 +74,7 @@ class WorkStream extends React.Component {
                     return (
                       <Purchase
                         key={purchase.id}
-                        id={purchase.id}
+                        purchase={purchase}
                       />
                     );
                   }
@@ -97,7 +97,7 @@ class WorkStream extends React.Component {
                     return (
                       <Purchase
                         key={purchase.id}
-                        id={purchase.id}
+                        purchase={purchase}
                       />
                     );
                   }
@@ -118,7 +118,7 @@ class WorkStream extends React.Component {
                     return (
                       <Purchase
                         key={purchase.id}
-                        id={purchase.id}
+                        purchase={purchase}
                       />
                     );
                   }
@@ -142,7 +142,7 @@ class WorkStream extends React.Component {
                     return (
                       <Purchase
                         key={purchase.id}
-                        id={purchase.id}
+                        purchase={purchase}
                       />
                     );
                   }
@@ -166,7 +166,7 @@ class WorkStream extends React.Component {
                     return (
                       <Purchase
                         key={purchase.id}
-                        id={purchase.id}
+                        purchase={purchase}
                       />
                     );
                   }

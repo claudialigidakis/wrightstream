@@ -48,7 +48,7 @@ class Purchase extends React.Component {
                 </div>
                 <div className="column is-6">
                   <div className="purchase-progress">
-                    <a onClick={this.toggle}>Purchase #{this.props.id}</a>
+                    <a onClick={this.toggle}>Purchase #{this.props.purchase.id}</a>
                     <progress className="progress is-small" value="100" max="100" />
                   </div>
                 </div>
@@ -69,7 +69,7 @@ class Purchase extends React.Component {
         <div className={this.state.modalClasses}>
           <div className="modal-background" onClick={this.toggle}></div>
           <div className="modal-content modal-purchase">
-            <PurchaseModal item={this.props} />
+            <PurchaseModal purchase={this.props.purchase} />
           </div>
           <button className="modal-close is-large" aria-label="close" onClick={this.toggle}></button>
         </div>

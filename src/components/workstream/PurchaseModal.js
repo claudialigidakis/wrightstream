@@ -5,6 +5,10 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+// COMPONENTS
+import PurchaseSupply from './PurchaseSupply';
+import PurchaseItem from './PurchaseItem';
+
 // ==========
 
 class PurchaseModal extends React.Component {
@@ -16,11 +20,26 @@ class PurchaseModal extends React.Component {
   };
 
   render () {
+    console.log(this.props);
     return (
       <div className="columns is-marginless">
         <div className="column is-5 modal-sidebar">
           <div className="purchase-status">
-            Finalize
+            {
+              (() => {
+                if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
+                  return 'Backlog';
+                } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
+                  return 'Pending';
+                } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
+                  return 'Crafting';
+                } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
+                  return 'Finalize';
+                } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
+                  return 'Delivery';
+                }
+              })()
+            }
           </div>
           <div className="purchase-header level">
             <div className="level-left">
@@ -30,7 +49,7 @@ class PurchaseModal extends React.Component {
                 </div>
               </div>
               <div className="level-item">
-                <h1 className="title is-5 is-marginless">Purchase #{this.props.id}</h1>
+                <h1 className="title is-5 is-marginless">Purchase #{this.props.purchase.id}</h1>
               </div>
             </div>
             <div className="level-right">
@@ -59,6 +78,7 @@ class PurchaseModal extends React.Component {
 
           <div className="purchase-row-child">
             <ul>
+              <PurchaseSupply />
               <li>
                 <div className="level">
                   <div className="level-left">
@@ -105,6 +125,7 @@ class PurchaseModal extends React.Component {
 
           <div className="purchase-row-child">
             <ul>
+              <PurchaseItem />
               <li>
                 <div className="level">
                   <div className="level-left">
