@@ -47,7 +47,7 @@ class ItemAddSupply extends React.Component {
     let suppliesList = remainingSupplies;
     if (this.state.id !== 'default') {
       const currentSupply = this.props.supplies.find(supply => supply.id === this.state.id);
-      // suppliesList = [currentSupply, ...remainingSupplies];
+      suppliesList = currentSupply ? [currentSupply, ...remainingSupplies] : [...remainingSupplies];
     }
 
     return (
