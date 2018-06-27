@@ -1,10 +1,6 @@
 // REACT
 import React from 'react';
 
-// REDUX
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
 // ==========
 
 class PurchaseItem extends React.Component {

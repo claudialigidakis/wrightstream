@@ -52,6 +52,8 @@ class WorkStream extends React.Component {
                         purchase={purchase}
                       />
                     );
+                  } else {
+                    return null;
                   }
                 })
               }
@@ -77,6 +79,8 @@ class WorkStream extends React.Component {
                         purchase={purchase}
                       />
                     );
+                  } else {
+                    return null;
                   }
                 })
               }
@@ -100,6 +104,8 @@ class WorkStream extends React.Component {
                         purchase={purchase}
                       />
                     );
+                  } else {
+                    return null;
                   }
                 })
               }
@@ -121,6 +127,8 @@ class WorkStream extends React.Component {
                         purchase={purchase}
                       />
                     );
+                  } else {
+                    return null;
                   }
                 })
               }
@@ -145,6 +153,8 @@ class WorkStream extends React.Component {
                         purchase={purchase}
                       />
                     );
+                  } else {
+                    return null;
                   }
                 })
               }
@@ -169,6 +179,8 @@ class WorkStream extends React.Component {
                         purchase={purchase}
                       />
                     );
+                  } else {
+                    return null;
                   }
                 })
               }
