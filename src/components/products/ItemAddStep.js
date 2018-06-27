@@ -7,13 +7,13 @@ class ItemAddStep extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      step: ''
+      step: this.props.step ? this.props.step.instructions : ''
     };
   };
 
   clear = () => {
     this.setState({
-      step: ''
+      step: this.props.step ? this.props.step.instructions : ''
     });
   };
 

@@ -12,17 +12,17 @@ class ItemAddSupply extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      id: 'default',
-      qty: 0,
-      qty_measure: 'default'
+      id: this.props.supply ? this.props.supply.id : 'default',
+      qty: this.props.supply ? this.props.supply.qty : 0,
+      qty_measure: this.props.supply ? this.props.supply.qty_measure : 'default'
     };
   };
 
   clear = () => {
     this.setState({
-      id: 'default',
-      qty: 0,
-      qty_measure: 'default'
+      id: this.props.supply ? this.props.supply.id : 'default',
+      qty: this.props.supply ? this.props.supply.qty: 0,
+      qty_measure: this.props.supply ? this.props.supply.qty_measure : 'default'
     });
   };
 
@@ -47,7 +47,7 @@ class ItemAddSupply extends React.Component {
     let suppliesList = remainingSupplies;
     if (this.state.id !== 'default') {
       const currentSupply = this.props.supplies.find(supply => supply.id === this.state.id);
-      suppliesList = [currentSupply, ...remainingSupplies];
+      // suppliesList = [currentSupply, ...remainingSupplies];
     }
 
     return (
@@ -108,7 +108,7 @@ class ItemAddSupply extends React.Component {
                       }}
                       >
                       <option value="default" disabled>Measure</option>
-                      {
+                      {/* {
                         (() => {
                           const currentSupply = this.props.supplies.find(supply => this.state.id === supply.id);
                           switch (currentSupply.measure_type) {
@@ -134,7 +134,7 @@ class ItemAddSupply extends React.Component {
                               return (<option value='unit'>unit</option>);
                           }
                         })()
-                      }
+                      } */}
                     </select>
                   )
                 }
