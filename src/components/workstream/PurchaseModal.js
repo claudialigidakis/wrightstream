@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 // COMPONENTS
 import PurchaseSupply from './PurchaseSupply';
 import PurchaseItem from './PurchaseItem';
+import PurchaseBundle from './PurchaseBundle';
+import PurchaseProductDetails from './PurchaseProductDetails';
 
 // ==========
 
@@ -15,8 +17,20 @@ class PurchaseModal extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-
+      product: null,
+      bundle: false,
+      modal: false,
+      modalClasses: 'column is-7'
     };
+  };
+
+  toggle = (product, bundle) => {
+    this.setState({
+      product: product,
+      bundle: bundle,
+      modal: true,
+      modalClasses: this.state.modalClasses + ' is-active'
+    });
   };
 
   render () {
@@ -71,117 +85,57 @@ class PurchaseModal extends React.Component {
             </div>
             <div className="level-right">
               <div className="level-item">
-                <progress className="progress is-small" value="60" max="100" />
+                <progress
+                  className="progress is-small"
+                  value={
+                    this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length
+                  }
+                  max="100" />
               </div>
             </div>
           </div>
 
           <div className="purchase-row-child">
             <ul>
-              <PurchaseSupply />
-              <li>
-                <div className="level">
-                  <div className="level-left">
-                    <div className="level-item">
-                      <span className="lnr-check"></span> 3 oz Milk
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="level">
-                  <div className="level-left">
-                    <div className="level-item">
-                      <span className="lnr-check"></span> 1 oz Frosting
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="level">
-                  <div className="level-left">
-                    <div className="level-item">
-                      <span className="lnr-cross2"></span> 1 oz Flour
-                    </div>
-                  </div>
-                </div>
-              </li>
+              {
+                this.props.purchase.supplies.map(supply => {
+                  return <PurchaseSupply key={supply.supplies_id} supply={supply} />;
+                })
+              }
             </ul>
           </div>
 
           <div className="purchase-row level">
             <div className="level-left">
               <div className="level-item">
-                <h2 className="title is-5 is-marginless">Products</h2>
+                <h2 className="title is-5 is-marginless" onClick={this.toggle}>Products</h2>
                 <i className="fas fa-chevron-down"></i>
               </div>
             </div>
             <div className="level-right">
               <div className="level-item">
-                <progress className="progress is-small" value="20" max="100" />
+                <progress
+                  className="progress is-small"
+                  value={
+                    this.props.purchase.items.filter(item => item.completed).length / this.props.purchase.items.length
+                  }
+                  max="100" />
               </div>
             </div>
           </div>
 
           <div className="purchase-row-child">
             <ul>
-              <PurchaseItem />
-              <li>
-                <div className="level">
-                  <div className="level-left">
-                    <div className="level-item">
-                      <div className="field">
-                        <input className="is-checkradio" id="cupcakes" type="checkbox" name="cupcakes" />
-                        <label htmlFor="cupcakes">5 Chocolate Cupcakes</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="level-right">
-                    <div className="level-item">
-                      <div className="purchase-profile">
-                        <img src={this.props.user.photo} alt='' />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="level">
-                  <div className="level-left">
-                    <div className="level-item">
-                      <div className="field">
-                        <input className="is-checkradio" id="cookies" type="checkbox" name="cookies" />
-                        <label htmlFor="cookies">21 Cinnamon Cookies</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="level-right">
-                    <div className="level-item">
-                      <div className="purchase-profile">
-                        <img src={this.props.user.photo} alt='' />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="level">
-                  <div className="level-left">
-                    <div className="level-item">
-                      <div className="field">
-                        <input className="is-checkradio" id="donuts3" type="checkbox" name="donuts" />
-                        <label htmlFor="donuts3">12 Donuts</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="level-right">
-                    <div className="level-item">
-                      <div className="purchase-profile">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
+              {
+                this.props.purchase.bundles.map(bundle => {
+                  return <PurchaseBundle key={bundle.id} bundle={bundle} toggle={this.toggle} />;
+                })
+              }
+              {
+                this.props.purchase.items.map(item => {
+                  return <PurchaseItem key={item.id} item={item} toggle={this.toggle} />;
+                })
+              }
             </ul>
           </div>
 
@@ -233,7 +187,7 @@ class PurchaseModal extends React.Component {
           <div className="purchase-row level">
             <div className="level-left">
               <div className="level-item">
-                <h2 className="title is-5 is-marginless">Delivery</h2>
+                <h2 className="title is-5 is-marginless">Schedule</h2>
                 <i className="fas fa-chevron-up"></i>
               </div>
             </div>
@@ -249,8 +203,10 @@ class PurchaseModal extends React.Component {
           </div>
 
         </div>
-        <div className="column is-7">
-          blahblahblah
+        <div className={this.state.modalClasses}>
+          {
+            this.state.product ? <PurchaseProductDetails bundle={this.state.bundle} product={this.state.product} /> : null
+          }
         </div>
       </div>
     );

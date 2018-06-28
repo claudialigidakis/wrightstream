@@ -348,8 +348,13 @@ nav {
     font-size: .9rem;
     padding: .5rem 1.5rem .5rem 2.5rem;
 
-    li {
+    ul li {
       margin: .4rem 0;
+    }
+
+    ul li ul {
+      margin-left: 1rem;
+      transform: scale(0.9);
     }
 
     .purchase-profile img {
@@ -367,6 +372,14 @@ nav {
 
     .lnr-cross2 {
       color: $red;
+    }
+
+    .lnr-label {
+      color: darken($quartz, 20%);
+    }
+
+    .lnr-label:hover {
+      color: $quartz;
     }
 
     label {

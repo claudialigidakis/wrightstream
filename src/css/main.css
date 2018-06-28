@@ -7428,8 +7428,11 @@ nav {
     color: #9295a5;
     font-size: .9rem;
     padding: .5rem 1.5rem .5rem 2.5rem; }
-    .modal-purchase .purchase-row-child li {
+    .modal-purchase .purchase-row-child ul li {
       margin: .4rem 0; }
+    .modal-purchase .purchase-row-child ul li ul {
+      margin-left: 1rem;
+      transform: scale(0.9); }
     .modal-purchase .purchase-row-child .purchase-profile img {
       width: 20px;
       height: 20px; }
@@ -7439,6 +7442,10 @@ nav {
       color: #83bf8a; }
     .modal-purchase .purchase-row-child .lnr-cross2 {
       color: #d66667; }
+    .modal-purchase .purchase-row-child .lnr-label {
+      color: #5f6272; }
+    .modal-purchase .purchase-row-child .lnr-label:hover {
+      color: #9295a5; }
     .modal-purchase .purchase-row-child label {
       font-size: .9rem;
       margin: 0; }
