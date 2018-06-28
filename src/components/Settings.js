@@ -71,9 +71,9 @@ class Settings extends React.Component {
           <button onClick={this.handleEtsyProductsClick}>Get Products</button>
           <button onClick={this.handleEtsyPurchasesClick}>Get Purchases</button>
           <div>
-            {"self:", JSON.stringify(this.state.self)}
-            {"products:", JSON.stringify(this.state.products)}
-            {"purchases:", JSON.stringify(this.state.purchases)}
+            {`self: ${JSON.stringify(this.state.self)}`}
+            {`products: ${JSON.stringify(this.state.products)}`}
+            {`purchases: ${JSON.stringify(this.state.purchases)}`}
           </div>
         </div>
       </div>

@@ -4,9 +4,11 @@ export const GET_LINKED_PRODUCTS = 'GET_LINKED_PRODUCTS';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const GET_ITEMS = 'GET_ITEMS';
 export const ADD_ITEM = 'ADD_ITEM';
+export const EDIT_ITEM = 'EDIT_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const GET_BUNDLES = 'GET_BUNDLES';
 export const ADD_BUNDLE = 'ADD_BUNDLE';
+export const EDIT_BUNDLE = 'EDIT_BUNDLE';
 export const DELETE_BUNDLE = 'DELETE_BUNDLE';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const ADD_CATEGORY = 'ADD_CATEGORY';
@@ -104,12 +106,31 @@ export const addItem = (name, categoryId, photo, stock, supplies, steps) => (
   }
 );
 
+export const editItem = (id, name, categoryId, photo, stock, supplies, steps) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/items/${id}`, 'put', {name, categoryId, photo, stock, supplies, steps})
+      .then(response => {
+        return request(`/items/${shop_id}/allItems`);
+      })
+      .then(response => {
+        dispatch({
+          type: EDIT_ITEM,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
 export const deleteItem = (id) => (
   dispatch => {
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/items/${id}`, 'put', {deleted: true})
+      request(`/items/${id}`, 'put', {archived: true})
       .then(response => {
         return request(`/items/${shop_id}/allItems`);
       })
@@ -139,12 +160,12 @@ export const getBundles = () => (
   }
 );
 
-export const addBundle = (name, categoryId, photo, stock) => (
+export const addBundle = (name, categoryId, photo, stock, items, steps) => (
   dispatch => {
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/bundles/${shop_id}`, 'post', {name, categoryId, photo, stock})
+      request(`/bundles/${shop_id}`, 'post', {name, categoryId, photo, stock, items, steps})
       .then(response => {
         return request(`/bundles/${shop_id}/allBundles`);
       })
@@ -158,12 +179,31 @@ export const addBundle = (name, categoryId, photo, stock) => (
   }
 );
 
+export const editBundle = (id, name, categoryId, photo, stock, items, steps) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/bundles/${id}`, 'put', {name, categoryId, photo, stock, items, steps})
+      .then(response => {
+        return request(`/bundles/${shop_id}/allBundles`);
+      })
+      .then(response => {
+        dispatch({
+          type: EDIT_BUNDLE,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
 export const deleteBundle = (id) => (
   dispatch => {
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/bundles/${id}`, 'put', {deleted: true})
+      request(`/bundles/${id}`, 'put', {archived: true})
       .then(response => {
         return request(`/bundles/${shop_id}/allBundles`);
       })

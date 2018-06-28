@@ -33,7 +33,6 @@ class WorkStream extends React.Component {
   };
 
   render () {
-    console.log(this.props)
     return (
       <section className="workstream">
         <div className="columns is-marginless">
@@ -44,16 +43,20 @@ class WorkStream extends React.Component {
               <a><span className="lnr-plus"></span></a>
             </h1>
             <div className="column-container">
-              {/* {
+              {
                 this.props.purchases.map(purchase => {
-                  return (
-                    <Purchase
-                      key={purchase.id}
-                      id={purchase.id}
-                    />
-                  );
+                  if (purchase.statuses.find(status => status.status_id === 1).completed === false) {
+                    return (
+                      <Purchase
+                        key={purchase.id}
+                        purchase={purchase}
+                      />
+                    );
+                  } else {
+                    return null;
+                  }
                 })
-              } */}
+              }
               <Purchase1 item={this.props.items[0]} categories={this.props.categories} />
               <Purchase2 item={this.props.items[1]} categories={this.props.categories} />
               <Purchase3 item={this.props.items[2]} categories={this.props.categories} />
@@ -67,6 +70,20 @@ class WorkStream extends React.Component {
               Pending
             </h1>
             <div className="column-container">
+              {
+                this.props.purchases.map(purchase => {
+                  if (purchase.statuses.find(status => status.status_id === 1).completed === true && purchase.statuses.find(status => status.status_id === 2).completed === false) {
+                    return (
+                      <Purchase
+                        key={purchase.id}
+                        purchase={purchase}
+                      />
+                    );
+                  } else {
+                    return null;
+                  }
+                })
+              }
               <Purchase4 item={this.props.items[3]} categories={this.props.categories} />
             </div>
             <div className="column-button">
@@ -78,6 +95,20 @@ class WorkStream extends React.Component {
               Crafting
             </h1>
             <div className="column-container">
+              {
+                this.props.purchases.map(purchase => {
+                  if (purchase.statuses.find(status => status.status_id === 2).completed === true && purchase.statuses.find(status => status.status_id === 3).completed === false) {
+                    return (
+                      <Purchase
+                        key={purchase.id}
+                        purchase={purchase}
+                      />
+                    );
+                  } else {
+                    return null;
+                  }
+                })
+              }
               <Purchase6 item={this.props.items[5]} categories={this.props.categories} />
               <Purchase5 item={this.props.items[4]} categories={this.props.categories} />
             </div>
@@ -87,6 +118,20 @@ class WorkStream extends React.Component {
               Finalize
             </h1>
             <div className="column-container">
+              {
+                this.props.purchases.map(purchase => {
+                  if (purchase.statuses.find(status => status.status_id === 3).completed === true && purchase.statuses.find(status => status.status_id === 4).completed === false) {
+                    return (
+                      <Purchase
+                        key={purchase.id}
+                        purchase={purchase}
+                      />
+                    );
+                  } else {
+                    return null;
+                  }
+                })
+              }
               <Purchase7 item={this.props.items[6]} categories={this.props.categories} />
               <Purchase8 item={this.props.items[7]} categories={this.props.categories} />
             </div>
@@ -99,6 +144,20 @@ class WorkStream extends React.Component {
               Pick Up
             </h1>
             <div className="column-container">
+              {
+                this.props.purchases.map(purchase => {
+                  if (purchase.statuses.find(status => status.status_id === 4).completed === true) {
+                    return (
+                      <Purchase
+                        key={purchase.id}
+                        purchase={purchase}
+                      />
+                    );
+                  } else {
+                    return null;
+                  }
+                })
+              }
               <Purchase10 item={this.props.items[11]} categories={this.props.categories} />
               <Purchase9 item={this.props.items[10]} categories={this.props.categories} />
             </div>
@@ -111,6 +170,20 @@ class WorkStream extends React.Component {
               Ship
             </h1>
             <div className="column-container">
+              {
+                this.props.purchases.map(purchase => {
+                  if (purchase.statuses.find(status => status.status_id === 4).completed === true) {
+                    return (
+                      <Purchase
+                        key={purchase.id}
+                        purchase={purchase}
+                      />
+                    );
+                  } else {
+                    return null;
+                  }
+                })
+              }
               <Purchase11 item={this.props.items[12]} categories={this.props.categories} />
               <Purchase12 item={this.props.items[13]} categories={this.props.categories} />
               <Purchase13 item={this.props.items[16]} categories={this.props.categories} />
