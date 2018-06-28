@@ -41,7 +41,7 @@ class PurchaseBundle extends React.Component {
         <ul>
           {
             this.props.bundle.bundle_items.map(item => {
-              return <PurchaseItem key={item.id} item={item} toggle={this.props.toggle} />;
+              return <PurchaseItem key={item.id} item={item} bundle={true} toggle={this.props.toggle} />;
             })
           }
         </ul>

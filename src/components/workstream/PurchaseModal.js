@@ -19,18 +19,109 @@ class PurchaseModal extends React.Component {
     this.state = {
       product: null,
       bundle: false,
-      modal: false,
-      modalClasses: 'column is-7'
+      suppliesCollapse: false,
+      suppliesClasses: 'purchase-row-child',
+      suppliesArrow: 'fas fa-chevron-down',
+      productsCollapse: false,
+      productsClasses: 'purchase-row-child',
+      productsArrow: 'fas fa-chevron-down',
+      qualityCollapse: false,
+      qualityClasses: 'purchase-row-child',
+      qualityArrow: 'fas fa-chevron-down',
+      scheduleCollapse: false,
+      scheduleClasses: 'purchase-row-child',
+      scheduleArrow: 'fas fa-chevron-down',
+      notesCollapse: false,
+      notesClasses: 'purchase-row-child',
+      notesArrow: 'fas fa-chevron-down'
     };
   };
 
   toggle = (product, bundle) => {
     this.setState({
       product: product,
-      bundle: bundle,
-      modal: true,
-      modalClasses: this.state.modalClasses + ' is-active'
+      bundle: bundle
     });
+  };
+
+  collapseSupplies = () => {
+    if (!this.state.suppliesCollapse) {
+      this.setState({
+        suppliesCollapse: true,
+        suppliesClasses: this.state.suppliesClasses + ' is-hidden',
+        suppliesArrow: 'fas fa-chevron-up'
+      });
+    } else {
+      this.setState({
+        suppliesCollapse: false,
+        suppliesClasses: 'purchase-row-child',
+        suppliesArrow: 'fas fa-chevron-down'
+      });
+    }
+  };
+
+  collapseProducts = () => {
+    if (!this.state.productsCollapse) {
+      this.setState({
+        productsCollapse: true,
+        productsClasses: this.state.productsClasses + ' is-hidden',
+        productsArrow: 'fas fa-chevron-up'
+      });
+    } else {
+      this.setState({
+        productsCollapse: false,
+        productsClasses: 'purchase-row-child',
+        productsArrow: 'fas fa-chevron-down'
+      });
+    }
+  };
+
+  collapseQuality = () => {
+    if (!this.state.qualityCollapse) {
+      this.setState({
+        qualityCollapse: true,
+        qualityClasses: this.state.qualityClasses + ' is-hidden',
+        qualityArrow: 'fas fa-chevron-up'
+      });
+    } else {
+      this.setState({
+        qualityCollapse: false,
+        qualityClasses: 'purchase-row-child',
+        qualityArrow: 'fas fa-chevron-down'
+      });
+    }
+  };
+
+  collapseSchedule = () => {
+    if (!this.state.scheduleCollapse) {
+      this.setState({
+        scheduleCollapse: true,
+        scheduleClasses: this.state.scheduleClasses + ' is-hidden',
+        scheduleArrow: 'fas fa-chevron-up'
+      });
+    } else {
+      this.setState({
+        scheduleCollapse: false,
+        scheduleClasses: 'purchase-row-child',
+        scheduleArrow: 'fas fa-chevron-down'
+      });
+    }
+  };
+
+  collapseNotes = () => {
+    if (!this.state.notesCollapse) {
+      this.setState({
+        notesCollapse: true,
+        notesClasses: this.state.notesClasses + ' is-hidden',
+        notesArrow: 'fas fa-chevron-up'
+      });
+    } else {
+      this.setState({
+        notesCollapse: false,
+        notesClasses: 'purchase-row-child',
+        notesArrow: 'fas fa-chevron-down'
+      });
+    }
   };
 
   render () {
@@ -76,11 +167,11 @@ class PurchaseModal extends React.Component {
             </div>
           </div>
 
-          <div className="purchase-row level">
+          <div className="purchase-row level" onClick={this.collapseSupplies}>
             <div className="level-left">
               <div className="level-item">
                 <h2 className="title is-5 is-marginless">Supplies</h2>
-                <i className="fas fa-chevron-down"></i>
+                <i className={this.state.suppliesArrow}></i>
               </div>
             </div>
             <div className="level-right">
@@ -95,7 +186,7 @@ class PurchaseModal extends React.Component {
             </div>
           </div>
 
-          <div className="purchase-row-child">
+          <div className={this.state.suppliesClasses}>
             <ul>
               {
                 this.props.purchase.supplies.map(supply => {
@@ -105,11 +196,11 @@ class PurchaseModal extends React.Component {
             </ul>
           </div>
 
-          <div className="purchase-row level">
+          <div className="purchase-row level" onClick={this.collapseProducts}>
             <div className="level-left">
               <div className="level-item">
                 <h2 className="title is-5 is-marginless" onClick={this.toggle}>Products</h2>
-                <i className="fas fa-chevron-down"></i>
+                <i className={this.state.productsArrow}></i>
               </div>
             </div>
             <div className="level-right">
@@ -124,7 +215,7 @@ class PurchaseModal extends React.Component {
             </div>
           </div>
 
-          <div className="purchase-row-child">
+          <div className={this.state.productsClasses}>
             <ul>
               {
                 this.props.purchase.bundles.map(bundle => {
@@ -139,11 +230,11 @@ class PurchaseModal extends React.Component {
             </ul>
           </div>
 
-          <div className="purchase-row level">
+          <div className="purchase-row level" onClick={this.collapseQuality}>
             <div className="level-left">
               <div className="level-item">
                 <h2 className="title is-5 is-marginless">Quality Check</h2>
-                <i className="fas fa-chevron-down"></i>
+                <i className={this.state.qualityArrow}></i>
               </div>
             </div>
             <div className="level-right">
@@ -155,7 +246,7 @@ class PurchaseModal extends React.Component {
             </div>
           </div>
 
-          <div className="purchase-row-child">
+          <div className={this.state.qualityClasses}>
             <ul>
               <li>
                 <div className="level">
@@ -184,26 +275,84 @@ class PurchaseModal extends React.Component {
             </ul>
           </div>
 
-          <div className="purchase-row level">
+          <div className="purchase-row level" onClick={this.collapseSchedule}>
             <div className="level-left">
               <div className="level-item">
                 <h2 className="title is-5 is-marginless">Schedule</h2>
-                <i className="fas fa-chevron-up"></i>
+                <i className={this.state.scheduleArrow}></i>
               </div>
             </div>
           </div>
 
-          <div className="purchase-row level">
+          <div className={this.state.scheduleClasses}>
+            <ul>
+              <li>
+                <div className="level">
+                  <div className="level-left">
+                    <div className="level-item">
+                      <div className="field">
+                        <input className="is-checkradio" id="ready" type="radio" name="quality" />
+                        <label htmlFor="ready">Ready for delivery</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div className="level">
+                  <div className="level-left">
+                    <div className="level-item">
+                      <div className="field">
+                        <input className="is-checkradio" id="sendback" type="radio" name="quality" />
+                        <label htmlFor="sendback">Send back to crafting</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div className="purchase-row level" onClick={this.collapseNotes}>
             <div className="level-left">
               <div className="level-item">
                 <h2 className="title is-5 is-marginless">Notes</h2>
-                <i className="fas fa-chevron-up"></i>
+                <i className={this.state.notesArrow}></i>
               </div>
             </div>
           </div>
 
+          <div className={this.state.notesClasses}>
+            <ul>
+              <li>
+                <div className="level">
+                  <div className="level-left">
+                    <div className="level-item">
+                      <div className="field">
+                        <input className="is-checkradio" id="ready" type="radio" name="quality" />
+                        <label htmlFor="ready">Ready for delivery</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div className="level">
+                  <div className="level-left">
+                    <div className="level-item">
+                      <div className="field">
+                        <input className="is-checkradio" id="sendback" type="radio" name="quality" />
+                        <label htmlFor="sendback">Send back to crafting</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
         </div>
-        <div className={this.state.modalClasses}>
+        <div className="column is-7">
           {
             this.state.product ? <PurchaseProductDetails bundle={this.state.bundle} product={this.state.product} /> : null
           }

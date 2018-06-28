@@ -7378,7 +7378,8 @@ nav {
 
 .modal-purchase {
   width: 900px;
-  height: calc(100vh - 40px); }
+  height: calc(100vh - 40px);
+  overflow-y: hidden; }
   .modal-purchase > .columns {
     height: 100%; }
   .modal-purchase > .columns > .column {
@@ -7410,7 +7411,8 @@ nav {
       text-transform: uppercase; }
   .modal-purchase .purchase-row {
     border-top: 1px solid #272b36;
-    padding: 1rem 1.5rem; }
+    padding: 1rem 1.5rem;
+    cursor: pointer; }
     .modal-purchase .purchase-row .title {
       color: #f0f1f6;
       letter-spacing: 1px;
@@ -7431,19 +7433,25 @@ nav {
     .modal-purchase .purchase-row-child ul li {
       margin: .4rem 0; }
     .modal-purchase .purchase-row-child ul li ul {
-      margin-left: 1rem;
+      margin-left: 2rem;
       transform: scale(0.9); }
+    .modal-purchase .purchase-row-child ul li ul span.bullet {
+      color: #5f6272;
+      margin-right: .5rem; }
     .modal-purchase .purchase-row-child .purchase-profile img {
       width: 20px;
       height: 20px; }
     .modal-purchase .purchase-row-child span {
       margin-right: .75rem; }
+    .modal-purchase .purchase-row-child label {
+      padding-right: .5rem; }
     .modal-purchase .purchase-row-child .lnr-check {
       color: #83bf8a; }
     .modal-purchase .purchase-row-child .lnr-cross2 {
       color: #d66667; }
     .modal-purchase .purchase-row-child .lnr-label {
-      color: #5f6272; }
+      color: #5f6272;
+      cursor: pointer; }
     .modal-purchase .purchase-row-child .lnr-label:hover {
       color: #9295a5; }
     .modal-purchase .purchase-row-child label {

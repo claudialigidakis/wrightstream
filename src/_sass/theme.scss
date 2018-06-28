@@ -266,6 +266,7 @@ nav {
 .modal-purchase {
   width: 900px;
   height: calc(100vh - 40px);
+  overflow-y: hidden;
 
   >.columns {
     height: 100%;
@@ -273,7 +274,6 @@ nav {
 
   >.columns>.column {
     padding: 0;
-
     overflow-y: auto;
   }
 
@@ -320,6 +320,7 @@ nav {
   .purchase-row {
     border-top: 1px solid lighten($koamaru, 3%);
     padding: 1rem 1.5rem;
+    cursor: pointer;
 
     .title {
       color: $slate;
@@ -353,8 +354,13 @@ nav {
     }
 
     ul li ul {
-      margin-left: 1rem;
+      margin-left: 2rem;
       transform: scale(0.9);
+    }
+
+    ul li ul span.bullet {
+      color: darken($quartz, 20%);
+      margin-right: .5rem;
     }
 
     .purchase-profile img {
@@ -364,6 +370,10 @@ nav {
 
     span {
       margin-right: .75rem;
+    }
+
+    label {
+      padding-right: .5rem;
     }
 
     .lnr-check {
@@ -376,6 +386,7 @@ nav {
 
     .lnr-label {
       color: darken($quartz, 20%);
+      cursor: pointer;
     }
 
     .lnr-label:hover {
