@@ -42,7 +42,8 @@ class ItemAddSupply extends React.Component {
 
   render () {
     const remainingSupplies = this.props.supplies.filter(supply =>
-      !this.props.selected.find(selectedSupply => selectedSupply.id === supply.id));
+      !this.props.selected.find(selectedSupply => selectedSupply.id === supply.id)
+    );
     let suppliesList = remainingSupplies;
     if (this.state.id !== 'default') {
       const currentSupply = this.props.supplies.find(supply => supply.id === this.state.id);
@@ -85,8 +86,8 @@ class ItemAddSupply extends React.Component {
                 id="qty"
                 value={this.state.qty}
                 onChange={event => {
-                  this.setState({qty: parseInt(event.target.value, 10)});
-                  this.props.addSupplyQty(this.props.input, parseInt(event.target.value, 10));
+                  this.setState({qty: Number(event.target.value)});
+                  this.props.addSupplyQty(this.props.input, Number(event.target.value));
                 }}
               />
             </div>
@@ -110,27 +111,31 @@ class ItemAddSupply extends React.Component {
                       {
                         (() => {
                           const currentSupply = this.props.supplies.find(supply => this.state.id === supply.id);
-                          switch (currentSupply.measure_type) {
-                            case 'length':
-                              return this.props.lengthMeasures.map(measure => {
-                                return (
-                                  <option key={measure} value={measure}>{measure}</option>
-                                )
-                              });
-                            case 'mass':
-                              return this.props.massMeasures.map(measure => {
-                                return (
-                                  <option key={measure} value={measure}>{measure}</option>
-                                )
-                              });
-                            case 'volume':
-                              return this.props.volumeMeasures.map(measure => {
-                                return (
-                                  <option key={measure} value={measure}>{measure}</option>
-                                );
-                              });
-                            default:
-                              return (<option value='unit'>unit</option>);
+                          if (currentSupply) {
+                            switch (currentSupply.measure_type) {
+                              case 'length':
+                                return this.props.lengthMeasures.map(measure => {
+                                  return (
+                                    <option key={measure} value={measure}>{measure}</option>
+                                  )
+                                });
+                              case 'mass':
+                                return this.props.massMeasures.map(measure => {
+                                  return (
+                                    <option key={measure} value={measure}>{measure}</option>
+                                  )
+                                });
+                              case 'volume':
+                                return this.props.volumeMeasures.map(measure => {
+                                  return (
+                                    <option key={measure} value={measure}>{measure}</option>
+                                  );
+                                });
+                              default:
+                                return (<option value='unit'>unit</option>);
+                            }
+                          } else {
+                            return null;
                           }
                         })()
                       }

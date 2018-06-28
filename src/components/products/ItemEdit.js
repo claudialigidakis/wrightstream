@@ -152,10 +152,10 @@ class ItemEdit extends React.Component {
 
     const stepsObject = JSON.parse(this.props.item.steps);
     const stepsArray = Object.keys(stepsObject).map(step => stepsObject[step]);
-    for (let instructions of stepsArray) {
-      const step = {input: shortid.generate(), instructions};
-      this.state.steps.push(step);
-      const input = step.input;
+    for (let step of stepsArray) {
+      const eachStep = {input: shortid.generate(), step};
+      this.state.steps.push(eachStep);
+      const input = eachStep.input;
       this.state.stepsInputs.push(input);
       this.setState({
         steps: this.state.steps,

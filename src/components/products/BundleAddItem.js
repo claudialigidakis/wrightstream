@@ -7,15 +7,15 @@ class BundleAddItem extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      id: 'default',
-      qty: 0
+      id: this.props.item ? this.props.item.id : 'default',
+      qty: this.props.item ? this.props.item.item_qty : 0
     };
   };
 
   clear = () => {
     this.setState({
-      id: 'default',
-      qty: 0
+      id: this.props.item ? this.props.item.id : 'default',
+      qty: this.props.item ? this.props.item.item_qty : 0
     });
   };
 
@@ -26,7 +26,7 @@ class BundleAddItem extends React.Component {
     let itemsList = remainingItems;
     if (this.state.id !== 'default') {
       const currentItem = this.props.items.find(item => item.id === this.state.id);
-      itemsList = [currentItem, ...remainingItems];
+      itemsList = currentItem ? [currentItem, ...remainingItems] : [...remainingItems];
     }
 
     return (

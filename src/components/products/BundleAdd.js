@@ -62,7 +62,6 @@ class BundleAdd extends React.Component {
         invalid: true
       });
     } else {
-      console.log('items', this.state.items)
       const category_id = this.props.categories.find(category => category.name === this.state.category).id;
       // if (this.state.linkedProduct === 'custom') {
       //   const linkedProduct_id = 0;
