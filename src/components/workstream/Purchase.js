@@ -37,7 +37,28 @@ class Purchase extends React.Component {
     return (
       <div>
         <div className="card">
-          <header className="card-header status-green"></header>
+          <header className={
+              (() => {
+                if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
+                  if ((this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100 === 0) {
+                    return 'card-header status-red';
+                  } else if ((this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100 === 100) {
+                    return 'card-header status-green';
+                  } else {
+                    return 'card-header status-yellow';
+                  }
+                } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
+                  return 'card-header';
+                } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
+                  return 'card-header';
+                } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
+                  return 'card-header status-green';
+                } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
+                  return 'card-header';
+                }
+              })()
+            }
+          ></header>
           <div className="card-content">
             <div className="content">
               <div className="columns is-marginless">
@@ -49,22 +70,68 @@ class Purchase extends React.Component {
                 <div className="column is-6">
                   <div className="purchase-progress">
                     <a onClick={this.toggle}>Purchase #{this.props.purchase.id}</a>
-                    <progress className="progress is-small" value="100" max="100" />
+                    <progress
+                      className="progress is-small"
+                      value={
+                        (() => {
+                          if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
+                            return (this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100;
+                          } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
+                            return ((this.props.purchase.items.filter(item => item.completed).length + this.props.purchase.bundles.filter(bundle => bundle.completed).length) / (this.props.purchase.items.length + this.props.purchase.bundles.length)) * 100;
+                          } else {
+                            return 100;
+                          }
+                        })()
+                      }
+                      max="100"
+                    />
                   </div>
                 </div>
                 <div className="column is-2 purchase-profile">
-                  {/* <div className="empty-photo"></div> */}
-                  <img src={this.props.user.photo} alt='' />
+
+                  {
+                    (() => {
+                      if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
+                        return <div className="empty-photo"></div>;
+                      } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
+                        return <img src={this.props.user.photo} alt='' />;
+                      } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
+                        return <img src={this.props.user.photo} alt='' />;
+                      } else {
+                        return null;
+                      }
+                    })()
+                  }
                 </div>
                 <div className="column is-2 purchase-drag">
-                  <span className="lnr-line-spacing"></span>
+                  {
+                    (() => {
+                      if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
+                        return <span className="lnr-calendar-check"></span>;
+                      } else {
+                        return <span className="lnr-line-spacing"></span>;
+                      }
+                    })()
+                  }
                 </div>
               </div>
             </div>
           </div>
-          <footer className="card-footer">
-            Move to Pending
-          </footer>
+          {
+            (() => {
+              if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
+                if ((this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100 === 100) {
+                  return (
+                    <footer className="card-footer">
+                      Move to Pending
+                    </footer>
+                  );
+                }
+              } else {
+                return null;
+              }
+            })()
+          }
         </div>
         <div className={this.state.modalClasses}>
           <div className="modal-background" onClick={this.toggle}></div>
