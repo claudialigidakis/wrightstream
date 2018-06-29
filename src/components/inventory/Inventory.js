@@ -8,12 +8,12 @@ import { getSupplies, getKinds, getItems, getCategories } from '../../actions/pr
 import { editSupply, editItem } from '../../actions/inventory';
 
 // COMPONENTS
-import Supply from './Supply';
-import Product from './Product';
+import InventorySupply from './InventorySupply';
+import InventoryProduct from './InventoryProduct';
 
 // ==========
 
-class Supplies extends React.Component {
+class Inventory extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -53,7 +53,6 @@ class Supplies extends React.Component {
       supplies[index].qty = qty;
       this.setState({supplies: supplies});
     }
-    console.log(this.state.supplies)
   };
 
   editItem = (id, qty) => {
@@ -66,7 +65,6 @@ class Supplies extends React.Component {
       items[index].qty = qty;
       this.setState({items: items});
     }
-    console.log(this.state.items)
   };
 
   render () {
@@ -86,7 +84,7 @@ class Supplies extends React.Component {
               {
                 this.props.supplies.map(supply => {
                   return (
-                    <Supply
+                    <InventorySupply
                       key={supply.id}
                       supply={supply}
                       editSupply={this.editSupply}
@@ -114,7 +112,7 @@ class Supplies extends React.Component {
               {
                 this.props.items.map(item => {
                   return (
-                    <Product
+                    <InventoryProduct
                       key={item.id}
                       product={item}
                       editItem={this.editItem}
@@ -149,4 +147,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   editItem
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Supplies);
+export default connect(mapStateToProps, mapDispatchToProps)(Inventory);

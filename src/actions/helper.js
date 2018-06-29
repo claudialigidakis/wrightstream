@@ -3,6 +3,7 @@ import request from '../helpers/request';
 export const GET_LENGTH = 'GET_LENGTH';
 export const GET_MASS = 'GET_MASS';
 export const GET_VOLUME = 'GET_VOLUME';
+export const ESTIMATOR = 'ESTIMATOR';
 
 export const getLength = () => (
   dispatch => {
@@ -35,6 +36,20 @@ export const getVolume = () => (
       dispatch({
         type: GET_VOLUME,
         payload: response.data.volumeMeasures
+      });
+    });
+  }
+);
+
+export const estimator = (items, bundles) => (
+  dispatch => {
+    console.log({items})
+    request('/helper/orderPredictor', 'post', {items, bundles})
+    .then(response => {
+      console.log(response);
+      dispatch({
+        type: ESTIMATOR,
+        payload: response.data.data
       });
     });
   }

@@ -80,13 +80,13 @@ class ItemAdd extends React.Component {
   };
 
   appendSuppliesInput = () => {
-    const newInput = shortid.generate();
-    this.setState({suppliesInputs: this.state.suppliesInputs.concat([newInput])});
+    const input = shortid.generate();
+    this.setState({suppliesInputs: this.state.suppliesInputs.concat([input])});
   };
 
   appendStepsInput = () => {
-    const newInput = shortid.generate();
-    this.setState({stepsInputs: this.state.stepsInputs.concat([newInput])});
+    const input = shortid.generate();
+    this.setState({stepsInputs: this.state.stepsInputs.concat([input])});
   };
 
   deleteSuppliesInput = i => {
@@ -142,11 +142,11 @@ class ItemAdd extends React.Component {
     }
   }
 
-  deleteSupply = (input) => {
+  deleteSupply = input => {
     this.setState({supplies: this.state.supplies.filter(supply => supply.input !== input)});
   };
 
-  deleteStep = (input) => {
+  deleteStep = input => {
     this.setState({steps: this.state.steps.filter(step => step.input !== input)});
   };
 

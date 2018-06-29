@@ -7,6 +7,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // COMPONENTS
 import Nav from './inventory/Nav';
 import Main from './inventory/Inventory';
+import Estimator from './inventory/Estimator';
 
 // ==========
 
@@ -21,6 +22,7 @@ class Products extends React.Component {
               <BrowserRouter>
                 <Switch>
                   <Route exact path="/inventory" component={Main} />
+                  <Route path="/inventory/estimator" component={Estimator} />
                   {/* <Route path="/products/items" component={Items} />
                   <Route path="/products/bundles" component={Bundles} />
                   <Route path="/products/category" component={Category} />
