@@ -73,9 +73,9 @@ class Estimator extends React.Component {
 
   render () {
     return (
-      <div className="columns">
+      <div className="columns estimator-content">
         <div className="column is-6">
-          <h1 className="title">Products</h1>
+          <h1 className="title is-5">Products</h1>
           {this.state.inputs.map((input, i) =>
             <EstimatorProduct
               key={input}
@@ -93,9 +93,11 @@ class Estimator extends React.Component {
           )}
         </div>
         <div className="column is-6">
-          <h1 className="title">Supplies Needed</h1>
-          <div className="has-text-right">
-            <button className="button is-outlined is-primary" onClick={this.handleSubmit}>Update</button>
+          <div className="estimator-supplies">
+            <h1 className="title is-5">Supplies Needed</h1>
+            <div className="has-text-right">
+              <button className="button is-outlined is-primary" onClick={this.handleSubmit}>Add List</button>
+            </div>
           </div>
         </div>
       </div>

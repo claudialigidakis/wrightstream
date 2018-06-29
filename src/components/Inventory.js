@@ -15,7 +15,7 @@ class Products extends React.Component {
   render () {
     return (
       <section className="inventory">
-        <div className="columns is-fullheight is-marginless">
+        <div className="columns">
           <div className="column is-12">
             <Nav />
             <div className="inventory-container">

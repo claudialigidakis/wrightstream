@@ -48,7 +48,7 @@ class Nav extends React.Component {
 
   render () {
     return (
-      <div className="tabs is-centered is-large products-tabs">
+      <div className="tabs is-centered is-large inventory-tabs">
         <ul>
           <li className={this.state.inventoryClasses}><a href="/inventory">Inventory</a></li>
           <li className={this.state.estimatorClasses}><a href="/inventory/estimator">Estimator</a></li>

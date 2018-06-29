@@ -69,9 +69,9 @@ class Inventory extends React.Component {
 
   render () {
     return (
-      <div className="columns">
+      <div className="columns inventory-content">
         <div className="column is-6">
-          <h1 className="title">Supplies</h1>
+          <h1 className="title is-5">Supplies</h1>
           <table className="table is-striped is-hoverable is-fullwidth inventory-table">
             <thead>
               <tr>
@@ -99,7 +99,7 @@ class Inventory extends React.Component {
           </div>
         </div>
         <div className="column is-6">
-          <h1 className="title">Products</h1>
+          <h1 className="title is-5">Products</h1>
           <table className="table is-striped is-hoverable is-fullwidth inventory-table">
             <thead>
               <tr>

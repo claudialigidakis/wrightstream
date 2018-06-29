@@ -7204,6 +7204,9 @@ label.panel-block {
   border-width: 1px;
   border-radius: 0; }
 
+.select, select {
+  width: 100%; }
+
 .hide {
   display: none; }
 
@@ -7284,9 +7287,9 @@ nav {
   .products-control .dropdown-item {
     padding-right: 2rem; }
 
-.products-tabs ul {
+.products-tabs ul, .inventory-tabs ul {
   border-bottom-color: #f0f1f6; }
-  .products-tabs ul a {
+  .products-tabs ul a, .inventory-tabs ul a {
     padding: 0.5em 2em; }
 
 .products .card {
@@ -7482,25 +7485,71 @@ nav {
     width: 35px;
     height: 35px; }
 
-.products-table {
+.products-table, .inventory-table {
   border-bottom: 2px solid #d9def1; }
-  .products-table thead {
+  .products-table thead, .inventory-table thead {
     background-color: #bbc3dd; }
-    .products-table thead th {
+    .products-table thead th, .inventory-table thead th {
       color: white;
       font-weight: 400;
       text-transform: uppercase;
       letter-spacing: 1px;
-      border: none;
-      padding: 1rem 1.25rem; }
-  .products-table td {
+      border: none; }
+  .products-table td, .inventory-table td {
     border: none;
-    padding: .75rem 1.25rem;
-    cursor: pointer; }
-  .products-table td:first-child {
+    vertical-align: middle; }
+
+.products-table th {
+  padding: 1rem 1.25rem; }
+
+.products-table td {
+  cursor: pointer;
+  padding: .75rem 1.25rem; }
+
+.products-table td:first-child {
+  min-width: 40%; }
+
+.products-table td:last-child {
+  min-width: 35%; }
+
+.inventory-table {
+  font-size: .8rem; }
+  .inventory-table th {
+    padding: .75rem 1.25rem; }
+  .inventory-table td {
+    padding: .5rem 1.25rem; }
+  .inventory-table td:first-child {
     min-width: 40%; }
-  .products-table td:last-child {
-    min-width: 35%; }
+  .inventory-table td:last-child {
+    min-width: 30%; }
+  .inventory-table input {
+    font-size: .8rem; }
+
+.inventory {
+  padding: 1rem; }
+  .inventory .title {
+    color: #cacbd3;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 1rem; }
+  .inventory .inventory-content {
+    padding: 2rem 1rem; }
+    .inventory .inventory-content .column {
+      padding: 1rem 2rem; }
+    .inventory .inventory-content .column:first-child {
+      border-right: 1px solid #e2e4f0;
+      padding-right: 4rem; }
+    .inventory .inventory-content .column:last-child {
+      border-left: 1px solid #e2e4f0;
+      padding-left: 4rem; }
+  .inventory .estimator-content {
+    padding: 2rem 5rem; }
+    .inventory .estimator-content .column {
+      padding: 1rem 3rem; }
+    .inventory .estimator-content .estimator-supplies {
+      background-color: white;
+      padding: 2rem 2.5rem; }
 
 .workstream {
   min-height: calc(100vh - 5rem);
@@ -7620,5 +7669,3 @@ nav {
 
 .modal-content.modal-form {
   width: 600px; }
-  .modal-content.modal-form .select, .modal-content.modal-form select {
-    width: 100%; }

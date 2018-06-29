@@ -33,7 +33,7 @@ class InventorySupply extends React.Component {
             type="number"
             placeholder="0"
             id="qty"
-            style={{width:'30%'}}
+            style={{width:'50%'}}
             value={this.state.qty}
             onChange={event => {
               this.setState({qty: Number(event.target.value)});
