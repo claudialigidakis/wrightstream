@@ -21,6 +21,17 @@ class SupplyAdd extends React.Component {
     };
   };
 
+  clear = () => {
+    this.setState({
+      name: '',
+      stock: 0,
+      measure_type: 'default',
+      source: 'default',
+      kind: 'default',
+      invalid: false
+    });
+  };
+
   handleSubmit = event => {
     event.preventDefault();
     if (!event.target.name.value || event.target.measure_type.value === 'default' || event.target.kind.value === 'default' || event.target.source.value === 'default') {
@@ -34,17 +45,6 @@ class SupplyAdd extends React.Component {
       this.clear();
       this.props.toggle();
     }
-  };
-
-  clear = () => {
-    this.setState({
-      name: '',
-      stock: 0,
-      measure_type: 'default',
-      source: 'default',
-      kind: 'default',
-      invalid: false
-    });
   };
 
   render () {
@@ -95,7 +95,6 @@ class SupplyAdd extends React.Component {
                     >
                     <option value="default" disabled>Measurement</option>
                     <option value="length">Length</option>
-                    <option value="area">Area</option>
                     <option value="mass">Mass</option>
                     <option value="volume">Volume</option>
                     <option value="unit">Unit</option>
