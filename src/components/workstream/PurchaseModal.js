@@ -128,7 +128,29 @@ class PurchaseModal extends React.Component {
     return (
       <div className="columns is-marginless">
         <div className="column is-5 modal-sidebar">
-          <div className="purchase-status">
+          <div
+            className={
+              (() => {
+                if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
+                  if ((this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100 === 0) {
+                    return 'purchase-status status-red';
+                  } else if ((this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100 === 100) {
+                    return 'purchase-status status-green';
+                  } else {
+                    return 'purchase-status status-yellow';
+                  }
+                } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
+                  return 'purchase-status';
+                } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
+                  return 'purchase-status';
+                } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
+                  return 'purchase-status status-red';
+                } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
+                  return 'purchase-status';
+                }
+              })()
+            }
+          >
             {
               (() => {
                 if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
@@ -159,8 +181,19 @@ class PurchaseModal extends React.Component {
             <div className="level-right">
               <div className="level-item">
                 <div className="purchase-profile">
-                  <div className="empty-photo"></div>
-                  {/* <img src={this.props.user.photo} alt='' /> */}
+                  {
+                    (() => {
+                      if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
+                        return <div className="empty-photo" onClick={() => this.props.changeStatus(2, true)}></div>;
+                      } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
+                        return <img src={this.props.user.photo} alt='' onClick={() => this.props.changeStatus(2, false)} />;
+                      } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
+                        return <div className="empty-photo"></div>;
+                      } else {
+                        return null;
+                      }
+                    })()
+                  }
                 </div>
               </div>
             </div>
@@ -225,6 +258,21 @@ class PurchaseModal extends React.Component {
                 })
               }
             </ul>
+            <div className="has-text-centered" style={{padding:'1rem'}}>
+              <button
+                className="button is-small is-primary"
+                disabled={
+                  (() => {
+                    if (((this.props.purchase.items.filter(item => item.completed).length + this.props.purchase.bundles.filter(bundle => bundle.completed).length) / (this.props.purchase.items.length + this.props.purchase.bundles.length)) * 100 === 100) {
+                      return false;
+                    } else {
+                      return true;
+                    }
+                  })()
+                }
+                onClick={() => this.props.changeStatus(3, true)}
+              >Complete Products</button>
+            </div>
           </div>
 
           <div className="purchase-row level" onClick={this.collapseQuality}>

@@ -4,6 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { changeStatus } from '../../actions/workstream';
 
 // COMPONENTS
 import PurchaseModal from './PurchaseModal';
@@ -33,11 +34,16 @@ class Purchase extends React.Component {
     }
   };
 
+  changeStatus = (status, completed) => {
+    this.props.changeStatus(this.props.purchase.id, status, completed);
+  };
+
   render () {
     return (
       <div>
         <div className="card">
-          <header className={
+          <header
+            className={
               (() => {
                 if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
                   if ((this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100 === 0) {
@@ -52,7 +58,7 @@ class Purchase extends React.Component {
                 } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
                   return 'card-header';
                 } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-                  return 'card-header status-green';
+                  return 'card-header status-red';
                 } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
                   return 'card-header';
                 }
@@ -88,15 +94,14 @@ class Purchase extends React.Component {
                   </div>
                 </div>
                 <div className="column is-2 purchase-profile">
-
                   {
                     (() => {
                       if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
-                        return <div className="empty-photo"></div>;
+                        return <div className="empty-photo" onClick={() => this.changeStatus(2, true)}></div>;
                       } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
-                        return <img src={this.props.user.photo} alt='' />;
+                        return <img src={this.props.user.photo} alt='' onClick={() => this.changeStatus(2, false)} />;
                       } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-                        return <img src={this.props.user.photo} alt='' />;
+                        return <div className="empty-photo"></div>;
                       } else {
                         return null;
                       }
@@ -122,7 +127,7 @@ class Purchase extends React.Component {
               if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
                 if ((this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100 === 100) {
                   return (
-                    <footer className="card-footer">
+                    <footer className="card-footer" onClick={() => this.changeStatus(1, true)}>
                       Move to Pending
                     </footer>
                   );
@@ -136,7 +141,7 @@ class Purchase extends React.Component {
         <div className={this.state.modalClasses}>
           <div className="modal-background" onClick={this.toggle}></div>
           <div className="modal-content modal-purchase">
-            <PurchaseModal purchase={this.props.purchase} />
+            <PurchaseModal purchase={this.props.purchase} changeStatus={this.changeStatus} />
           </div>
           <button className="modal-close is-large" aria-label="close" onClick={this.toggle}></button>
         </div>
@@ -150,7 +155,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-
+  changeStatus
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Purchase);

@@ -499,6 +499,9 @@ nav {
   .column-container {
     background-color: $mist;
     padding: .75rem;
+    min-height: 175px;
+    max-height: 65vh;
+    overflow-y: auto;
   }
 
   .column-button {

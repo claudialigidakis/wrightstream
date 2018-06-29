@@ -139,7 +139,7 @@ class WorkStream extends React.Component {
               Assign
             </div>
           </div>
-          <div className="column is-3">
+          {/* <div className="column is-3">
             <h1 className="title is-4">
               Pick Up
             </h1>
@@ -158,13 +158,11 @@ class WorkStream extends React.Component {
                   }
                 })
               }
-              {/* <Purchase10 item={this.props.items[11]} categories={this.props.categories} />
-              <Purchase9 item={this.props.items[10]} categories={this.props.categories} /> */}
             </div>
             <div className="column-button">
               Archive
             </div>
-          </div>
+          </div> */}
           <div className="column is-3">
             <h1 className="title is-4">
               Ship

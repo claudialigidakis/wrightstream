@@ -7521,7 +7521,10 @@ nav {
       padding-left: 0; }
   .workstream .column-container {
     background-color: #e2e4f0;
-    padding: .75rem; }
+    padding: .75rem;
+    min-height: 175px;
+    max-height: 65vh;
+    overflow-y: auto; }
   .workstream .column-button {
     background-color: #bbc3dd;
     color: white;

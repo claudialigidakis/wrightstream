@@ -1,5 +1,6 @@
 import {
   GET_PURCHASES,
+  CHANGE_STATUS,
   COMPLETE_ITEM,
   COMPLETE_BUNDLE
 } from '../actions/workstream';
@@ -11,6 +12,8 @@ let initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_PURCHASES:
+      return {...state, purchases: action.payload};
+    case CHANGE_STATUS:
       return {...state, purchases: action.payload};
     case COMPLETE_ITEM:
       return {...state, purchases: action.payload};

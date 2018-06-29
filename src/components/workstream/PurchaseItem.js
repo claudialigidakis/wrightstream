@@ -20,7 +20,7 @@ class PurchaseItem extends React.Component {
   check = () => {
     this.props.completeItem(this.props.purchase.id, this.props.item.id, !this.state.checked);
     this.setState({checked: !this.state.checked});
-  }
+  };
 
   render () {
     return (
