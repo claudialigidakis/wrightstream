@@ -204,7 +204,9 @@ class PurchaseModal extends React.Component {
               <div className="level-item">
                 <progress
                   className="progress is-small"
-                  value={(this.props.purchase.items.filter(item => item.completed).length / this.props.purchase.items.length) * 100}
+                  value={
+                    ((this.props.purchase.items.filter(item => item.completed).length + this.props.purchase.bundles.filter(bundle => bundle.completed).length) / (this.props.purchase.items.length + this.props.purchase.bundles.length)) * 100
+                  }
                   max="100" />
               </div>
             </div>

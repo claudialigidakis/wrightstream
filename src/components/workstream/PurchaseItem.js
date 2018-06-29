@@ -30,7 +30,7 @@ class PurchaseItem extends React.Component {
             <div className="level-item">
               <div className="field">
                 {
-                  !this.props.bundle ? <input id={this.props.item.id} className="is-checkradio" type="checkbox" checked={this.state.checked} /> : <span className="bullet">•</span>
+                  !this.props.bundle ? <input id={this.props.item.id} className="is-checkradio" type="checkbox" checked={this.state.checked} onChange={event => {event.preventDefault()}} /> : <span className="bullet">•</span>
                 }
                 <label htmlFor={this.props.item.id} onClick={this.check} >{this.props.item.item_qty} {this.props.item.name}</label>
                 <span className="lnr-label" onClick={event => this.props.toggle(this.props.item, false)}></span>
@@ -50,12 +50,8 @@ class PurchaseItem extends React.Component {
   };
 };
 
-const mapStateToProps = state => ({
-
-});
-
 const mapDispatchToProps = dispatch => bindActionCreators({
   completeItem
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(PurchaseItem);
+export default connect(null, mapDispatchToProps)(PurchaseItem);

@@ -31,7 +31,7 @@ class PurchaseBundle extends React.Component {
           <div className="level-left">
             <div className="level-item">
               <div className="field">
-                <input className="is-checkradio" type="checkbox" checked={this.state.checked} />
+                <input className="is-checkradio" type="checkbox" checked={this.state.checked} onChange={event => {event.preventDefault()}} />
                 <label onClick={this.check}>{this.props.bundle.bundle_qty} {this.props.bundle.name}</label> <span className="lnr-label" onClick={event => this.props.toggle(this.props.bundle, true)}></span>
               </div>
             </div>
