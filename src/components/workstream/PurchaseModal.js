@@ -288,7 +288,7 @@ class PurchaseModal extends React.Component {
                         } else {
                           return true;
                         }
-                      }  
+                      }
                     })()
                   }
                   onClick={() => this.props.changeStatus(3, true)}
@@ -316,27 +316,15 @@ class PurchaseModal extends React.Component {
           <div className={this.state.qualityClasses}>
             <ul>
               <li>
-                <div className="level">
-                  <div className="level-left">
-                    <div className="level-item">
-                      <div className="field">
-                        <input className="is-checkradio" id="ready" type="radio" name="quality" />
-                        <label htmlFor="ready">Ready for delivery</label>
-                      </div>
-                    </div>
-                  </div>
+                <div className="field">
+                  <input className="is-checkradio" id="ready" type="radio" name="quality" />
+                  <label htmlFor="ready">Ready for delivery</label>
                 </div>
               </li>
               <li>
-                <div className="level">
-                  <div className="level-left">
-                    <div className="level-item">
-                      <div className="field">
-                        <input className="is-checkradio" id="sendback" type="radio" name="quality" />
-                        <label htmlFor="sendback">Send back to crafting</label>
-                      </div>
-                    </div>
-                  </div>
+                <div className="field">
+                  <input className="is-checkradio" id="sendback" type="radio" name="quality" />
+                  <label htmlFor="sendback">Send back to crafting</label>
                 </div>
               </li>
             </ul>
@@ -354,27 +342,48 @@ class PurchaseModal extends React.Component {
           <div className={this.state.scheduleClasses}>
             <ul>
               <li>
-                <div className="level">
-                  <div className="level-left">
-                    <div className="level-item">
-                      <div className="field">
-                        <input className="is-checkradio" id="ready" type="radio" name="quality" />
-                        <label htmlFor="ready">Ready for delivery</label>
-                      </div>
-                    </div>
-                  </div>
+                <div className="field">
+                  <input className="is-checkradio" id="ready" type="radio" name="quality" />
+                  <label htmlFor="ready">Pick Up</label>
                 </div>
               </li>
               <li>
-                <div className="level">
-                  <div className="level-left">
-                    <div className="level-item">
-                      <div className="field">
-                        <input className="is-checkradio" id="sendback" type="radio" name="quality" />
-                        <label htmlFor="sendback">Send back to crafting</label>
-                      </div>
-                    </div>
-                  </div>
+                <div className="field">
+                  <input className="is-checkradio" id="sendback" type="radio" name="quality" />
+                  <label htmlFor="sendback">Ship</label>
+                </div>
+              </li>
+              <li>
+                <div className="field">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="Delivery Service"
+                    id="service"
+                    value={this.state.service}
+                  />
+                </div>
+              </li>
+              <li>
+                <div className="field">
+                  <input
+                    className="input"
+                    type="date"
+                    placeholder="Shipping Date"
+                    id="date"
+                    value={this.state.date}
+                  />
+                </div>
+              </li>
+              <li>
+                <div className="field">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="Tracking Number"
+                    id="tracking-number"
+                    value={this.state.tracking}
+                  />
                 </div>
               </li>
             </ul>
@@ -392,27 +401,13 @@ class PurchaseModal extends React.Component {
           <div className={this.state.notesClasses}>
             <ul>
               <li>
-                <div className="level">
-                  <div className="level-left">
-                    <div className="level-item">
-                      <div className="field">
-                        <input className="is-checkradio" id="ready" type="radio" name="quality" />
-                        <label htmlFor="ready">Ready for delivery</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div className="level">
-                  <div className="level-left">
-                    <div className="level-item">
-                      <div className="field">
-                        <input className="is-checkradio" id="sendback" type="radio" name="quality" />
-                        <label htmlFor="sendback">Send back to crafting</label>
-                      </div>
-                    </div>
-                  </div>
+                <div className="field">
+                  <textarea
+                    className="textarea"
+                    placeholder="Write your comments here..."
+                    id="notes"
+                    value={this.state.notes}
+                  />
                 </div>
               </li>
             </ul>
