@@ -1,6 +1,11 @@
 // REACT
 import React from 'react';
 
+// REDUX
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { completeBundle } from '../../actions/workstream';
+
 // COMPONENTS
 import PurchaseItem from './PurchaseItem';
 
@@ -10,11 +15,12 @@ class PurchaseBundle extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      checked: false
+      checked: this.props.bundle.completed
     };
   };
 
   check = () => {
+    this.props.completeBundle(this.props.purchase.id, this.props.bundle.id, !this.state.checked);
     this.setState({checked: !this.state.checked});
   }
 
@@ -50,4 +56,8 @@ class PurchaseBundle extends React.Component {
   };
 };
 
-export default PurchaseBundle;
+const mapDispatchToProps = dispatch => bindActionCreators({
+  completeBundle
+}, dispatch);
+
+export default connect(null, mapDispatchToProps)(PurchaseBundle);

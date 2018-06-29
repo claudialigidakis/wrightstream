@@ -1,17 +1,24 @@
 // REACT
 import React from 'react';
 
+// REDUX
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { completeItem } from '../../actions/workstream';
+
+
 // ==========
 
 class PurchaseItem extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      checked: false
+      checked: this.props.item.completed
     };
   };
 
   check = () => {
+    this.props.completeItem(this.props.purchase.id, this.props.item.id, !this.state.checked);
     this.setState({checked: !this.state.checked});
   }
 
@@ -23,9 +30,10 @@ class PurchaseItem extends React.Component {
             <div className="level-item">
               <div className="field">
                 {
-                  !this.props.bundle ? <input className="is-checkradio" type="checkbox" checked={this.state.checked} /> : <span className="bullet">•</span>
+                  !this.props.bundle ? <input id={this.props.item.id} className="is-checkradio" type="checkbox" checked={this.state.checked} /> : <span className="bullet">•</span>
                 }
-                <label onClick={this.check}>{this.props.item.item_qty} {this.props.item.name}</label> <span className="lnr-label" onClick={event => this.props.toggle(this.props.item, false)}></span>
+                <label htmlFor={this.props.item.id} onClick={this.check} >{this.props.item.item_qty} {this.props.item.name}</label>
+                <span className="lnr-label" onClick={event => this.props.toggle(this.props.item, false)}></span>
               </div>
             </div>
           </div>
@@ -42,4 +50,12 @@ class PurchaseItem extends React.Component {
   };
 };
 
-export default PurchaseItem;
+const mapStateToProps = state => ({
+
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  completeItem
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(PurchaseItem);

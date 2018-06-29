@@ -125,7 +125,6 @@ class PurchaseModal extends React.Component {
   };
 
   render () {
-    console.log(this.props);
     return (
       <div className="columns is-marginless">
         <div className="column is-5 modal-sidebar">
@@ -215,12 +214,12 @@ class PurchaseModal extends React.Component {
             <ul>
               {
                 this.props.purchase.bundles.map(bundle => {
-                  return <PurchaseBundle key={bundle.id} bundle={bundle} toggle={this.toggle} />;
+                  return <PurchaseBundle key={bundle.id} bundle={bundle} purchase={this.props.purchase} toggle={this.toggle} />;
                 })
               }
               {
                 this.props.purchase.items.map(item => {
-                  return <PurchaseItem key={item.id} item={item} toggle={this.toggle} />;
+                  return <PurchaseItem key={item.id} item={item} purchase={this.props.purchase} toggle={this.toggle} />;
                 })
               }
             </ul>
