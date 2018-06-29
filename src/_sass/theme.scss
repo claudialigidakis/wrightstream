@@ -237,22 +237,6 @@ nav {
     color: $stone;
   }
 
-  ul {
-
-    .supply-qty {
-      text-align: right;
-      margin-right: .25rem;
-      min-width: 40px;
-      display: inline-block;
-    }
-
-    .supply-unit {
-      color: lighten($stone, 20%);
-      font-size: .9rem;
-      margin-right: .5rem;
-    }
-  }
-
   ol {
     margin-left: 2.75rem;
 
@@ -260,6 +244,19 @@ nav {
       padding-left: .25rem;
     }
   }
+}
+
+.supply-qty {
+  text-align: right;
+  margin-right: .25rem;
+  min-width: 40px;
+  display: inline-block;
+}
+
+.supply-unit {
+  color: lighten($stone, 20%);
+  font-size: .9rem;
+  margin-right: .5rem;
 }
 
 .modal-purchase {

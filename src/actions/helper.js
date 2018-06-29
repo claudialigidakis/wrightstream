@@ -46,7 +46,6 @@ export const estimator = (items, bundles) => (
     console.log({items})
     request('/helper/orderPredictor', 'post', {items, bundles})
     .then(response => {
-      console.log(response);
       dispatch({
         type: ESTIMATOR,
         payload: response.data.data

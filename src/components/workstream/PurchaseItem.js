@@ -32,7 +32,9 @@ class PurchaseItem extends React.Component {
                 {
                   !this.props.bundle ? <input id={this.props.item.id} className="is-checkradio" type="checkbox" checked={this.state.checked} onChange={event => {event.preventDefault()}} /> : <span className="bullet">•</span>
                 }
-                <label htmlFor={this.props.item.id} onClick={this.check} >{this.props.item.item_qty} {this.props.item.name}</label>
+                <label htmlFor={this.props.item.id} onClick={() => {if (!this.props.bundle) this.check();}} >
+                  {this.props.item.item_qty} {this.props.item.name}
+                </label>
                 <span className="lnr-label" onClick={event => this.props.toggle(this.props.item, false)}></span>
               </div>
             </div>

@@ -4,12 +4,11 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getItems, getSupplies } from '../../actions/products';
+import { getItems } from '../../actions/products';
 import { estimator } from '../../actions/helper';
 
 // COMPONENTS
 import EstimatorProduct from './EstimatorProduct';
-import EstimatorSupply from './EstimatorSupply';
 
 // MISC
 const shortid = require('shortid');
@@ -21,9 +20,13 @@ class Estimator extends React.Component {
     super(props);
     this.state = {
       items: [],
-      bundles: [{id: 1, bundle_qty: 1}],
+      bundles: [],
       inputs: [shortid.generate()]
     };
+  };
+
+  componentDidMount () {
+    this.props.getItems();
   };
 
   handleSubmit = event => {
@@ -62,16 +65,10 @@ class Estimator extends React.Component {
       items[index].item_qty = qty;
       this.setState({items: items});
     }
-    this.handleSubmit();
   };
 
   deleteItem = input => {
     this.setState({items: this.state.items.filter(item => item.input !== input)});
-  };
-
-  componentDidMount () {
-    this.props.getItems();
-    this.props.getSupplies();
   };
 
   render () {
@@ -98,14 +95,6 @@ class Estimator extends React.Component {
         <div className="column is-6">
           <div className="estimator-supplies">
             <h1 className="title is-5">Supplies Needed</h1>
-            <ul>
-              {this.props.estimatorSupplies.map(supply =>
-                <EstimatorSupply
-                  key={supply.supply_id}
-                  supply={supply}
-                />
-              )}
-            </ul>
             <div className="has-text-right">
               <button className="button is-outlined is-primary" onClick={this.handleSubmit}>Add List</button>
             </div>
@@ -118,13 +107,11 @@ class Estimator extends React.Component {
 
 const mapStateToProps = state => ({
   items: state.products.items,
-  supplies: state.products.supplies,
-  estimatorSupplies: state.helper.supplies
+  supplies: state.helper.supplies
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getItems,
-  getSupplies,
   estimator
 }, dispatch);
 

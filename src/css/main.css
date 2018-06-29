@@ -7365,19 +7365,21 @@ nav {
     margin-bottom: 2rem; }
   .modal-container ul, .modal-container ol {
     color: #76757b; }
-  .modal-container ul .supply-qty {
-    text-align: right;
-    margin-right: .25rem;
-    min-width: 40px;
-    display: inline-block; }
-  .modal-container ul .supply-unit {
-    color: #aaa9ad;
-    font-size: .9rem;
-    margin-right: .5rem; }
   .modal-container ol {
     margin-left: 2.75rem; }
     .modal-container ol li {
       padding-left: .25rem; }
+
+.supply-qty {
+  text-align: right;
+  margin-right: .25rem;
+  min-width: 40px;
+  display: inline-block; }
+
+.supply-unit {
+  color: #aaa9ad;
+  font-size: .9rem;
+  margin-right: .5rem; }
 
 .modal-purchase {
   width: 900px;

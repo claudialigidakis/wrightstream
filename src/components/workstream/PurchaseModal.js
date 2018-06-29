@@ -307,7 +307,7 @@ class PurchaseModal extends React.Component {
             <div className="level-right">
               <div className="level-item">
                 <div className="purchase-profile">
-                  <img src={this.props.user.photo} alt='' />
+                  {/* <img src={this.props.user.photo} alt='' /> */}
                 </div>
               </div>
             </div>
