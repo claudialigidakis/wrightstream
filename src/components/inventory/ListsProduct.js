@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 // ==========
 
-class ListsList extends React.Component {
+class ListsProduct extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -18,7 +18,7 @@ class ListsList extends React.Component {
   render () {
     return (
       <li>
-        <button className="button is-primary" onClick={() => this.props.toggle(this.props.list.id)}>{this.props.list.name}</button>
+        {this.props.item.name} {this.props.item.item_qty}
       </li>
     );
   };
@@ -32,4 +32,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListsList);
+export default connect(mapStateToProps, mapDispatchToProps)(ListsProduct);
