@@ -15,11 +15,27 @@ class Lists extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      lists: []
+      lists: [],
+      modal: false,
+      modalClasses: 'modal'
     };
   };
 
-  handleOrder = () => {
+  toggle = () => {
+    if (!this.state.modal) {
+      this.setState({
+        modal: true,
+        modalClasses: this.state.modalClasses + ' is-active'
+      });
+    } else {
+      this.setState({
+        modal: false,
+        modalClasses: 'modal'
+      });
+    }
+  };
+
+  handleSubmit = () => {
 
   };
 
@@ -50,7 +66,7 @@ class Lists extends React.Component {
           <div className="estimator-supplies">
             <h1 className="title is-5">Source here</h1>
             <div className="has-text-right">
-              <button className="button is-outlined is-primary" onClick={this.handleOrder}>Order</button>
+              <button className="button is-outlined is-primary" onClick={this.handleSubmit}>Order</button>
             </div>
           </div>
         </div>

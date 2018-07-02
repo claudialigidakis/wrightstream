@@ -5,6 +5,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getItems, getSupplies } from '../../actions/products';
+import { addList } from '../../actions/inventory';
 import { estimator } from '../../actions/helper';
 
 // COMPONENTS
@@ -21,13 +22,53 @@ class Estimator extends React.Component {
     super(props);
     this.state = {
       items: [],
-      bundles: [{id: 1, bundle_qty: 1}],
-      inputs: [shortid.generate()]
+      bundles: [{id:1, bundle_qty: 1}],
+      inputs: [shortid.generate()],
+      modal: false,
+      modalClasses: 'modal',
+      name: '',
+      invalid: false
     };
   };
 
+  clear = () => {
+    this.setState({
+      items: [],
+      bundles: [{id:1, bundle_qty: 1}],
+      inputs: [shortid.generate()],
+      modal: false,
+      modalClasses: 'modal',
+      name: '',
+      invalid: false
+    });
+  };
+
+  toggle = () => {
+    if (!this.state.modal) {
+      this.setState({
+        modal: true,
+        modalClasses: this.state.modalClasses + ' is-active'
+      });
+    } else {
+      this.setState({
+        modal: false,
+        modalClasses: 'modal'
+      });
+    }
+  };
+
   handleSubmit = event => {
-    this.props.estimator(this.state.items, this.state.bundles)
+    event.preventDefault();
+    if (!event.target.name.value) {
+      this.setState({
+        invalid: true
+      });
+    } else {
+      const items = this.state.items.map(item => ({item_id: item.id, item_qty: item.item_qty}));
+      const bundles = this.state.bundles.map(bundle => ({bundle_id: bundle.id, bundle_qty: bundle.bundle_qty}));
+      this.props.addList(this.state.name, items, bundles);
+      this.clear();
+    }
   }
 
   appendInput = () => {
@@ -50,6 +91,7 @@ class Estimator extends React.Component {
       items[index].id = id;
       this.setState({items: items});
     }
+    this.props.estimator(this.state.items, this.state.bundles);
   };
 
   addItemQty = (input, qty) => {
@@ -62,7 +104,7 @@ class Estimator extends React.Component {
       items[index].item_qty = qty;
       this.setState({items: items});
     }
-    this.handleSubmit();
+    this.props.estimator(this.state.items, this.state.bundles);
   };
 
   deleteItem = input => {
@@ -107,9 +149,40 @@ class Estimator extends React.Component {
               )}
             </ul>
             <div className="has-text-right">
-              <button className="button is-outlined is-primary" onClick={this.handleSubmit}>Add List</button>
+              <button className="button is-outlined is-primary" onClick={this.toggle}>Add List</button>
             </div>
           </div>
+        </div>
+        <div className={this.state.modalClasses}>
+          <div className="modal-background" onClick={this.toggle}></div>
+          <div className="modal-content">
+            <div className="modal-container">
+              <form onSubmit={this.handleSubmit}>
+                <div className="field">
+                  <div className="control">
+                    <input
+                      className="input"
+                      type="text"
+                      placeholder="List Name"
+                      id="name"
+                      value={this.state.name}
+                      onChange={event => this.setState({name: event.target.value})}
+                    />
+                  </div>
+                </div>
+                {this.state.invalid ? (
+                  <p id="error" className="help is-danger has-text-centered">
+                    Please fill out all information correctly.
+                  </p>
+                ) : null}
+                <br />
+                <div className="control has-text-centered">
+                  <button className="button is-primary is-outlined">Add List</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <button className="modal-close is-large"  onClick={this.toggle}></button>
         </div>
       </div>
     );
@@ -125,6 +198,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   getItems,
   getSupplies,
+  addList,
   estimator
 }, dispatch);
 

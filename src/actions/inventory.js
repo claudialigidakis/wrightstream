@@ -3,6 +3,7 @@ import request from '../helpers/request';
 export const EDIT_SUPPLY = 'EDIT_SUPPLY';
 export const EDIT_ITEM = 'EDIT_ITEM';
 export const GET_LISTS = 'GET_LISTS';
+export const ADD_LIST = 'ADD_LIST';
 
 export const editSupply = (id, stock_qty) => (
   dispatch => {
@@ -51,6 +52,25 @@ export const getLists = () => (
       .then(response => {
         dispatch({
           type: GET_LISTS,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const addList = (name, items, bundles) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/lists/${shop_id}`, 'post', {name, items, bundles})
+      .then(response => {
+        return request(`/lists/${shop_id}/allLists`);
+      })
+      .then(response => {
+        dispatch({
+          type: ADD_LIST,
           payload: response.data.data
         });
       });

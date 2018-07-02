@@ -17,6 +17,13 @@ class KindAdd extends React.Component {
     };
   };
 
+  clear = () => {
+    this.setState({
+      name: '',
+      invalid: false
+    });
+  };
+  
   handleSubmit = event => {
     event.preventDefault();
     if (!event.target.name.value) {
@@ -28,13 +35,6 @@ class KindAdd extends React.Component {
       this.clear();
       this.props.toggle();
     }
-  };
-
-  clear = () => {
-    this.setState({
-      name: '',
-      invalid: false
-    });
   };
 
   render () {

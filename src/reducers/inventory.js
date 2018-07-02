@@ -1,7 +1,8 @@
 import {
   EDIT_SUPPLY,
   EDIT_ITEM,
-  GET_LISTS
+  GET_LISTS,
+  ADD_LIST
 } from '../actions/inventory';
 
 let initialState = {
@@ -17,6 +18,8 @@ export default (state = initialState, action) => {
     case EDIT_ITEM:
       return {...state, items: action.payload};
     case GET_LISTS:
+      return {...state, lists: action.payload};
+    case ADD_LIST:
       return {...state, lists: action.payload};
     default:
       return state;
