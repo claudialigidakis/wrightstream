@@ -1,13 +1,15 @@
 import {
   GET_LENGTH,
   GET_MASS,
-  GET_VOLUME
+  GET_VOLUME,
+  ESTIMATOR
 } from '../actions/helper';
 
 let initialState = {
   lengthMeasures: [],
   massMeasures: [],
-  volumeMeasures: []
+  volumeMeasures: [],
+  supplies: []
 };
 
 export default (state = initialState, action) => {
@@ -18,6 +20,8 @@ export default (state = initialState, action) => {
       return {...state, massMeasures: action.payload};
     case GET_VOLUME:
       return {...state, volumeMeasures: action.payload};
+    case ESTIMATOR:
+      return {...state, supplies: action.payload};
     default:
       return state;
   }

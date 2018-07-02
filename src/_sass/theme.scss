@@ -5,7 +5,6 @@ body {
 }
 
 nav {
-
   border-bottom: solid 2px transparentize($mist, .7);
 
   .navbar-main {
@@ -110,7 +109,7 @@ nav {
   }
 }
 
-.products-tabs ul {
+.products-tabs ul, .inventory-tabs ul {
   border-bottom-color: $slate;
 
   a {
@@ -238,22 +237,6 @@ nav {
     color: $stone;
   }
 
-  ul {
-
-    .supply-qty {
-      text-align: right;
-      margin-right: .25rem;
-      min-width: 40px;
-      display: inline-block;
-    }
-
-    .supply-unit {
-      color: lighten($stone, 20%);
-      font-size: .9rem;
-      margin-right: .5rem;
-    }
-  }
-
   ol {
     margin-left: 2.75rem;
 
@@ -263,9 +246,23 @@ nav {
   }
 }
 
+.supply-qty {
+  text-align: right;
+  margin-right: .25rem;
+  min-width: 40px;
+  display: inline-block;
+}
+
+.supply-unit {
+  color: lighten($stone, 20%);
+  font-size: .9rem;
+  margin-right: .5rem;
+}
+
 .modal-purchase {
   width: 900px;
   height: calc(100vh - 40px);
+  overflow-y: hidden;
 
   >.columns {
     height: 100%;
@@ -273,7 +270,6 @@ nav {
 
   >.columns>.column {
     padding: 0;
-
     overflow-y: auto;
   }
 
@@ -320,6 +316,7 @@ nav {
   .purchase-row {
     border-top: 1px solid lighten($koamaru, 3%);
     padding: 1rem 1.5rem;
+    cursor: pointer;
 
     .title {
       color: $slate;
@@ -348,8 +345,18 @@ nav {
     font-size: .9rem;
     padding: .5rem 1.5rem .5rem 2.5rem;
 
-    li {
+    ul li {
       margin: .4rem 0;
+    }
+
+    ul li ul {
+      margin-left: 2rem;
+      transform: scale(0.9);
+    }
+
+    ul li ul span.bullet {
+      color: darken($quartz, 20%);
+      margin-right: .5rem;
     }
 
     .purchase-profile img {
@@ -361,12 +368,25 @@ nav {
       margin-right: .75rem;
     }
 
+    label {
+      padding-right: .5rem;
+    }
+
     .lnr-check {
       color: $green;
     }
 
     .lnr-cross2 {
       color: $red;
+    }
+
+    .lnr-label {
+      color: darken($quartz, 20%);
+      cursor: pointer;
+    }
+
+    .lnr-label:hover {
+      color: $quartz;
     }
 
     label {
@@ -413,7 +433,7 @@ nav {
   }
 }
 
-.products-table {
+.products-table, .inventory-table {
   border-bottom: 2px solid $lavender;
 
   thead {
@@ -425,14 +445,24 @@ nav {
       text-transform: uppercase;
       letter-spacing: 1px;
       border: none;
-      padding: 1rem 1.25rem;
     }
   }
 
   td {
     border: none;
-    padding: .75rem 1.25rem;
+    vertical-align: middle;
+  }
+}
+
+.products-table {
+
+  th {
+    padding: 1rem 1.25rem;
+  }
+
+  td {
     cursor: pointer;
+    padding: .75rem 1.25rem;
   }
 
   td:first-child {
@@ -441,6 +471,73 @@ nav {
 
   td:last-child {
     min-width: 35%;
+  }
+}
+
+.inventory-table {
+  font-size: .8rem;
+
+  th {
+    padding: .75rem 1.25rem;
+  }
+
+  td {
+    padding: .5rem 1.25rem;
+  }
+
+  td:first-child {
+    min-width: 40%;
+  }
+
+  td:last-child {
+    min-width: 30%;
+  }
+
+  input {
+    font-size: .8rem;
+  }
+}
+
+.inventory {
+  padding: 1rem;
+
+  .title {
+    color: lighten($quartz, 20%);
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .inventory-content {
+    padding: 2rem 1rem;
+
+    .column {
+      padding: 1rem 2rem;
+    }
+
+    .column:first-child {
+      border-right: 1px solid $mist;
+      padding-right: 4rem;
+    }
+
+    .column:last-child {
+      border-left: 1px solid $mist;
+      padding-left: 4rem;
+    }
+  }
+
+  .estimator-content {
+    padding: 2rem 5rem;
+
+    .column {
+      padding: 1rem 3rem;
+    }
+
+    .estimator-supplies {
+      background-color: $white;
+      padding: 2rem 2.5rem;
+    }
   }
 }
 
@@ -475,6 +572,9 @@ nav {
   .column-container {
     background-color: $mist;
     padding: .75rem;
+    min-height: 175px;
+    max-height: 65vh;
+    overflow-y: auto;
   }
 
   .column-button {
@@ -622,8 +722,4 @@ nav {
 
 .modal-content.modal-form {
   width: 600px;
-
-  .select, select {
-    width: 100%;
-  }
 }
