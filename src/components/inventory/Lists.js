@@ -4,99 +4,53 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getItems } from '../../actions/products';
-import { estimator } from '../../actions/helper';
+import { getLists } from '../../actions/inventory';
 
 // COMPONENTS
-import EstimatorProduct from './EstimatorProduct';
-
-// MISC
-const shortid = require('shortid');
+import ListsList from './ListsList';
 
 // ==========
 
-class Estimator extends React.Component {
+class Lists extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      items: [],
-      bundles: [],
-      inputs: [shortid.generate()]
+      lists: []
     };
   };
 
+  handleOrder = () => {
+
+  };
+
   componentDidMount () {
-    this.props.getItems();
-  };
-
-  handleSubmit = event => {
-    this.props.estimator(this.state.items, this.state.bundles)
-  }
-
-  appendInput = () => {
-    const input = shortid.generate();
-    this.setState({inputs: this.state.inputs.concat([input])});
-  };
-
-  deleteInput = i => {
-    this.state.inputs.splice(i, 1);
-    this.setState({inputs: this.state.inputs});
-  };
-
-  addItem = (input, id) => {
-    if (!this.state.items.find(item => item.input === input) && !this.state.items.find(item => item.id === id)) {
-      this.state.items.push({input, id});
-      this.setState({items: this.state.items});
-    } else if (this.state.items.find(item => item.input === input) && !this.state.items.find(item => item.id === id)) {
-      const items = this.state.items;
-      const index = items.findIndex(item => item.input === input);
-      items[index].id = id;
-      this.setState({items: items});
-    }
-  };
-
-  addItemQty = (input, qty) => {
-    if (!this.state.items.find(item => item.input === input)) {
-      this.state.items.push({input, item_qty: qty});
-      this.setState({items: this.state.items});
-    } else {
-      const items = this.state.items;
-      const index = items.findIndex(item => item.input === input);
-      items[index].item_qty = qty;
-      this.setState({items: items});
-    }
-  };
-
-  deleteItem = input => {
-    this.setState({items: this.state.items.filter(item => item.input !== input)});
+    this.props.getLists();
   };
 
   render () {
+    console.log(this.props.lists)
     return (
       <div className="columns estimator-content">
         <div className="column is-6">
-          <h1 className="title is-5">Products</h1>
-          {this.state.inputs.map((input, i) =>
-            <EstimatorProduct
-              key={input}
-              input={input}
-              i={i}
-              length={this.state.inputs.length-1}
-              appendInput={this.appendInput}
-              deleteInput={this.deleteInput}
-              addItem={this.addItem}
-              addItemQty={this.addItemQty}
-              deleteItem={this.deleteItem}
-              items={this.props.items}
-              selected={this.state.items}
-            />
-          )}
+          <h1 className="title is-5">Lists</h1>
+          <ul>
+            {
+              this.props.lists.map(list => {
+                return (
+                  <ListsList
+                    key={list.id}
+                    list={list}
+                  />
+                );
+              })
+            }
+          </ul>
         </div>
         <div className="column is-6">
           <div className="estimator-supplies">
-            <h1 className="title is-5">Supplies Needed</h1>
+            <h1 className="title is-5">Source here</h1>
             <div className="has-text-right">
-              <button className="button is-outlined is-primary" onClick={this.handleSubmit}>Add List</button>
+              <button className="button is-outlined is-primary" onClick={this.handleOrder}>Order</button>
             </div>
           </div>
         </div>
@@ -106,13 +60,11 @@ class Estimator extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  items: state.products.items,
-  supplies: state.helper.supplies
+  lists: state.inventory.lists
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getItems,
-  estimator
+  getLists
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Estimator);
+export default connect(mapStateToProps, mapDispatchToProps)(Lists);
