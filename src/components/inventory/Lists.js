@@ -5,10 +5,12 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getLists } from '../../actions/inventory';
+import { getSources } from '../../actions/products';
 
 // COMPONENTS
 import ListsList from './ListsList';
 import ListsProduct from './ListsProduct';
+import ListsSource from './ListsSource';
 
 // ==========
 
@@ -17,6 +19,7 @@ class Lists extends React.Component {
     super(props);
     this.state = {
       lists: [],
+      selected: [],
       id: null,
       modal: false,
       modalClasses: 'modal'
@@ -39,16 +42,28 @@ class Lists extends React.Component {
     }
   };
 
+  addSelected = list => {
+    if (!this.state.selected.find(checkedList => checkedList.id === list.id)) {
+      this.setState({selected: [...this.state.selected, list]});
+    } else {
+      const [list, ...rest] = this.state.selected;
+      this.setState({selected: rest});
+    }
+
+  }
+
   handleSubmit = () => {
 
   };
 
   componentDidMount () {
     this.props.getLists();
+    this.props.getSources();
   };
 
   render () {
-    console.log(this.props.lists)
+    console.log('lists', this.props.lists)
+        console.log('selected', this.state.selected);
     return (
       <div className="columns estimator-content">
         <div className="column is-6">
@@ -61,6 +76,7 @@ class Lists extends React.Component {
                     key={list.id}
                     list={list}
                     toggle={this.toggle}
+                    addSelected={this.addSelected}
                   />
                 );
               })
@@ -69,7 +85,17 @@ class Lists extends React.Component {
         </div>
         <div className="column is-6">
           <div className="estimator-supplies">
-            <h1 className="title is-5">Source here</h1>
+            {
+              this.props.sources.map(source => {
+                return (
+                  <ListsSource
+                    key={source.id}
+                    source={source}
+                  />
+                );
+              })
+            }
+
             <div className="has-text-right">
               <button className="button is-outlined is-primary" onClick={this.handleSubmit}>Order</button>
             </div>
@@ -105,11 +131,13 @@ class Lists extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  lists: state.inventory.lists
+  lists: state.inventory.lists,
+  sources: state.products.sources
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getLists
+  getLists,
+  getSources
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Lists);

@@ -1,7 +1,7 @@
 import request from '../helpers/request';
 
 export const GET_PURCHASES = 'GET_PURCHASES';
-export const CHANGE_STATUS = 'CHANGE_STATUS'
+export const CHANGE_STATUS = 'CHANGE_STATUS';
 export const COMPLETE_ITEM = 'COMPLETE_ITEM';
 export const COMPLETE_BUNDLE = 'COMPLETE_BUNDLE';
 
