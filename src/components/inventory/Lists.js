@@ -5,7 +5,8 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getLists } from '../../actions/inventory';
-import { getSources } from '../../actions/products';
+import { getSources, getSupplies } from '../../actions/products';
+import { estimator } from '../../actions/helper';
 
 // COMPONENTS
 import ListsList from './ListsList';
@@ -20,6 +21,8 @@ class Lists extends React.Component {
     this.state = {
       lists: [],
       selected: [],
+      items: [],
+      bundles: [{id:1, bundle_qty: 1}],
       id: null,
       modal: false,
       modalClasses: 'modal'
@@ -42,15 +45,38 @@ class Lists extends React.Component {
     }
   };
 
-  addSelected = list => {
+  select = list => {
     if (!this.state.selected.find(checkedList => checkedList.id === list.id)) {
-      this.setState({selected: [...this.state.selected, list]});
+      this.setState({selected: [...this.state.selected, list]}, this.addItems(list));
     } else {
-      const [list, ...rest] = this.state.selected;
-      this.setState({selected: rest});
+      const index = this.state.selected.findIndex(checkedList => checkedList.id === list.id);
+      this.setState({selected: [...this.state.selected.slice(0, index), ...this.state.selected.slice(index+1, this.state.selected.length)]}, this.removeItems(list));
     }
+  };
 
-  }
+  addItems = list => {
+    let items = [...this.state.items];
+    for (let item of list.item) {
+      if (!items.find(existingItem => existingItem.item_id === item.item_id)) {
+        items = [...items, item];
+      } else {
+        items = items.map(existingItem => existingItem.item_id === item.item_id ? {...existingItem, item_qty: existingItem.item_qty + item.item_qty} : {...existingItem});
+      }
+    }
+    this.setState({items: items}, this.estimate);
+  };
+
+  removeItems = list => {
+    let items = [...this.state.items];
+    for (let item of list.item) {
+      items = items.map(existingItem => existingItem.item_id === item.item_id ? {...existingItem, item_qty: existingItem.item_qty - item.item_qty} : {...existingItem});
+    }
+    this.setState({items: items.filter(item => item.item_qty !== 0)}, this.estimate);
+  };
+
+  estimate = () => {
+    this.props.estimator(this.state.items.map(item => ({id: item.item_id, item_qty: item.item_qty})), this.state.bundles);
+  };
 
   handleSubmit = () => {
 
@@ -59,11 +85,10 @@ class Lists extends React.Component {
   componentDidMount () {
     this.props.getLists();
     this.props.getSources();
+    this.props.getSupplies();
   };
 
   render () {
-    console.log('lists', this.props.lists)
-        console.log('selected', this.state.selected);
     return (
       <div className="columns estimator-content">
         <div className="column is-6">
@@ -76,7 +101,8 @@ class Lists extends React.Component {
                     key={list.id}
                     list={list}
                     toggle={this.toggle}
-                    addSelected={this.addSelected}
+                    select={this.select}
+                    estimate={this.estimate}
                   />
                 );
               })
@@ -91,11 +117,12 @@ class Lists extends React.Component {
                   <ListsSource
                     key={source.id}
                     source={source}
+                    supplies={this.props.supplies}
+                    estimatorSupplies={this.props.estimatorSupplies}
                   />
                 );
               })
             }
-
             <div className="has-text-right">
               <button className="button is-outlined is-primary" onClick={this.handleSubmit}>Order</button>
             </div>
@@ -132,12 +159,16 @@ class Lists extends React.Component {
 
 const mapStateToProps = state => ({
   lists: state.inventory.lists,
-  sources: state.products.sources
+  sources: state.products.sources,
+  supplies: state.products.supplies,
+  estimatorSupplies: state.helper.supplies
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getLists,
-  getSources
+  getSources,
+  getSupplies,
+  estimator
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Lists);

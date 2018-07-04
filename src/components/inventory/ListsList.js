@@ -16,7 +16,6 @@ class ListsList extends React.Component {
   };
 
   check = () => {
-    // this.props.completeItem(this.props.purchase.id, this.props.item.id, !this.state.checked);
     this.setState({checked: !this.state.checked});
   };
 
@@ -27,7 +26,7 @@ class ListsList extends React.Component {
         <label
           htmlFor={this.props.list.id}
           onClick={() => {
-            this.props.addSelected(this.props.list);
+            this.props.select(this.props.list);
             this.check();
           }}
         >

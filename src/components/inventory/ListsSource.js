@@ -5,6 +5,9 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+// COMPONENTS
+import ListsSupply from './ListsSupply';
+
 // ==========
 
 class ListsSource extends React.Component {
@@ -16,8 +19,35 @@ class ListsSource extends React.Component {
   };
 
   render () {
+    let supplies = [];
+    const sourceSupplies = this.props.supplies.filter(supply => supply.source_id === this.props.source.id);
+    for (let supply of this.props.estimatorSupplies) {
+      if (sourceSupplies.find(sourceSupply => sourceSupply.id === supply.supply_id)) {
+        supplies = [...supplies, supply];
+      }
+    }
+
     return (
-      <h1 className="title is-5">{this.props.source.name}</h1>
+      <div>
+        <h1 className="title is-5">
+          {
+            supplies.length > 0 ? this.props.source.name : null
+          }
+        </h1>
+        <ul>
+          {
+            supplies.map(supply => {
+              return (
+                <ListsSupply
+                  key={supply.supply_id}
+                  supply={supply}
+                  supplies={this.props.supplies}
+                />
+              );
+            })
+          }
+        </ul>
+      </div>
     );
   };
 };

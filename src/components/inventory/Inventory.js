@@ -87,7 +87,7 @@ class Inventory extends React.Component {
     if (!this.state.supplies.find(supply => supply.id === id)) {
       this.setState({supplies: [...this.state.supplies, {id, qty}]});
     } else {
-      this.setState({supplies: this.state.supplies.map(supply => {return supply.id === id ? {...supply, qty} : {...supply}})});
+      this.setState({supplies: this.state.supplies.map(supply => supply.id === id ? {...supply, qty} : {...supply})});
     }
   };
 
@@ -95,7 +95,7 @@ class Inventory extends React.Component {
     if (!this.state.items.find(item => item.id === id)) {
       this.setState({items: [...this.state.items, {id, qty}]});
     } else {
-      this.setState({items: this.state.items.map(item => {return item.id === id ? {...item, qty} : {...item}})});
+      this.setState({items: this.state.items.map(item => item.id === id ? {...item, qty} : {...item})});
     }
   };
 
