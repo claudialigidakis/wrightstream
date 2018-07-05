@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 // ==========
 
-class ListsSupply extends React.Component {
+class OrdersSupply extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -39,4 +39,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListsSupply);
+export default connect(mapStateToProps, mapDispatchToProps)(OrdersSupply);

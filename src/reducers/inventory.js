@@ -2,13 +2,16 @@ import {
   EDIT_SUPPLY,
   EDIT_ITEM,
   GET_LISTS,
-  ADD_LIST
+  ADD_LIST,
+  GET_ORDERS,
+  ADD_ORDER
 } from '../actions/inventory';
 
 let initialState = {
   supplies: [],
   items: [],
-  lists: []
+  lists: [],
+  orders: []
 };
 
 export default (state = initialState, action) => {
@@ -21,6 +24,10 @@ export default (state = initialState, action) => {
       return {...state, lists: action.payload};
     case ADD_LIST:
       return {...state, lists: action.payload};
+    case GET_ORDERS:
+      return {...state, orders: action.payload};
+    case ADD_ORDER:
+      return {...state, orders: action.payload};
     default:
       return state;
   }

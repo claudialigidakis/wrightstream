@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getLists } from '../../actions/inventory';
+import { getLists, addOrder } from '../../actions/inventory';
 import { getSources, getSupplies } from '../../actions/products';
 import { estimator } from '../../actions/helper';
 
@@ -79,7 +79,7 @@ class Lists extends React.Component {
   };
 
   handleSubmit = () => {
-
+    this.props.addOrder({order: {items: this.state.items, bundles: this.state.bundles}});
   };
 
   componentDidMount () {
@@ -102,7 +102,6 @@ class Lists extends React.Component {
                     list={list}
                     toggle={this.toggle}
                     select={this.select}
-                    estimate={this.estimate}
                   />
                 );
               })
@@ -124,7 +123,13 @@ class Lists extends React.Component {
               })
             }
             <div className="has-text-right">
-              <button className="button is-outlined is-primary" onClick={this.handleSubmit}>Order</button>
+              <button
+                className="button is-outlined is-primary"
+                disabled={
+                  this.props.estimatorSupplies.length > 0 ? false : true
+                }
+                onClick={this.handleSubmit}
+              >Order</button>
             </div>
           </div>
         </div>
@@ -166,6 +171,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getLists,
+  addOrder,
   getSources,
   getSupplies,
   estimator

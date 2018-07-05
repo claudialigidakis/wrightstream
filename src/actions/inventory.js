@@ -4,6 +4,8 @@ export const EDIT_SUPPLY = 'EDIT_SUPPLY';
 export const EDIT_ITEM = 'EDIT_ITEM';
 export const GET_LISTS = 'GET_LISTS';
 export const ADD_LIST = 'ADD_LIST';
+export const GET_ORDERS = 'GET_ORDERS';
+export const ADD_ORDER = 'ADD_ORDER';
 
 export const editSupply = (id, stock_qty) => (
   dispatch => {
@@ -71,6 +73,41 @@ export const addList = (name, items, bundles) => (
       .then(response => {
         dispatch({
           type: ADD_LIST,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const getOrders = () => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/orders/${shop_id}/allOrders`)
+      .then(response => {
+        dispatch({
+          type: GET_ORDERS,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const addOrder = (order) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/orders/${shop_id}`, 'post', {order})
+      .then(response => {
+        return request(`/orders/${shop_id}/allOrders`);
+      })
+      .then(response => {
+        dispatch({
+          type: ADD_ORDER,
           payload: response.data.data
         });
       });
