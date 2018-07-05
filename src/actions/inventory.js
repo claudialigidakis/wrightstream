@@ -101,7 +101,6 @@ export const addOrder = order => (
   dispatch => {
     request('/auth/token')
     .then(response => {
-      console.log({order})
       const shop_id = response.data.shops_id;
       request(`/orders/${shop_id}`, 'post', {order})
       .then(response => {
@@ -121,7 +120,6 @@ export const editOrderSupply = (order_id, supply_id, supply_status, supply_qty) 
   dispatch => {
     request('/auth/token')
     .then(response => {
-      console.log({supply_id, supply_status, supply_qty})
       const shop_id = response.data.shops_id;
       request(`/orders/orderSupply/${order_id}`, 'put', {supply_id, supply_status, supply_qty})
       .then(response => {

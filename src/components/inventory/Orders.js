@@ -36,7 +36,6 @@ class Orders extends React.Component {
   };
 
   render () {
-    console.log(this.props.orders);
     return (
       <div className="columns estimator-content">
         <div className="column is-6">
