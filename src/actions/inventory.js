@@ -6,6 +6,7 @@ export const GET_LISTS = 'GET_LISTS';
 export const ADD_LIST = 'ADD_LIST';
 export const GET_ORDERS = 'GET_ORDERS';
 export const ADD_ORDER = 'ADD_ORDER';
+export const EDIT_ORDER_SUPPLY = 'EDIT_ORDER_SUPPLY';
 
 export const editSupply = (id, stock_qty) => (
   dispatch => {
@@ -96,10 +97,11 @@ export const getOrders = () => (
   }
 );
 
-export const addOrder = (order) => (
+export const addOrder = order => (
   dispatch => {
     request('/auth/token')
     .then(response => {
+      console.log({order})
       const shop_id = response.data.shops_id;
       request(`/orders/${shop_id}`, 'post', {order})
       .then(response => {
@@ -108,6 +110,26 @@ export const addOrder = (order) => (
       .then(response => {
         dispatch({
           type: ADD_ORDER,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const editOrderSupply = (order_id, supply_id, supply_status, supply_qty) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      console.log({supply_id, supply_status, supply_qty})
+      const shop_id = response.data.shops_id;
+      request(`/orders/orderSupply/${order_id}`, 'put', {supply_id, supply_status, supply_qty})
+      .then(response => {
+        return request(`/orders/${shop_id}/allOrders`);
+      })
+      .then(response => {
+        dispatch({
+          type: EDIT_ORDER_SUPPLY,
           payload: response.data.data
         });
       });

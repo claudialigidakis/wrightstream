@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getOrders } from '../../actions/inventory';
+import { getOrders, editOrderSupply } from '../../actions/inventory';
 import { getSources, getSupplies } from '../../actions/products';
 
 // COMPONENTS
@@ -25,8 +25,8 @@ class Orders extends React.Component {
     this.setState({id})
   };
 
-  handleSubmit = () => {
-    // this.props.addOrder({order: this.props.estimatorSupplies});
+  editSupply = (supply_id, supply_status, supply_qty) => {
+    this.props.editOrderSupply(this.state.id, supply_id, supply_status, supply_qty);
   };
 
   componentDidMount () {
@@ -66,19 +66,11 @@ class Orders extends React.Component {
                     source={source}
                     supplies={this.props.supplies}
                     orderSupplies={this.props.orders.find(order => order.id === this.state.id).supplies}
+                    editSupply={this.editSupply}
                   />
                 )
               }) : null
             }
-            <div className="has-text-right">
-              <button
-                className="button is-outlined is-primary"
-                // disabled={
-                //   this.props.estimatorSupplies.length > 0 ? false : true
-                // }
-                onClick={this.handleSubmit}
-              >Save</button>
-            </div>
           </div>
         </div>
       </div>
@@ -94,6 +86,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getOrders,
+  editOrderSupply,
   getSources,
   getSupplies
 }, dispatch);

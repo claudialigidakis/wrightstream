@@ -79,7 +79,8 @@ class Lists extends React.Component {
   };
 
   handleSubmit = () => {
-    this.props.addOrder({order: {items: this.state.items, bundles: this.state.bundles}});
+    const items = this.state.items.map(item => ({id: item.item_id, item_qty: item.item_qty}));
+   this.props.addOrder({items, bundles: this.state.bundles});
   };
 
   componentDidMount () {

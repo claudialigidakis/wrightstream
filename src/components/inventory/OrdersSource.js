@@ -42,6 +42,7 @@ class OrdersSource extends React.Component {
                   key={supply.supply_id}
                   supply={supply}
                   supplies={this.props.supplies}
+                  editSupply={this.props.editSupply}
                 />
               );
             })
