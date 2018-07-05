@@ -43,7 +43,6 @@ export const getVolume = () => (
 
 export const estimator = (items, bundles) => (
   dispatch => {
-    console.log({items})
     request('/helper/orderPredictor', 'post', {items, bundles})
     .then(response => {
       dispatch({
