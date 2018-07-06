@@ -14,11 +14,12 @@ const moment = require('moment');
 class PurchaseSchedule extends React.Component {
   constructor (props) {
     super(props);
+    const today = new Date();
     this.state = {
       checked: this.props.purchase.pick_up || this.props.purchase.pick_up === false ? this.props.purchase.pick_up : null,
       pickupClasses: this.props.purchase.pick_up ? '' : 'is-hidden',
       shipClasses: this.props.purchase.pick_up === false ? '' : 'is-hidden',
-      date: this.props.purchase.delivery_date ? this.props.purchase.delivery_date : '',
+      date: this.props.purchase.delivery_date ? this.props.purchase.delivery_date : moment(today).format('YYYY-MM-DD'),
       service: this.props.purchase.service ? this.props.purchase.service : '',
       tracking: this.props.purchase.tracking ? this.props.purchase.tracking : ''
     };
