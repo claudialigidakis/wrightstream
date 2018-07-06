@@ -9,6 +9,9 @@ import { changeStatus } from '../../actions/workstream';
 // COMPONENTS
 import PurchaseModal from './PurchaseModal';
 
+// HELPERS
+const moment = require('moment');
+
 // ==========
 
 class Purchase extends React.Component {
@@ -116,7 +119,12 @@ class Purchase extends React.Component {
                   {
                     (() => {
                       if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
-                        return <span className="lnr-calendar-check"></span>;
+                        const today = new Date();
+                        if (moment(today).format('YYYY-MM-DD') === moment(this.props.purchase.delivery_date).format('YYYY-MM-DD')) {
+                          return <span className="lnr-calendar-check"></span>;
+                        } else {
+                          return <span className="lnr-calendar-empty"></span>;
+                        }
                       } else {
                         return <span className="lnr-line-spacing"></span>;
                       }
