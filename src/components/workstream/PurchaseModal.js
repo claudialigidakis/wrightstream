@@ -128,7 +128,6 @@ class PurchaseModal extends React.Component {
   };
 
   render () {
-    console.log(this.props.purchase)
     return (
       <div className="columns is-marginless">
         <div className="column is-5 modal-sidebar">
@@ -148,7 +147,11 @@ class PurchaseModal extends React.Component {
                 } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
                   return 'purchase-status';
                 } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-                  return 'purchase-status status-red';
+                  if (this.props.purchase.quality_check || (this.props.purchase.pick_up || this.props.purchase.pick_up === false)) {
+                    return 'purchase-status status-yellow';
+                  } else {
+                    return 'purchase-status status-red';
+                  }
                 } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
                   return 'purchase-status';
                 }
@@ -317,7 +320,7 @@ class PurchaseModal extends React.Component {
             </div>
           </div>
           <div className={this.state.qualityClasses}>
-            <PurchaseQuality purchase={this.props.purchase} />
+            <PurchaseQuality purchase={this.props.purchase} changeStatus={this.props.changeStatus} />
           </div>
 
           <div className="purchase-row level" onClick={this.collapseSchedule}>
@@ -329,7 +332,7 @@ class PurchaseModal extends React.Component {
             </div>
           </div>
           <div className={this.state.scheduleClasses}>
-            <PurchaseSchedule purchase={this.props.purchase} />
+            <PurchaseSchedule purchase={this.props.purchase} changeStatus={this.props.changeStatus} />
           </div>
 
           <div className="purchase-row level" onClick={this.collapseNotes}>

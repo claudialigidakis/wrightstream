@@ -26,6 +26,9 @@ class PurchaseQuality extends React.Component {
 
   qualityCheck = boolean => {
     this.props.qualityCheck(this.props.purchase.id, boolean);
+    if (this.props.purchase.quality_check && (this.props.purchase.pick_up || this.props.purchase.pick_up === false)) {
+      this.props.changeStatus(4, true);
+    }
   };
 
   render () {

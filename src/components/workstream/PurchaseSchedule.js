@@ -58,6 +58,9 @@ class PurchaseSchedule extends React.Component {
 
   schedule = (date, service = null, tracking = null) => {
     this.props.schedule(this.props.purchase.id, date, service !== '' ? service : null, tracking !== '' ? tracking : null);
+    if (this.props.purchase.quality_check && (this.props.purchase.pick_up || this.props.purchase.pick_up === false)) {
+      this.props.changeStatus(4, true);
+    }
   };
 
   render () {

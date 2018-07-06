@@ -38,8 +38,6 @@ class Purchase extends React.Component {
     this.props.changeStatus(this.props.purchase.id, status, completed);
   };
 
-  
-
   render () {
     return (
       <div>
@@ -60,7 +58,11 @@ class Purchase extends React.Component {
                 } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
                   return 'card-header';
                 } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-                  return 'card-header status-red';
+                  if (this.props.purchase.quality_check || (this.props.purchase.pick_up || this.props.purchase.pick_up === false)) {
+                    return 'card-header status-yellow';
+                  } else {
+                    return 'card-header status-red';
+                  }
                 } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
                   return 'card-header';
                 }
