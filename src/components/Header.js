@@ -14,7 +14,8 @@ class Header extends React.Component {
     this.state = {
       productsClasses: 'navbar-item',
       inventoryClasses: 'navbar-item',
-      workstreamClasses: 'navbar-item'
+      workstreamClasses: 'navbar-item',
+      adminClasses: 'navbar-item'
     };
   };
 
@@ -23,19 +24,29 @@ class Header extends React.Component {
       this.setState({
         productsClasses: 'navbar-item is-active',
         inventoryClasses: 'navbar-item',
-        workstreamClasses: 'navbar-item'
+        workstreamClasses: 'navbar-item',
+        adminClasses: 'navbar-item'
       });
     } else if (window.location.pathname.includes('/inventory')) {
       this.setState({
         productsClasses: 'navbar-item',
         inventoryClasses: 'navbar-item is-active',
-        workstreamClasses: 'navbar-item'
+        workstreamClasses: 'navbar-item',
+        adminClasses: 'navbar-item'
       });
     } else if (window.location.pathname.includes('/workstream')) {
       this.setState({
         productsClasses: 'navbar-item',
         inventoryClasses: 'navbar-item',
-        workstreamClasses: 'navbar-item is-active'
+        workstreamClasses: 'navbar-item is-active',
+        adminClasses: 'navbar-item'
+      });
+    } else if (window.location.pathname.includes('/admin')) {
+      this.setState({
+        productsClasses: 'navbar-item',
+        inventoryClasses: 'navbar-item',
+        workstreamClasses: 'navbar-item',
+        adminClasses: 'navbar-item is-active'
       });
     }
   };
@@ -61,6 +72,7 @@ class Header extends React.Component {
                   <a className={this.state.productsClasses} href="/products">Products</a>
                   <a className={this.state.inventoryClasses} href="/inventory">Inventory</a>
                   <a className={this.state.workstreamClasses} href="/workstream">WorkStream</a>
+                  <a className={this.state.adminClasses} href="/admin">Admin</a>
                 </div>
                 <div className="navbar-item has-dropdown is-hoverable">
                   <a className="navbar-link is-hidden-touch">
