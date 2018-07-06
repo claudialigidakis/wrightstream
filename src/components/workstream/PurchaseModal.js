@@ -10,6 +10,8 @@ import PurchaseSupply from './PurchaseSupply';
 import PurchaseItem from './PurchaseItem';
 import PurchaseBundle from './PurchaseBundle';
 import PurchaseProductDetails from './PurchaseProductDetails';
+import PurchaseQuality from './PurchaseQuality';
+import PurchaseNotes from './PurchaseNotes';
 
 // ==========
 
@@ -125,6 +127,7 @@ class PurchaseModal extends React.Component {
   };
 
   render () {
+    console.log(this.props.purchase)
     return (
       <div className="columns is-marginless">
         <div className="column is-5 modal-sidebar">
@@ -314,20 +317,7 @@ class PurchaseModal extends React.Component {
           </div>
 
           <div className={this.state.qualityClasses}>
-            <ul>
-              <li>
-                <div className="field">
-                  <input className="is-checkradio" id="ready" type="radio" name="quality" />
-                  <label htmlFor="ready">Ready for delivery</label>
-                </div>
-              </li>
-              <li>
-                <div className="field">
-                  <input className="is-checkradio" id="sendback" type="radio" name="quality" />
-                  <label htmlFor="sendback">Send back to crafting</label>
-                </div>
-              </li>
-            </ul>
+            <PurchaseQuality purchase={this.props.purchase} />
           </div>
 
           <div className="purchase-row level" onClick={this.collapseSchedule}>
@@ -399,18 +389,7 @@ class PurchaseModal extends React.Component {
           </div>
 
           <div className={this.state.notesClasses}>
-            <ul>
-              <li>
-                <div className="field">
-                  <textarea
-                    className="textarea"
-                    placeholder="Write your comments here..."
-                    id="notes"
-                    value={this.state.notes}
-                  />
-                </div>
-              </li>
-            </ul>
+            <PurchaseNotes purchase={this.props.purchase} />
           </div>
 
         </div>

@@ -4,6 +4,8 @@ export const GET_PURCHASES = 'GET_PURCHASES';
 export const CHANGE_STATUS = 'CHANGE_STATUS';
 export const COMPLETE_ITEM = 'COMPLETE_ITEM';
 export const COMPLETE_BUNDLE = 'COMPLETE_BUNDLE';
+export const QUALITY_CHECK = 'QUALITY_CHECK';
+export const ADD_NOTES = 'ADD_NOTES';
 
 export const getPurchases = () => (
   dispatch => {
@@ -71,6 +73,44 @@ export const completeBundle = (purchase_id, bundle_id, completed) => (
       .then(response => {
         dispatch({
           type: COMPLETE_BUNDLE,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const qualityCheck = (purchase_id, quality_check) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/purchases/${purchase_id}`, 'put', {quality_check})
+      .then(response => {
+        return request(`/purchases/${shop_id}/allPurchases`);
+      })
+      .then(response => {
+        dispatch({
+          type: QUALITY_CHECK,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const addNotes = (purchase_id, notes) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/purchases/${purchase_id}`, 'put', {notes})
+      .then(response => {
+        return request(`/purchases/${shop_id}/allPurchases`);
+      })
+      .then(response => {
+        dispatch({
+          type: ADD_NOTES,
           payload: response.data.data
         });
       });

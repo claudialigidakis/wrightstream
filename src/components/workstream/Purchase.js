@@ -38,6 +38,8 @@ class Purchase extends React.Component {
     this.props.changeStatus(this.props.purchase.id, status, completed);
   };
 
+  
+
   render () {
     return (
       <div>
