@@ -139,14 +139,14 @@ class WorkStream extends React.Component {
               Assign
             </div>
           </div>
-          {/* <div className="column is-3">
+          <div className="column is-3">
             <h1 className="title is-4">
               Pick Up
             </h1>
             <div className="column-container">
               {
                 this.props.purchases.map(purchase => {
-                  if (purchase.statuses.find(status => status.status_id === 4).completed === true) {
+                  if (purchase.statuses.find(status => status.status_id === 4).completed === true && purchase.pick_up) {
                     return (
                       <Purchase
                         key={purchase.id}
@@ -162,7 +162,7 @@ class WorkStream extends React.Component {
             <div className="column-button">
               Archive
             </div>
-          </div> */}
+          </div>
           <div className="column is-3">
             <h1 className="title is-4">
               Ship
@@ -170,7 +170,7 @@ class WorkStream extends React.Component {
             <div className="column-container">
               {
                 this.props.purchases.map(purchase => {
-                  if (purchase.statuses.find(status => status.status_id === 4).completed === true) {
+                  if (purchase.statuses.find(status => status.status_id === 4).completed === true && purchase.pick_up === false) {
                     return (
                       <Purchase
                         key={purchase.id}
@@ -182,9 +182,6 @@ class WorkStream extends React.Component {
                   }
                 })
               }
-              {/* <Purchase11 item={this.props.items[12]} categories={this.props.categories} />
-              <Purchase12 item={this.props.items[13]} categories={this.props.categories} />
-              <Purchase13 item={this.props.items[16]} categories={this.props.categories} /> */}
             </div>
             <div className="column-button">
               Archive
