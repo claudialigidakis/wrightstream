@@ -11,6 +11,7 @@ import PurchaseItem from './PurchaseItem';
 import PurchaseBundle from './PurchaseBundle';
 import PurchaseProductDetails from './PurchaseProductDetails';
 import PurchaseQuality from './PurchaseQuality';
+import PurchaseSchedule from './PurchaseSchedule';
 import PurchaseNotes from './PurchaseNotes';
 
 // ==========
@@ -278,7 +279,7 @@ class PurchaseModal extends React.Component {
                   })
                 }
               </ul>
-              <div className="has-text-centered" style={{padding:'1rem'}}>
+              <div className="has-text-centered" style={{padding: '1rem'}}>
                 <button
                   className="button is-small is-primary"
                   disabled={
@@ -315,7 +316,6 @@ class PurchaseModal extends React.Component {
               </div>
             </div>
           </div>
-
           <div className={this.state.qualityClasses}>
             <PurchaseQuality purchase={this.props.purchase} />
           </div>
@@ -328,55 +328,8 @@ class PurchaseModal extends React.Component {
               </div>
             </div>
           </div>
-
           <div className={this.state.scheduleClasses}>
-            <ul>
-              <li>
-                <div className="field">
-                  <input className="is-checkradio" id="ready" type="radio" name="quality" />
-                  <label htmlFor="ready">Pick Up</label>
-                </div>
-              </li>
-              <li>
-                <div className="field">
-                  <input className="is-checkradio" id="sendback" type="radio" name="quality" />
-                  <label htmlFor="sendback">Ship</label>
-                </div>
-              </li>
-              <li>
-                <div className="field">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Delivery Service"
-                    id="service"
-                    value={this.state.service}
-                  />
-                </div>
-              </li>
-              <li>
-                <div className="field">
-                  <input
-                    className="input"
-                    type="date"
-                    placeholder="Shipping Date"
-                    id="date"
-                    value={this.state.date}
-                  />
-                </div>
-              </li>
-              <li>
-                <div className="field">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Tracking Number"
-                    id="tracking-number"
-                    value={this.state.tracking}
-                  />
-                </div>
-              </li>
-            </ul>
+            <PurchaseSchedule purchase={this.props.purchase} />
           </div>
 
           <div className="purchase-row level" onClick={this.collapseNotes}>
@@ -387,7 +340,6 @@ class PurchaseModal extends React.Component {
               </div>
             </div>
           </div>
-
           <div className={this.state.notesClasses}>
             <PurchaseNotes purchase={this.props.purchase} />
           </div>

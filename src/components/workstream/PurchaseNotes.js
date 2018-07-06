@@ -34,7 +34,7 @@ class PurchaseQuality extends React.Component {
             }}
           />
         </div>
-        <div className="has-text-centered" style={{paddingBottom:'1rem'}}>
+        <div className="has-text-centered" style={{paddingBottom: '1rem'}}>
           <button
             className="button is-small is-primary"
             disabled={this.state.notes === ''}
