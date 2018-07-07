@@ -16,7 +16,7 @@ class PurchaseSchedule extends React.Component {
     super(props);
     const today = new Date();
     this.state = {
-      checked: this.props.purchase.pick_up || this.props.purchase.pick_up === false ? this.props.purchase.pick_up : null,
+      checked: this.props.purchase.pick_up || this.props.purchase.pick_up === false ? this.props.purchase.pick_up : undefined,
       pickupClasses: this.props.purchase.pick_up ? '' : 'is-hidden',
       shipClasses: this.props.purchase.pick_up === false ? '' : 'is-hidden',
       date: this.props.purchase.delivery_date ? this.props.purchase.delivery_date : moment(today).format('YYYY-MM-DD'),
@@ -64,7 +64,6 @@ class PurchaseSchedule extends React.Component {
               className="is-checkradio"
               id="pickup"
               type="radio"
-              name="schedule"
               checked={this.state.checked === true}
               onChange={event => {event.preventDefault()}}
             />
@@ -100,7 +99,6 @@ class PurchaseSchedule extends React.Component {
               className="is-checkradio"
               id="ship"
               type="radio"
-              name="schedule"
               checked={this.state.checked === false}
               onChange={event => {event.preventDefault()}}
             />

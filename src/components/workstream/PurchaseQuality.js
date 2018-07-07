@@ -12,13 +12,13 @@ class PurchaseQuality extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      checked: this.props.purchase.quality_check ? true : null
+      checked: this.props.purchase.quality_check ? true : ''
     };
   };
 
   check = boolean => {
-    this.props.qualityCheck(this.props.purchase.id, boolean);
     this.setState({checked: boolean});
+    this.props.qualityCheck(this.props.purchase.id, boolean);
     if (this.props.purchase.quality_check && (this.props.purchase.pick_up || this.props.purchase.pick_up === false)) {
       this.props.changeStatus(4, true);
     }
@@ -33,7 +33,6 @@ class PurchaseQuality extends React.Component {
               className="is-checkradio"
               id="ready"
               type="radio"
-              name="quality"
               checked={this.state.checked}
               onChange={event => {event.preventDefault()}}
             />
@@ -51,7 +50,6 @@ class PurchaseQuality extends React.Component {
               className="is-checkradio"
               id="sendback"
               type="radio"
-              name="quality"
               checked={this.state.checked === false}
               onChange={event => {event.preventDefault()}}
             />
