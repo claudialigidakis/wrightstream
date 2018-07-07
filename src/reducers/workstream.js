@@ -4,7 +4,6 @@ import {
   COMPLETE_ITEM,
   COMPLETE_BUNDLE,
   QUALITY_CHECK,
-  PICK_UP,
   SCHEDULE,
   ADD_NOTES
 } from '../actions/workstream';
@@ -24,8 +23,6 @@ export default (state = initialState, action) => {
     case COMPLETE_BUNDLE:
       return {...state, purchases: action.payload};
     case QUALITY_CHECK:
-      return {...state, purchases: action.payload};
-    case PICK_UP:
       return {...state, purchases: action.payload};
     case SCHEDULE:
       return {...state, purchases: action.payload};

@@ -16,16 +16,9 @@ class PurchaseQuality extends React.Component {
     };
   };
 
-  checkReady = () => {
-    this.setState({checked: true});
-  };
-
-  checkSendBack = () => {
-    this.setState({checked: false});
-  };
-
-  qualityCheck = boolean => {
+  check = boolean => {
     this.props.qualityCheck(this.props.purchase.id, boolean);
+    this.setState({checked: boolean});
     if (this.props.purchase.quality_check && (this.props.purchase.pick_up || this.props.purchase.pick_up === false)) {
       this.props.changeStatus(4, true);
     }
@@ -41,15 +34,12 @@ class PurchaseQuality extends React.Component {
               id="ready"
               type="radio"
               name="quality"
-              checked={this.state.checked === true}
+              checked={this.state.checked}
               onChange={event => {event.preventDefault()}}
             />
             <label
               htmlFor="ready"
-              onClick={() => {
-                this.checkReady();
-                this.qualityCheck(true);
-              }}
+              onClick={() => {this.check(true)}}
             >
               Ready for delivery
             </label>
@@ -67,10 +57,7 @@ class PurchaseQuality extends React.Component {
             />
             <label
               htmlFor="sendback"
-              onClick={() => {
-                this.checkSendBack();
-                this.qualityCheck(false);
-              }}
+              onClick={() => {this.check(false)}}
             >
               Send back to crafting
             </label>

@@ -5,7 +5,6 @@ export const CHANGE_STATUS = 'CHANGE_STATUS';
 export const COMPLETE_ITEM = 'COMPLETE_ITEM';
 export const COMPLETE_BUNDLE = 'COMPLETE_BUNDLE';
 export const QUALITY_CHECK = 'QUALITY_CHECK';
-export const PICK_UP = 'PICK_UP';
 export const SCHEDULE = 'SCHEDULE';
 export const ADD_NOTES = 'ADD_NOTES';
 
@@ -101,31 +100,12 @@ export const qualityCheck = (purchase_id, quality_check) => (
   }
 );
 
-export const pickUp = (purchase_id, pick_up) => (
+export const schedule = (purchase_id, pick_up, delivery_date, service, tracking) => (
   dispatch => {
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/purchases/${purchase_id}`, 'put', {pick_up})
-      .then(response => {
-        return request(`/purchases/${shop_id}/allPurchases`);
-      })
-      .then(response => {
-        dispatch({
-          type: PICK_UP,
-          payload: response.data.data
-        });
-      });
-    });
-  }
-);
-
-export const schedule = (purchase_id, delivery_date, service, tracking) => (
-  dispatch => {
-    request('/auth/token')
-    .then(response => {
-      const shop_id = response.data.shops_id;
-      request(`/purchases/${purchase_id}`, 'put', {delivery_date, service, tracking})
+      request(`/purchases/${purchase_id}`, 'put', {pick_up, delivery_date, service, tracking})
       .then(response => {
         return request(`/purchases/${shop_id}/allPurchases`);
       })

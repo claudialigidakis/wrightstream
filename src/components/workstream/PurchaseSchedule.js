@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { pickUp, schedule } from '../../actions/workstream';
+import { schedule } from '../../actions/workstream';
 
 // HELPERS
 const moment = require('moment');
@@ -23,6 +23,10 @@ class PurchaseSchedule extends React.Component {
       service: this.props.purchase.service ? this.props.purchase.service : '',
       tracking: this.props.purchase.tracking ? this.props.purchase.tracking : ''
     };
+  };
+
+  check = boolean => {
+    this.setState({checked: boolean}, this.toggle);
   };
 
   toggle = () => {
@@ -44,20 +48,8 @@ class PurchaseSchedule extends React.Component {
     }
   };
 
-  checkPickUp = () => {
-    this.setState({checked: true}, this.toggle);
-  };
-
-  checkShip = () => {
-    this.setState({checked: false}, this.toggle);
-  };
-
-  pickUp = boolean => {
-    this.props.pickUp(this.props.purchase.id, boolean);
-  };
-
-  schedule = (date, service = null, tracking = null) => {
-    this.props.schedule(this.props.purchase.id, date, service !== '' ? service : null, tracking !== '' ? tracking : null);
+  schedule = (pickup, date, service = null, tracking = null) => {
+    this.props.schedule(this.props.purchase.id, pickup, date, service !== '' ? service : null, tracking !== '' ? tracking : null);
     if (this.props.purchase.quality_check && (this.props.purchase.pick_up || this.props.purchase.pick_up === false)) {
       this.props.changeStatus(4, true);
     }
@@ -78,10 +70,7 @@ class PurchaseSchedule extends React.Component {
             />
             <label
               htmlFor="pickup"
-              onClick={() => {
-                this.checkPickUp();
-                this.pickUp(true);
-              }}
+              onClick={() => {this.check(true)}}
             >
               Pick Up
             </label>
@@ -101,7 +90,7 @@ class PurchaseSchedule extends React.Component {
             <button
               className="button is-small is-primary"
               disabled={!this.state.date}
-              onClick={() => this.schedule(this.state.date)}
+              onClick={() => this.schedule(true, this.state.date)}
             >Save</button>
           </div>
         </li>
@@ -117,10 +106,7 @@ class PurchaseSchedule extends React.Component {
             />
             <label
               htmlFor="ship"
-              onClick={() => {
-                this.checkShip();
-                this.pickUp(false);
-              }}
+              onClick={() => {this.check(false)}}
             >
               Ship
             </label>
@@ -160,7 +146,7 @@ class PurchaseSchedule extends React.Component {
             <button
               className="button is-small is-primary"
               disabled={!this.state.date}
-              onClick={() => this.schedule(this.state.date, this.state.service, this.state.tracking)}
+              onClick={() => this.schedule(false, this.state.date, this.state.service, this.state.tracking)}
             >Save</button>
           </div>
         </li>
@@ -170,7 +156,6 @@ class PurchaseSchedule extends React.Component {
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  pickUp,
   schedule
 }, dispatch);
 
