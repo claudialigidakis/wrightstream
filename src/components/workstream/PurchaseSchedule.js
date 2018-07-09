@@ -50,10 +50,15 @@ class PurchaseSchedule extends React.Component {
 
   schedule = (pickup, date, service = null, tracking = null) => {
     this.props.schedule(this.props.purchase.id, pickup, date, service !== '' ? service : null, tracking !== '' ? tracking : null);
-    if (this.props.purchase.quality_check && (this.props.purchase.pick_up || this.props.purchase.pick_up === false)) {
-      this.props.changeStatus(4, true);
-    }
   };
+
+  componentDidUpdate (prevProps) {
+    if (this.props.purchase.quality_check !== prevProps.purchase.quality_check || this.props.purchase.pick_up !== prevProps.purchase.pick_up) {
+      if (this.props.purchase.quality_check && (this.props.purchase.pick_up || this.props.purchase.pick_up === false)) {
+        this.props.changeStatus(4, true);
+      }
+    }
+  }
 
   render () {
     return (
@@ -89,7 +94,9 @@ class PurchaseSchedule extends React.Component {
             <button
               className="button is-small is-primary"
               disabled={!this.state.date}
-              onClick={() => this.schedule(true, this.state.date)}
+              onClick={() => {
+                this.schedule(true, this.state.date);
+              }}
             >Save</button>
           </div>
         </li>
@@ -144,7 +151,9 @@ class PurchaseSchedule extends React.Component {
             <button
               className="button is-small is-primary"
               disabled={!this.state.date}
-              onClick={() => this.schedule(false, this.state.date, this.state.service, this.state.tracking)}
+              onClick={() => {
+                this.schedule(false, this.state.date, this.state.service, this.state.tracking);
+              }}
             >Save</button>
           </div>
         </li>

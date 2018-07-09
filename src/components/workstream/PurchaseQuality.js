@@ -19,8 +19,13 @@ class PurchaseQuality extends React.Component {
   check = boolean => {
     this.setState({checked: boolean});
     this.props.qualityCheck(this.props.purchase.id, boolean);
-    if (this.props.purchase.quality_check && (this.props.purchase.pick_up || this.props.purchase.pick_up === false)) {
-      this.props.changeStatus(4, true);
+  };
+
+  componentDidUpdate (prevProps) {
+    if (this.props.purchase.quality_check !== prevProps.purchase.quality_check || this.props.purchase.pick_up !== prevProps.purchase.pick_up) {
+      if (this.props.purchase.quality_check && (this.props.purchase.pick_up || this.props.purchase.pick_up === false)) {
+        this.props.changeStatus(4, true);
+      }
     }
   };
 
@@ -38,7 +43,9 @@ class PurchaseQuality extends React.Component {
             />
             <label
               htmlFor="ready"
-              onClick={() => {this.check(true)}}
+              onClick={() => {
+                this.check(true);
+              }}
             >
               Ready for delivery
             </label>
@@ -55,7 +62,9 @@ class PurchaseQuality extends React.Component {
             />
             <label
               htmlFor="sendback"
-              onClick={() => {this.check(false)}}
+              onClick={() => {
+                this.check(false);
+              }}
             >
               Send back to crafting
             </label>
