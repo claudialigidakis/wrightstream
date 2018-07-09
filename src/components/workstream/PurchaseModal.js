@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 // COMPONENTS
 import PurchaseStatus from './PurchaseStatus';
-import PurchaseAssign from './PurchaseAssign';
+import PurchasePhoto from './PurchasePhoto';
 import PurchaseProgress from './PurchaseProgress';
 import PurchaseSupplies from './PurchaseSupplies';
 import PurchaseProducts from './PurchaseProducts';
@@ -131,111 +131,113 @@ class PurchaseModal extends React.Component {
 
   render () {
     return (
-      <div className="columns is-marginless">
-        <div className="column is-5 modal-sidebar">
-          <PurchaseStatus purchase={this.props.purchase} text={true} />
-          <div className="purchase-header level">
-            <div className="level-left">
-              <div className="level-item">
-                <div className="store-logo">
-                  C
+      <div className="modal-content modal-purchase">
+        <div className="columns is-marginless">
+          <div className="column is-5 modal-sidebar">
+            <PurchaseStatus purchase={this.props.purchase} text={true} />
+            <div className="purchase-header level">
+              <div className="level-left">
+                <div className="level-item">
+                  <div className="store-logo">
+                    C
+                  </div>
+                </div>
+                <div className="level-item">
+                  <h1 className="title is-5 is-marginless">Purchase #{this.props.purchase.id}</h1>
                 </div>
               </div>
-              <div className="level-item">
-                <h1 className="title is-5 is-marginless">Purchase #{this.props.purchase.id}</h1>
-              </div>
-            </div>
-            <div className="level-right">
-              <div className="level-item">
-                <div className="purchase-profile">
-                  <PurchaseAssign purchase={this.props.purchase} user={this.props.user} changeStatus={this.props.changeStatus} />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="purchase-row level" onClick={this.collapseSupplies}>
-            <div className="level-left">
-              <div className="level-item">
-                <h2 className="title is-5 is-marginless">Supplies</h2>
-                <i className={this.state.suppliesArrow}></i>
-              </div>
-            </div>
-            <div className="level-right">
-              <div className="level-item">
-                <PurchaseProgress purchase={this.props.purchase} progress="supplies" />
-              </div>
-            </div>
-          </div>
-          <div className={this.state.suppliesClasses}>
-            <PurchaseSupplies purchase={this.props.purchase} />
-          </div>
-
-          <div className="purchase-row level" onClick={this.collapseProducts}>
-            <div className="level-left">
-              <div className="level-item">
-                <h2 className="title is-5 is-marginless" onClick={this.toggle}>Products</h2>
-                <i className={this.state.productsArrow}></i>
-              </div>
-            </div>
-            <div className="level-right">
-              <div className="level-item">
-                <PurchaseProgress purchase={this.props.purchase} progress="products" />
-              </div>
-            </div>
-          </div>
-          <div className={this.state.productsClasses}>
-            <PurchaseProducts purchase={this.props.purchase} toggle={this.toggle} changeStatus={this.props.changeStatus} />
-          </div>
-
-          <div className="purchase-row level" onClick={this.collapseQuality}>
-            <div className="level-left">
-              <div className="level-item">
-                <h2 className="title is-5 is-marginless">Quality Check</h2>
-                <i className={this.state.qualityArrow}></i>
-              </div>
-            </div>
-            <div className="level-right">
-              <div className="level-item">
-                <div className="purchase-profile">
-                  {/* <img src={this.props.user.photo} alt='' /> */}
+              <div className="level-right">
+                <div className="level-item">
+                  <div className="purchase-profile">
+                    <PurchasePhoto purchase={this.props.purchase} user={this.props.user} changeStatus={this.props.changeStatus} assign={this.props.assign} />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className={this.state.qualityClasses}>
-            <PurchaseQuality purchase={this.props.purchase} changeStatus={this.props.changeStatus} />
-          </div>
 
-          <div className="purchase-row level" onClick={this.collapseSchedule}>
-            <div className="level-left">
-              <div className="level-item">
-                <h2 className="title is-5 is-marginless">Schedule</h2>
-                <i className={this.state.scheduleArrow}></i>
+            <div className="purchase-row level" onClick={this.collapseSupplies}>
+              <div className="level-left">
+                <div className="level-item">
+                  <h2 className="title is-5 is-marginless">Supplies</h2>
+                  <i className={this.state.suppliesArrow}></i>
+                </div>
+              </div>
+              <div className="level-right">
+                <div className="level-item">
+                  <PurchaseProgress purchase={this.props.purchase} progress="supplies" />
+                </div>
               </div>
             </div>
-          </div>
-          <div className={this.state.scheduleClasses}>
-            <PurchaseSchedule purchase={this.props.purchase} changeStatus={this.props.changeStatus} />
-          </div>
+            <div className={this.state.suppliesClasses}>
+              <PurchaseSupplies purchase={this.props.purchase} />
+            </div>
 
-          <div className="purchase-row level" onClick={this.collapseNotes}>
-            <div className="level-left">
-              <div className="level-item">
-                <h2 className="title is-5 is-marginless">Notes</h2>
-                <i className={this.state.notesArrow}></i>
+            <div className="purchase-row level" onClick={this.collapseProducts}>
+              <div className="level-left">
+                <div className="level-item">
+                  <h2 className="title is-5 is-marginless" onClick={this.toggle}>Products</h2>
+                  <i className={this.state.productsArrow}></i>
+                </div>
+              </div>
+              <div className="level-right">
+                <div className="level-item">
+                  <PurchaseProgress purchase={this.props.purchase} progress="products" />
+                </div>
               </div>
             </div>
-          </div>
-          <div className={this.state.notesClasses}>
-            <PurchaseNotes purchase={this.props.purchase} />
-          </div>
+            <div className={this.state.productsClasses}>
+              <PurchaseProducts purchase={this.props.purchase} toggle={this.toggle} changeStatus={this.props.changeStatus} />
+            </div>
 
-        </div>
-        <div className="column is-7">
-          {
-            this.state.product ? <PurchaseProductDetails bundle={this.state.bundle} product={this.state.product} /> : null
-          }
+            <div className="purchase-row level" onClick={this.collapseQuality}>
+              <div className="level-left">
+                <div className="level-item">
+                  <h2 className="title is-5 is-marginless">Quality Check</h2>
+                  <i className={this.state.qualityArrow}></i>
+                </div>
+              </div>
+              <div className="level-right">
+                <div className="level-item">
+                  <div className="purchase-profile">
+                    {/* <img src={this.props.user.photo} alt='' /> */}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className={this.state.qualityClasses}>
+              <PurchaseQuality purchase={this.props.purchase} changeStatus={this.props.changeStatus} />
+            </div>
+
+            <div className="purchase-row level" onClick={this.collapseSchedule}>
+              <div className="level-left">
+                <div className="level-item">
+                  <h2 className="title is-5 is-marginless">Schedule</h2>
+                  <i className={this.state.scheduleArrow}></i>
+                </div>
+              </div>
+            </div>
+            <div className={this.state.scheduleClasses}>
+              <PurchaseSchedule purchase={this.props.purchase} changeStatus={this.props.changeStatus} />
+            </div>
+
+            <div className="purchase-row level" onClick={this.collapseNotes}>
+              <div className="level-left">
+                <div className="level-item">
+                  <h2 className="title is-5 is-marginless">Notes</h2>
+                  <i className={this.state.notesArrow}></i>
+                </div>
+              </div>
+            </div>
+            <div className={this.state.notesClasses}>
+              <PurchaseNotes purchase={this.props.purchase} />
+            </div>
+
+          </div>
+          <div className="column is-7">
+            {
+              this.state.product ? <PurchaseProductDetails bundle={this.state.bundle} product={this.state.product} /> : null
+            }
+          </div>
         </div>
       </div>
     );

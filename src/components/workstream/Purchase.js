@@ -7,12 +7,13 @@ import { connect } from 'react-redux';
 import { changeStatus } from '../../actions/workstream';
 
 // COMPONENTS
-import PurchaseModal from './PurchaseModal';
 import PurchaseStatus from './PurchaseStatus';
-import PurchaseAssign from './PurchaseAssign';
+import PurchasePhoto from './PurchasePhoto';
 import PurchaseProgress from './PurchaseProgress';
 import PurchaseIcon from './PurchaseIcon';
 import PurchaseAction from './PurchaseAction';
+import PurchaseModal from './PurchaseModal';
+import PurchaseAssign from './PurchaseAssign';
 
 // ==========
 
@@ -21,7 +22,9 @@ class Purchase extends React.Component {
     super(props);
     this.state = {
       modal: false,
-      modalClasses: 'modal'
+      modalClasses: 'modal',
+      assign: false,
+      assignClasses: 'modal'
     };
   };
 
@@ -35,6 +38,20 @@ class Purchase extends React.Component {
       this.setState({
         modal: false,
         modalClasses: 'modal'
+      });
+    }
+  };
+
+  assign = () => {
+    if (!this.state.assign) {
+      this.setState({
+        assign: true,
+        assignClasses: this.state.assignClasses + ' is-active'
+      });
+    } else {
+      this.setState({
+        assign: false,
+        assignClasses: 'modal'
       });
     }
   };
@@ -74,7 +91,7 @@ class Purchase extends React.Component {
                   </div>
                 </div>
                 <div className="column is-2 purchase-profile">
-                  <PurchaseAssign purchase={this.props.purchase} user={this.props.user} changeStatus={this.changeStatus} />
+                  <PurchasePhoto purchase={this.props.purchase} user={this.props.user} changeStatus={this.changeStatus} assign={this.assign} />
                 </div>
                 <div className="column is-2 purchase-drag">
                   <PurchaseIcon purchase={this.props.purchase} />
@@ -86,10 +103,13 @@ class Purchase extends React.Component {
         </div>
         <div className={this.state.modalClasses}>
           <div className="modal-background" onClick={this.toggle}></div>
-          <div className="modal-content modal-purchase">
-            <PurchaseModal purchase={this.props.purchase} user={this.props.user} changeStatus={this.changeStatus} />
-          </div>
-          <button className="modal-close is-large" aria-label="close" onClick={this.toggle}></button>
+          <PurchaseModal purchase={this.props.purchase} user={this.props.user} changeStatus={this.changeStatus} assign={this.assign} />
+          <button className="modal-close is-large" onClick={this.toggle}></button>
+        </div>
+        <div className={this.state.assignClasses}>
+          <div className="modal-background" onClick={this.assign}></div>
+          <PurchaseAssign purchase={this.props.purchase} />
+          <button className="modal-close is-large" onClick={this.assign}></button>
         </div>
       </div>
     );
