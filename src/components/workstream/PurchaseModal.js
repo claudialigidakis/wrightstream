@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // COMPONENTS
+import PurchaseStatus from './PurchaseStatus';
 import PurchaseSupplies from './PurchaseSupplies';
 import PurchaseProducts from './PurchaseProducts';
 import PurchaseProductDetails from './PurchaseProductDetails';
@@ -130,49 +131,7 @@ class PurchaseModal extends React.Component {
     return (
       <div className="columns is-marginless">
         <div className="column is-5 modal-sidebar">
-          <div
-            className={
-              (() => {
-                if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
-                  if ((this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100 === 0) {
-                    return 'purchase-status status-red';
-                  } else if ((this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100 === 100) {
-                    return 'purchase-status status-green';
-                  } else {
-                    return 'purchase-status status-yellow';
-                  }
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
-                  return 'purchase-status';
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
-                  return 'purchase-status';
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-                  if (this.props.purchase.quality_check || (this.props.purchase.pick_up || this.props.purchase.pick_up === false)) {
-                    return 'purchase-status status-yellow';
-                  } else {
-                    return 'purchase-status status-red';
-                  }
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
-                  return 'purchase-status';
-                }
-              })()
-            }
-          >
-            {
-              (() => {
-                if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
-                  return 'Backlog';
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
-                  return 'Pending';
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
-                  return 'Crafting';
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-                  return 'Finalize';
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
-                  return 'Delivery';
-                }
-              })()
-            }
-          </div>
+          <PurchaseStatus purchase={this.props.purchase} text={true} />
           <div className="purchase-header level">
             <div className="level-left">
               <div className="level-item">

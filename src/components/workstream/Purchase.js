@@ -8,6 +8,7 @@ import { changeStatus } from '../../actions/workstream';
 
 // COMPONENTS
 import PurchaseModal from './PurchaseModal';
+import PurchaseStatus from './PurchaseStatus';
 
 // HELPERS
 const moment = require('moment');
@@ -45,33 +46,7 @@ class Purchase extends React.Component {
     return (
       <div>
         <div className="card">
-          <header
-            className={
-              (() => {
-                if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
-                  if ((this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100 === 0) {
-                    return 'card-header status-red';
-                  } else if ((this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100 === 100) {
-                    return 'card-header status-green';
-                  } else {
-                    return 'card-header status-yellow';
-                  }
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
-                  return 'card-header';
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
-                  return 'card-header';
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-                  if (this.props.purchase.quality_check || (this.props.purchase.pick_up || this.props.purchase.pick_up === false)) {
-                    return 'card-header status-yellow';
-                  } else {
-                    return 'card-header status-red';
-                  }
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
-                  return 'card-header';
-                }
-              })()
-            }
-          ></header>
+          <PurchaseStatus purchase={this.props.purchase} text={false} />
           <div className="card-content">
             <div className="content">
               <div className="columns is-marginless">
