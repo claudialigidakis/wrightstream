@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 
 // COMPONENTS
 import PurchaseStatus from './PurchaseStatus';
+import PurchaseAssign from './PurchaseAssign';
+import PurchaseProgress from './PurchaseProgress';
 import PurchaseSupplies from './PurchaseSupplies';
 import PurchaseProducts from './PurchaseProducts';
 import PurchaseProductDetails from './PurchaseProductDetails';
@@ -146,19 +148,7 @@ class PurchaseModal extends React.Component {
             <div className="level-right">
               <div className="level-item">
                 <div className="purchase-profile">
-                  {
-                    (() => {
-                      if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
-                        return <div className="empty-photo" onClick={() => this.props.changeStatus(2, true)}></div>;
-                      } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
-                        return <img src={this.props.user.photo} alt='' onClick={() => this.props.changeStatus(2, false)} />;
-                      } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-                        return <div className="empty-photo"></div>;
-                      } else {
-                        return null;
-                      }
-                    })()
-                  }
+                  <PurchaseAssign purchase={this.props.purchase} user={this.props.user} changeStatus={this.props.changeStatus} />
                 </div>
               </div>
             </div>
@@ -173,10 +163,7 @@ class PurchaseModal extends React.Component {
             </div>
             <div className="level-right">
               <div className="level-item">
-                <progress
-                  className="progress is-small"
-                  value={(this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100}
-                  max="100" />
+                <PurchaseProgress purchase={this.props.purchase} progress="supplies" />
               </div>
             </div>
           </div>
@@ -193,12 +180,7 @@ class PurchaseModal extends React.Component {
             </div>
             <div className="level-right">
               <div className="level-item">
-                <progress
-                  className="progress is-small"
-                  value={
-                    ((this.props.purchase.items.filter(item => item.completed).length + this.props.purchase.bundles.filter(bundle => bundle.completed).length) / (this.props.purchase.items.length + this.props.purchase.bundles.length)) * 100
-                  }
-                  max="100" />
+                <PurchaseProgress purchase={this.props.purchase} progress="products" />
               </div>
             </div>
           </div>
