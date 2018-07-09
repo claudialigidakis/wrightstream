@@ -6,9 +6,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // COMPONENTS
-import PurchaseSupply from './PurchaseSupply';
-import PurchaseItem from './PurchaseItem';
-import PurchaseBundle from './PurchaseBundle';
+import PurchaseSupplies from './PurchaseSupplies';
+import PurchaseProducts from './PurchaseProducts';
 import PurchaseProductDetails from './PurchaseProductDetails';
 import PurchaseQuality from './PurchaseQuality';
 import PurchaseSchedule from './PurchaseSchedule';
@@ -222,15 +221,8 @@ class PurchaseModal extends React.Component {
               </div>
             </div>
           </div>
-
           <div className={this.state.suppliesClasses}>
-            <ul>
-              {
-                this.props.purchase.supplies.map(supply => {
-                  return <PurchaseSupply key={supply.supplies_id} supply={supply} />;
-                })
-              }
-            </ul>
+            <PurchaseSupplies purchase={this.props.purchase} />
           </div>
 
           <div className="purchase-row level" onClick={this.collapseProducts}>
@@ -251,57 +243,8 @@ class PurchaseModal extends React.Component {
               </div>
             </div>
           </div>
-
           <div className={this.state.productsClasses}>
-            <div
-              className={
-                (() => {
-                  if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
-                    return 'disable';
-                  } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
-                    return 'disable';
-                  } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
-                    return null;
-                  } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-                    return 'disable';
-                  } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
-                    return 'disable';
-                  }
-                })()
-              }
-            >
-              <ul>
-                {
-                  this.props.purchase.bundles.map(bundle => {
-                    return <PurchaseBundle key={bundle.id} bundle={bundle} purchase={this.props.purchase} toggle={this.toggle} />;
-                  })
-                }
-                {
-                  this.props.purchase.items.map(item => {
-                    return <PurchaseItem key={item.id} item={item} purchase={this.props.purchase} toggle={this.toggle} />;
-                  })
-                }
-              </ul>
-              <div className="has-text-centered" style={{padding: '1rem'}}>
-                <button
-                  className="button is-small is-primary"
-                  disabled={
-                    (() => {
-                      if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true) {
-                        return true;
-                      } else {
-                        if (((this.props.purchase.items.filter(item => item.completed).length + this.props.purchase.bundles.filter(bundle => bundle.completed).length) / (this.props.purchase.items.length + this.props.purchase.bundles.length)) * 100 === 100) {
-                          return false;
-                        } else {
-                          return true;
-                        }
-                      }
-                    })()
-                  }
-                  onClick={() => this.props.changeStatus(3, true)}
-                >Complete Products</button>
-              </div>
-            </div>
+            <PurchaseProducts purchase={this.props.purchase} toggle={this.toggle} changeStatus={this.props.changeStatus} />
           </div>
 
           <div className="purchase-row level" onClick={this.collapseQuality}>
