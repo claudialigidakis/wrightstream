@@ -22,11 +22,23 @@ class Lists extends React.Component {
       lists: [],
       selected: [],
       items: [],
-      bundles: [{id:1, bundle_qty: 1}],
+      bundles: [],
       id: null,
       modal: false,
       modalClasses: 'modal'
     };
+  };
+
+  clear = () => {
+    this.setState({
+      lists: [],
+      selected: [],
+      items: [],
+      bundles: [],
+      id: null,
+      modal: false,
+      modalClasses: 'modal'
+    });
   };
 
   toggle = id => {
@@ -80,7 +92,8 @@ class Lists extends React.Component {
 
   handleSubmit = () => {
     const items = this.state.items.map(item => ({id: item.item_id, item_qty: item.item_qty}));
-   this.props.addOrder({items, bundles: this.state.bundles});
+    this.props.addOrder({items, bundles: this.state.bundles});
+    this.clear();
   };
 
   componentDidMount () {

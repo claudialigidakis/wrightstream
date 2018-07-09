@@ -8,6 +8,11 @@ import { changeStatus } from '../../actions/workstream';
 
 // COMPONENTS
 import PurchaseModal from './PurchaseModal';
+import PurchaseStatus from './PurchaseStatus';
+import PurchaseAssign from './PurchaseAssign';
+import PurchaseProgress from './PurchaseProgress';
+import PurchaseIcon from './PurchaseIcon';
+import PurchaseAction from './PurchaseAction';
 
 // ==========
 
@@ -42,29 +47,7 @@ class Purchase extends React.Component {
     return (
       <div>
         <div className="card">
-          <header
-            className={
-              (() => {
-                if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
-                  if ((this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100 === 0) {
-                    return 'card-header status-red';
-                  } else if ((this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100 === 100) {
-                    return 'card-header status-green';
-                  } else {
-                    return 'card-header status-yellow';
-                  }
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
-                  return 'card-header';
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
-                  return 'card-header';
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-                  return 'card-header status-red';
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
-                  return 'card-header';
-                }
-              })()
-            }
-          ></header>
+          <PurchaseStatus purchase={this.props.purchase} text={false} />
           <div className="card-content">
             <div className="content">
               <div className="columns is-marginless">
@@ -76,72 +59,35 @@ class Purchase extends React.Component {
                 <div className="column is-6">
                   <div className="purchase-progress">
                     <a onClick={this.toggle}>Purchase #{this.props.purchase.id}</a>
-                    <progress
-                      className="progress is-small"
-                      value={
+                    <PurchaseProgress
+                      purchase={this.props.purchase}
+                      progress={
                         (() => {
                           if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
-                            return (this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100;
+                            return 'supplies';
                           } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
-                            return ((this.props.purchase.items.filter(item => item.completed).length + this.props.purchase.bundles.filter(bundle => bundle.completed).length) / (this.props.purchase.items.length + this.props.purchase.bundles.length)) * 100;
-                          } else {
-                            return 100;
+                            return 'products';
                           }
                         })()
                       }
-                      max="100"
                     />
                   </div>
                 </div>
                 <div className="column is-2 purchase-profile">
-                  {
-                    (() => {
-                      if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
-                        return <div className="empty-photo" onClick={() => this.changeStatus(2, true)}></div>;
-                      } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
-                        return <img src={this.props.user.photo} alt='' onClick={() => this.changeStatus(2, false)} />;
-                      } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-                        return <div className="empty-photo"></div>;
-                      } else {
-                        return null;
-                      }
-                    })()
-                  }
+                  <PurchaseAssign purchase={this.props.purchase} user={this.props.user} changeStatus={this.changeStatus} />
                 </div>
                 <div className="column is-2 purchase-drag">
-                  {
-                    (() => {
-                      if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
-                        return <span className="lnr-calendar-check"></span>;
-                      } else {
-                        return <span className="lnr-line-spacing"></span>;
-                      }
-                    })()
-                  }
+                  <PurchaseIcon purchase={this.props.purchase} />
                 </div>
               </div>
             </div>
           </div>
-          {
-            (() => {
-              if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
-                if ((this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100 === 100) {
-                  return (
-                    <footer className="card-footer" onClick={() => this.changeStatus(1, true)}>
-                      Move to Pending
-                    </footer>
-                  );
-                }
-              } else {
-                return null;
-              }
-            })()
-          }
+          <PurchaseAction purchase={this.props.purchase} />
         </div>
         <div className={this.state.modalClasses}>
           <div className="modal-background" onClick={this.toggle}></div>
           <div className="modal-content modal-purchase">
-            <PurchaseModal purchase={this.props.purchase} changeStatus={this.changeStatus} />
+            <PurchaseModal purchase={this.props.purchase} user={this.props.user} changeStatus={this.changeStatus} />
           </div>
           <button className="modal-close is-large" aria-label="close" onClick={this.toggle}></button>
         </div>

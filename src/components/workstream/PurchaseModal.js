@@ -6,10 +6,15 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // COMPONENTS
-import PurchaseSupply from './PurchaseSupply';
-import PurchaseItem from './PurchaseItem';
-import PurchaseBundle from './PurchaseBundle';
+import PurchaseStatus from './PurchaseStatus';
+import PurchaseAssign from './PurchaseAssign';
+import PurchaseProgress from './PurchaseProgress';
+import PurchaseSupplies from './PurchaseSupplies';
+import PurchaseProducts from './PurchaseProducts';
 import PurchaseProductDetails from './PurchaseProductDetails';
+import PurchaseQuality from './PurchaseQuality';
+import PurchaseSchedule from './PurchaseSchedule';
+import PurchaseNotes from './PurchaseNotes';
 
 // ==========
 
@@ -128,45 +133,7 @@ class PurchaseModal extends React.Component {
     return (
       <div className="columns is-marginless">
         <div className="column is-5 modal-sidebar">
-          <div
-            className={
-              (() => {
-                if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
-                  if ((this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100 === 0) {
-                    return 'purchase-status status-red';
-                  } else if ((this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100 === 100) {
-                    return 'purchase-status status-green';
-                  } else {
-                    return 'purchase-status status-yellow';
-                  }
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
-                  return 'purchase-status';
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
-                  return 'purchase-status';
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-                  return 'purchase-status status-red';
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
-                  return 'purchase-status';
-                }
-              })()
-            }
-          >
-            {
-              (() => {
-                if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
-                  return 'Backlog';
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
-                  return 'Pending';
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
-                  return 'Crafting';
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-                  return 'Finalize';
-                } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
-                  return 'Delivery';
-                }
-              })()
-            }
-          </div>
+          <PurchaseStatus purchase={this.props.purchase} text={true} />
           <div className="purchase-header level">
             <div className="level-left">
               <div className="level-item">
@@ -181,19 +148,7 @@ class PurchaseModal extends React.Component {
             <div className="level-right">
               <div className="level-item">
                 <div className="purchase-profile">
-                  {
-                    (() => {
-                      if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
-                        return <div className="empty-photo" onClick={() => this.props.changeStatus(2, true)}></div>;
-                      } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
-                        return <img src={this.props.user.photo} alt='' onClick={() => this.props.changeStatus(2, false)} />;
-                      } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-                        return <div className="empty-photo"></div>;
-                      } else {
-                        return null;
-                      }
-                    })()
-                  }
+                  <PurchaseAssign purchase={this.props.purchase} user={this.props.user} changeStatus={this.props.changeStatus} />
                 </div>
               </div>
             </div>
@@ -208,22 +163,12 @@ class PurchaseModal extends React.Component {
             </div>
             <div className="level-right">
               <div className="level-item">
-                <progress
-                  className="progress is-small"
-                  value={(this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100}
-                  max="100" />
+                <PurchaseProgress purchase={this.props.purchase} progress="supplies" />
               </div>
             </div>
           </div>
-
           <div className={this.state.suppliesClasses}>
-            <ul>
-              {
-                this.props.purchase.supplies.map(supply => {
-                  return <PurchaseSupply key={supply.supplies_id} supply={supply} />;
-                })
-              }
-            </ul>
+            <PurchaseSupplies purchase={this.props.purchase} />
           </div>
 
           <div className="purchase-row level" onClick={this.collapseProducts}>
@@ -235,66 +180,12 @@ class PurchaseModal extends React.Component {
             </div>
             <div className="level-right">
               <div className="level-item">
-                <progress
-                  className="progress is-small"
-                  value={
-                    ((this.props.purchase.items.filter(item => item.completed).length + this.props.purchase.bundles.filter(bundle => bundle.completed).length) / (this.props.purchase.items.length + this.props.purchase.bundles.length)) * 100
-                  }
-                  max="100" />
+                <PurchaseProgress purchase={this.props.purchase} progress="products" />
               </div>
             </div>
           </div>
-
           <div className={this.state.productsClasses}>
-            <div
-              className={
-                (() => {
-                  if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
-                    return 'disable';
-                  } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
-                    return 'disable';
-                  } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
-                    return null;
-                  } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-                    return 'disable';
-                  } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
-                    return 'disable';
-                  }
-                })()
-              }
-            >
-              <ul>
-                {
-                  this.props.purchase.bundles.map(bundle => {
-                    return <PurchaseBundle key={bundle.id} bundle={bundle} purchase={this.props.purchase} toggle={this.toggle} />;
-                  })
-                }
-                {
-                  this.props.purchase.items.map(item => {
-                    return <PurchaseItem key={item.id} item={item} purchase={this.props.purchase} toggle={this.toggle} />;
-                  })
-                }
-              </ul>
-              <div className="has-text-centered" style={{padding:'1rem'}}>
-                <button
-                  className="button is-small is-primary"
-                  disabled={
-                    (() => {
-                      if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true) {
-                        return true;
-                      } else {
-                        if (((this.props.purchase.items.filter(item => item.completed).length + this.props.purchase.bundles.filter(bundle => bundle.completed).length) / (this.props.purchase.items.length + this.props.purchase.bundles.length)) * 100 === 100) {
-                          return false;
-                        } else {
-                          return true;
-                        }
-                      }
-                    })()
-                  }
-                  onClick={() => this.props.changeStatus(3, true)}
-                >Complete Products</button>
-              </div>
-            </div>
+            <PurchaseProducts purchase={this.props.purchase} toggle={this.toggle} changeStatus={this.props.changeStatus} />
           </div>
 
           <div className="purchase-row level" onClick={this.collapseQuality}>
@@ -312,22 +203,8 @@ class PurchaseModal extends React.Component {
               </div>
             </div>
           </div>
-
           <div className={this.state.qualityClasses}>
-            <ul>
-              <li>
-                <div className="field">
-                  <input className="is-checkradio" id="ready" type="radio" name="quality" />
-                  <label htmlFor="ready">Ready for delivery</label>
-                </div>
-              </li>
-              <li>
-                <div className="field">
-                  <input className="is-checkradio" id="sendback" type="radio" name="quality" />
-                  <label htmlFor="sendback">Send back to crafting</label>
-                </div>
-              </li>
-            </ul>
+            <PurchaseQuality purchase={this.props.purchase} changeStatus={this.props.changeStatus} />
           </div>
 
           <div className="purchase-row level" onClick={this.collapseSchedule}>
@@ -338,55 +215,8 @@ class PurchaseModal extends React.Component {
               </div>
             </div>
           </div>
-
           <div className={this.state.scheduleClasses}>
-            <ul>
-              <li>
-                <div className="field">
-                  <input className="is-checkradio" id="ready" type="radio" name="quality" />
-                  <label htmlFor="ready">Pick Up</label>
-                </div>
-              </li>
-              <li>
-                <div className="field">
-                  <input className="is-checkradio" id="sendback" type="radio" name="quality" />
-                  <label htmlFor="sendback">Ship</label>
-                </div>
-              </li>
-              <li>
-                <div className="field">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Delivery Service"
-                    id="service"
-                    value={this.state.service}
-                  />
-                </div>
-              </li>
-              <li>
-                <div className="field">
-                  <input
-                    className="input"
-                    type="date"
-                    placeholder="Shipping Date"
-                    id="date"
-                    value={this.state.date}
-                  />
-                </div>
-              </li>
-              <li>
-                <div className="field">
-                  <input
-                    className="input"
-                    type="text"
-                    placeholder="Tracking Number"
-                    id="tracking-number"
-                    value={this.state.tracking}
-                  />
-                </div>
-              </li>
-            </ul>
+            <PurchaseSchedule purchase={this.props.purchase} changeStatus={this.props.changeStatus} />
           </div>
 
           <div className="purchase-row level" onClick={this.collapseNotes}>
@@ -397,20 +227,8 @@ class PurchaseModal extends React.Component {
               </div>
             </div>
           </div>
-
           <div className={this.state.notesClasses}>
-            <ul>
-              <li>
-                <div className="field">
-                  <textarea
-                    className="textarea"
-                    placeholder="Write your comments here..."
-                    id="notes"
-                    value={this.state.notes}
-                  />
-                </div>
-              </li>
-            </ul>
+            <PurchaseNotes purchase={this.props.purchase} />
           </div>
 
         </div>

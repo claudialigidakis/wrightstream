@@ -9,19 +9,6 @@ import { getItems, getCategories } from '../actions/products';
 
 // COMPONENTS
 import Purchase from './workstream/Purchase';
-// import Purchase1 from './workstream/Purchase1';
-// import Purchase2 from './workstream/Purchase2';
-// import Purchase3 from './workstream/Purchase3';
-// import Purchase4 from './workstream/Purchase4';
-// import Purchase5 from './workstream/Purchase5';
-// import Purchase6 from './workstream/Purchase6';
-// import Purchase7 from './workstream/Purchase7';
-// import Purchase8 from './workstream/Purchase8';
-// import Purchase9 from './workstream/Purchase9';
-// import Purchase10 from './workstream/Purchase10';
-// import Purchase11 from './workstream/Purchase11';
-// import Purchase12 from './workstream/Purchase12';
-// import Purchase13 from './workstream/Purchase13';
 
 // ==========
 
@@ -57,9 +44,6 @@ class WorkStream extends React.Component {
                   }
                 })
               }
-              {/* <Purchase1 item={this.props.items[0]} categories={this.props.categories} />
-              <Purchase2 item={this.props.items[1]} categories={this.props.categories} />
-              <Purchase3 item={this.props.items[2]} categories={this.props.categories} /> */}
             </div>
             <div className="column-button">
               Move to Pending
@@ -84,7 +68,6 @@ class WorkStream extends React.Component {
                   }
                 })
               }
-              {/* <Purchase4 item={this.props.items[3]} categories={this.props.categories} /> */}
             </div>
             <div className="column-button">
               Assign
@@ -109,8 +92,6 @@ class WorkStream extends React.Component {
                   }
                 })
               }
-              {/* <Purchase6 item={this.props.items[5]} categories={this.props.categories} />
-              <Purchase5 item={this.props.items[4]} categories={this.props.categories} /> */}
             </div>
           </div>
           <div className="column is-3">
@@ -132,21 +113,19 @@ class WorkStream extends React.Component {
                   }
                 })
               }
-              {/* <Purchase7 item={this.props.items[6]} categories={this.props.categories} />
-              <Purchase8 item={this.props.items[7]} categories={this.props.categories} /> */}
             </div>
             <div className="column-button">
               Assign
             </div>
           </div>
-          {/* <div className="column is-3">
+          <div className="column is-3">
             <h1 className="title is-4">
               Pick Up
             </h1>
             <div className="column-container">
               {
                 this.props.purchases.map(purchase => {
-                  if (purchase.statuses.find(status => status.status_id === 4).completed === true) {
+                  if (purchase.statuses.find(status => status.status_id === 4).completed === true && purchase.pick_up) {
                     return (
                       <Purchase
                         key={purchase.id}
@@ -162,7 +141,7 @@ class WorkStream extends React.Component {
             <div className="column-button">
               Archive
             </div>
-          </div> */}
+          </div>
           <div className="column is-3">
             <h1 className="title is-4">
               Ship
@@ -170,7 +149,7 @@ class WorkStream extends React.Component {
             <div className="column-container">
               {
                 this.props.purchases.map(purchase => {
-                  if (purchase.statuses.find(status => status.status_id === 4).completed === true) {
+                  if (purchase.statuses.find(status => status.status_id === 4).completed === true && purchase.pick_up === false) {
                     return (
                       <Purchase
                         key={purchase.id}
@@ -182,9 +161,6 @@ class WorkStream extends React.Component {
                   }
                 })
               }
-              {/* <Purchase11 item={this.props.items[12]} categories={this.props.categories} />
-              <Purchase12 item={this.props.items[13]} categories={this.props.categories} />
-              <Purchase13 item={this.props.items[16]} categories={this.props.categories} /> */}
             </div>
             <div className="column-button">
               Archive

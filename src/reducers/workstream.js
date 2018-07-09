@@ -2,7 +2,10 @@ import {
   GET_PURCHASES,
   CHANGE_STATUS,
   COMPLETE_ITEM,
-  COMPLETE_BUNDLE
+  COMPLETE_BUNDLE,
+  QUALITY_CHECK,
+  SCHEDULE,
+  ADD_NOTES
 } from '../actions/workstream';
 
 let initialState = {
@@ -18,6 +21,12 @@ export default (state = initialState, action) => {
     case COMPLETE_ITEM:
       return {...state, purchases: action.payload};
     case COMPLETE_BUNDLE:
+      return {...state, purchases: action.payload};
+    case QUALITY_CHECK:
+      return {...state, purchases: action.payload};
+    case SCHEDULE:
+      return {...state, purchases: action.payload};
+    case ADD_NOTES:
       return {...state, purchases: action.payload};
     default:
       return state;
