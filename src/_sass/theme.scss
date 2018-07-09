@@ -427,9 +427,28 @@ nav {
   .purchase-profile {
 
     img, .empty-photo {
+      cursor: pointer;
       width: 35px;
       height: 35px;
     }
+  }
+}
+
+.purchase-assign {
+  width: 300px;
+
+  li {
+    cursor: pointer;
+  }
+
+  li:hover {
+    background-color: $slate;
+  }
+
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
   }
 }
 

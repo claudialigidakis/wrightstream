@@ -7,6 +7,7 @@ export const COMPLETE_BUNDLE = 'COMPLETE_BUNDLE';
 export const QUALITY_CHECK = 'QUALITY_CHECK';
 export const SCHEDULE = 'SCHEDULE';
 export const ADD_NOTES = 'ADD_NOTES';
+export const GET_STAFF = 'GET_STAFF';
 
 export const getPurchases = () => (
   dispatch => {
@@ -131,6 +132,22 @@ export const addNotes = (purchase_id, notes) => (
       .then(response => {
         dispatch({
           type: ADD_NOTES,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const getStaff = () => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/shops/${shop_id}/staff`)
+      .then(response => {
+        dispatch({
+          type: GET_STAFF,
           payload: response.data.data
         });
       });

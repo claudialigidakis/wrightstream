@@ -5,11 +5,13 @@ import {
   COMPLETE_BUNDLE,
   QUALITY_CHECK,
   SCHEDULE,
-  ADD_NOTES
+  ADD_NOTES,
+  GET_STAFF
 } from '../actions/workstream';
 
 let initialState = {
-  purchases: []
+  purchases: [],
+  staff: []
 };
 
 export default (state = initialState, action) => {
@@ -28,6 +30,8 @@ export default (state = initialState, action) => {
       return {...state, purchases: action.payload};
     case ADD_NOTES:
       return {...state, purchases: action.payload};
+    case GET_STAFF:
+      return {...state, staff: action.payload};
     default:
       return state;
   }
