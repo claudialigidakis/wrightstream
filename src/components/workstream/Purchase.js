@@ -120,7 +120,7 @@ class Purchase extends React.Component {
                     (() => {
                       if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
                         const today = new Date();
-                        if (moment(today).format('YYYY-MM-DD') === moment(this.props.purchase.delivery_date).format('YYYY-MM-DD')) {
+                        if (moment(this.props.purchase.delivery_date).isBefore(today)) {
                           return <span className="lnr-calendar-check"></span>;
                         } else {
                           return <span className="lnr-calendar-empty"></span>;
