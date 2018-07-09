@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { changeStatus } from '../../actions/workstream';
+import { changeStatus, assignStaff } from '../../actions/workstream';
 
 // COMPONENTS
 import PurchaseStatus from './PurchaseStatus';
@@ -56,6 +56,10 @@ class Purchase extends React.Component {
     }
   };
 
+  assignStaff = (id = null) => {
+    this.props.assignStaff(this.props.purchase.id, id);
+  };
+
   changeStatus = (status, completed) => {
     this.props.changeStatus(this.props.purchase.id, status, completed);
   };
@@ -91,7 +95,7 @@ class Purchase extends React.Component {
                   </div>
                 </div>
                 <div className="column is-2 purchase-profile">
-                  <PurchasePhoto purchase={this.props.purchase} user={this.props.user} changeStatus={this.changeStatus} assign={this.assign} />
+                  <PurchasePhoto purchase={this.props.purchase} user={this.props.user} changeStatus={this.changeStatus} assign={this.assign} assignStaff={this.props.assignStaff} />
                 </div>
                 <div className="column is-2 purchase-drag">
                   <PurchaseIcon purchase={this.props.purchase} />
@@ -103,12 +107,12 @@ class Purchase extends React.Component {
         </div>
         <div className={this.state.modalClasses}>
           <div className="modal-background" onClick={this.toggle}></div>
-          <PurchaseModal purchase={this.props.purchase} user={this.props.user} changeStatus={this.changeStatus} assign={this.assign} />
+          <PurchaseModal purchase={this.props.purchase} user={this.props.user} changeStatus={this.changeStatus} assign={this.assign} assignStaff={this.assignStaff} />
           <button className="modal-close is-large" onClick={this.toggle}></button>
         </div>
         <div className={this.state.assignClasses}>
           <div className="modal-background" onClick={this.assign}></div>
-          <PurchaseAssign purchase={this.props.purchase} />
+          <PurchaseAssign purchase={this.props.purchase} assign={this.assign} assignStaff={this.assignStaff} changeStatus={this.changeStatus} />
           <button className="modal-close is-large" onClick={this.assign}></button>
         </div>
       </div>
@@ -121,7 +125,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  changeStatus
+  changeStatus,
+  assignStaff
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Purchase);

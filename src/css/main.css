@@ -7497,7 +7497,8 @@ nav {
   .purchase-assign img {
     width: 30px;
     height: 30px;
-    border-radius: 50%; }
+    border-radius: 50%;
+    object-fit: cover; }
 
 .products-table, .inventory-table {
   border-bottom: 2px solid #d9def1; }
@@ -7616,7 +7617,8 @@ nav {
     justify-content: center; }
   .workstream .purchase-profile img, .workstream .purchase-profile .empty-photo {
     background-color: #f0f1f6;
-    border-radius: 50%; }
+    border-radius: 50%;
+    object-fit: cover; }
     .workstream .purchase-profile img:hover, .workstream .purchase-profile .empty-photo:hover {
       background-color: #e2e4f0;
       transform: scale(1.1); }

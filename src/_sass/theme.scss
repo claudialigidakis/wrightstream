@@ -449,6 +449,7 @@ nav {
     width: 30px;
     height: 30px;
     border-radius: 50%;
+    object-fit: cover;
   }
 }
 
@@ -635,6 +636,7 @@ nav {
     img, .empty-photo {
       background-color: $slate;
       border-radius: 50%;
+      object-fit: cover;
 
       &:hover {
         background-color: $mist;

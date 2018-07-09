@@ -8,6 +8,7 @@ export const QUALITY_CHECK = 'QUALITY_CHECK';
 export const SCHEDULE = 'SCHEDULE';
 export const ADD_NOTES = 'ADD_NOTES';
 export const GET_STAFF = 'GET_STAFF';
+export const ASSIGN_STAFF = 'ASSIGN_STAFF';
 
 export const getPurchases = () => (
   dispatch => {
@@ -148,6 +149,25 @@ export const getStaff = () => (
       .then(response => {
         dispatch({
           type: GET_STAFF,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const assignStaff = (purchase_id, staff_id) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/purchases/${purchase_id}`, 'put', {staff_id})
+      .then(response => {
+        return request(`/purchases/${shop_id}/allPurchases`);
+      })
+      .then(response => {
+        dispatch({
+          type: ASSIGN_STAFF,
           payload: response.data.data
         });
       });

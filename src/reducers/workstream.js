@@ -6,7 +6,8 @@ import {
   QUALITY_CHECK,
   SCHEDULE,
   ADD_NOTES,
-  GET_STAFF
+  GET_STAFF,
+  ASSIGN_STAFF
 } from '../actions/workstream';
 
 let initialState = {
@@ -32,6 +33,8 @@ export default (state = initialState, action) => {
       return {...state, purchases: action.payload};
     case GET_STAFF:
       return {...state, staff: action.payload};
+    case ASSIGN_STAFF:
+      return {...state, purchases: action.payload};
     default:
       return state;
   }

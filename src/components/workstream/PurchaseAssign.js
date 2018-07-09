@@ -24,14 +24,13 @@ class PurchaseAssign extends React.Component {
   };
 
   render () {
-    console.log(this.props.staff);
     return (
       <div className="modal-content purchase-assign">
         <ul>
           {
             this.props.staff.map(staff => {
               return (
-                <PurchaseAssignStaff staff={staff} />
+                <PurchaseAssignStaff key={staff.id} staff={staff} assign={this.props.assign} assignStaff={this.props.assignStaff} changeStatus={this.props.changeStatus} />
               )
             })
           }
