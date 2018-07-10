@@ -151,6 +151,7 @@ class PurchaseModal extends React.Component {
                   <div className="purchase-profile">
                     <PurchasePhoto
                       purchase={this.props.purchase}
+                      staff={this.props.staff}
                       user={this.props.user}
                       changeStatus={this.props.changeStatus}
                       assign={this.props.assign}
@@ -192,7 +193,7 @@ class PurchaseModal extends React.Component {
               </div>
             </div>
             <div className={this.state.productsClasses}>
-              <PurchaseProducts purchase={this.props.purchase} toggle={this.toggle} changeStatus={this.props.changeStatus} />
+              <PurchaseProducts purchase={this.props.purchase} staff={this.props.staff} toggle={this.toggle} changeStatus={this.props.changeStatus} />
             </div>
 
             <div className="purchase-row level" onClick={this.collapseQuality}>

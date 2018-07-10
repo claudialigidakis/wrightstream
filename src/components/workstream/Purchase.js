@@ -97,6 +97,7 @@ class Purchase extends React.Component {
                 <div className="column is-2 purchase-profile">
                   <PurchasePhoto
                     purchase={this.props.purchase}
+                    staff={this.props.staff}
                     user={this.props.user}
                     changeStatus={this.changeStatus}
                     assign={this.assign}
@@ -115,6 +116,7 @@ class Purchase extends React.Component {
           <div className="modal-background" onClick={this.toggle}></div>
           <PurchaseModal
             purchase={this.props.purchase}
+            staff={this.props.staff}
             user={this.props.user}
             changeStatus={this.changeStatus}
             assign={this.assign}

@@ -41,12 +41,12 @@ class PurchaseProducts extends React.Component {
         <ul>
           {
             this.props.purchase.bundles.map(bundle => {
-              return <PurchaseBundle key={bundle.id} bundle={bundle} purchase={this.props.purchase} toggle={this.props.toggle} />;
+              return <PurchaseBundle key={bundle.id} bundle={bundle} purchase={this.props.purchase} staff={this.props.staff} toggle={this.props.toggle} />;
             })
           }
           {
             this.props.purchase.items.map(item => {
-              return <PurchaseItem key={item.id} item={item} purchase={this.props.purchase} toggle={this.props.toggle} />;
+              return <PurchaseItem key={item.id} item={item} purchase={this.props.purchase} staff={this.props.staff} toggle={this.props.toggle} />;
             })
           }
         </ul>

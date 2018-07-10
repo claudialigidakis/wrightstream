@@ -45,12 +45,12 @@ export const changeStatus = (purchase_id, status_id, completed) => (
   }
 );
 
-export const completeItem = (purchase_id, item_id, completed) => (
+export const completeItem = (purchase_id, item_id, staff_id, completed) => (
   dispatch => {
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/purchases_items/${purchase_id}/${item_id}`, 'put', {completed})
+      request(`/purchases_items/${purchase_id}/${item_id}`, 'put', {staff_id, completed})
       .then(response => {
         return request(`/purchases/${shop_id}/allPurchases`);
       })
@@ -64,12 +64,12 @@ export const completeItem = (purchase_id, item_id, completed) => (
   }
 );
 
-export const completeBundle = (purchase_id, bundle_id, completed) => (
+export const completeBundle = (purchase_id, bundle_id, staff_id, completed) => (
   dispatch => {
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/purchases_bundles/${purchase_id}/${bundle_id}`, 'put', {completed})
+      request(`/purchases_bundles/${purchase_id}/${bundle_id}`, 'put', {staff_id, completed})
       .then(response => {
         return request(`/purchases/${shop_id}/allPurchases`);
       })

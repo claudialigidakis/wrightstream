@@ -4,7 +4,6 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getStaff } from '../../actions/workstream';
 
 // ==========
 
@@ -14,10 +13,6 @@ class PurchasePhoto extends React.Component {
     this.state = {
 
     };
-  };
-
-  componentDidMount () {
-    this.props.getStaff();
   };
 
   render () {
@@ -75,11 +70,11 @@ class PurchasePhoto extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  staff: state.workstream.staff
+
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getStaff
+
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(PurchasePhoto);
