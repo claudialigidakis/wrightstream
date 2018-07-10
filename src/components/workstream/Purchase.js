@@ -95,7 +95,13 @@ class Purchase extends React.Component {
                   </div>
                 </div>
                 <div className="column is-2 purchase-profile">
-                  <PurchasePhoto purchase={this.props.purchase} user={this.props.user} changeStatus={this.changeStatus} assign={this.assign} assignStaff={this.props.assignStaff} />
+                  <PurchasePhoto
+                    purchase={this.props.purchase}
+                    user={this.props.user}
+                    changeStatus={this.changeStatus}
+                    assign={this.assign}
+                    assignStaff={this.assignStaff}
+                  />
                 </div>
                 <div className="column is-2 purchase-drag">
                   <PurchaseIcon purchase={this.props.purchase} />
@@ -107,12 +113,23 @@ class Purchase extends React.Component {
         </div>
         <div className={this.state.modalClasses}>
           <div className="modal-background" onClick={this.toggle}></div>
-          <PurchaseModal purchase={this.props.purchase} user={this.props.user} changeStatus={this.changeStatus} assign={this.assign} assignStaff={this.assignStaff} />
+          <PurchaseModal
+            purchase={this.props.purchase}
+            user={this.props.user}
+            changeStatus={this.changeStatus}
+            assign={this.assign}
+            assignStaff={this.assignStaff}
+          />
           <button className="modal-close is-large" onClick={this.toggle}></button>
         </div>
         <div className={this.state.assignClasses}>
           <div className="modal-background" onClick={this.assign}></div>
-          <PurchaseAssign purchase={this.props.purchase} assign={this.assign} assignStaff={this.assignStaff} changeStatus={this.changeStatus} />
+          <PurchaseAssign
+            purchase={this.props.purchase}
+            assign={this.assign}
+            assignStaff={this.assignStaff}
+            changeStatus={this.changeStatus}
+          />
           <button className="modal-close is-large" onClick={this.assign}></button>
         </div>
       </div>

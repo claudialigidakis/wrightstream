@@ -30,7 +30,13 @@ class PurchaseAssign extends React.Component {
           {
             this.props.staff.map(staff => {
               return (
-                <PurchaseAssignStaff key={staff.id} staff={staff} assign={this.props.assign} assignStaff={this.props.assignStaff} changeStatus={this.props.changeStatus} />
+                <PurchaseAssignStaff
+                  key={staff.id}
+                  staff={staff}
+                  assign={this.props.assign}
+                  assignStaff={this.props.assignStaff}
+                  changeStatus={this.props.changeStatus}
+                />
               )
             })
           }
