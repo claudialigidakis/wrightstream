@@ -37,7 +37,7 @@ class PurchasePhoto extends React.Component {
                   }
                   alt={
                     this.props.staff.find(staff => staff.id === this.props.purchase.staff_id) ?
-                    this.props.staff.find(staff => staff.id === this.props.purchase.staff_id).first_name
+                    `${this.props.staff.find(staff => staff.id === this.props.purchase.staff_id).first_name[0]}${this.props.staff.find(staff => staff.id === this.props.purchase.staff_id).last_name[0]}`
                     : ''
                   }
                   onClick={() => {
@@ -47,7 +47,23 @@ class PurchasePhoto extends React.Component {
                 />
               );
             } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-              return <div className="empty-photo"></div>;
+              if (this.props.staff.find(staff => staff.id === this.props.purchase.staff_id)) {
+                return (
+                  <img
+                    src={
+                      this.props.staff.find(staff => staff.id === this.props.purchase.staff_id).photo
+                    }
+                    alt={
+                      `${this.props.staff.find(staff => staff.id === this.props.purchase.staff_id).first_name[0]}${this.props.staff.find(staff => staff.id === this.props.purchase.staff_id).last_name[0]}`
+                    }
+                    onClick={() => {
+                      this.props.assignStaff();
+                    }}
+                  />
+                );
+              } else {
+                return <div className="empty-photo" onClick={this.props.assign}></div>;
+              }
             } else {
               return null;
             }
