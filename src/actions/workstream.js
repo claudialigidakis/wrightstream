@@ -7,6 +7,8 @@ export const COMPLETE_BUNDLE = 'COMPLETE_BUNDLE';
 export const QUALITY_CHECK = 'QUALITY_CHECK';
 export const SCHEDULE = 'SCHEDULE';
 export const ADD_NOTES = 'ADD_NOTES';
+export const GET_STAFF = 'GET_STAFF';
+export const ASSIGN_STAFF = 'ASSIGN_STAFF';
 
 export const getPurchases = () => (
   dispatch => {
@@ -43,12 +45,12 @@ export const changeStatus = (purchase_id, status_id, completed) => (
   }
 );
 
-export const completeItem = (purchase_id, item_id, completed) => (
+export const completeItem = (purchase_id, item_id, staff_id, completed) => (
   dispatch => {
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/purchases_items/${purchase_id}/${item_id}`, 'put', {completed})
+      request(`/purchases_items/${purchase_id}/${item_id}`, 'put', {staff_id, completed})
       .then(response => {
         return request(`/purchases/${shop_id}/allPurchases`);
       })
@@ -62,12 +64,12 @@ export const completeItem = (purchase_id, item_id, completed) => (
   }
 );
 
-export const completeBundle = (purchase_id, bundle_id, completed) => (
+export const completeBundle = (purchase_id, bundle_id, staff_id, completed) => (
   dispatch => {
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/purchases_bundles/${purchase_id}/${bundle_id}`, 'put', {completed})
+      request(`/purchases_bundles/${purchase_id}/${bundle_id}`, 'put', {staff_id, completed})
       .then(response => {
         return request(`/purchases/${shop_id}/allPurchases`);
       })
@@ -131,6 +133,41 @@ export const addNotes = (purchase_id, notes) => (
       .then(response => {
         dispatch({
           type: ADD_NOTES,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const getStaff = () => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/shops/${shop_id}/staff`)
+      .then(response => {
+        dispatch({
+          type: GET_STAFF,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const assignStaff = (purchase_id, staff_id) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/purchases/${purchase_id}`, 'put', {staff_id})
+      .then(response => {
+        return request(`/purchases/${shop_id}/allPurchases`);
+      })
+      .then(response => {
+        dispatch({
+          type: ASSIGN_STAFF,
           payload: response.data.data
         });
       });

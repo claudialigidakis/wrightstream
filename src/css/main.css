@@ -7484,8 +7484,21 @@ nav {
       width: 1.25rem;
       height: 1.25rem; }
   .modal-purchase .purchase-profile img, .modal-purchase .purchase-profile .empty-photo {
+    cursor: pointer;
     width: 35px;
     height: 35px; }
+
+.purchase-assign {
+  width: 300px; }
+  .purchase-assign li {
+    cursor: pointer; }
+  .purchase-assign li:hover {
+    background-color: #f0f1f6; }
+  .purchase-assign img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover; }
 
 .products-table, .inventory-table {
   border-bottom: 2px solid #d9def1; }
@@ -7604,7 +7617,8 @@ nav {
     justify-content: center; }
   .workstream .purchase-profile img, .workstream .purchase-profile .empty-photo {
     background-color: #f0f1f6;
-    border-radius: 50%; }
+    border-radius: 50%;
+    object-fit: cover; }
     .workstream .purchase-profile img:hover, .workstream .purchase-profile .empty-photo:hover {
       background-color: #e2e4f0;
       transform: scale(1.1); }

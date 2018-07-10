@@ -5,6 +5,9 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+// COMPONENTS
+import PurchaseAssignStaff from './PurchaseAssignStaff';
+
 // ==========
 
 class PurchaseAssign extends React.Component {
@@ -17,27 +20,33 @@ class PurchaseAssign extends React.Component {
 
   render () {
     return (
-      <div>
-        {
-          (() => {
-            if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
-              return <div className="empty-photo" onClick={() => this.props.changeStatus(2, true)}></div>;
-            } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
-              return <img src={this.props.user.photo} alt='' onClick={() => this.props.changeStatus(2, false)} />;
-            } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-              return <div className="empty-photo"></div>;
-            } else {
-              return null;
-            }
-          })()
-        }
+      <div className="modal-content purchase-assign">
+        <ul>
+          {
+            this.props.staff.map(staff => {
+              return (
+                <PurchaseAssignStaff
+                  key={staff.id}
+                  staff={staff}
+                  assign={this.props.assign}
+                  assignStaff={this.props.assignStaff}
+                  changeStatus={this.props.changeStatus}
+                />
+              )
+            })
+          }
+        </ul>
       </div>
     );
   };
 };
 
+const mapStateToProps = state => ({
+
+});
+
 const mapDispatchToProps = dispatch => bindActionCreators({
 
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(PurchaseAssign);
+export default connect(mapStateToProps, mapDispatchToProps)(PurchaseAssign);

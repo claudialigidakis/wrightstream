@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getPurchases } from '../actions/workstream';
+import { getPurchases, getStaff } from '../actions/workstream';
 import { getItems, getCategories } from '../actions/products';
 
 // COMPONENTS
@@ -15,6 +15,7 @@ import Purchase from './workstream/Purchase';
 class WorkStream extends React.Component {
   componentDidMount () {
     this.props.getPurchases();
+    this.props.getStaff();
     this.props.getItems();
     this.props.getCategories();
   };
@@ -37,6 +38,7 @@ class WorkStream extends React.Component {
                       <Purchase
                         key={purchase.id}
                         purchase={purchase}
+                        staff={this.props.staff}
                       />
                     );
                   } else {
@@ -61,6 +63,7 @@ class WorkStream extends React.Component {
                       <Purchase
                         key={purchase.id}
                         purchase={purchase}
+                        staff={this.props.staff}
                       />
                     );
                   } else {
@@ -85,6 +88,7 @@ class WorkStream extends React.Component {
                       <Purchase
                         key={purchase.id}
                         purchase={purchase}
+                        staff={this.props.staff}
                       />
                     );
                   } else {
@@ -106,6 +110,7 @@ class WorkStream extends React.Component {
                       <Purchase
                         key={purchase.id}
                         purchase={purchase}
+                        staff={this.props.staff}
                       />
                     );
                   } else {
@@ -130,6 +135,7 @@ class WorkStream extends React.Component {
                       <Purchase
                         key={purchase.id}
                         purchase={purchase}
+                        staff={this.props.staff}
                       />
                     );
                   } else {
@@ -154,6 +160,7 @@ class WorkStream extends React.Component {
                       <Purchase
                         key={purchase.id}
                         purchase={purchase}
+                        staff={this.props.staff}
                       />
                     );
                   } else {
@@ -174,12 +181,14 @@ class WorkStream extends React.Component {
 
 const mapStateToProps = state => ({
   purchases: state.workstream.purchases,
+  staff: state.workstream.staff,
   items: state.products.items,
   categories: state.products.categories
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getPurchases,
+  getStaff,
   getItems,
   getCategories
 }, dispatch);

@@ -15,14 +15,19 @@ class PurchaseBundle extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      checked: this.props.bundle.completed
+      checked: this.props.bundle.completed,
+      staff: this.props.purchase.staff_id ? true : false
     };
   };
 
   check = () => {
-    this.props.completeBundle(this.props.purchase.id, this.props.bundle.id, !this.state.checked);
-    this.setState({checked: !this.state.checked});
-  }
+    this.props.completeBundle(this.props.purchase.id, this.props.bundle.id, !this.state.staff ? this.props.purchase.staff_id : null, !this.state.checked);
+    this.setState({
+      checked: !this.state.checked,
+      staff: !this.state.staff
+    });
+    console.log(this.props.purchase.staff_id)
+  };
 
   render () {
     return (
@@ -39,7 +44,12 @@ class PurchaseBundle extends React.Component {
           <div className="level-right">
             <div className="level-item">
               <div className="purchase-profile">
-                {/* <img src={this.props.user.photo} alt='' /> */}
+                {
+                  this.props.staff.find(staff => staff.id === this.props.bundle.staff_id) ? <img src={this.props.staff.find(staff => staff.id === this.props.bundle.staff_id).photo} alt='' /> : null
+                }
+                {/* {
+                  this.props.staff.find(staff => staff.id === this.props.purchase.staff_id) ? <img src={this.props.staff.find(staff => staff.id === this.props.purchase.staff_id).photo} alt='' /> : null
+                } */}
               </div>
             </div>
           </div>
