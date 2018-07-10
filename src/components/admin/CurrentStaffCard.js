@@ -6,7 +6,7 @@ class CurrentStaffCard extends React.Component {
 
   render () {
     return (
-      <div id={this.props.id} className="column is-4">
+      <div id={this.props.id} className="column">
         <div className="card">
           <header>
             {this.props.first_name}
@@ -15,11 +15,10 @@ class CurrentStaffCard extends React.Component {
               <ul>
               {
                 this.props.inProduction.map(task => {
-                  console.log("task",task);
                 return (
-                <ul id={task.id}>{task.id}</ul>
-                  )
-              })
+                <ul id={task.id}>Purchase #{task.id}</ul>
+                )
+                })
             }
             </ul>
           </div>

@@ -13,7 +13,6 @@ class Settings extends React.Component {
     super(props)
     this.state = {
       loginUrl: '',
-      self:'',
       products:'',
       purchases:''
     }
@@ -22,23 +21,18 @@ class Settings extends React.Component {
   handleEtsyAuthClick = () => {
     window.location = this.state.loginUrl
   }
-  handleEtsySelfClick = () => {
-    request('/etsy/self')
-    .then(response => {
-      this.setState({self:response.data})
-    })
-  }
   handleEtsyProductsClick = () => {
     request('/etsy/findAllListingActive')
     .then(response => {
-      this.setState({products:response.data.results})
+      console.log(response.data);
+      this.setState({products:response.data})
     })
   }
   handleEtsyPurchasesClick = () => {
     request('/etsy/findAllPurchases')
     .then(response => {
-      console.log(response.data.results);;
-      this.setState({purchases:response.data.results})
+      console.log(response.data);
+      this.setState({purchases:response.data})
     })
   }
 
@@ -48,7 +42,6 @@ class Settings extends React.Component {
   }
 
   render () {
-    console.log(this.props.user, this.state)
     return (
       <div>
         <h1>
@@ -67,11 +60,9 @@ class Settings extends React.Component {
         </button>
         <button className="button">Link Shopify</button>
         <div>
-          <button onClick={this.handleEtsySelfClick}>Get Self</button>
           <button onClick={this.handleEtsyProductsClick}>Get Products</button>
           <button onClick={this.handleEtsyPurchasesClick}>Get Purchases</button>
           <div>
-            {`self: ${JSON.stringify(this.state.self)}`}
             {`products: ${JSON.stringify(this.state.products)}`}
             {`purchases: ${JSON.stringify(this.state.purchases)}`}
           </div>
