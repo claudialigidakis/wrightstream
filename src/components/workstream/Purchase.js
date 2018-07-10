@@ -126,6 +126,7 @@ class Purchase extends React.Component {
           <div className="modal-background" onClick={this.assign}></div>
           <PurchaseAssign
             purchase={this.props.purchase}
+            staff={this.props.staff}
             assign={this.assign}
             assignStaff={this.assignStaff}
             changeStatus={this.changeStatus}
