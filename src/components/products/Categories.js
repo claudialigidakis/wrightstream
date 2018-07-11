@@ -6,6 +6,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getCategories } from '../../actions/products';
 
+// COMPONENTS
+import MissingProducts from './MissingProducts';
+
 // ==========
 
 class Categories extends React.Component {
@@ -16,6 +19,7 @@ class Categories extends React.Component {
   render () {
     return (
       <aside className="menu">
+        <MissingProducts />
         <p className="menu-label">
           Browse
         </p>

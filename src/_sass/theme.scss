@@ -744,3 +744,22 @@ nav {
 .modal-content.modal-form {
   width: 600px;
 }
+
+.missing-products {
+  color: $quartz;
+  background-color: lighten($koamaru, 10%);
+  box-shadow: none;
+  margin-bottom: 3rem;
+
+  .title {
+    color: $quartz;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: .75rem;
+  }
+
+  ul {
+    font-size: .8rem;
+    margin-left: .5rem;
+  }
+}
