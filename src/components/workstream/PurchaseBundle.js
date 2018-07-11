@@ -15,18 +15,13 @@ class PurchaseBundle extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      checked: this.props.bundle.completed,
-      staff: this.props.purchase.staff_id ? true : false
+      checked: this.props.bundle.completed
     };
   };
 
   check = () => {
-    this.props.completeBundle(this.props.purchase.id, this.props.bundle.id, !this.state.staff ? this.props.purchase.staff_id : null, !this.state.checked);
-    this.setState({
-      checked: !this.state.checked,
-      staff: !this.state.staff
-    });
-    console.log(this.props.purchase.staff_id)
+    this.props.completeBundle(this.props.purchase.id, this.props.bundle.id, !this.state.checked ? this.props.purchase.staff_id : null, !this.state.checked);
+    this.setState({checked: !this.state.checked});
   };
 
   render () {
@@ -45,11 +40,16 @@ class PurchaseBundle extends React.Component {
             <div className="level-item">
               <div className="purchase-profile">
                 {
-                  this.props.staff.find(staff => staff.id === this.props.bundle.staff_id) ? <img src={this.props.staff.find(staff => staff.id === this.props.bundle.staff_id).photo} alt='' /> : null
+                  this.props.staff.find(staff => staff.id === this.props.bundle.staff_id) ?
+                  <img
+                    src={
+                      this.props.staff.find(staff => staff.id === this.props.bundle.staff_id).photo
+                    }
+                    alt={
+                      `${this.props.staff.find(staff => staff.id === this.props.bundle.staff_id).first_name[0]}${this.props.staff.find(staff => staff.id === this.props.bundle.staff_id).last_name[0]}`
+                    }
+                  /> : null
                 }
-                {/* {
-                  this.props.staff.find(staff => staff.id === this.props.purchase.staff_id) ? <img src={this.props.staff.find(staff => staff.id === this.props.purchase.staff_id).photo} alt='' /> : null
-                } */}
               </div>
             </div>
           </div>

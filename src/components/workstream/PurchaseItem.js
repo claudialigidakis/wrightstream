@@ -13,23 +13,13 @@ class PurchaseItem extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      checked: this.props.item.completed,
-      staff: !this.props.bundle && !this.props.purchase.staff_id ? true : false
+      checked: this.props.item.completed
     };
   };
 
   check = () => {
-    // this.props.completeItem(this.props.purchase.id, this.props.item.id, !this.state.staff ? this.props.purchase.staff_id : null, !this.state.checked);
-    this.setState({
-      checked: !this.state.checked,
-      staff: !this.state.staff
-    });
-  };
-
-  componentDidUpdate (prevState) {
-    if (this.state.checked !== prevState.checked) {
-      console.log(this.state.checked, this.state.staff)
-    }
+    this.props.completeItem(this.props.purchase.id, this.props.item.id, !this.state.checked ? this.props.purchase.staff_id : null, !this.state.checked);
+    this.setState({checked: !this.state.checked});
   };
 
   render () {
@@ -53,11 +43,16 @@ class PurchaseItem extends React.Component {
             <div className="level-item">
               <div className="purchase-profile">
                 {
-                  !this.props.bundle && this.props.staff.find(staff => staff.id === this.props.item.staff_id) ? <img src={this.props.staff.find(staff => staff.id === this.props.item.staff_id).photo} alt='' /> : null
+                  !this.props.bundle && this.props.staff.find(staff => staff.id === this.props.item.staff_id) ?
+                  <img
+                    src={
+                      this.props.staff.find(staff => staff.id === this.props.item.staff_id).photo
+                    }
+                    alt={
+                      `${this.props.staff.find(staff => staff.id === this.props.item.staff_id).first_name[0]}${this.props.staff.find(staff => staff.id === this.props.item.staff_id).last_name[0]}`
+                    }
+                  /> : null
                 }
-                {/* {
-                  !this.props.bundle && this.props.staff.find(staff => staff.id === this.props.purchase.staff_id) ? <img src={this.props.staff.find(staff => staff.id === this.props.purchase.staff_id).photo} alt='' /> : null
-                } */}
               </div>
             </div>
           </div>

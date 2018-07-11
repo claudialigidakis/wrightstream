@@ -60,8 +60,8 @@ class Purchase extends React.Component {
     this.props.assignStaff(this.props.purchase.id, id);
   };
 
-  changeStatus = (status, completed) => {
-    this.props.changeStatus(this.props.purchase.id, status, completed);
+  changeStatus = (status, completed, staff) => {
+    this.props.changeStatus(this.props.purchase.id, status, completed, staff);
   };
 
   render () {

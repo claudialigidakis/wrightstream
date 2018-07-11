@@ -24,6 +24,7 @@ class PurchaseQuality extends React.Component {
   componentDidUpdate (prevProps) {
     if (this.props.purchase.quality_check !== prevProps.purchase.quality_check || this.props.purchase.pick_up !== prevProps.purchase.pick_up) {
       if (this.props.purchase.quality_check && (this.props.purchase.pick_up || this.props.purchase.pick_up === false)) {
+        this.props.assignStaff();
         this.props.changeStatus(4, true);
       }
     }
@@ -45,6 +46,7 @@ class PurchaseQuality extends React.Component {
               htmlFor="ready"
               onClick={() => {
                 this.check(true);
+                this.props.changeStatus(4, this.props.purchase.statuses.find(status => status.status_id === 4).completed, this.props.purchase.staff_id);
               }}
             >
               Ready for delivery

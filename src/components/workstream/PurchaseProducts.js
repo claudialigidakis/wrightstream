@@ -66,7 +66,10 @@ class PurchaseProducts extends React.Component {
                 }
               })()
             }
-            onClick={() => this.props.changeStatus(3, true)}
+            onClick={() => {
+              this.props.assignStaff();
+              this.props.changeStatus(3, true);
+            }}
           >Complete Products</button>
         </div>
       </div>
