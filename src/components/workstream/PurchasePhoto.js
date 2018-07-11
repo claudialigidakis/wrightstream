@@ -32,7 +32,7 @@ class PurchasePhoto extends React.Component {
                       this.props.changeStatus(2, true);
                     }
                   }}
-                  ></div>
+                ></div>
               );
             } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
               return (
@@ -66,12 +66,25 @@ class PurchasePhoto extends React.Component {
                       `${this.props.staff.find(staff => staff.id === this.props.purchase.staff_id).first_name[0]}${this.props.staff.find(staff => staff.id === this.props.purchase.staff_id).last_name[0]}`
                     }
                     onClick={() => {
-                      this.props.assignStaff();
+                      if (this.props.user.role_id !== 3 || this.props.purchase.staff_id === this.props.user.id) {
+                        this.props.assignStaff();
+                      }
                     }}
                   />
                 );
               } else {
-                return <div className="empty-photo" onClick={this.props.assign}></div>;
+                return (
+                  <div
+                    className="empty-photo"
+                    onClick={() => {
+                      if (this.props.user.role_id !== 3) {
+                        this.props.assign();
+                      } else {
+                        this.props.assignStaff(this.props.user.id);
+                      }
+                    }}
+                  ></div>
+                );
               }
             } else {
               return null;
