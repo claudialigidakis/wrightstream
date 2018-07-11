@@ -32,7 +32,23 @@ class PurchaseQuality extends React.Component {
 
   render () {
     return (
-      <ul>
+      <ul
+        className={
+          (() => {
+            if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
+              return 'disable';
+            } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
+              return 'disable';
+            } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
+              return 'disable';
+            } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
+              return null;
+            } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
+              return 'disable';
+            }
+          })()
+        }
+      >
         <li>
           <div className="field">
             <input

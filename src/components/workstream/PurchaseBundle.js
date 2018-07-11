@@ -32,7 +32,29 @@ class PurchaseBundle extends React.Component {
             <div className="level-item">
               <div className="field">
                 <input className="is-checkradio" type="checkbox" checked={this.state.checked} onChange={event => {event.preventDefault()}} />
-                <label onClick={this.check}>{this.props.bundle.bundle_qty} {this.props.bundle.name}</label> <span className="lnr-label" onClick={event => this.props.toggle(this.props.bundle, true)}></span>
+                <label
+                  onClick={this.check}
+                  className={
+                    (() => {
+                      if (this.props.purchase) {
+                        if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
+                          return 'disable';
+                        } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
+                          return 'disable';
+                        } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
+                          return null;
+                        } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
+                          return 'disable';
+                        } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
+                          return 'disable';
+                        }
+                      }
+                    })()
+                  }
+                >
+                  {this.props.bundle.bundle_qty} {this.props.bundle.name}
+                </label>
+                <span className="lnr-label" onClick={event => {this.props.toggle(this.props.bundle, true)}}></span>
               </div>
             </div>
           </div>
