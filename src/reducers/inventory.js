@@ -2,6 +2,7 @@ import {
   EDIT_SUPPLY,
   EDIT_ITEM,
   GET_LISTS,
+  GET_WORKSTREAM_LIST,
   ADD_LIST,
   GET_ORDERS,
   ADD_ORDER,
@@ -12,6 +13,7 @@ let initialState = {
   supplies: [],
   items: [],
   lists: [],
+  workstreamList: [],
   orders: []
 };
 
@@ -23,6 +25,8 @@ export default (state = initialState, action) => {
       return {...state, items: action.payload};
     case GET_LISTS:
       return {...state, lists: action.payload};
+    case GET_WORKSTREAM_LIST:
+      return {...state, workstreamList: action.payload};
     case ADD_LIST:
       return {...state, lists: action.payload};
     case GET_ORDERS:

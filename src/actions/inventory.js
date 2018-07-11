@@ -3,6 +3,7 @@ import request from '../helpers/request';
 export const EDIT_SUPPLY = 'EDIT_SUPPLY';
 export const EDIT_ITEM = 'EDIT_ITEM';
 export const GET_LISTS = 'GET_LISTS';
+export const GET_WORKSTREAM_LIST = 'GET_WORKSTREAM_LIST';
 export const ADD_LIST = 'ADD_LIST';
 export const GET_ORDERS = 'GET_ORDERS';
 export const ADD_ORDER = 'ADD_ORDER';
@@ -55,6 +56,22 @@ export const getLists = () => (
       .then(response => {
         dispatch({
           type: GET_LISTS,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
+export const getWorkstreamList = () => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/helper/wrightStream/${shop_id}`)
+      .then(response => {
+        dispatch({
+          type: GET_WORKSTREAM_LIST,
           payload: response.data.data
         });
       });

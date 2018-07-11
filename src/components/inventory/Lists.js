@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getLists, addOrder } from '../../actions/inventory';
+import { getLists, getWorkstreamList, addOrder } from '../../actions/inventory';
 import { getSources, getSupplies } from '../../actions/products';
 import { estimator } from '../../actions/helper';
 
@@ -19,7 +19,6 @@ class Lists extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      lists: [],
       selected: [],
       items: [],
       bundles: [],
@@ -31,7 +30,6 @@ class Lists extends React.Component {
 
   clear = () => {
     this.setState({
-      lists: [],
       selected: [],
       items: [],
       bundles: [],
@@ -98,18 +96,32 @@ class Lists extends React.Component {
 
   componentDidMount () {
     this.props.getLists();
+    this.props.getWorkstreamList();
     this.props.getSources();
     this.props.getSupplies();
   };
 
   render () {
+    let workstreamItems = [];
+    for (let purchase of this.props.workstreamList) {
+      for (let purchaseItem of purchase.items) {
+        if (workstreamItems.find(item => item.item_id === purchaseItem.item_id)) {
+          workstreamItems.find(item => item.item_id === purchaseItem.item_id).item_qty += purchaseItem.item_qty;
+        } else {
+          workstreamItems = [...workstreamItems, purchaseItem];
+        }
+      }
+    }
+    const workstreamList = {id: 0, name: "WorkStream", item: workstreamItems, bundles: []};
+    const lists = [workstreamList, ...this.props.lists];
+    
     return (
       <div className="columns estimator-content">
         <div className="column is-6">
           <h1 className="title is-5">Lists</h1>
           <ul>
             {
-              this.props.lists.map(list => {
+              lists.map(list => {
                 return (
                   <ListsList
                     key={list.id}
@@ -152,12 +164,12 @@ class Lists extends React.Component {
           <div className="modal-content">
             <div className="modal-container">
               <h1 className="title is-5">Products in {
-                this.state.id ? this.props.lists.find(list => list.id === this.state.id).name : null
+                this.state.id ? lists.find(list => list.id === this.state.id).name : null
               }</h1>
               <ul>
                 {
                   this.state.id ?
-                  this.props.lists.find(list => list.id === this.state.id).item.map(item => {
+                  lists.find(list => list.id === this.state.id).item.map(item => {
                     return (
                       <ListsProduct
                         key={item.item_id}
@@ -178,6 +190,7 @@ class Lists extends React.Component {
 
 const mapStateToProps = state => ({
   lists: state.inventory.lists,
+  workstreamList: state.inventory.workstreamList,
   sources: state.products.sources,
   supplies: state.products.supplies,
   estimatorSupplies: state.helper.supplies
@@ -185,6 +198,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getLists,
+  getWorkstreamList,
   addOrder,
   getSources,
   getSupplies,
