@@ -23,7 +23,6 @@ class PurchaseItem extends React.Component {
   };
 
   render () {
-    console.log(this.props.item)
     return (
       <li>
         <div className="level">
