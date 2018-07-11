@@ -21,7 +21,19 @@ class PurchasePhoto extends React.Component {
         {
           (() => {
             if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
-              return <div className="empty-photo" onClick={this.props.assign}></div>;
+              return (
+                <div
+                  className="empty-photo"
+                  onClick={() => {
+                    if (this.props.user.role_id !== 3) {
+                      this.props.assign();
+                    } else {
+                      this.props.assignStaff(this.props.user.id);
+                      this.props.changeStatus(2, true);
+                    }
+                  }}
+                  ></div>
+              );
             } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
               return (
                 <img
@@ -36,8 +48,10 @@ class PurchasePhoto extends React.Component {
                     : ''
                   }
                   onClick={() => {
-                    this.props.assignStaff();
-                    this.props.changeStatus(2, false);
+                    if (this.props.user.role_id !== 3 || this.props.purchase.staff_id === this.props.user.id) {
+                      this.props.assignStaff();
+                      this.props.changeStatus(2, false);
+                    }
                   }}
                 />
               );
@@ -70,7 +84,7 @@ class PurchasePhoto extends React.Component {
 };
 
 const mapStateToProps = state => ({
-
+  user: state.auth.user
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
