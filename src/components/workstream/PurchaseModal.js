@@ -1,10 +1,6 @@
 // REACT
 import React from 'react';
 
-// REDUX
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
 // COMPONENTS
 import PurchaseStatus from './PurchaseStatus';
 import PurchasePhoto from './PurchasePhoto';
@@ -271,12 +267,4 @@ class PurchaseModal extends React.Component {
   };
 };
 
-const mapStateToProps = state => ({
-
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(PurchaseModal);
+export default PurchaseModal;

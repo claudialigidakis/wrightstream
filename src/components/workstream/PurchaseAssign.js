@@ -1,23 +1,12 @@
 // REACT
 import React from 'react';
 
-// REDUX
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
 // COMPONENTS
 import PurchaseAssignStaff from './PurchaseAssignStaff';
 
 // ==========
 
 class PurchaseAssign extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-
-    };
-  };
-
   render () {
     return (
       <div className="modal-content purchase-assign">
@@ -32,7 +21,7 @@ class PurchaseAssign extends React.Component {
                   assignStaff={this.props.assignStaff}
                   changeStatus={this.props.changeStatus}
                 />
-              )
+              );
             })
           }
         </ul>
@@ -41,12 +30,4 @@ class PurchaseAssign extends React.Component {
   };
 };
 
-const mapStateToProps = state => ({
-
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(PurchaseAssign);
+export default PurchaseAssign;

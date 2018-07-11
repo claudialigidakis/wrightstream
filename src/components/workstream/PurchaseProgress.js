@@ -1,20 +1,9 @@
 // REACT
 import React from 'react';
 
-// REDUX
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
 // ==========
 
 class PurchaseProgress extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-
-    };
-  };
-
   render () {
     return (
       <progress
@@ -28,15 +17,12 @@ class PurchaseProgress extends React.Component {
             } else {
               return 100;
             }
-          })()          
+          })()
         }
-        max="100" />
+        max="100"
+      />
     );
   };
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-
-}, dispatch);
-
-export default connect(null, mapDispatchToProps)(PurchaseProgress);
+export default PurchaseProgress;

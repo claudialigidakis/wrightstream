@@ -1,23 +1,12 @@
 // REACT
 import React from 'react';
 
-// REDUX
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
 // HELPERS
 const moment = require('moment');
 
 // ==========
 
 class PurchaseIcon extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-
-    };
-  };
-
   render () {
     return (
       <div>
@@ -40,8 +29,4 @@ class PurchaseIcon extends React.Component {
   };
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-
-}, dispatch);
-
-export default connect(null, mapDispatchToProps)(PurchaseIcon);
+export default PurchaseIcon;

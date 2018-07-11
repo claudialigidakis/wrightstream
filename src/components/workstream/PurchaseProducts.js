@@ -1,10 +1,6 @@
 // REACT
 import React from 'react';
 
-// REDUX
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
 // COMPONENTS
 import PurchaseItem from './PurchaseItem';
 import PurchaseBundle from './PurchaseBundle';
@@ -12,13 +8,6 @@ import PurchaseBundle from './PurchaseBundle';
 // ==========
 
 class PurchaseProducts extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-
-    };
-  };
-
   render () {
     return (
       <div>
@@ -61,8 +50,4 @@ class PurchaseProducts extends React.Component {
   };
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-
-}, dispatch);
-
-export default connect(null, mapDispatchToProps)(PurchaseProducts);
+export default PurchaseProducts;

@@ -1,10 +1,6 @@
 // REACT
 import React from 'react';
 
-// REDUX
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
 // ==========
 
 class PurchaseStatus extends React.Component {
@@ -64,8 +60,4 @@ class PurchaseStatus extends React.Component {
   };
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-
-}, dispatch);
-
-export default connect(null, mapDispatchToProps)(PurchaseStatus);
+export default PurchaseStatus;
