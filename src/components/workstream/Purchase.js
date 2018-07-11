@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { changeStatus, assignStaff } from '../../actions/workstream';
+import { changeStatus, assignStaff, archive } from '../../actions/workstream';
 
 // COMPONENTS
 import PurchaseStore from './PurchaseStore';
@@ -65,6 +65,10 @@ class Purchase extends React.Component {
     this.props.changeStatus(this.props.purchase.id, status, completed, staff);
   };
 
+  archive = () => {
+    this.props.archive(this.props.purchase.id, true);
+  };
+
   render () {
     return (
       <div>
@@ -115,7 +119,11 @@ class Purchase extends React.Component {
           </div>
           {
             !this.props.mystream ? (
-              <PurchaseAction purchase={this.props.purchase} />
+              <PurchaseAction
+                purchase={this.props.purchase}
+                changeStatus={this.changeStatus}
+                archive={this.archive}
+              />
             ) : null
           }
         </div>
@@ -149,7 +157,8 @@ class Purchase extends React.Component {
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   changeStatus,
-  assignStaff
+  assignStaff,
+  archive
 }, dispatch);
 
 export default connect(null, mapDispatchToProps)(Purchase);

@@ -42,6 +42,7 @@ class PurchasePhoto extends React.Component {
                   onClick={() => {
                     if (this.props.user.role_id !== 3 || this.props.purchase.staff_id === this.props.user.id) {
                       this.props.assignStaff();
+                      console.log('pending unassigning')
                       this.props.changeStatus(2, false);
                     }
                   }}
@@ -60,6 +61,7 @@ class PurchasePhoto extends React.Component {
                     onClick={() => {
                       if (this.props.user.role_id !== 3 || this.props.purchase.staff_id === this.props.user.id) {
                         this.props.assignStaff();
+                        console.log('finalize unassigning')
                       }
                     }}
                   />

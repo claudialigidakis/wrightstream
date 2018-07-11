@@ -15,7 +15,7 @@ class PurchaseAction extends React.Component {
             if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
               if ((this.props.purchase.supplies.filter(supply => supply.completed).length / this.props.purchase.supplies.length) * 100 === 100) {
                 return (
-                  <footer className="card-footer" onClick={() => this.changeStatus(1, true)}>
+                  <footer className="card-footer" onClick={() => this.props.changeStatus(1, true)}>
                     Move to Pending
                   </footer>
                 );
@@ -24,7 +24,7 @@ class PurchaseAction extends React.Component {
               const today = new Date();
               if (moment(this.props.purchase.delivery_date).isBefore(today)) {
                 return (
-                  <footer className="card-footer">
+                  <footer className="card-footer" onClick={this.props.archive}>
                     Archive
                   </footer>
                 );
