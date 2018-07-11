@@ -15,6 +15,7 @@ class Header extends React.Component {
       productsClasses: 'navbar-item',
       inventoryClasses: 'navbar-item',
       workstreamClasses: 'navbar-item',
+      mystreamClasses: 'navbar-item',
       adminClasses: 'navbar-item'
     };
   };
@@ -25,6 +26,7 @@ class Header extends React.Component {
         productsClasses: 'navbar-item is-active',
         inventoryClasses: 'navbar-item',
         workstreamClasses: 'navbar-item',
+        mystreamClasses: 'navbar-item',
         adminClasses: 'navbar-item'
       });
     } else if (window.location.pathname.includes('/inventory')) {
@@ -32,6 +34,7 @@ class Header extends React.Component {
         productsClasses: 'navbar-item',
         inventoryClasses: 'navbar-item is-active',
         workstreamClasses: 'navbar-item',
+        mystreamClasses: 'navbar-item',
         adminClasses: 'navbar-item'
       });
     } else if (window.location.pathname.includes('/workstream')) {
@@ -39,6 +42,15 @@ class Header extends React.Component {
         productsClasses: 'navbar-item',
         inventoryClasses: 'navbar-item',
         workstreamClasses: 'navbar-item is-active',
+        mystreamClasses: 'navbar-item',
+        adminClasses: 'navbar-item'
+      });
+    } else if (window.location.pathname.includes('/mystream')) {
+      this.setState({
+        productsClasses: 'navbar-item',
+        inventoryClasses: 'navbar-item',
+        workstreamClasses: 'navbar-item',
+        mystreamClasses: 'navbar-item is-active',
         adminClasses: 'navbar-item'
       });
     } else if (window.location.pathname.includes('/admin')) {
@@ -46,6 +58,7 @@ class Header extends React.Component {
         productsClasses: 'navbar-item',
         inventoryClasses: 'navbar-item',
         workstreamClasses: 'navbar-item',
+        mystreamClasses: 'navbar-item',
         adminClasses: 'navbar-item is-active'
       });
     }
@@ -65,14 +78,22 @@ class Header extends React.Component {
           </a>
         </div>
         <div className="navbar-menu" id="navMenu">
-          {this.props.authorized ?
-            (
+          {
+            this.props.authorized ? (
               <div className="navbar-end">
                 <div className="navbar-main">
                   <a className={this.state.productsClasses} href="/products">Products</a>
                   <a className={this.state.inventoryClasses} href="/inventory">Inventory</a>
                   <a className={this.state.workstreamClasses} href="/workstream">WorkStream</a>
-                  <a className={this.state.adminClasses} href="/admin">Admin</a>
+                  {
+                    (() => {
+                      if (this.props.user.role_id !== 3) {
+                        return <a className={this.state.adminClasses} href="/admin">Admin</a>;
+                      } else {
+                        return <a className={this.state.mystreamClasses} href="/mystream">MyStream</a>;
+                      }
+                    })()
+                  }
                 </div>
                 <div className="navbar-item has-dropdown is-hoverable">
                   <a className="navbar-link is-hidden-touch">
