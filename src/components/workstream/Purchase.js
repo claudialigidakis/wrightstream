@@ -104,13 +104,21 @@ class Purchase extends React.Component {
                     assignStaff={this.assignStaff}
                   />
                 </div>
-                <div className="column is-2 purchase-drag">
-                  <PurchaseIcon purchase={this.props.purchase} />
-                </div>
+                {
+                  !this.props.mystream ? (
+                    <div className="column is-2 purchase-drag">
+                      <PurchaseIcon purchase={this.props.purchase} />
+                    </div>
+                  ) : null
+                }
               </div>
             </div>
           </div>
-          <PurchaseAction purchase={this.props.purchase} />
+          {
+            !this.props.mystream ? (
+              <PurchaseAction purchase={this.props.purchase} />
+            ) : null
+          }
         </div>
         <div className={this.state.modalClasses}>
           <div className="modal-background" onClick={this.toggle}></div>
