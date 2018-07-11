@@ -39,6 +39,9 @@ class CategoryControl extends React.Component {
   render () {
     return (
       <div className="products-control buttons is-right">
+        <a className="button">
+          <span className="icon"><i className="fas fa-sync-alt"></i></span>
+        </a>
         <div className="dropdown is-hoverable is-right">
           <div className="dropdown-trigger">
             <a className="button is-primary">
@@ -75,7 +78,7 @@ class CategoryControl extends React.Component {
               </a>
             </div>
           </div>
-        </div>
+        </div>      
         <div className={this.state.modalClasses}>
           <div className="modal-background" onClick={this.toggle}></div>
           <div className="modal-content modal-form">
