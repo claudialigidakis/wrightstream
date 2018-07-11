@@ -10,9 +10,26 @@ import { getItems, getCategories } from '../actions/products';
 // COMPONENTS
 import Purchase from './workstream/Purchase';
 
+// HELPERS
+import request from '../helpers/request';
+
 // ==========
 
 class WorkStream extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      purchases: ''
+    };
+  };
+
+  handleEtsyPurchases = () => {
+    request('/etsy/findAllPurchases')
+    .then(response => {
+      this.setState({purchases: response.data});
+    });
+  };
+
   componentDidMount () {
     this.props.getPurchases();
     this.props.getStaff();
@@ -27,7 +44,7 @@ class WorkStream extends React.Component {
           <div className="column is-3">
             <h1 className="title is-4">
               Backlog
-              <a><span className="lnr-refresh"></span></a>
+              <a onClick={this.handleEtsyPurchases}><span className="lnr-refresh"></span></a>
               <a><span className="lnr-plus"></span></a>
             </h1>
             <div className="column-container">

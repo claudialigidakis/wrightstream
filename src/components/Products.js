@@ -21,9 +21,26 @@ import Sources from './products/Sources';
 import Type from './products/Type';
 import Types from './products/Types';
 
+// HELPERS
+import request from '../helpers/request';
+
 // ==========
 
 class Products extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      purchases: ''
+    };
+  };
+
+  handleEtsyProducts = () => {
+    request('/etsy/findAllListingActive')
+    .then(response => {
+      this.setState({products: response.data});
+    });
+  };
+
   render () {
     return (
       <section className="products">
@@ -42,7 +59,7 @@ class Products extends React.Component {
               <Switch>
                 <Route path="/products/sources" component={TypeControl} />
                 <Route path="/products/supplies" component={KindControl} />
-                <Route path="/products" component={CategoryControl} />
+                <Route path="/products" render={() => <CategoryControl handleEtsyProducts={this.handleEtsyProducts} />} />
               </Switch>
             </BrowserRouter>
             <Nav />
