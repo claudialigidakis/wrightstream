@@ -24,6 +24,7 @@ class PurchaseQuality extends React.Component {
   componentDidUpdate (prevProps) {
     if (this.props.purchase.quality_check !== prevProps.purchase.quality_check || this.props.purchase.pick_up !== prevProps.purchase.pick_up) {
       if (this.props.purchase.quality_check && (this.props.purchase.pick_up || this.props.purchase.pick_up === false)) {
+        this.props.assignStaff();
         this.props.changeStatus(4, true);
       }
     }
@@ -31,7 +32,27 @@ class PurchaseQuality extends React.Component {
 
   render () {
     return (
-      <ul>
+      <ul
+        className={
+          (() => {
+            if (this.props.purchase && this.props.user.id === this.props.purchase.staff_id) {
+              if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
+                return 'disable';
+              } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
+                return 'disable';
+              } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
+                return 'disable';
+              } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
+                return null;
+              } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
+                return 'disable';
+              }
+            } else {
+              return 'disable';
+            }
+          })()
+        }
+      >
         <li>
           <div className="field">
             <input
@@ -45,6 +66,7 @@ class PurchaseQuality extends React.Component {
               htmlFor="ready"
               onClick={() => {
                 this.check(true);
+                this.props.changeStatus(4, this.props.purchase.statuses.find(status => status.status_id === 4).completed, this.props.purchase.staff_id);
               }}
             >
               Ready for delivery
@@ -75,8 +97,12 @@ class PurchaseQuality extends React.Component {
   };
 };
 
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
 const mapDispatchToProps = dispatch => bindActionCreators({
   qualityCheck
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(PurchaseQuality);
+export default connect(mapStateToProps, mapDispatchToProps)(PurchaseQuality);

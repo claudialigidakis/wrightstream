@@ -14,8 +14,8 @@ class Login extends React.Component {
     password: ''
   };
 
-  handleLogin = e => {
-    e.preventDefault();
+  handleLogin = event => {
+    event.preventDefault();
     this.props.userLogin(this.state, this.props.history);
   };
 
@@ -35,7 +35,7 @@ class Login extends React.Component {
                         placeholder="Email"
                         id="email"
                         value={this.state.email}
-                        onChange={e => this.setState({email: e.target.value})}
+                        onChange={event => this.setState({email: event.target.value})}
                         required
                       />
                     </p>
@@ -48,7 +48,7 @@ class Login extends React.Component {
                         placeholder="Password"
                         id="password"
                         value={this.state.password}
-                        onChange={e => this.setState({password: e.target.value})}
+                        onChange={event => this.setState({password: event.target.value})}
                         required
                       />
                     </p>
@@ -56,11 +56,13 @@ class Login extends React.Component {
                   <div className="control">
                     <button className="button is-primary is-fullwidth">Log In</button>
                   </div>
-                  {this.props.showLoginError ? (
-                    <p id="error" className="help is-danger">
-                      Email or password is incorrect.
-                    </p>
-                  ) : null}
+                  {
+                    this.props.showLoginError ? (
+                      <p id="error" className="help is-danger">
+                        Email or password is incorrect.
+                      </p>
+                    ) : null
+                  }
                 </form>
               </div>
             </div>
@@ -71,7 +73,12 @@ class Login extends React.Component {
   };
 };
 
-const mapStateToProps = state => ({showLoginError: state.auth.showLoginError});
-const mapDispatchToProps = dispatch => ({userLogin: bindActionCreators(userLogin, dispatch)});
+const mapStateToProps = state => ({
+  showLoginError: state.auth.showLoginError
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  userLogin
+}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -21,23 +21,7 @@ class PurchaseProducts extends React.Component {
 
   render () {
     return (
-      <div
-        className={
-          (() => {
-            if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
-              return 'disable';
-            } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
-              return 'disable';
-            } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
-              return null;
-            } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-              return 'disable';
-            } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
-              return 'disable';
-            }
-          })()
-        }
-      >
+      <div>
         <ul>
           {
             this.props.purchase.bundles.map(bundle => {
@@ -66,7 +50,10 @@ class PurchaseProducts extends React.Component {
                 }
               })()
             }
-            onClick={() => this.props.changeStatus(3, true)}
+            onClick={() => {
+              this.props.assignStaff();
+              this.props.changeStatus(3, true);
+            }}
           >Complete Products</button>
         </div>
       </div>

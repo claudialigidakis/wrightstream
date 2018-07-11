@@ -26,12 +26,12 @@ export const getPurchases = () => (
   }
 );
 
-export const changeStatus = (purchase_id, status_id, completed) => (
+export const changeStatus = (purchase_id, status_id, completed, staff_id) => (
   dispatch => {
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/purchases_statuses/${purchase_id}/${status_id}`, 'put', {completed})
+      request(`/purchases_statuses/${purchase_id}/${status_id}`, 'put', {completed, staff_id})
       .then(response => {
         return request(`/purchases/${shop_id}/allPurchases`);
       })

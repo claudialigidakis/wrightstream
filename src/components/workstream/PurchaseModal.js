@@ -193,7 +193,13 @@ class PurchaseModal extends React.Component {
               </div>
             </div>
             <div className={this.state.productsClasses}>
-              <PurchaseProducts purchase={this.props.purchase} staff={this.props.staff} toggle={this.toggle} changeStatus={this.props.changeStatus} />
+              <PurchaseProducts
+                purchase={this.props.purchase}
+                staff={this.props.staff}
+                toggle={this.toggle}
+                changeStatus={this.props.changeStatus}
+                assignStaff={this.props.assignStaff}
+              />
             </div>
 
             <div className="purchase-row level" onClick={this.collapseQuality}>
@@ -206,13 +212,27 @@ class PurchaseModal extends React.Component {
               <div className="level-right">
                 <div className="level-item">
                   <div className="purchase-profile">
-                    {/* <img src={this.props.user.photo} alt='' /> */}
+                    {
+                      this.props.staff.find(staff => staff.id === this.props.purchase.statuses.find(status => status.status_id === 4).staff_id) ?
+                      <img
+                        src={
+                          this.props.staff.find(staff => staff.id === this.props.purchase.statuses.find(status => status.status_id === 4).staff_id).photo
+                        }
+                        alt={
+                          `${this.props.staff.find(staff => staff.id === this.props.purchase.statuses.find(status => status.status_id === 4).staff_id).first_name[0]}${this.props.staff.find(staff => staff.id === this.props.purchase.statuses.find(status => status.status_id === 4).staff_id).last_name[0]}`
+                        }
+                      /> : null
+                    }
                   </div>
                 </div>
               </div>
             </div>
             <div className={this.state.qualityClasses}>
-              <PurchaseQuality purchase={this.props.purchase} changeStatus={this.props.changeStatus} />
+              <PurchaseQuality
+                purchase={this.props.purchase}
+                changeStatus={this.props.changeStatus}
+                assignStaff={this.props.assignStaff}
+              />
             </div>
 
             <div className="purchase-row level" onClick={this.collapseSchedule}>
@@ -252,7 +272,7 @@ class PurchaseModal extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  user: state.auth.user
+
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
