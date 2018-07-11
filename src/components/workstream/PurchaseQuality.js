@@ -35,15 +35,19 @@ class PurchaseQuality extends React.Component {
       <ul
         className={
           (() => {
-            if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
-              return 'disable';
-            } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
-              return 'disable';
-            } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
-              return 'disable';
-            } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-              return null;
-            } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
+            if (this.props.purchase && this.props.user.id === this.props.purchase.staff_id) {
+              if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
+                return 'disable';
+              } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
+                return 'disable';
+              } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
+                return 'disable';
+              } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
+                return null;
+              } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
+                return 'disable';
+              }
+            } else {
               return 'disable';
             }
           })()
@@ -93,8 +97,12 @@ class PurchaseQuality extends React.Component {
   };
 };
 
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
 const mapDispatchToProps = dispatch => bindActionCreators({
   qualityCheck
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(PurchaseQuality);
+export default connect(mapStateToProps, mapDispatchToProps)(PurchaseQuality);
