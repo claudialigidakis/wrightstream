@@ -1,20 +1,9 @@
 // REACT
 import React from 'react';
 
-// REDUX
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
 // ==========
 
 class PurchaseAssignStaff extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-
-    };
-  };
-
   render () {
     return (
       <li
@@ -31,8 +20,4 @@ class PurchaseAssignStaff extends React.Component {
   };
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-
-}, dispatch);
-
-export default connect(null, mapDispatchToProps)(PurchaseAssignStaff);
+export default PurchaseAssignStaff;

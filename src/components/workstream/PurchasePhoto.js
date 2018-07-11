@@ -8,13 +8,6 @@ import { connect } from 'react-redux';
 // ==========
 
 class PurchasePhoto extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-
-    };
-  };
-
   render () {
     return (
       <div>
@@ -100,8 +93,4 @@ const mapStateToProps = state => ({
   user: state.auth.user
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(PurchasePhoto);
+export default connect(mapStateToProps, null)(PurchasePhoto);

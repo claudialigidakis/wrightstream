@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { completeItem } from '../../actions/workstream';
 
-
 // ==========
 
 class PurchaseItem extends React.Component {

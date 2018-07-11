@@ -58,7 +58,7 @@ class PurchaseSchedule extends React.Component {
         this.props.changeStatus(4, true);
       }
     }
-  }
+  };
 
   render () {
     return (

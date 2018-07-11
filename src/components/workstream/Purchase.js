@@ -148,13 +148,9 @@ class Purchase extends React.Component {
   };
 };
 
-const mapStateToProps = state => ({
-
-});
-
 const mapDispatchToProps = dispatch => bindActionCreators({
   changeStatus,
   assignStaff
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Purchase);
+export default connect(null, mapDispatchToProps)(Purchase);
