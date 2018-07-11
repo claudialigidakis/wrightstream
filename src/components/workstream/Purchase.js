@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { changeStatus, assignStaff } from '../../actions/workstream';
 
 // COMPONENTS
+import PurchaseStore from './PurchaseStore';
 import PurchaseStatus from './PurchaseStatus';
 import PurchasePhoto from './PurchasePhoto';
 import PurchaseProgress from './PurchaseProgress';
@@ -73,9 +74,7 @@ class Purchase extends React.Component {
             <div className="content">
               <div className="columns is-marginless">
                 <div className="column is-2">
-                  <div className="store-logo">
-                    C
-                  </div>
+                  <PurchaseStore purchase={this.props.purchase} />
                 </div>
                 <div className="column is-6">
                   <div className="purchase-progress">

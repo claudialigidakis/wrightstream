@@ -85,15 +85,8 @@ class Header extends React.Component {
                   <a className={this.state.productsClasses} href="/products">Products</a>
                   <a className={this.state.inventoryClasses} href="/inventory">Inventory</a>
                   <a className={this.state.workstreamClasses} href="/workstream">WorkStream</a>
-                  {
-                    (() => {
-                      if (this.props.user.role_id !== 3) {
-                        return <a className={this.state.adminClasses} href="/admin">Admin</a>;
-                      } else {
-                        return <a className={this.state.mystreamClasses} href="/mystream">MyStream</a>;
-                      }
-                    })()
-                  }
+                  <a className={this.state.mystreamClasses} href="/mystream">MyStream</a>
+                  {this.props.user.role_id !== 3 ? <a className={this.state.adminClasses} href="/admin">Admin</a> : null}
                 </div>
                 <div className="navbar-item has-dropdown is-hoverable">
                   <a className="navbar-link is-hidden-touch">
