@@ -141,7 +141,7 @@ class Purchase extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  user: state.auth.user
+
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

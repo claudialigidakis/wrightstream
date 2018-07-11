@@ -23,6 +23,7 @@ class PurchaseItem extends React.Component {
   };
 
   render () {
+    console.log(this.props.item)
     return (
       <li>
         <div className="level">
@@ -39,19 +40,25 @@ class PurchaseItem extends React.Component {
                   }}
                   className={
                     (() => {
-                      if (this.props.purchase) {
-                        if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
-                          return 'disable';
-                        } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
-                          return 'disable';
-                        } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
-                          return null;
-                        } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
-                          return 'disable';
-                        } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
+                      if (this.props.purchase && this.props.user.id === this.props.purchase.staff_id) {
+                        if ((this.props.item.completed && this.props.user.id === this.props.item.staff_id) || this.props.item.completed === false) {
+                          if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
+                            return 'disable';
+                          } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
+                            return 'disable';
+                          } else if (this.props.purchase.statuses.find(status => status.status_id === 2).completed === true && this.props.purchase.statuses.find(status => status.status_id === 3).completed === false) {
+                            return null;
+                          } else if (this.props.purchase.statuses.find(status => status.status_id === 3).completed === true && this.props.purchase.statuses.find(status => status.status_id === 4).completed === false) {
+                            return 'disable';
+                          } else if (this.props.purchase.statuses.find(status => status.status_id === 4).completed === true) {
+                            return 'disable';
+                          }
+                        } else {
                           return 'disable';
                         }
-                      }                    
+                      } else {
+                        return 'disable';
+                      }
                     })()
                   }
                 >
@@ -84,8 +91,12 @@ class PurchaseItem extends React.Component {
   };
 };
 
+const mapStateToProps = state => ({
+  user: state.auth.user
+});
+
 const mapDispatchToProps = dispatch => bindActionCreators({
   completeItem
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(PurchaseItem);
+export default connect(mapStateToProps, mapDispatchToProps)(PurchaseItem);

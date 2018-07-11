@@ -180,6 +180,7 @@ class WorkStream extends React.Component {
 };
 
 const mapStateToProps = state => ({
+  user: state.auth.user,
   purchases: state.workstream.purchases,
   staff: state.workstream.staff,
   items: state.products.items,
