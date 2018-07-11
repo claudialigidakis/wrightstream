@@ -9,6 +9,7 @@ export const SCHEDULE = 'SCHEDULE';
 export const ADD_NOTES = 'ADD_NOTES';
 export const GET_STAFF = 'GET_STAFF';
 export const ASSIGN_STAFF = 'ASSIGN_STAFF';
+export const ARCHIVE = 'ARCHIVE';
 
 export const getPurchases = () => (
   dispatch => {
@@ -17,9 +18,12 @@ export const getPurchases = () => (
       const shop_id = response.data.shops_id;
       request(`/purchases/${shop_id}/allPurchases`)
       .then(response => {
+        return response.data.data.filter(purchase => purchase.archived === false);
+      })
+      .then(response => {
         dispatch({
           type: GET_PURCHASES,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -36,9 +40,12 @@ export const changeStatus = (purchase_id, status_id, completed, staff_id) => (
         return request(`/purchases/${shop_id}/allPurchases`);
       })
       .then(response => {
+        return response.data.data.filter(purchase => purchase.archived === false);
+      })
+      .then(response => {
         dispatch({
           type: CHANGE_STATUS,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -55,9 +62,12 @@ export const completeItem = (purchase_id, item_id, staff_id, completed) => (
         return request(`/purchases/${shop_id}/allPurchases`);
       })
       .then(response => {
+        return response.data.data.filter(purchase => purchase.archived === false);
+      })
+      .then(response => {
         dispatch({
           type: COMPLETE_ITEM,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -74,9 +84,12 @@ export const completeBundle = (purchase_id, bundle_id, staff_id, completed) => (
         return request(`/purchases/${shop_id}/allPurchases`);
       })
       .then(response => {
+        return response.data.data.filter(purchase => purchase.archived === false);
+      })
+      .then(response => {
         dispatch({
           type: COMPLETE_BUNDLE,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -93,9 +106,12 @@ export const qualityCheck = (purchase_id, quality_check) => (
         return request(`/purchases/${shop_id}/allPurchases`);
       })
       .then(response => {
+        return response.data.data.filter(purchase => purchase.archived === false);
+      })
+      .then(response => {
         dispatch({
           type: QUALITY_CHECK,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -112,9 +128,12 @@ export const schedule = (purchase_id, pick_up, delivery_date, service, tracking)
         return request(`/purchases/${shop_id}/allPurchases`);
       })
       .then(response => {
+        return response.data.data.filter(purchase => purchase.archived === false);
+      })
+      .then(response => {
         dispatch({
           type: SCHEDULE,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -131,9 +150,12 @@ export const addNotes = (purchase_id, notes) => (
         return request(`/purchases/${shop_id}/allPurchases`);
       })
       .then(response => {
+        return response.data.data.filter(purchase => purchase.archived === false);
+      })
+      .then(response => {
         dispatch({
           type: ADD_NOTES,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -166,9 +188,34 @@ export const assignStaff = (purchase_id, staff_id) => (
         return request(`/purchases/${shop_id}/allPurchases`);
       })
       .then(response => {
+        return response.data.data.filter(purchase => purchase.archived === false);
+      })
+      .then(response => {
         dispatch({
           type: ASSIGN_STAFF,
-          payload: response.data.data
+          payload: response
+        });
+      });
+    });
+  }
+);
+
+export const archive = (purchase_id, archived) => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/purchases/${purchase_id}`, 'put', {archived})
+      .then(response => {
+        return request(`/purchases/${shop_id}/allPurchases`);
+      })
+      .then(response => {
+        return response.data.data.filter(purchase => purchase.archived === false);
+      })
+      .then(response => {
+        dispatch({
+          type: ARCHIVE,
+          payload: response
         });
       });
     });
