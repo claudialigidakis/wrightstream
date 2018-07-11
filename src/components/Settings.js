@@ -4,42 +4,43 @@ import React from 'react';
 // REDUX
 import { connect } from 'react-redux';
 
-import request from '../helpers/request'
+// HELPERS
+import request from '../helpers/request';
 
 // ==========
 
 class Settings extends React.Component {
-  constructor(props){
-    super(props)
+  constructor (props) {
+    super(props);
     this.state = {
       loginUrl: '',
-      products:'',
-      purchases:''
-    }
-  }
+      products: '',
+      purchases: ''
+    };
+  };
 
   handleEtsyAuthClick = () => {
-    window.location = this.state.loginUrl
-  }
+    window.location = this.state.loginUrl;
+  };
+
   handleEtsyProductsClick = () => {
     request('/etsy/findAllListingActive')
     .then(response => {
-      console.log(response.data);
-      this.setState({products:response.data})
-    })
-  }
+      this.setState({products: response.data});
+    });
+  };
+
   handleEtsyPurchasesClick = () => {
     request('/etsy/findAllPurchases')
     .then(response => {
-      console.log(response.data);
-      this.setState({purchases:response.data})
-    })
-  }
+      this.setState({purchases: response.data});
+    });
+  };
 
   componentDidMount = async () => {
-    const response = await request('/auth/etsy/loginUrl')
-    this.setState({loginUrl: response.data.loginUrl})
-  }
+    const response = await request('/auth/etsy/loginUrl');
+    this.setState({loginUrl: response.data.loginUrl});
+  };
 
   render () {
     return (
@@ -55,10 +56,13 @@ class Settings extends React.Component {
         <button
           className="button"
           disabled={!this.state.loginUrl}
-          onClick={this.handleEtsyAuthClick}>
+          onClick={this.handleEtsyAuthClick}
+        >
           Link Etsy
         </button>
-        <button className="button">Link Shopify</button>
+        <button className="button">
+          Link Shopify
+        </button>
         <div>
           <button onClick={this.handleEtsyProductsClick}>Get Products</button>
           <button onClick={this.handleEtsyPurchasesClick}>Get Purchases</button>
