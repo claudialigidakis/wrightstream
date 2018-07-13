@@ -100,37 +100,25 @@ class BundleAdd extends React.Component {
 
   addItem = (input, id) => {
     if (!this.state.items.find(item => item.input === input) && !this.state.items.find(item => item.id === id)) {
-      this.state.items.push({input, id});
-      this.setState({items: this.state.items});
-    } else if (this.state.items.find(item => item.input === input) && !this.state.items.find(item => item.id === id)) {
-      const items = this.state.items;
-      const index = items.findIndex(item => item.input === input);
-      items[index].id = id;
-      this.setState({items: items});
+      this.setState({items: [...this.state.items, {input, id}]});
+    } else {
+      this.setState({items: this.state.items.map(item => item.input === input ? {...item, id} : {...item})});
     }
   };
 
   addItemQty = (input, qty) => {
     if (!this.state.items.find(item => item.input === input)) {
-      this.state.items.push({input, qty});
-      this.setState({items: this.state.items});
+      this.setState({items: [...this.state.items, {input, item_qty: qty}]});
     } else {
-      const items = this.state.items;
-      const index = items.findIndex(item => item.input === input);
-      items[index].item_qty = qty;
-      this.setState({items: items});
+      this.setState({items: this.state.items.map(item => item.input === input ? {...item, item_qty: qty} : {...item})});
     }
   };
 
   addStep = (input, step) => {
     if (!this.state.steps.find(step => step.input === input)) {
-      this.state.steps.push({input, step});
-      this.setState({steps: this.state.steps});
+      this.setState({steps: [...this.state.steps, {input, step}]});
     } else {
-      const steps = this.state.steps;
-      const index = steps.findIndex(step => step.input === input);
-      steps[index].step = step;
-      this.setState({steps: steps});
+      this.setState({steps: this.state.steps.map(existingStep => existingStep.input === input ? {...existingStep, step} : {...existingStep})});
     }
   }
 

@@ -101,44 +101,29 @@ class ItemAdd extends React.Component {
 
   addSupply = (input, id) => {
     if (!this.state.supplies.find(supply => supply.input === input) && !this.state.supplies.find(supply => supply.id === id)) {
-      this.state.supplies.push({input, id});
-      this.setState({supplies: this.state.supplies});
-    } else if (this.state.supplies.find(supply => supply.input === input) && !this.state.supplies.find(supply => supply.id === id)) {
-      const supplies = this.state.supplies;
-      const index = supplies.findIndex(supply => supply.input === input);
-      supplies[index].id = id;
-      this.setState({supplies: supplies});
+      this.setState({supplies: [...this.state.supplies, {input, id}]});
+    } else {
+      this.setState({supplies: this.state.supplies.map(supply => supply.input === input ? {...supply, id} : {...supply})});
     }
   };
 
   addSupplyQty = (input, qty) => {
     if (!this.state.supplies.find(supply => supply.input === input)) {
-      this.state.supplies.push({input, qty});
-      this.setState({supplies: this.state.supplies});
+      this.setState({supplies: [...this.state.supplies, {input, qty}]});
     } else {
-      const supplies = this.state.supplies;
-      const index = supplies.findIndex(supply => supply.input === input);
-      supplies[index].qty = qty;
-      this.setState({supplies: supplies});
+      this.setState({supplies: this.state.supplies.map(supply => supply.input === input ? {...supply, qty} : {...supply})});
     }
   };
 
   addSupplyMeasure = (input, measure) => {
-    const supplies = this.state.supplies;
-    const index = supplies.findIndex(supply => supply.input === input);
-    supplies[index].qty_measure = measure;
-    this.setState({supplies: supplies});
+    this.setState({supplies: this.state.supplies.map(supply => supply.input === input ? {...supply, qty_measure: measure} : {...supply})});
   };
 
   addStep = (input, step) => {
     if (!this.state.steps.find(step => step.input === input)) {
-      this.state.steps.push({input, step});
-      this.setState({steps: this.state.steps});
+      this.setState({steps: [...this.state.steps, {input, step}]});
     } else {
-      const steps = this.state.steps;
-      const index = steps.findIndex(step => step.input === input);
-      steps[index].step = step;
-      this.setState({steps: steps});
+      this.setState({steps: this.state.steps.map(existingStep => existingStep.input === input ? {...existingStep, step} : {...existingStep})});
     }
   }
 

@@ -83,28 +83,18 @@ class Estimator extends React.Component {
 
   addItem = (input, id) => {
     if (!this.state.items.find(item => item.input === input) && !this.state.items.find(item => item.id === id)) {
-      this.state.items.push({input, id});
-      this.setState({items: this.state.items});
-    } else if (this.state.items.find(item => item.input === input) && !this.state.items.find(item => item.id === id)) {
-      const items = this.state.items;
-      const index = items.findIndex(item => item.input === input);
-      items[index].id = id;
-      this.setState({items: items});
+      this.setState({items: [...this.state.items, {input, id}]}, () => {this.props.estimator(this.state.items, this.state.bundles)});
+    } else {
+      this.setState({items: this.state.items.map(item => item.input === input ? {...item, id} : {...item})}, () => {this.props.estimator(this.state.items, this.state.bundles)});
     }
-    this.props.estimator(this.state.items, this.state.bundles);
   };
 
   addItemQty = (input, qty) => {
     if (!this.state.items.find(item => item.input === input)) {
-      this.state.items.push({input, item_qty: qty});
-      this.setState({items: this.state.items});
+      this.setState({items: [...this.state.items, {input, item_qty: qty}]}, () => {this.props.estimator(this.state.items, this.state.bundles)});
     } else {
-      const items = this.state.items;
-      const index = items.findIndex(item => item.input === input);
-      items[index].item_qty = qty;
-      this.setState({items: items});
+      this.setState({items: this.state.items.map(item => item.input === input ? {...item, item_qty: qty} : {...item})}, () => {this.props.estimator(this.state.items, this.state.bundles)});
     }
-    this.props.estimator(this.state.items, this.state.bundles);
   };
 
   deleteItem = input => {

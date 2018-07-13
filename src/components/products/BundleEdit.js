@@ -84,37 +84,25 @@ class BundleEdit extends React.Component {
 
   addItem = (input, id) => {
     if (!this.state.items.find(item => item.input === input) && !this.state.items.find(item => item.id === id)) {
-      this.state.items.push({input, id});
-      this.setState({items: this.state.items});
-    } else if (this.state.items.find(item => item.input === input) && !this.state.items.find(item => item.id === id)) {
-      const items = this.state.items;
-      const index = items.findIndex(item => item.input === input);
-      items[index].id = id;
-      this.setState({items: items});
+      this.setState({items: [...this.state.items, {input, id}]});
+    } else {
+      this.setState({items: this.state.items.map(item => item.input === input ? {...item, id} : {...item})});
     }
   };
 
   addItemQty = (input, qty) => {
     if (!this.state.items.find(item => item.input === input)) {
-      this.state.items.push({input, qty});
-      this.setState({items: this.state.items});
+      this.setState({items: [...this.state.items, {input, item_qty: qty}]});
     } else {
-      const items = this.state.items;
-      const index = items.findIndex(item => item.input === input);
-      items[index].item_qty = qty;
-      this.setState({items: items});
+      this.setState({items: this.state.items.map(item => item.input === input ? {...item, item_qty: qty} : {...item})});
     }
   };
 
   addStep = (input, step) => {
     if (!this.state.steps.find(step => step.input === input)) {
-      this.state.steps.push({input, step});
-      this.setState({steps: this.state.steps});
+      this.setState({steps: [...this.state.steps, {input, step}]});
     } else {
-      const steps = this.state.steps;
-      const index = steps.findIndex(step => step.input === input);
-      steps[index].step = step;
-      this.setState({steps: steps});
+      this.setState({steps: this.state.steps.map(existingStep => existingStep.input === input ? {...existingStep, step} : {...existingStep})});
     }
   }
 
@@ -133,12 +121,9 @@ class BundleEdit extends React.Component {
     for (let ingredient of this.props.bundle.ingredients) {
       const {id, item_qty} = ingredient;
       const item = {input: shortid.generate(), id, item_qty};
-      this.state.items.push(item);
-      const input = item.input;
-      this.state.itemsInputs.push(input);
       this.setState({
-        items: this.state.items,
-        itemsInputs: this.state.itemsInputs
+        items: [...this.state.items, item],
+        itemsInputs: [...this.state.itemsInputs, item.input]
       });
     }
 
@@ -146,12 +131,9 @@ class BundleEdit extends React.Component {
     const stepsArray = Object.keys(stepsObject).map(step => stepsObject[step]);
     for (let step of stepsArray) {
       const eachStep = {input: shortid.generate(), step};
-      this.state.steps.push(eachStep);
-      const input = eachStep.input;
-      this.state.stepsInputs.push(input);
       this.setState({
-        steps: this.state.steps,
-        stepsInputs: this.state.stepsInputs
+        steps: [...this.state.steps, eachStep],
+        stepsInputs: [...this.state.stepsInputs, eachStep.input]
       });
     }
   };
