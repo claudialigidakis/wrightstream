@@ -57,10 +57,16 @@ class Lists extends React.Component {
 
   select = list => {
     if (!this.state.selected.find(checkedList => checkedList.id === list.id)) {
-      this.setState({selected: [...this.state.selected, list]}, this.addItems(list));
+      this.setState({selected: [...this.state.selected, list]}, () => {
+        this.addItems(list);
+        this.addBundles(list);
+      });
     } else {
       const index = this.state.selected.findIndex(checkedList => checkedList.id === list.id);
-      this.setState({selected: [...this.state.selected.slice(0, index), ...this.state.selected.slice(index+1, this.state.selected.length)]}, this.removeItems(list));
+      this.setState({selected: [...this.state.selected.slice(0, index), ...this.state.selected.slice(index+1, this.state.selected.length)]}, () => {
+        this.removeItems(list);
+        this.removeBundles(list);
+      });
     }
   };
 
@@ -76,6 +82,18 @@ class Lists extends React.Component {
     this.setState({items: items}, this.estimate);
   };
 
+  addBundles = list => {
+    let bundles = [...this.state.bundles];
+    for (let bundle of list.bundles) {
+      if (!bundles.find(existingBundle => existingBundle.bundle_id === bundle.bundle_id)) {
+        bundles = [...bundles, bundle];
+      } else {
+        bundles = bundles.map(existingBundle => existingBundle.bundle_id === bundle.bundle_id ? {...existingBundle, bundle_qty: existingBundle.bundle_qty + bundle.bundle_qty} : {...existingBundle});
+      }
+    }
+    this.setState({bundles: bundles}, this.estimate);
+  };
+
   removeItems = list => {
     let items = [...this.state.items];
     for (let item of list.item) {
@@ -84,13 +102,22 @@ class Lists extends React.Component {
     this.setState({items: items.filter(item => item.item_qty !== 0)}, this.estimate);
   };
 
+  removeBundles = list => {
+    let bundles = [...this.state.bundles];
+    for (let bundle of list.bundles) {
+      bundles = bundles.map(existingBundle => existingBundle.bundle_id === bundle.bundle_id ? {...existingBundle, bundle_qty: existingBundle.bundle_qty - bundle.bundle_qty} : {...existingBundle});
+    }
+    this.setState({bundles: bundles.filter(bundle => bundle.bundle_qty !== 0)}, this.estimate);
+  };
+
   estimate = () => {
-    this.props.estimator(this.state.items.map(item => ({id: item.item_id, item_qty: item.item_qty})), this.state.bundles);
+    this.props.estimator(this.state.items.map(item => ({id: item.item_id, item_qty: item.item_qty})), this.state.bundles.map(bundle => ({id: bundle.bundle_id, bundle_qty: bundle.bundle_qty})));
   };
 
   handleSubmit = () => {
     const items = this.state.items.map(item => ({id: item.item_id, item_qty: item.item_qty}));
-    this.props.addOrder({items, bundles: this.state.bundles});
+    const bundles = this.state.bundles.map(bundle => ({id: bundle.bundle_id, bundle_qty: bundle.bundle_qty}));
+    this.props.addOrder({items, bundles});
     this.setState({
       selected: [],
       items: [],
