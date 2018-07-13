@@ -91,7 +91,11 @@ class Lists extends React.Component {
   handleSubmit = () => {
     const items = this.state.items.map(item => ({id: item.item_id, item_qty: item.item_qty}));
     this.props.addOrder({items, bundles: this.state.bundles});
-    this.clear();
+    this.setState({
+      selected: [],
+      items: [],
+      bundles: []
+    }, this.estimate);
   };
 
   componentDidMount () {
@@ -114,7 +118,7 @@ class Lists extends React.Component {
     }
     const workstreamList = {id: 0, name: "WorkStream", item: workstreamItems, bundles: []};
     const lists = [workstreamList, ...this.props.lists];
-    
+
     return (
       <div className="columns estimator-content">
         <div className="column is-6">
@@ -151,9 +155,7 @@ class Lists extends React.Component {
             <div className="has-text-right">
               <button
                 className="button is-outlined is-primary"
-                disabled={
-                  this.props.estimatorSupplies.length > 0 ? false : true
-                }
+                disabled={this.props.estimatorSupplies.length > 0 ? false : true}
                 onClick={this.handleSubmit}
               >Order</button>
             </div>
@@ -163,9 +165,9 @@ class Lists extends React.Component {
           <div className="modal-background" onClick={this.toggle}></div>
           <div className="modal-content">
             <div className="modal-container">
-              <h1 className="title is-5">Products in {
-                this.state.id ? lists.find(list => list.id === this.state.id).name : null
-              }</h1>
+              <h1 className="title is-5">
+                Products in {this.state.id ? lists.find(list => list.id === this.state.id).name : null}
+              </h1>
               <ul>
                 {
                   this.state.id ?
@@ -181,7 +183,7 @@ class Lists extends React.Component {
               </ul>
             </div>
           </div>
-          <button className="modal-close is-large"  onClick={this.toggle}></button>
+          <button className="modal-close is-large" onClick={this.toggle}></button>
         </div>
       </div>
     );
