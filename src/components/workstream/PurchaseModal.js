@@ -2,6 +2,7 @@
 import React from 'react';
 
 // COMPONENTS
+import PurchaseStore from './PurchaseStore';
 import PurchaseStatus from './PurchaseStatus';
 import PurchasePhoto from './PurchasePhoto';
 import PurchaseProgress from './PurchaseProgress';
@@ -134,9 +135,7 @@ class PurchaseModal extends React.Component {
             <div className="purchase-header level">
               <div className="level-left">
                 <div className="level-item">
-                  <div className="store-logo">
-                    C
-                  </div>
+                  <PurchaseStore purchase={this.props.purchase} />
                 </div>
                 <div className="level-item">
                   <h1 className="title is-5 is-marginless">Purchase #{this.props.purchase.id}</h1>
