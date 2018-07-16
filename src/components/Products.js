@@ -7,6 +7,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { getProductsEtsy } from '../actions/stores';
 
 // COMPONENTS
 import Nav from './products/Nav';
@@ -44,7 +45,7 @@ class Products extends React.Component {
               <Switch>
                 <Route path="/products/supplies" component={Kinds} />
                 <Route path="/products/sources" component={Types} />
-                <Route path="/products" component={Categories} />
+                <Route path="/products" render={() => <Categories getEtsyProducts={this.props.getProductsEtsy} />} />
               </Switch>
             </BrowserRouter>
           </div>
@@ -79,7 +80,7 @@ class Products extends React.Component {
 };
 
 const mapStateToProps = state => ({
-
+  getProductsEtsy
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

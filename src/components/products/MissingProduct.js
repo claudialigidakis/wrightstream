@@ -17,7 +17,7 @@ class MissingProduct extends React.Component {
 
   render () {
     return (
-      <li onClick={this.props.toggle}>{this.props.product.title}</li>
+      <li onClick={() => this.props.toggle(this.props.unlinkedProduct.product_id)}>{this.props.unlinkedProduct.title}</li>
     );
   };
 };

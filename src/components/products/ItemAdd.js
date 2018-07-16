@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getUnlinkedProducts, getSupplies, addItem } from '../../actions/products';
+import { getSupplies, addItem } from '../../actions/products';
 
 // COMPONENTS
 import ItemAddSupply from './ItemAddSupply';
@@ -19,10 +19,10 @@ class ItemAdd extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      name: '',
-      linkedProduct: 'default',
+      name: this.props.unlinkedProduct ? this.props.unlinkedProduct.title : '',
+      unlinkedProduct: this.props.unlinkedProduct ? this.props.unlinkedProduct.title : 'default',
       category: 'default',
-      photo: '',
+      photo: this.props.unlinkedProduct ? this.props.unlinkedProduct.image : '',
       stock: 0,
       supplies: [],
       suppliesInputs: [shortid.generate()],
@@ -34,10 +34,10 @@ class ItemAdd extends React.Component {
 
   clear = () => {
     this.setState({
-      name: '',
-      linkedProduct: 'default',
+      name: this.props.unlinkedProduct ? this.props.unlinkedProduct.title : '',
+      unlinkedProduct: this.props.unlinkedProduct ? this.props.unlinkedProduct.title : 'default',
       category: 'default',
-      photo: '',
+      photo: this.props.unlinkedProduct ? this.props.unlinkedProduct.image : '',
       stock: 0,
       supplies: [],
       suppliesInputs: [shortid.generate()],
@@ -51,7 +51,7 @@ class ItemAdd extends React.Component {
     event.preventDefault();
     if (
       !event.target.name.value
-      // || event.target.linkedProduct.value === 'default'
+      || event.target.unlinkedProduct.value === 'default'
       || event.target.category.value === 'default'
       || this.state.supplies.length === 0
       || this.state.supplies.find(supply => supply.qty === 0)
@@ -64,16 +64,12 @@ class ItemAdd extends React.Component {
       });
     } else {
       const category_id = this.props.categories.find(category => category.name === this.state.category).id;
-      // if (this.state.linkedProduct === 'custom') {
-      //   const linkedProduct_id = 0;
-      // } else {
-      //   const linkedProduct_id = this.props.linkedProducts.find(linkedProduct => linkedProduct.name === this.state.linkedProduct).id;
-      // }
+      const unlinkedProduct_id = this.state.unlinkedProduct === 'custom' ? 0 : this.props.unlinkedProducts.find(unlinkedProduct => unlinkedProduct.title === this.state.unlinkedProduct).product_id;
       const steps = {};
       for (let i = 0; i < this.state.steps.length; i++) {
         steps[i+1] = this.state.steps[i].step;
       }
-      this.props.addItem(this.state.name, category_id, this.state.photo, this.state.stock, this.state.supplies, JSON.stringify(steps));
+      this.props.addItem(this.state.name, unlinkedProduct_id, category_id, this.state.photo, this.state.stock, this.state.supplies, JSON.stringify(steps));
       this.clear();
       this.props.toggle();
     }
@@ -136,7 +132,6 @@ class ItemAdd extends React.Component {
   };
 
   componentDidMount () {
-    this.props.getUnlinkedProducts();
     this.props.getSupplies();
   };
 
@@ -155,19 +150,19 @@ class ItemAdd extends React.Component {
             />
           </div>
         </div>
-        {/* <div className="field">
+        <div className="field">
           <div className="control">
             <div className="select">
               <select
-                id="linkedProduct"
-                value={this.state.linkedProduct}
-                onChange={event => this.setState({linkedProduct: event.target.value})}
+                id="unlinkedProduct"
+                value={this.state.unlinkedProduct}
+                onChange={event => this.setState({unlinkedProduct: event.target.value})}
                 >
                 <option value="default" disabled>Linked Product</option>
                 {
-                  this.props.linkedProducts.map(linkedProduct => {
+                  this.props.unlinkedProducts.map(unlinkedProduct => {
                     return (
-                      <option key={linkedProduct.id} value={linkedProduct.name}>{linkedProduct.name}</option>
+                      <option key={unlinkedProduct.product_id} value={unlinkedProduct.title}>{unlinkedProduct.title}</option>
                     )
                   })
                 }
@@ -175,7 +170,7 @@ class ItemAdd extends React.Component {
               </select>
             </div>
           </div>
-        </div> */}
+        </div>
         <div className="field">
           <div className="control">
             <input
@@ -254,13 +249,12 @@ class ItemAdd extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  linkedProducts: state.products.linkedProducts,
+  unlinkedProducts: state.products.unlinkedProducts,
   categories: state.products.categories,
   supplies: state.products.supplies
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getUnlinkedProducts,
   getSupplies,
   addItem
 }, dispatch);

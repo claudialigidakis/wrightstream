@@ -85,12 +85,12 @@ export const getItems = () => (
   }
 );
 
-export const addItem = (name, categoryId, photo, stock, supplies, steps) => (
+export const addItem = (name, productId, categoryId, photo, stock, supplies, steps) => (
   dispatch => {
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/items/${shop_id}`, 'post', {name, categoryId, photo, stock, supplies, steps})
+      request(`/items/${shop_id}`, 'post', {name, productId, categoryId, photo, stock, supplies, steps})
       .then(response => {
         return request(`/items/${shop_id}/allItems`)
       })
@@ -99,17 +99,26 @@ export const addItem = (name, categoryId, photo, stock, supplies, steps) => (
           type: ADD_ITEM,
           payload: response.data.data
         });
+      })
+      .then(response => {
+        return request(`/products/${shop_id}/allUnlinked`)
+      })
+      .then(response => {
+        dispatch({
+          type: GET_UNLINKED_PRODUCTS,
+          payload: response.data.data
+        });
       });
     });
   }
 );
 
-export const editItem = (id, name, categoryId, photo, stock, supplies, steps) => (
+export const editItem = (id, name, productId, categoryId, photo, stock, supplies, steps) => (
   dispatch => {
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/items/${id}`, 'put', {name, categoryId, photo, stock, supplies, steps})
+      request(`/items/${id}`, 'put', {name, productId, categoryId, photo, stock, supplies, steps})
       .then(response => {
         return request(`/items/${shop_id}/allItems`);
       })

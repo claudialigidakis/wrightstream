@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 // COMPONENTS
 import MissingProduct from './MissingProduct';
 import ItemAdd from './ItemAdd';
+import BundleAdd from './BundleAdd';
 
 // ==========
 
@@ -20,42 +21,45 @@ class MissingProducts extends React.Component {
       modalControl: false,
       modalControlClasses: 'modal',
       modalDisable: false,
-      action: ''
+      unlinkedProduct: '',
+      productType: ''
     };
   };
 
-  toggle = () => {
+  toggle = id => {
     if (!this.state.modalDisable) {
       if (!this.state.modal) {
         this.setState({
           modal: true,
-          modalClasses: this.state.modalClasses + ' is-active'
+          modalClasses: this.state.modalClasses + ' is-active',
+          unlinkedProduct: id
         });
       } else {
         this.setState({
           modal: false,
-          modalClasses: 'modal'
+          modalClasses: 'modal',
+          unlinkedProduct: ''
         });
       }
     }
   };
 
-  toggleControl = event => {
-    if (!this.state.modalControl) {
-      this.setState({
-        modalControl: true,
-        modalControlClasses: this.state.modalControlClasses + ' is-active',
-        modalDisable: true,
-        action: event.target.id
-      });
-    } else {
-      this.setState({
-        modalControl: false,
-        modalControlClasses: 'modal',
-        modalDisable: false,
-        action: ''
-      });
-    }
+  selectProductType = type => {
+    this.setState({
+      productType: type
+    });
+  };
+
+  clear = () => {
+    this.setState({
+      modal: false,
+      modalClasses: 'modal',
+      modalControl: false,
+      modalControlClasses: 'modal',
+      modalDisable: false,
+      unlinkedProduct: '',
+      productType: ''
+    });
   };
 
   componentDidMount () {
@@ -72,8 +76,8 @@ class MissingProducts extends React.Component {
               this.props.unlinkedProducts.map(unlinkedProduct => {
                 return (
                   <MissingProduct
-                    key={unlinkedProduct.listing_id}
-                    product={unlinkedProduct}
+                    key={unlinkedProduct.product_id}
+                    unlinkedProduct={unlinkedProduct}
                     toggle={this.toggle}
                   />
                 );
@@ -82,27 +86,58 @@ class MissingProducts extends React.Component {
           </ul>
         </div>
         <div className={this.state.modalClasses}>
-          <div className="modal-background" onClick={this.toggle}></div>
+          <div
+            className="modal-background"
+            onClick={() => {
+              this.toggle();
+              this.clear();
+            }}
+          ></div>
           <div className="modal-content modal-form">
             <div className="modal-container">
-              <button className="button" onClick={event => this.toggleControl(event)}>
-                Item
-              </button>
-              <button className="button" onClick={event => this.toggleControl(event)}>
-                Bundle
-              </button>
+              {
+                this.state.productType === '' ? (
+                  <div>
+                    <button className="button" onClick={() => {this.selectProductType('item')}}>
+                      Item
+                    </button>
+                    <button className="button" onClick={() => {this.selectProductType('bundle')}}>
+                      Bundle
+                    </button>
+                  </div>
+                ) : null
+              }
+              {
+                (() => {
+                  if (this.state.productType === 'item') {
+                    return (
+                      <ItemAdd
+                        toggle={this.toggle}
+                        unlinkedProduct={this.props.unlinkedProducts.find(unlinkedProduct => this.state.unlinkedProduct === unlinkedProduct.product_id)}
+                      />
+                    );
+                  } else if (this.state.productType === 'bundle') {
+                    return (
+                      <BundleAdd
+                        toggle={this.toggle}
+                        unlinkedProduct={this.props.unlinkedProducts.find(unlinkedProduct => this.state.unlinkedProduct === unlinkedProduct.product_id)}
+                      />
+                    );
+                  } else {
+                    return null;
+                  }
+                })()
+              }
             </div>
           </div>
-          <button className="modal-close is-large" onClick={this.toggle}></button>
-        </div>
-        <div className={this.state.modalControlClasses}>
-          <div className="modal-background" onClick={this.toggleControl}></div>
-          <div className="modal-content modal-form">
-            <div className="modal-container">
-              <ItemAdd toggle={this.toggleControl} />
-            </div>
-          </div>
-          <button className="modal-close is-large"  onClick={this.toggleControl}></button>
+          <button
+            className="modal-close is-large"
+            onClick={() => {
+              this.toggle();
+              this.clear();
+            }}
+          >
+          </button>
         </div>
       </div>
     );
