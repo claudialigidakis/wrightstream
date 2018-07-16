@@ -39,9 +39,9 @@ class CategoryControl extends React.Component {
   render () {
     return (
       <div className="products-control buttons is-right">
-        <a className="button" onClick={this.props.getProductsEtsy}>
+        {/* <a className="button" onClick={this.props.getProductsEtsy}>
           <span className="icon"><i className="fas fa-sync-alt"></i></span>
-        </a>
+        </a> */}
         <div className="dropdown is-hoverable is-right">
           <div className="dropdown-trigger">
             <a className="button is-primary">

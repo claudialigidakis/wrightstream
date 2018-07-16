@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getLinkedProducts, getSupplies, editItem } from '../../actions/products';
+import { getUnlinkedProducts, getSupplies, editItem } from '../../actions/products';
 
 // COMPONENTS
 import ItemAddSupply from './ItemAddSupply';
@@ -121,7 +121,7 @@ class ItemEdit extends React.Component {
   };
 
   componentDidMount () {
-    this.props.getLinkedProducts();
+    this.props.getUnlinkedProducts();
     this.props.getSupplies();
 
     for (let ingredient of this.props.item.ingredients) {
@@ -270,7 +270,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getLinkedProducts,
+  getUnlinkedProducts,
   getSupplies,
   editItem
 }, dispatch);

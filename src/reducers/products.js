@@ -1,5 +1,5 @@
 import {
-  GET_LINKED_PRODUCTS,
+  GET_UNLINKED_PRODUCTS,
   GET_PRODUCTS,
   GET_ITEMS,
   ADD_ITEM,
@@ -35,7 +35,7 @@ import {
 } from '../actions/products';
 
 let initialState = {
-  linkedProducts: [],
+  unlinkedProducts: [],
   products: [],
   items: [],
   bundles: [],
@@ -51,8 +51,8 @@ let initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_LINKED_PRODUCTS:
-      return {...state, linkedProducts: action.payload};
+    case GET_UNLINKED_PRODUCTS:
+      return {...state, unlinkedProducts: action.payload};
     case GET_PRODUCTS:
       return {...state, products: action.payload};
     case GET_ITEMS:

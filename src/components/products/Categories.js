@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getCategories } from '../../actions/products';
+import { getCategories, getUnlinkedProducts } from '../../actions/products';
 
 // COMPONENTS
 import MissingProducts from './MissingProducts';
@@ -14,12 +14,17 @@ import MissingProducts from './MissingProducts';
 class Categories extends React.Component {
   componentDidMount () {
     this.props.getCategories();
+    this.props.getUnlinkedProducts();
   };
 
   render () {
     return (
       <aside className="menu">
-        <MissingProducts etsyProducts={this.props.etsyProducts} />
+        {
+          this.props.unlinkedProducts.length > 0 ? (
+            <MissingProducts unlinkedProducts={this.props.unlinkedProducts} />
+          ) : null
+        }
         <p className="menu-label">
           Browse
         </p>
@@ -65,11 +70,13 @@ class Categories extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  categories: state.products.categories
+  categories: state.products.categories,
+  unlinkedProducts: state.products.unlinkedProducts
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getCategories
+  getCategories,
+  getUnlinkedProducts
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);

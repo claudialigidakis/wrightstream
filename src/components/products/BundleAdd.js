@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getLinkedProducts, getItems, addBundle } from '../../actions/products';
+import { getUnlinkedProducts, getItems, addBundle } from '../../actions/products';
 
 // COMPONENTS
 import BundleAddItem from './BundleAddItem';
@@ -131,7 +131,7 @@ class BundleAdd extends React.Component {
   };
 
   componentDidMount () {
-    this.props.getLinkedProducts();
+    this.props.getUnlinkedProducts();
     this.props.getItems();
   };
 
@@ -254,7 +254,7 @@ class BundleAdd extends React.Component {
   });
 
   const mapDispatchToProps = dispatch => bindActionCreators({
-    getLinkedProducts,
+    getUnlinkedProducts,
     getItems,
     addBundle
   }, dispatch);

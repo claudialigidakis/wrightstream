@@ -7,7 +7,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getProductsEtsy } from '../actions/stores';
 
 // COMPONENTS
 import Nav from './products/Nav';
@@ -37,7 +36,6 @@ class Products extends React.Component {
   };
 
   render () {
-    console.log(this.props.etsyProducts)
     return (
       <section className="products">
         <div className="columns is-fullheight is-marginless">
@@ -46,7 +44,7 @@ class Products extends React.Component {
               <Switch>
                 <Route path="/products/supplies" component={Kinds} />
                 <Route path="/products/sources" component={Types} />
-                <Route path="/products" render={() => <Categories etsyProducts={this.props.etsyProducts} />} />
+                <Route path="/products" component={Categories} />
               </Switch>
             </BrowserRouter>
           </div>
@@ -55,7 +53,7 @@ class Products extends React.Component {
               <Switch>
                 <Route path="/products/sources" component={TypeControl} />
                 <Route path="/products/supplies" component={KindControl} />
-                <Route path="/products" render={() => <CategoryControl getProductsEtsy={this.props.getProductsEtsy} />} />
+                <Route path="/products" component={CategoryControl} />
               </Switch>
             </BrowserRouter>
             <Nav />
@@ -81,11 +79,11 @@ class Products extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  etsyProducts: state.stores.etsyProducts
+
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getProductsEtsy
+
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
