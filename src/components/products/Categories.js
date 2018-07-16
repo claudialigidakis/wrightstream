@@ -19,7 +19,7 @@ class Categories extends React.Component {
   render () {
     return (
       <aside className="menu">
-        <MissingProducts />
+        <MissingProducts etsyProducts={this.props.etsyProducts} />
         <p className="menu-label">
           Browse
         </p>

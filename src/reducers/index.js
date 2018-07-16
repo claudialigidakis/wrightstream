@@ -1,4 +1,5 @@
 import auth from './auth';
+import stores from './stores';
 import admin from './admin';
 import helper from './helper';
 import products from './products';
@@ -10,6 +11,7 @@ import { reducer as formReducer } from 'redux-form';
 
 const rootReducer = combineReducers({
     auth,
+    stores,
     admin,
     helper,
     products,

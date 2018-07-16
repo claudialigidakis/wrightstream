@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // COMPONENTS
-// import Product from './Product';
+import MissingProduct from './MissingProduct';
 
 // ==========
 
@@ -17,14 +17,23 @@ class MissingProducts extends React.Component {
 
   render () {
     return (
-      <div className="box missing-products">
-        <h1 className="title is-6 has-text-centered">Missing Products</h1>
-        <ul>
-          <li>HoneyDew Lemonade</li>
-          <li>Apple Juice</li>
-          <li>Assorted Macarons</li>
-          <li>Pumpkin Roll</li>
-        </ul>
+      <div>
+        {
+          this.props.etsyProducts.length > 0 ? (
+            <div className="box missing-products">
+              <h1 className="title is-6 has-text-centered">Missing Products</h1>
+              <ul>
+                {
+                  this.props.etsyProducts.map(etsyProduct => {
+                    return (
+                      <MissingProduct key={etsyProduct.listing_id} product={etsyProduct} />
+                    );
+                  })
+                }
+              </ul>
+            </div>
+          ) : null
+        }
       </div>
     );
   };
