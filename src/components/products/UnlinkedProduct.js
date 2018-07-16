@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 
 // ==========
 
-class MissingProduct extends React.Component {
+class UnlinkedProduct extends React.Component {
   componentDidMount () {
     // this.props.getProductsByCategory(query('id'));
   };
@@ -30,4 +30,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(MissingProduct);
+export default connect(mapStateToProps, mapDispatchToProps)(UnlinkedProduct);

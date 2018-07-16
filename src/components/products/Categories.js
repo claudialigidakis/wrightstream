@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { getCategories, getUnlinkedProducts } from '../../actions/products';
 
 // COMPONENTS
-import MissingProducts from './MissingProducts';
+import UnlinkedProducts from './UnlinkedProducts';
 
 // ==========
 
@@ -22,7 +22,7 @@ class Categories extends React.Component {
       <aside className="menu">
         {
           this.props.unlinkedProducts.length > 0 ? (
-            <MissingProducts unlinkedProducts={this.props.unlinkedProducts} />
+            <UnlinkedProducts unlinkedProducts={this.props.unlinkedProducts} />
           ) : null
         }
         <p className="menu-label">

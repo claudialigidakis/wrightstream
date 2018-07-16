@@ -6,13 +6,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // COMPONENTS
-import MissingProduct from './MissingProduct';
+import UnlinkedProduct from './UnlinkedProduct';
 import ItemAdd from './ItemAdd';
 import BundleAdd from './BundleAdd';
 
 // ==========
 
-class MissingProducts extends React.Component {
+class UnlinkedProducts extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -75,7 +75,7 @@ class MissingProducts extends React.Component {
             {
               this.props.unlinkedProducts.map(unlinkedProduct => {
                 return (
-                  <MissingProduct
+                  <UnlinkedProduct
                     key={unlinkedProduct.product_id}
                     unlinkedProduct={unlinkedProduct}
                     toggle={this.toggle}
@@ -152,4 +152,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(MissingProducts);
+export default connect(mapStateToProps, mapDispatchToProps)(UnlinkedProducts);
