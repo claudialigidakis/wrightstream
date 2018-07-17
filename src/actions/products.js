@@ -1,7 +1,8 @@
 import request from '../helpers/request';
 
-export const GET_UNLINKED_PRODUCTS = 'GET_UNLINKED_PRODUCTS';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
+export const GET_UNLINKED_PRODUCTS = 'GET_UNLINKED_PRODUCTS';
+export const GET_RECENT_PRODUCTS = 'GET_RECENT_PRODUCTS';
 export const GET_ITEMS = 'GET_ITEMS';
 export const ADD_ITEM = 'ADD_ITEM';
 export const EDIT_ITEM = 'EDIT_ITEM';
@@ -34,6 +35,22 @@ export const EDIT_TYPE = 'EDIT_TYPE';
 export const DELETE_TYPE = 'DELETE_TYPE';
 export const GET_SOURCES_BY_TYPE = 'GET_SOURCES_BY_TYPE';
 
+export const getProducts = () => (
+  dispatch => {
+    request('/auth/token')
+    .then(response => {
+      const shop_id = response.data.shops_id;
+      request(`/products/${shop_id}/allProducts`)
+      .then(response => {
+        dispatch({
+          type: GET_PRODUCTS,
+          payload: response.data.data
+        });
+      });
+    });
+  }
+);
+
 export const getUnlinkedProducts = () => (
   dispatch => {
     request('/auth/token')
@@ -50,7 +67,7 @@ export const getUnlinkedProducts = () => (
   }
 );
 
-export const getProducts = () => (
+export const getRecentProducts = () => (
   dispatch => {
     request('/auth/token')
     .then(response => {
@@ -61,7 +78,7 @@ export const getProducts = () => (
       })
       .then(response => {
         dispatch({
-          type: GET_PRODUCTS,
+          type: GET_RECENT_PRODUCTS,
           payload: response
         });
       });
@@ -125,6 +142,15 @@ export const editItem = (id, name, productId, categoryId, photo, stock, supplies
       .then(response => {
         dispatch({
           type: EDIT_ITEM,
+          payload: response.data.data
+        });
+      })
+      .then(response => {
+        return request(`/products/${shop_id}/allUnlinked`)
+      })
+      .then(response => {
+        dispatch({
+          type: GET_UNLINKED_PRODUCTS,
           payload: response.data.data
         });
       });

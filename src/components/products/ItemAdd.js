@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getSupplies, addItem } from '../../actions/products';
+import { getSupplies, addItem, editItem } from '../../actions/products';
 
 // COMPONENTS
 import ItemAddSupply from './ItemAddSupply';
@@ -19,30 +19,30 @@ class ItemAdd extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      name: this.props.unlinkedProduct ? this.props.unlinkedProduct.title : '',
-      unlinkedProduct: this.props.unlinkedProduct ? this.props.unlinkedProduct.title : 'default',
-      category: 'default',
-      photo: this.props.unlinkedProduct ? this.props.unlinkedProduct.image : '',
+      name: this.props.item ? this.props.item.name : (this.props.unlinkedProduct ? this.props.unlinkedProduct.title : ''),
+      unlinkedProduct: this.props.item ? (this.props.products.find(product => product.product_id === this.props.item.item.product_id) ? this.props.products.find(product => product.product_id === this.props.item.item.product_id).title : 'custom') : (this.props.unlinkedProduct ? this.props.unlinkedProduct.title : 'default'),
+      category: this.props.item ? this.props.item.categories.find(category => category.id === this.props.item.category_id).name : 'default',
+      photo: this.props.item ? this.props.item.photo : (this.props.unlinkedProduct ? this.props.unlinkedProduct.image : ''),
       stock: 0,
       supplies: [],
-      suppliesInputs: [shortid.generate()],
+      suppliesInputs: this.props.item ? [] : [shortid.generate()],
       steps: [],
-      stepsInputs: [shortid.generate()],
+      stepsInputs: this.props.item ? [] : [shortid.generate()],
       invalid: false
     };
   };
 
   clear = () => {
     this.setState({
-      name: this.props.unlinkedProduct ? this.props.unlinkedProduct.title : '',
-      unlinkedProduct: this.props.unlinkedProduct ? this.props.unlinkedProduct.title : 'default',
-      category: 'default',
-      photo: this.props.unlinkedProduct ? this.props.unlinkedProduct.image : '',
+      name: this.props.item ? this.props.item.name : (this.props.unlinkedProduct ? this.props.unlinkedProduct.title : ''),
+      unlinkedProduct: this.props.item ? (this.props.products.find(product => product.product_id === this.props.item.item.product_id) ? this.props.products.find(product => product.product_id === this.props.item.item.product_id).title : 'custom') : (this.props.unlinkedProduct ? this.props.unlinkedProduct.title : 'default'),
+      category: this.props.item ? this.props.item.categories.find(category => category.id === this.props.item.category_id).name : 'default',
+      photo: this.props.item ? this.props.item.photo : (this.props.unlinkedProduct ? this.props.unlinkedProduct.image : ''),
       stock: 0,
       supplies: [],
-      suppliesInputs: [shortid.generate()],
+      suppliesInputs: this.props.item ? [] : [shortid.generate()],
       steps: [],
-      stepsInputs: [shortid.generate()],
+      stepsInputs: this.props.item ? [] : [shortid.generate()],
       invalid: false
     });
   };
@@ -64,12 +64,16 @@ class ItemAdd extends React.Component {
       });
     } else {
       const category_id = this.props.categories.find(category => category.name === this.state.category).id;
-      const unlinkedProduct_id = this.state.unlinkedProduct === 'custom' ? 0 : this.props.unlinkedProducts.find(unlinkedProduct => unlinkedProduct.title === this.state.unlinkedProduct).product_id;
+      const unlinkedProduct_id = this.state.unlinkedProduct === 'custom' ? null : this.props.unlinkedProducts.find(unlinkedProduct => unlinkedProduct.title === this.state.unlinkedProduct).product_id;
       const steps = {};
       for (let i = 0; i < this.state.steps.length; i++) {
         steps[i+1] = this.state.steps[i].step;
       }
-      this.props.addItem(this.state.name, unlinkedProduct_id, category_id, this.state.photo, this.state.stock, this.state.supplies, JSON.stringify(steps));
+      if (this.props.item) {
+        this.props.editItem(this.props.item.id, this.state.name, unlinkedProduct_id, category_id, this.state.photo, this.state.stock, this.state.supplies, JSON.stringify(steps));
+      } else {
+        this.props.addItem(this.state.name, unlinkedProduct_id, category_id, this.state.photo, this.state.stock, this.state.supplies, JSON.stringify(steps));
+      }
       this.clear();
       this.props.toggle();
     }
@@ -133,6 +137,20 @@ class ItemAdd extends React.Component {
 
   componentDidMount () {
     this.props.getSupplies();
+    if (this.props.item) {
+      const suppliesInputsArray = this.props.item.ingredients.map(ingredient => shortid.generate());
+      this.setState({
+        supplies: this.props.item.ingredients.map((ingredient, i) => ({input: suppliesInputsArray[i], id: ingredient.id, qty: ingredient.qty, qty_measure: ingredient.qty_measure})),
+        suppliesInputs: suppliesInputsArray
+      });
+      const stepsObject = JSON.parse(this.props.item.steps);
+      const stepsArray = Object.keys(stepsObject).map(step => stepsObject[step]);
+      const stepsInputsArray = stepsArray.map(step => shortid.generate());
+      this.setState({
+        steps: stepsArray.map((step, i) => ({input: stepsInputsArray[i], step})),
+        stepsInputs: stepsInputsArray
+      });
+    }
   };
 
   render () {
@@ -157,8 +175,17 @@ class ItemAdd extends React.Component {
                 id="unlinkedProduct"
                 value={this.state.unlinkedProduct}
                 onChange={event => this.setState({unlinkedProduct: event.target.value})}
-                >
+              >
                 <option value="default" disabled>Linked Product</option>
+                {
+                  this.props.products.find(product => product.product_id === this.props.item.item.product_id) ? (
+                    <option value={this.props.products.find(product => product.product_id === this.props.item.item.product_id).title}>
+                      {this.props.products.find(product => product.product_id === this.props.item.item.product_id).title}
+                    </option>
+                  ) : (
+                    null
+                  )
+                }
                 {
                   this.props.unlinkedProducts.map(unlinkedProduct => {
                     return (
@@ -218,6 +245,9 @@ class ItemAdd extends React.Component {
             deleteSupply={this.deleteSupply}
             supplies={this.props.supplies}
             selected={this.state.supplies}
+            supply={
+              this.state.supplies.find(supply => supply.input === input) ? this.state.supplies.find(supply => supply.input === input) : null
+            }
           />
         )}
         <h1 className="title">Steps</h1>
@@ -232,6 +262,9 @@ class ItemAdd extends React.Component {
             addStep={this.addStep}
             deleteStep={this.deleteStep}
             steps={this.state.steps}
+            step={
+              this.state.steps.find(step => step.input === input) ? this.state.steps.find(step => step.input === input) : null
+            }
           />
         )}
         {this.state.invalid ? (
@@ -241,7 +274,13 @@ class ItemAdd extends React.Component {
         ) : null}
         <br />
         <div className="control has-text-centered">
-          <button className="button is-primary is-outlined">Add Item</button>
+          {
+            this.props.item ? (
+              <button className="button is-primary is-outlined">Edit Item</button>
+            ) : (
+              <button className="button is-primary is-outlined">Add Item</button>
+            )
+          }
         </div>
       </form>
     );
@@ -249,6 +288,7 @@ class ItemAdd extends React.Component {
 };
 
 const mapStateToProps = state => ({
+  products: state.products.products,
   unlinkedProducts: state.products.unlinkedProducts,
   categories: state.products.categories,
   supplies: state.products.supplies
@@ -256,7 +296,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getSupplies,
-  addItem
+  addItem,
+  editItem
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ItemAdd);

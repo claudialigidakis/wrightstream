@@ -70,7 +70,7 @@ class UnlinkedProducts extends React.Component {
     return (
       <div>
         <div className="box missing-products">
-          <h1 className="title is-6 has-text-centered">Missing Products</h1>
+          <h1 className="title is-6 has-text-centered">Unlinked Products</h1>
           <ul>
             {
               this.props.unlinkedProducts.map(unlinkedProduct => {

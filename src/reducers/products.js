@@ -1,6 +1,7 @@
 import {
-  GET_UNLINKED_PRODUCTS,
   GET_PRODUCTS,
+  GET_UNLINKED_PRODUCTS,
+  GET_RECENT_PRODUCTS,
   GET_ITEMS,
   ADD_ITEM,
   EDIT_ITEM,
@@ -35,8 +36,9 @@ import {
 } from '../actions/products';
 
 let initialState = {
-  unlinkedProducts: [],
   products: [],
+  unlinkedProducts: [],
+  recentProducts: [],
   items: [],
   bundles: [],
   categories: [],
@@ -51,10 +53,12 @@ let initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_UNLINKED_PRODUCTS:
-      return {...state, unlinkedProducts: action.payload};
     case GET_PRODUCTS:
       return {...state, products: action.payload};
+    case GET_UNLINKED_PRODUCTS:
+      return {...state, unlinkedProducts: action.payload};
+    case GET_RECENT_PRODUCTS:
+      return {...state, recentProducts: action.payload};
     case GET_ITEMS:
       return {...state, items: action.payload};
     case ADD_ITEM:

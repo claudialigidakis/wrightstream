@@ -33,7 +33,6 @@ class ItemEdit extends React.Component {
   };
 
   handleSubmit = event => {
-    console.log(this.state)
     event.preventDefault();
     if (
       !event.target.name.value
@@ -124,24 +123,19 @@ class ItemEdit extends React.Component {
     this.props.getUnlinkedProducts();
     this.props.getSupplies();
 
-    for (let ingredient of this.props.item.ingredients) {
-      const {id, qty, qty_measure} = ingredient;
-      const supply = {input: shortid.generate(), id, qty, qty_measure};
-      this.setState({
-        supplies: [...this.state.supplies, supply],
-        suppliesInputs: [...this.state.suppliesInputs, supply.input]
-      });
-    }
+    const suppliesInputsArray = this.props.item.ingredients.map(ingredient => shortid.generate());
+    this.setState({
+      supplies: this.props.item.ingredients.map((ingredient, i) => ({input: suppliesInputsArray[i], id: ingredient.id, qty: ingredient.qty, qty_measure: ingredient.qty_measure})),
+      suppliesInputs: suppliesInputsArray
+    });
 
     const stepsObject = JSON.parse(this.props.item.steps);
     const stepsArray = Object.keys(stepsObject).map(step => stepsObject[step]);
-    for (let step of stepsArray) {
-      const eachStep = {input: shortid.generate(), step};
-      this.setState({
-        steps: [...this.state.steps, eachStep],
-        stepsInputs: [...this.state.stepsInputs, eachStep.input]
-      });
-    }
+    const stepsInputsArray = stepsArray.map(step => shortid.generate());
+    this.setState({
+      steps: stepsArray.map((step, i) => ({input: stepsInputsArray[i], step})),
+      stepsInputs: stepsInputsArray
+    });
   };
 
   render () {

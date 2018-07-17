@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getProducts } from '../../actions/products';
+import { getRecentProducts } from '../../actions/products';
 
 // COMPONENTS
 import Product from './Product';
@@ -14,14 +14,14 @@ import Product from './Product';
 
 class Main extends React.Component {
   componentDidMount () {
-    this.props.getProducts();
+    this.props.getRecentProducts();
   };
 
   render () {
     return (
       <div className="columns">
         {
-          this.props.products.map(product => {
+          this.props.recentProducts.map(product => {
             return (
               <Product
                 key={product.id}
@@ -42,11 +42,11 @@ class Main extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  products: state.products.products
+  recentProducts: state.products.recentProducts
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getProducts
+  getRecentProducts
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

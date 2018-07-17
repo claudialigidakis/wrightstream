@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getCategories, getUnlinkedProducts } from '../../actions/products';
+import { getCategories, getUnlinkedProducts, getProducts } from '../../actions/products';
 
 // COMPONENTS
 import UnlinkedProducts from './UnlinkedProducts';
@@ -15,6 +15,7 @@ class Categories extends React.Component {
   componentDidMount () {
     this.props.getCategories();
     this.props.getUnlinkedProducts();
+    this.props.getProducts();
   };
 
   render () {
@@ -71,12 +72,14 @@ class Categories extends React.Component {
 
 const mapStateToProps = state => ({
   categories: state.products.categories,
-  unlinkedProducts: state.products.unlinkedProducts
+  unlinkedProducts: state.products.unlinkedProducts,
+  products: state.products.products
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getCategories,
-  getUnlinkedProducts
+  getUnlinkedProducts,
+  getProducts
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);
