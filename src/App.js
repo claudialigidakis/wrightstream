@@ -31,20 +31,22 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <Header />
         <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={() => <Redirect to="/login" />} />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route path="/settings" component={Settings} />
-            <Route path="/products" component={Products} />
-            <Route path="/inventory" component={Inventory} />
-            <Route path="/workstream" component={WorkStream} />
-            <Route path="/mystream" component={MyStream} />
-            <Route path="/admin" component={Admin} />
-            <Route path="/auth/callback/etsy" component={EtsyCallback} />
-          </Switch>
+          <div>
+            <Header />
+            <Switch>
+              <Route exact path="/" component={() => <Redirect to="/login" />} />
+              <Route path="/login" component={Login} />
+              <Route path="/signup" component={Signup} />
+              <Route path="/settings" component={Settings} />
+              <Route path="/products" component={Products} />
+              <Route path="/inventory" component={Inventory} />
+              <Route path="/workstream" component={WorkStream} />
+              <Route path="/mystream" component={MyStream} />
+              <Route path="/admin" component={Admin} />
+              <Route path="/auth/callback/etsy" component={EtsyCallback} />
+            </Switch>
+          </div>  
         </BrowserRouter>
       </div>
     );

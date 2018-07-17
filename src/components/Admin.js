@@ -15,18 +15,16 @@ class Admin extends React.Component {
 
   render () {
     return (
-      <section className="admin">
-        <div className="columns is-fullheight is-marginless">
-          <div className="column is-3 bar">
-            <BrowserRouter>
+      <BrowserRouter>
+        <section className="admin">
+          <div className="columns is-fullheight is-marginless">
+            <div className="column is-3 bar">
               <Switch>
                 <Route path="/admin" component={AdminMenu} />
               </Switch>
-            </BrowserRouter>
-          </div>
-          <div className="column is-9 admin-content">
-            <div className="admin-container">
-              <BrowserRouter>
+            </div>
+            <div className="column is-9 admin-content">
+              <div className="admin-container">
                 <Switch>
                   <Route exact path="/admin" component={Dashboard} />
                   <Route path="/admin/dashboard" component={Dashboard} />
@@ -35,11 +33,11 @@ class Admin extends React.Component {
                   <Route path="/admin/purchases" component={Purchases} />
                   <Route path="/admin/supplies" component={Supplies} />
                 </Switch>
-              </BrowserRouter>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </BrowserRouter>
     );
   };
 };
