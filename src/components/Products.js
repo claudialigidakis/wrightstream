@@ -4,6 +4,11 @@ import React from 'react';
 // ROUTER
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
+// REDUX
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { getProductsEtsy } from '../actions/stores';
+
 // COMPONENTS
 import Nav from './products/Nav';
 import CategoryControl from './products/CategoryControl';
@@ -21,24 +26,14 @@ import Sources from './products/Sources';
 import Type from './products/Type';
 import Types from './products/Types';
 
-// HELPERS
-import request from '../helpers/request';
-
 // ==========
 
 class Products extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      purchases: ''
-    };
-  };
 
-  handleEtsyProducts = () => {
-    request('/etsy/findAllListingActive')
-    .then(response => {
-      this.setState({products: response.data});
-    });
+    };
   };
 
   render () {
@@ -50,7 +45,7 @@ class Products extends React.Component {
               <Switch>
                 <Route path="/products/supplies" component={Kinds} />
                 <Route path="/products/sources" component={Types} />
-                <Route path="/products" component={Categories} />
+                <Route path="/products" render={() => <Categories getEtsyProducts={this.props.getProductsEtsy} />} />
               </Switch>
             </BrowserRouter>
           </div>
@@ -59,7 +54,7 @@ class Products extends React.Component {
               <Switch>
                 <Route path="/products/sources" component={TypeControl} />
                 <Route path="/products/supplies" component={KindControl} />
-                <Route path="/products" render={() => <CategoryControl handleEtsyProducts={this.handleEtsyProducts} />} />
+                <Route path="/products" component={CategoryControl} />
               </Switch>
             </BrowserRouter>
             <Nav />
@@ -84,4 +79,12 @@ class Products extends React.Component {
   };
 };
 
-export default Products;
+const mapStateToProps = state => ({
+  getProductsEtsy
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products);

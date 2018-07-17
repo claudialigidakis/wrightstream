@@ -39,7 +39,7 @@ class CategoryControl extends React.Component {
   render () {
     return (
       <div className="products-control buttons is-right">
-        <a className="button" onClick={this.props.handleEtsyProducts}>
+        <a className="button" onClick={this.props.getProductsEtsy}>
           <span className="icon"><i className="fas fa-sync-alt"></i></span>
         </a>
         <div className="dropdown is-hoverable is-right">
@@ -84,15 +84,22 @@ class CategoryControl extends React.Component {
           <div className="modal-content modal-form">
             <div className="modal-container">
               {
-                this.state.action === 'add-item' ? <ItemAdd toggle={this.toggle} /> : (
-                  this.state.action === 'add-bundle' ? <BundleAdd toggle={this.toggle} /> : (
-                    this.state.action === 'add-category' ? <CategoryAdd toggle={this.toggle} /> : (
-                      this.state.action === 'edit-category' ? <CategoryEdit toggle={this.toggle} /> : (
-                        this.state.action === 'delete-category' ? <CategoryDelete toggle={this.toggle} /> : null
-                      )
-                    )
-                  )
-                )
+                (() => {
+                  switch (this.state.action) {
+                    case 'add-item':
+                      return <ItemAdd toggle={this.toggle} />;
+                    case 'add-bundle':
+                      return <BundleAdd toggle={this.toggle} />;
+                    case 'add-category':
+                      return <CategoryAdd toggle={this.toggle} />;
+                    case 'edit-category':
+                      return <CategoryEdit toggle={this.toggle} />;
+                    case 'delete-category':
+                      return <CategoryDelete toggle={this.toggle} />;
+                    default:
+                      return null;
+                  }
+                })()
               }
             </div>
           </div>

@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getLinkedProducts, getItems, addBundle } from '../../actions/products';
+import { getItems, addBundle, editBundle } from '../../actions/products';
 
 // COMPONENTS
 import BundleAddItem from './BundleAddItem';
@@ -19,30 +19,30 @@ class BundleAdd extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      name: '',
-      linkedProduct: 'default',
-      category: 'default',
-      photo: '',
+      name: this.props.bundle ? this.props.bundle.name : (this.props.unlinkedProduct ? this.props.unlinkedProduct.title : ''),
+      unlinkedProduct: this.props.bundle ? (this.props.products.find(product => product.product_id === this.props.bundle.bundle.product_id) ? this.props.products.find(product => product.product_id === this.props.bundle.bundle.product_id).title : 'custom') : (this.props.unlinkedProduct ? this.props.unlinkedProduct.title : 'default'),
+      category: this.props.bundle ? this.props.bundle.categories.find(category => category.id === this.props.bundle.category_id).name : 'default',
+      photo: this.props.bundle ? this.props.bundle.photo : (this.props.unlinkedProduct ? this.props.unlinkedProduct.image : ''),
       stock: 0,
       items: [],
-      itemsInputs: [shortid.generate()],
+      itemsInputs: this.props.bundle ? [] : [shortid.generate()],
       steps: [],
-      stepsInputs: [shortid.generate()],
+      stepsInputs: this.props.bundle ? [] : [shortid.generate()],
       invalid: false
     };
   };
 
   clear = () => {
     this.setState({
-      name: '',
-      linkedProduct: 'default',
-      category: 'default',
-      photo: '',
+      name: this.props.bundle ? this.props.bundle.name : (this.props.unlinkedProduct ? this.props.unlinkedProduct.title : ''),
+      unlinkedProduct: this.props.bundle ? (this.props.products.find(product => product.product_id === this.props.bundle.bundle.product_id) ? this.props.products.find(product => product.product_id === this.props.bundle.bundle.product_id).title : 'custom') : (this.props.unlinkedProduct ? this.props.unlinkedProduct.title : 'default'),
+      category: this.props.bundle ? this.props.bundle.categories.find(category => category.id === this.props.bundle.category_id).name : 'default',
+      photo: this.props.bundle ? this.props.bundle.photo : (this.props.unlinkedProduct ? this.props.unlinkedProduct.image : ''),
       stock: 0,
       items: [],
-      itemsInputs: [shortid.generate()],
+      itemsInputs: this.props.bundle ? [] : [shortid.generate()],
       steps: [],
-      stepsInputs: [shortid.generate()],
+      stepsInputs: this.props.bundle ? [] : [shortid.generate()],
       invalid: false
     });
   };
@@ -51,7 +51,7 @@ class BundleAdd extends React.Component {
     event.preventDefault();
     if (
       !event.target.name.value
-      // || event.target.linkedProduct.value === 'default'
+      || event.target.unlinkedProduct.value === 'default'
       || event.target.category.value === 'default'
       || this.state.items.length === 0
       || this.state.items.find(item => item.item_qty === 0)
@@ -63,29 +63,29 @@ class BundleAdd extends React.Component {
       });
     } else {
       const category_id = this.props.categories.find(category => category.name === this.state.category).id;
-      // if (this.state.linkedProduct === 'custom') {
-      //   const linkedProduct_id = 0;
-      // } else {
-      //   const linkedProduct_id = this.props.linkedProducts.find(linkedProduct => linkedProduct.name === this.state.linkedProduct).id;
-      // }
+      const unlinkedProduct_id = this.state.unlinkedProduct === 'custom' ? null : this.props.unlinkedProducts.find(unlinkedProduct => unlinkedProduct.title === this.state.unlinkedProduct).product_id;
       const steps = {};
       for (let i = 0; i < this.state.steps.length; i++) {
         steps[i+1] = this.state.steps[i].step;
       }
-      this.props.addBundle(this.state.name, category_id, this.state.photo, this.state.stock, this.state.items, JSON.stringify(steps));
+      if (this.props.bundle) {
+        this.props.editBundle(this.props.bundle.id, this.state.name, unlinkedProduct_id, category_id, this.state.photo, this.state.stock, this.state.items, JSON.stringify(steps));
+      } else {
+        this.props.addBundle(this.state.name, unlinkedProduct_id, category_id, this.state.photo, this.state.stock, this.state.items, JSON.stringify(steps));
+      }
       this.clear();
       this.props.toggle();
     }
   };
 
   appendItemsInput = () => {
-    const newInput = shortid.generate();
-    this.setState({itemsInputs: this.state.itemsInputs.concat([newInput])});
+    const input = shortid.generate();
+    this.setState({itemsInputs: this.state.itemsInputs.concat([input])});
   };
 
   appendStepsInput = () => {
-    const newInput = shortid.generate();
-    this.setState({stepsInputs: this.state.stepsInputs.concat([newInput])});
+    const input = shortid.generate();
+    this.setState({stepsInputs: this.state.stepsInputs.concat([input])});
   };
 
   deleteItemsInput = i => {
@@ -100,37 +100,25 @@ class BundleAdd extends React.Component {
 
   addItem = (input, id) => {
     if (!this.state.items.find(item => item.input === input) && !this.state.items.find(item => item.id === id)) {
-      this.state.items.push({input, id});
-      this.setState({items: this.state.items});
-    } else if (this.state.items.find(item => item.input === input) && !this.state.items.find(item => item.id === id)) {
-      const items = this.state.items;
-      const index = items.findIndex(item => item.input === input);
-      items[index].id = id;
-      this.setState({items: items});
+      this.setState({items: [...this.state.items, {input, id}]});
+    } else {
+      this.setState({items: this.state.items.map(item => item.input === input ? {...item, id} : {...item})});
     }
   };
 
   addItemQty = (input, qty) => {
     if (!this.state.items.find(item => item.input === input)) {
-      this.state.items.push({input, qty});
-      this.setState({items: this.state.items});
+      this.setState({items: [...this.state.items, {input, item_qty: qty}]});
     } else {
-      const items = this.state.items;
-      const index = items.findIndex(item => item.input === input);
-      items[index].item_qty = qty;
-      this.setState({items: items});
+      this.setState({items: this.state.items.map(item => item.input === input ? {...item, item_qty: qty} : {...item})});
     }
   };
 
   addStep = (input, step) => {
     if (!this.state.steps.find(step => step.input === input)) {
-      this.state.steps.push({input, step});
-      this.setState({steps: this.state.steps});
+      this.setState({steps: [...this.state.steps, {input, step}]});
     } else {
-      const steps = this.state.steps;
-      const index = steps.findIndex(step => step.input === input);
-      steps[index].step = step;
-      this.setState({steps: steps});
+      this.setState({steps: this.state.steps.map(existingStep => existingStep.input === input ? {...existingStep, step} : {...existingStep})});
     }
   }
 
@@ -143,8 +131,21 @@ class BundleAdd extends React.Component {
   };
 
   componentDidMount () {
-    this.props.getLinkedProducts();
     this.props.getItems();
+    if (this.props.bundle) {
+      const itemsInputsArray = this.props.bundle.ingredients.map(ingredient => shortid.generate());
+      this.setState({
+        items: this.props.bundle.ingredients.map((ingredient, i) => ({input: itemsInputsArray[i], id: ingredient.id, item_qty: ingredient.item_qty})),
+        itemsInputs: itemsInputsArray
+      });
+      const stepsObject = JSON.parse(this.props.bundle.steps);
+      const stepsArray = Object.keys(stepsObject).map(step => stepsObject[step]);
+      const stepsInputsArray = stepsArray.map(step => shortid.generate());
+      this.setState({
+        steps: stepsArray.map((step, i) => ({input: stepsInputsArray[i], step})),
+        stepsInputs: stepsInputsArray
+      });
+    }
   };
 
     render () {
@@ -162,19 +163,30 @@ class BundleAdd extends React.Component {
               />
             </div>
           </div>
-          {/* <div className="field">
+          <div className="field">
             <div className="control">
               <div className="select">
                 <select
-                  id="linkedProduct"
-                  value={this.state.linkedProduct}
-                  onChange={event => this.setState({linkedProduct: event.target.value})}
-                  >
+                  id="unlinkedProduct"
+                  value={this.state.unlinkedProduct}
+                  onChange={event => this.setState({unlinkedProduct: event.target.value})}
+                >
                   <option value="default" disabled>Linked Product</option>
                   {
-                    this.props.linkedProducts.map(linkedProduct => {
+                    this.props.bundle ? (
+                      this.props.products.find(product => product.product_id === this.props.bundle.bundle.product_id) ? (
+                        <option value={this.props.products.find(product => product.product_id === this.props.bundle.bundle.product_id).title}>
+                          {this.props.products.find(product => product.product_id === this.props.bundle.bundle.product_id).title}
+                        </option>
+                      ) : (
+                        null
+                      )
+                    ) : null
+                  }
+                  {
+                    this.props.unlinkedProducts.map(unlinkedProduct => {
                       return (
-                        <option key={linkedProduct.id} value={linkedProduct.name}>{linkedProduct.name}</option>
+                        <option key={unlinkedProduct.product_id} value={unlinkedProduct.title}>{unlinkedProduct.title}</option>
                       )
                     })
                   }
@@ -182,7 +194,7 @@ class BundleAdd extends React.Component {
                 </select>
               </div>
             </div>
-          </div> */}
+          </div>
           <div className="field">
             <div className="control">
               <input
@@ -229,6 +241,9 @@ class BundleAdd extends React.Component {
               deleteItem={this.deleteItem}
               items={this.props.items}
               selected={this.state.items}
+              item={
+                this.state.items.find(item => item.input === input) ? this.state.items.find(item => item.input === input) : null
+              }
             />
           )}
           <h1 className="title">Steps</h1>
@@ -243,6 +258,9 @@ class BundleAdd extends React.Component {
               addStep={this.addStep}
               deleteStep={this.deleteStep}
               steps={this.state.steps}
+              step={
+                this.state.steps.find(step => step.input === input) ? this.state.steps.find(step => step.input === input) : null
+              }
             />
           )}
           {this.state.invalid ? (
@@ -252,7 +270,9 @@ class BundleAdd extends React.Component {
           ) : null}
           <br />
           <div className="control has-text-centered">
-            <button className="button is-primary is-outlined">Add Bundle</button>
+            <button className="button is-primary is-outlined">
+              {this.props.bundle ? 'Edit Bundle' : 'Add Bundle'}
+            </button>
           </div>
         </form>
       );
@@ -260,15 +280,16 @@ class BundleAdd extends React.Component {
   };
 
   const mapStateToProps = state => ({
-    linkedProducts: state.products.linkedProducts,
+    products: state.products.products,
+    unlinkedProducts: state.products.unlinkedProducts,
     categories: state.products.categories,
     items: state.products.items
   });
 
   const mapDispatchToProps = dispatch => bindActionCreators({
-    getLinkedProducts,
     getItems,
-    addBundle
+    addBundle,
+    editBundle
   }, dispatch);
 
   export default connect(mapStateToProps, mapDispatchToProps)(BundleAdd);

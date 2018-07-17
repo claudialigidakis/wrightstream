@@ -5,9 +5,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // COMPONENTS
-import ItemEdit from './ItemEdit';
+import ItemAdd from './ItemAdd';
 import ItemDelete from './ItemDelete';
-import BundleEdit from './BundleEdit';
+import BundleAdd from './BundleAdd';
 import BundleDelete from './BundleDelete';
 
 // ==========
@@ -174,7 +174,7 @@ class Product extends React.Component {
             <div className="modal-container">
               {
                 this.state.action === 'edit' ? (
-                  this.props.product === 'item' ? <ItemEdit item={this.props} toggle={this.toggleControl} /> : <BundleEdit bundle={this.props} toggle={this.toggleControl} />
+                  this.props.product === 'item' ? <ItemAdd item={this.props} toggle={this.toggleControl} /> : <BundleAdd bundle={this.props} toggle={this.toggleControl} />
                 ) : (
                   this.state.action === 'delete' ? (
                     this.props.product === 'item' ? <ItemDelete item={this.props} toggle={this.toggleControl} toggleParent={this.toggle} /> : <BundleDelete bundle={this.props} toggle={this.toggleControl} toggleParent={this.toggle} />

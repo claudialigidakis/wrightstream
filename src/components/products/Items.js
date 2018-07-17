@@ -31,6 +31,7 @@ class Items extends React.Component {
                 photo={item.photo}
                 ingredients={item.supplies}
                 steps={item.steps}
+                item={item}
               />
             );
           })
