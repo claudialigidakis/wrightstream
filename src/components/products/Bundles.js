@@ -31,6 +31,7 @@ class Bundles extends React.Component {
                 photo={bundle.photo}
                 ingredients={bundle.items}
                 steps={bundle.steps}
+                bundle={bundle}
               />
             );
           })

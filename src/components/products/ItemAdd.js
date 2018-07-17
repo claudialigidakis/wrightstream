@@ -178,13 +178,15 @@ class ItemAdd extends React.Component {
               >
                 <option value="default" disabled>Linked Product</option>
                 {
-                  this.props.products.find(product => product.product_id === this.props.item.item.product_id) ? (
-                    <option value={this.props.products.find(product => product.product_id === this.props.item.item.product_id).title}>
-                      {this.props.products.find(product => product.product_id === this.props.item.item.product_id).title}
-                    </option>
-                  ) : (
-                    null
-                  )
+                  this.props.item ? (
+                    this.props.products.find(product => product.product_id === this.props.item.item.product_id) ? (
+                      <option value={this.props.products.find(product => product.product_id === this.props.item.item.product_id).title}>
+                        {this.props.products.find(product => product.product_id === this.props.item.item.product_id).title}
+                      </option>
+                    ) : (
+                      null
+                    )
+                  ) : null    
                 }
                 {
                   this.props.unlinkedProducts.map(unlinkedProduct => {
@@ -274,13 +276,9 @@ class ItemAdd extends React.Component {
         ) : null}
         <br />
         <div className="control has-text-centered">
-          {
-            this.props.item ? (
-              <button className="button is-primary is-outlined">Edit Item</button>
-            ) : (
-              <button className="button is-primary is-outlined">Add Item</button>
-            )
-          }
+          <button className="button is-primary is-outlined">
+            {this.props.bundle ? 'Edit Item' : 'Add Item'}
+          </button>
         </div>
       </form>
     );

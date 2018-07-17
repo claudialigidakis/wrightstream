@@ -172,6 +172,15 @@ export const deleteItem = (id) => (
           type: DELETE_ITEM,
           payload: response.data.data
         });
+      })
+      .then(response => {
+        return request(`/products/${shop_id}/allUnlinked`)
+      })
+      .then(response => {
+        dispatch({
+          type: GET_UNLINKED_PRODUCTS,
+          payload: response.data.data
+        });
       });
     });
   }
@@ -193,12 +202,12 @@ export const getBundles = () => (
   }
 );
 
-export const addBundle = (name, categoryId, photo, stock, items, steps) => (
+export const addBundle = (name, productId, categoryId, photo, stock, items, steps) => (
   dispatch => {
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/bundles/${shop_id}`, 'post', {name, categoryId, photo, stock, items, steps})
+      request(`/bundles/${shop_id}`, 'post', {name, productId, categoryId, photo, stock, items, steps})
       .then(response => {
         return request(`/bundles/${shop_id}/allBundles`);
       })
@@ -207,23 +216,41 @@ export const addBundle = (name, categoryId, photo, stock, items, steps) => (
           type: ADD_BUNDLE,
           payload: response.data.data
         });
+      })
+      .then(response => {
+        return request(`/products/${shop_id}/allUnlinked`)
+      })
+      .then(response => {
+        dispatch({
+          type: GET_UNLINKED_PRODUCTS,
+          payload: response.data.data
+        });
       });
     });
   }
 );
 
-export const editBundle = (id, name, categoryId, photo, stock, items, steps) => (
+export const editBundle = (id, name, productId, categoryId, photo, stock, items, steps) => (
   dispatch => {
     request('/auth/token')
     .then(response => {
       const shop_id = response.data.shops_id;
-      request(`/bundles/${id}`, 'put', {name, categoryId, photo, stock, items, steps})
+      request(`/bundles/${id}`, 'put', {name, productId, categoryId, photo, stock, items, steps})
       .then(response => {
         return request(`/bundles/${shop_id}/allBundles`);
       })
       .then(response => {
         dispatch({
           type: EDIT_BUNDLE,
+          payload: response.data.data
+        });
+      })
+      .then(response => {
+        return request(`/products/${shop_id}/allUnlinked`)
+      })
+      .then(response => {
+        dispatch({
+          type: GET_UNLINKED_PRODUCTS,
           payload: response.data.data
         });
       });
@@ -243,6 +270,15 @@ export const deleteBundle = (id) => (
       .then(response => {
         dispatch({
           type: DELETE_BUNDLE,
+          payload: response.data.data
+        });
+      })
+      .then(response => {
+        return request(`/products/${shop_id}/allUnlinked`)
+      })
+      .then(response => {
+        dispatch({
+          type: GET_UNLINKED_PRODUCTS,
           payload: response.data.data
         });
       });
