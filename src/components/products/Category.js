@@ -34,6 +34,8 @@ class Category extends React.Component {
                 photo={product.photo}
                 ingredients={product.supplies ? product.supplies : product.items}
                 steps={product.steps}
+                item={product.supplies ? product : null}
+                bundle={!product.supplies ? product : null}
               />
             );
           })

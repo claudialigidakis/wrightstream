@@ -59,10 +59,11 @@ class EstimatorProduct extends React.Component {
                 type="number"
                 placeholder="Quantity"
                 id="qty"
+                min="0"
                 value={this.state.qty}
                 onChange={event => {
-                  this.setState({qty: Number(event.target.value)});
-                  this.props.addItemQty(this.props.input, Number(event.target.value));
+                  this.setState({qty: event.target.value});
+                  this.props.addItemQty(this.props.input, event.target.value);
                 }}
               />
             </div>

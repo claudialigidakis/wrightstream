@@ -19,9 +19,12 @@ export const editSupply = (id, stock_qty) => (
         return request(`/supplies/${shop_id}/allSupplies`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: EDIT_SUPPLY,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -38,9 +41,12 @@ export const editItem = (id, stock) => (
         return request(`/items/${shop_id}/allItems`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: EDIT_ITEM,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -143,9 +149,12 @@ export const editOrderSupply = (order_id, supply_id, supply_status, supply_qty) 
         return request(`/orders/${shop_id}/allOrders`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: EDIT_ORDER_SUPPLY,
-          payload: response.data.data
+          payload: response
         });
       });
     });

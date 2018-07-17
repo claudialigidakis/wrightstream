@@ -62,6 +62,7 @@ class BundleAddItem extends React.Component {
                 type="number"
                 placeholder="Quantity"
                 id="qty"
+                min="0"
                 value={this.state.qty}
                 onChange={event => {
                   this.setState({qty: parseInt(event.target.value, 10)});

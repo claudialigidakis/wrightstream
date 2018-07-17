@@ -73,8 +73,17 @@ export const getRecentProducts = () => (
     .then(response => {
       const shop_id = response.data.shops_id;
       request(`/items/${shop_id}/allItems`)
+      // .then(resItems => {
+      //   return request(`/bundles/${shop_id}/allBundles`)
+      //   .then(resBundles => {
+      //     return resItems.data.data.concat(resBundles.data.data);
+      //   });
+      // })
+      // .then(response => {
+      //   return response.slice(response.length-6, response.length).reverse();
+      // })
       .then(response => {
-        return response.data.data.slice(response.data.data.length-6, response.data.data.length)
+        return response.data.data.slice(response.data.data.length-6, response.data.data.length).reverse();
       })
       .then(response => {
         dispatch({
@@ -93,9 +102,12 @@ export const getItems = () => (
       const shop_id = response.data.shops_id;
       request(`/items/${shop_id}/allItems`)
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: GET_ITEMS,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -109,16 +121,31 @@ export const addItem = (name, productId, categoryId, photo, stock, supplies, ste
       const shop_id = response.data.shops_id;
       request(`/items/${shop_id}`, 'post', {name, productId, categoryId, photo, stock, supplies, steps})
       .then(response => {
-        return request(`/items/${shop_id}/allItems`)
+        return request(`/items/${shop_id}/allItems`);
+      })
+      .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
       })
       .then(response => {
         dispatch({
           type: ADD_ITEM,
-          payload: response.data.data
+          payload: response
         });
       })
       .then(response => {
-        return request(`/products/${shop_id}/allUnlinked`)
+        return request(`/items/${shop_id}/allItems`);
+      })
+      .then(response => {
+        return response.data.data.slice(response.data.data.length-6, response.data.data.length).reverse();
+      })
+      .then(response => {
+        dispatch({
+          type: GET_RECENT_PRODUCTS,
+          payload: response
+        });
+      })
+      .then(response => {
+        return request(`/products/${shop_id}/allUnlinked`);
       })
       .then(response => {
         dispatch({
@@ -140,9 +167,24 @@ export const editItem = (id, name, productId, categoryId, photo, stock, supplies
         return request(`/items/${shop_id}/allItems`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: EDIT_ITEM,
-          payload: response.data.data
+          payload: response
+        });
+      })
+      .then(response => {
+        return request(`/items/${shop_id}/allItems`);
+      })
+      .then(response => {
+        return response.data.data.slice(response.data.data.length-6, response.data.data.length).reverse();
+      })
+      .then(response => {
+        dispatch({
+          type: GET_RECENT_PRODUCTS,
+          payload: response
         });
       })
       .then(response => {
@@ -158,7 +200,7 @@ export const editItem = (id, name, productId, categoryId, photo, stock, supplies
   }
 );
 
-export const deleteItem = (id) => (
+export const deleteItem = id => (
   dispatch => {
     request('/auth/token')
     .then(response => {
@@ -168,13 +210,28 @@ export const deleteItem = (id) => (
         return request(`/items/${shop_id}/allItems`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: DELETE_ITEM,
-          payload: response.data.data
+          payload: response
         });
       })
       .then(response => {
-        return request(`/products/${shop_id}/allUnlinked`)
+        return request(`/items/${shop_id}/allItems`);
+      })
+      .then(response => {
+        return response.data.data.slice(response.data.data.length-6, response.data.data.length).reverse();
+      })
+      .then(response => {
+        dispatch({
+          type: GET_RECENT_PRODUCTS,
+          payload: response
+        });
+      })
+      .then(response => {
+        return request(`/products/${shop_id}/allUnlinked`);
       })
       .then(response => {
         dispatch({
@@ -193,9 +250,12 @@ export const getBundles = () => (
       const shop_id = response.data.shops_id;
       request(`/bundles/${shop_id}/allBundles`)
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: GET_BUNDLES,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -212,13 +272,16 @@ export const addBundle = (name, productId, categoryId, photo, stock, items, step
         return request(`/bundles/${shop_id}/allBundles`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: ADD_BUNDLE,
-          payload: response.data.data
+          payload: response
         });
       })
       .then(response => {
-        return request(`/products/${shop_id}/allUnlinked`)
+        return request(`/products/${shop_id}/allUnlinked`);
       })
       .then(response => {
         dispatch({
@@ -240,13 +303,16 @@ export const editBundle = (id, name, productId, categoryId, photo, stock, items,
         return request(`/bundles/${shop_id}/allBundles`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: EDIT_BUNDLE,
-          payload: response.data.data
+          payload: response
         });
       })
       .then(response => {
-        return request(`/products/${shop_id}/allUnlinked`)
+        return request(`/products/${shop_id}/allUnlinked`);
       })
       .then(response => {
         dispatch({
@@ -258,7 +324,7 @@ export const editBundle = (id, name, productId, categoryId, photo, stock, items,
   }
 );
 
-export const deleteBundle = (id) => (
+export const deleteBundle = id => (
   dispatch => {
     request('/auth/token')
     .then(response => {
@@ -268,13 +334,16 @@ export const deleteBundle = (id) => (
         return request(`/bundles/${shop_id}/allBundles`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: DELETE_BUNDLE,
-          payload: response.data.data
+          payload: response
         });
       })
       .then(response => {
-        return request(`/products/${shop_id}/allUnlinked`)
+        return request(`/products/${shop_id}/allUnlinked`);
       })
       .then(response => {
         dispatch({
@@ -293,16 +362,19 @@ export const getCategories = () => (
       const shop_id = response.data.shops_id;
       request(`/categories/${shop_id}/allCategories`)
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: GET_CATEGORIES,
-          payload: response.data.data
+          payload: response
         });
       });
     });
   }
 );
 
-export const addCategory = (name) => (
+export const addCategory = name => (
   dispatch => {
     request('/auth/token')
     .then(response => {
@@ -312,9 +384,12 @@ export const addCategory = (name) => (
         return request(`/categories/${shop_id}/allCategories`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: ADD_CATEGORY,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -331,16 +406,19 @@ export const editCategory = (id, name) => (
         return request(`/categories/${shop_id}/allCategories`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: EDIT_CATEGORY,
-          payload: response.data.data
+          payload: response
         });
       });
     });
   }
 );
 
-export const deleteCategory = (id) => (
+export const deleteCategory = id => (
   dispatch => {
     request('/auth/token')
     .then(response => {
@@ -350,16 +428,19 @@ export const deleteCategory = (id) => (
         return request(`/categories/${shop_id}/allCategories`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: DELETE_CATEGORY,
-          payload: response.data.data
+          payload: response
         });
       });
     });
   }
 );
 
-export const getProductsByCategory = (id) => (
+export const getProductsByCategory = id => (
   dispatch => {
     request('/auth/token')
     .then(response => {
@@ -373,6 +454,9 @@ export const getProductsByCategory = (id) => (
         .then(resBundles => {
           return resItems.concat(resBundles.data.data.filter(bundle => bundle.category_id === parseInt(id, 10)));
         });
+      })
+      .then(response => {
+        return response.sort((a, b) => a.name.localeCompare(b.name));
       })
       .then(response => {
         dispatch({
@@ -391,9 +475,12 @@ export const getSupplies = () => (
       const shop_id = response.data.shops_id;
       request(`/supplies/${shop_id}/allSupplies`)
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: GET_SUPPLIES,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -410,9 +497,12 @@ export const addSupply = (name, stock, measure_type, source_id, kind_id) => (
         return request(`/supplies/${shop_id}/allSupplies`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: ADD_SUPPLY,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -429,16 +519,19 @@ export const editSupply = (id, name, stock, measure_type, source_id, kind_id) =>
         return request(`/supplies/${shop_id}/allSupplies`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: EDIT_SUPPLY,
-          payload: response.data.data
+          payload: response
         });
       });
     });
   }
 );
 
-export const deleteSupply = (id) => (
+export const deleteSupply = id => (
   dispatch => {
     request('/auth/token')
     .then(response => {
@@ -448,9 +541,12 @@ export const deleteSupply = (id) => (
         return request(`/supplies/${shop_id}/allSupplies`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: DELETE_SUPPLY,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -464,16 +560,19 @@ export const getKinds = () => (
       const shop_id = response.data.shops_id;
       request(`/kinds/${shop_id}/allKinds`)
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: GET_KINDS,
-          payload: response.data.data
+          payload: response
         });
       });
     });
   }
 );
 
-export const addKind = (name) => (
+export const addKind = name => (
   dispatch => {
     request('/auth/token')
     .then(response => {
@@ -483,9 +582,12 @@ export const addKind = (name) => (
         return request(`/kinds/${shop_id}/allKinds`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: ADD_KIND,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -502,16 +604,19 @@ export const editKind = (id, name) => (
         return request(`/kinds/${shop_id}/allKinds`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: EDIT_KIND,
-          payload: response.data.data
+          payload: response
         });
       });
     });
   }
 );
 
-export const deleteKind = (id) => (
+export const deleteKind = id => (
   dispatch => {
     request('/auth/token')
     .then(response => {
@@ -521,16 +626,19 @@ export const deleteKind = (id) => (
         return request(`/kinds/${shop_id}/allKinds`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: DELETE_KIND,
-          payload: response.data.data
+          payload: response
         });
       });
     });
   }
 );
 
-export const getSuppliesByKind = (id) => (
+export const getSuppliesByKind = id => (
   dispatch => {
     request('/auth/token')
     .then(response => {
@@ -538,6 +646,9 @@ export const getSuppliesByKind = (id) => (
       request(`/supplies/${shop_id}/allSupplies`)
       .then(response => {
         return response.data.data.filter(supply => supply.kind_id === parseInt(id, 10));
+      })
+      .then(response => {
+        return response.sort((a, b) => a.name.localeCompare(b.name));
       })
       .then(response => {
         dispatch({
@@ -556,9 +667,12 @@ export const getSources = () => (
       const shop_id = response.data.shops_id;
       request(`/sources/${shop_id}/allSources`)
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: GET_SOURCES,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -575,9 +689,12 @@ export const addSource = (name, type_id, link) => (
         return request(`/sources/${shop_id}/allSources`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: ADD_SOURCE,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -594,16 +711,19 @@ export const editSource = (id, name, link, type_id) => (
         return request(`/sources/${shop_id}/allSources`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: EDIT_SOURCE,
-          payload: response.data.data
+          payload: response
         });
       });
     });
   }
 );
 
-export const deleteSource = (id) => (
+export const deleteSource = id => (
   dispatch => {
     request('/auth/token')
     .then(response => {
@@ -613,9 +733,12 @@ export const deleteSource = (id) => (
         return request(`/sources/${shop_id}/allSources`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: DELETE_SOURCE,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -629,16 +752,19 @@ export const getTypes = () => (
       const shop_id = response.data.shops_id;
       request(`/types/${shop_id}/allTypes`)
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: GET_TYPES,
-          payload: response.data.data
+          payload: response
         });
       });
     });
   }
 );
 
-export const addType = (name) => (
+export const addType = name => (
   dispatch => {
     request('/auth/token')
     .then(response => {
@@ -648,9 +774,12 @@ export const addType = (name) => (
         return request(`/types/${shop_id}/allTypes`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: ADD_TYPE,
-          payload: response.data.data
+          payload: response
         });
       });
     });
@@ -667,16 +796,19 @@ export const editType = (id, name) => (
         return request(`/types/${shop_id}/allTypes`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: EDIT_TYPE,
-          payload: response.data.data
+          payload: response
         });
       });
     });
   }
 );
 
-export const deleteType = (id) => (
+export const deleteType = id => (
   dispatch => {
     request('/auth/token')
     .then(response => {
@@ -686,16 +818,19 @@ export const deleteType = (id) => (
         return request(`/types/${shop_id}/allTypes`);
       })
       .then(response => {
+        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
+      })
+      .then(response => {
         dispatch({
           type: DELETE_TYPE,
-          payload: response.data.data
+          payload: response
         });
       });
     });
   }
 );
 
-export const getSourcesByType = (id) => (
+export const getSourcesByType = id => (
   dispatch => {
     request('/auth/token')
     .then(response => {
@@ -703,6 +838,9 @@ export const getSourcesByType = (id) => (
       request(`/sources/${shop_id}/allSources`)
       .then(response => {
         return response.data.data.filter(source => source.type_id === parseInt(id, 10));
+      })
+      .then(response => {
+        return response.sort((a, b) => a.name.localeCompare(b.name));
       })
       .then(response => {
         dispatch({

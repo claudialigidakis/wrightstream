@@ -186,7 +186,7 @@ class ItemAdd extends React.Component {
                     ) : (
                       null
                     )
-                  ) : null    
+                  ) : null
                 }
                 {
                   this.props.unlinkedProducts.map(unlinkedProduct => {
@@ -277,7 +277,7 @@ class ItemAdd extends React.Component {
         <br />
         <div className="control has-text-centered">
           <button className="button is-primary is-outlined">
-            {this.props.bundle ? 'Edit Item' : 'Add Item'}
+            {this.props.item ? 'Edit Item' : 'Add Item'}
           </button>
         </div>
       </form>
