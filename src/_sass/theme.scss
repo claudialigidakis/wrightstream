@@ -541,7 +541,7 @@ nav {
       padding-right: 4rem;
     }
 
-    .column:last-child {
+    .column:nth-child(2) {
       border-left: 1px solid $mist;
       padding-left: 4rem;
     }

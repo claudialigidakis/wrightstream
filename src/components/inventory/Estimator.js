@@ -104,6 +104,7 @@ class Estimator extends React.Component {
   componentDidMount () {
     this.props.getItems();
     this.props.getSupplies();
+    this.props.estimator([],[]);
   };
 
   render () {

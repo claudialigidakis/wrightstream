@@ -130,6 +130,7 @@ class Lists extends React.Component {
     this.props.getWorkstreamList();
     this.props.getSources();
     this.props.getSupplies();
+    this.props.estimator([],[]);
   };
 
   render () {

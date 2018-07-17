@@ -7555,7 +7555,7 @@ nav {
     .inventory .inventory-content .column:first-child {
       border-right: 1px solid #e2e4f0;
       padding-right: 4rem; }
-    .inventory .inventory-content .column:last-child {
+    .inventory .inventory-content .column:nth-child(2) {
       border-left: 1px solid #e2e4f0;
       padding-left: 4rem; }
   .inventory .estimator-content {
