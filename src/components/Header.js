@@ -1,6 +1,9 @@
 // REACT
 import React from 'react';
 
+// ROUTER
+import { Link } from 'react-router-dom'
+
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -18,6 +21,65 @@ class Header extends React.Component {
       mystreamClasses: 'navbar-item',
       adminClasses: 'navbar-item'
     };
+  };
+
+  toggle = link => {
+    switch (link) {
+      case 'products':
+        this.setState({
+          productsClasses: 'navbar-item is-active',
+          inventoryClasses: 'navbar-item',
+          workstreamClasses: 'navbar-item',
+          mystreamClasses: 'navbar-item',
+          adminClasses: 'navbar-item'
+        });
+        break;
+      case 'inventory':
+        this.setState({
+          productsClasses: 'navbar-item',
+          inventoryClasses: 'navbar-item is-active',
+          workstreamClasses: 'navbar-item',
+          mystreamClasses: 'navbar-item',
+          adminClasses: 'navbar-item'
+        });
+        break;
+      case 'workstream':
+        this.setState({
+          productsClasses: 'navbar-item',
+          inventoryClasses: 'navbar-item',
+          workstreamClasses: 'navbar-item is-active',
+          mystreamClasses: 'navbar-item',
+          adminClasses: 'navbar-item'
+        });
+        break;
+      case 'mystream':
+        this.setState({
+          productsClasses: 'navbar-item',
+          inventoryClasses: 'navbar-item',
+          workstreamClasses: 'navbar-item',
+          mystreamClasses: 'navbar-item is-active',
+          adminClasses: 'navbar-item'
+        });
+        break;
+      case 'admin':
+        this.setState({
+          productsClasses: 'navbar-item',
+          inventoryClasses: 'navbar-item',
+          workstreamClasses: 'navbar-item',
+          mystreamClasses: 'navbar-item',
+          adminClasses: 'navbar-item is-active'
+        });
+        break;
+      default:
+        this.setState({
+          productsClasses: 'navbar-item',
+          inventoryClasses: 'navbar-item',
+          workstreamClasses: 'navbar-item',
+          mystreamClasses: 'navbar-item',
+          adminClasses: 'navbar-item'
+        });
+        break;
+    }
   };
 
   componentDidMount () {
@@ -68,9 +130,9 @@ class Header extends React.Component {
     return (
       <nav className="navbar is-fixed-top">
         <div className="navbar-brand">
-          <a className="navbar-item" href="/">
+          <Link className="navbar-item" to="/">
             <img src="../assets/wrightstream-logo-horizontal.svg" alt="WrightStream" />
-          </a>
+          </Link>
           <a role="button" className="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -82,11 +144,11 @@ class Header extends React.Component {
             this.props.authorized ? (
               <div className="navbar-end">
                 <div className="navbar-main">
-                  <a className={this.state.productsClasses} href="/products">Products</a>
-                  <a className={this.state.inventoryClasses} href="/inventory">Inventory</a>
-                  <a className={this.state.workstreamClasses} href="/workstream">WorkStream</a>
-                  <a className={this.state.mystreamClasses} href="/mystream">MyStream</a>
-                  {this.props.user.role_id !== 3 ? <a className={this.state.adminClasses} href="/admin">Admin</a> : null}
+                  <Link className={this.state.productsClasses} to="/products" onClick={() => {this.toggle('products')}}>Products</Link>
+                  <Link className={this.state.inventoryClasses} to="/inventory" onClick={() => {this.toggle('inventory')}}>Inventory</Link>
+                  <Link className={this.state.workstreamClasses} to="/workstream" onClick={() => {this.toggle('workstream')}}>WorkStream</Link>
+                  <Link className={this.state.mystreamClasses} to="/mystream" onClick={() => {this.toggle('mystream')}}>MyStream</Link>
+                  {this.props.user.role_id !== 3 ? <Link className={this.state.adminClasses} to="/admin" onClick={() => {this.toggle('admin')}}>Admin</Link> : null}
                 </div>
                 <div className="navbar-item has-dropdown is-hoverable">
                   <a className="navbar-link is-hidden-touch">
@@ -94,30 +156,30 @@ class Header extends React.Component {
                     <span>{this.props.user.first_name}</span>
                   </a>
                   <div className="navbar-dropdown is-right">
-                    <a className="navbar-item" href="/profile">
+                    <Link className="navbar-item" to="/profile">
                       Profile
-                    </a>
-                    <a className="navbar-item" href="/settings">
+                    </Link>
+                    <Link className="navbar-item" to="/settings">
                       Settings
-                    </a>
-                    <a className="navbar-item" href="/help">
+                    </Link>
+                    <Link className="navbar-item" to="/help">
                       Help
-                    </a>
+                    </Link>
                     <hr className="navbar-divider" />
-                    <a className="navbar-item is-active" href="/" onClick={() => this.props.userLogout()}>
+                    <Link className="navbar-item is-active" to="/" onClick={() => {this.props.userLogout()}}>
                       Log Out
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
             ) : (
               <div className="navbar-end">
-                <a className="navbar-item" href="/login">
+                <Link className="navbar-item" to="/login">
                   Log In
-                </a>
-                <a className="navbar-item" href="/signup">
+                </Link>
+                <Link className="navbar-item" to="/signup">
                   Sign Up
-                </a>
+                </Link>
               </div>
             )
           }

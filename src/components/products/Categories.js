@@ -1,6 +1,9 @@
 // REACT
 import React from 'react';
 
+// ROUTER
+import { Link } from 'react-router-dom'
+
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -30,9 +33,9 @@ class Categories extends React.Component {
           Browse
         </p>
         <ul className="menu-list">
-          <li><a href="/products">Recently Added</a></li>
-          <li><a href="/products/items">All Items</a></li>
-          <li><a href="/products/bundles">All Bundles</a></li>
+          <li><Link to="/products">Recently Added</Link></li>
+          <li><Link to="/products/items">All Items</Link></li>
+          <li><Link to="/products/bundles">All Bundles</Link></li>
           <li><a className="disable">Favorites</a></li>
           <li><a className="disable">Archived</a></li>
         </ul>
@@ -43,7 +46,7 @@ class Categories extends React.Component {
           {
             this.props.categories.map(category => {
               return (
-                <li key={category.id}><a href={`/products/category?id=${category.id}`}>{category.name}</a></li>
+                <li key={category.id}><Link to={`/products/category?id=${category.id}`}>{category.name}</Link></li>
               )
             })
           }

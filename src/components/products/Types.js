@@ -1,6 +1,9 @@
 // REACT
 import React from 'react';
 
+// ROUTER
+import { Link } from 'react-router-dom'
+
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -20,7 +23,7 @@ class Types extends React.Component {
           Browse
         </p>
         <ul className="menu-list">
-          <li><a href="/products/supplies">All Sources</a></li>
+          <li><Link to="/products/supplies">All Sources</Link></li>
           <li><a className="disable">Archived</a></li>
         </ul>
         <p className="menu-label">
@@ -30,7 +33,7 @@ class Types extends React.Component {
           {
             this.props.types.map(type => {
               return (
-                <li key={type.id}><a href={`/products/sources/type?id=${type.id}`}>{type.name}</a></li>
+                <li key={type.id}><Link to={`/products/sources/type?id=${type.id}`}>{type.name}</Link></li>
               )
             })
           }

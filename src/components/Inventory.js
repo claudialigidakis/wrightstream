@@ -16,23 +16,23 @@ import Orders from './inventory/Orders';
 class Products extends React.Component {
   render () {
     return (
-      <section className="inventory">
-        <div className="columns">
-          <div className="column is-12">
-            <Nav />
-            <div className="inventory-container">
-              <BrowserRouter>
+      <BrowserRouter>
+        <section className="inventory">
+          <div className="columns">
+            <div className="column is-12">
+              <Nav />
+              <div className="inventory-container">
                 <Switch>
                   <Route exact path="/inventory" component={Main} />
                   <Route path="/inventory/estimator" component={Estimator} />
                   <Route path="/inventory/lists" component={Lists} />
                   <Route path="/inventory/orders" component={Orders} />
                 </Switch>
-              </BrowserRouter>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </BrowserRouter>
     );
   };
 };

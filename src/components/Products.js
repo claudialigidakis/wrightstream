@@ -38,28 +38,24 @@ class Products extends React.Component {
 
   render () {
     return (
-      <section className="products">
-        <div className="columns is-fullheight is-marginless">
-          <div className="column is-3 bar">
-            <BrowserRouter>
-              <Switch>
-                <Route path="/products/supplies" component={Kinds} />
-                <Route path="/products/sources" component={Types} />
-                <Route path="/products" component={Categories} />
-              </Switch>
-            </BrowserRouter>
-          </div>
-          <div className="column is-9 products-content">
-            <BrowserRouter>
-              <Switch>
-                <Route path="/products/sources" component={TypeControl} />
-                <Route path="/products/supplies" component={KindControl} />
-                <Route path="/products" render={() => <CategoryControl getProductsEtsy={this.props.getProductsEtsy} />} />
-              </Switch>
-            </BrowserRouter>
-            <Nav />
-            <div className="products-container">
-              <BrowserRouter>
+      <BrowserRouter>
+        <section className="products">
+          <div className="columns is-fullheight is-marginless">
+            <div className="column is-3 bar">
+                <Switch>
+                  <Route path="/products/supplies" component={Kinds} />
+                  <Route path="/products/sources" component={Types} />
+                  <Route path="/products" component={Categories} />
+                </Switch>
+              </div>
+              <div className="column is-9 products-content">
+                <Switch>
+                  <Route path="/products/sources" component={TypeControl} />
+                  <Route path="/products/supplies" component={KindControl} />
+                  <Route path="/products" render={() => <CategoryControl getProductsEtsy={this.props.getProductsEtsy} />} />
+                </Switch>
+                <Nav />
+              <div className="products-container">
                 <Switch>
                   <Route exact path="/products" component={Main} />
                   <Route path="/products/items" component={Items} />
@@ -70,11 +66,11 @@ class Products extends React.Component {
                   <Route exact path="/products/sources" component={Sources} />
                   <Route path="/products/sources/type" component={Type} />
                 </Switch>
-              </BrowserRouter>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </BrowserRouter>
     );
   };
 };

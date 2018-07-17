@@ -1,6 +1,9 @@
 // REACT
 import React from 'react';
 
+// ROUTER
+import { Link } from 'react-router-dom'
+
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -20,7 +23,7 @@ class Kinds extends React.Component {
           Browse
         </p>
         <ul className="menu-list">
-          <li><a href="/products/supplies">All Supplies</a></li>
+          <li><Link to="/products/supplies">All Supplies</Link></li>
           <li><a className="disable">Archived</a></li>
         </ul>
         <p className="menu-label">
@@ -30,7 +33,7 @@ class Kinds extends React.Component {
           {
             this.props.kinds.map(kind => {
               return (
-                <li key={kind.id}><a href={`/products/supplies/kind?id=${kind.id}`}>{kind.name}</a></li>
+                <li key={kind.id}><Link to={`/products/supplies/kind?id=${kind.id}`}>{kind.name}</Link></li>
               )
             })
           }

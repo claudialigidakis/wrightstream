@@ -1,6 +1,9 @@
 // REACT
 import React from 'react';
 
+// ROUTER
+import { Link } from 'react-router-dom'
+
 // ==========
 
 class AdminMenu extends React.Component {
@@ -12,11 +15,11 @@ class AdminMenu extends React.Component {
           Shop Tracking
         </p>
         <ul className="menu-list">
-          <li><a href="/admin/dashboard">Dashboard</a></li>
-          <li><a href="/admin/staff">Staff</a></li>
-          <li><a href="/admin/products">Products</a></li>
-          <li><a href="/admin/purchases">Purchases</a></li>
-          <li><a href="/admin/supplies">Supplies</a></li>
+          <li><Link to="/admin/dashboard">Dashboard</Link></li>
+          <li><Link to="/admin/staff">Staff</Link></li>
+          <li><Link to="/admin/products">Products</Link></li>
+          <li><Link to="/admin/purchases">Purchases</Link></li>
+          <li><Link to="/admin/supplies">Supplies</Link></li>
         </ul>
       </aside>
     );
