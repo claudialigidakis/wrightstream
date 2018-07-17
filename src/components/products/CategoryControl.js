@@ -50,10 +50,10 @@ class CategoryControl extends React.Component {
           </div>
           <div className="dropdown-menu">
             <div className="dropdown-content">
-              <a className="dropdown-item" id="add-item" onClick={event => this.toggle(event)}>
+              <a className="dropdown-item" id="add-item" onClick={event => {this.toggle(event)}}>
                 Add Item
               </a>
-              <a className="dropdown-item" id="add-bundle" onClick={event => this.toggle(event)}>
+              <a className="dropdown-item" id="add-bundle" onClick={event => {this.toggle(event)}}>
                 Add Bundle
               </a>
             </div>

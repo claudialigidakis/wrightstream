@@ -109,7 +109,7 @@ export const addItem = (name, productId, categoryId, photo, stock, supplies, ste
       const shop_id = response.data.shops_id;
       request(`/items/${shop_id}`, 'post', {name, productId, categoryId, photo, stock, supplies, steps})
       .then(response => {
-        return request(`/items/${shop_id}/allItems`)
+        return request(`/items/${shop_id}/allItems`);
       })
       .then(response => {
         dispatch({
@@ -118,7 +118,7 @@ export const addItem = (name, productId, categoryId, photo, stock, supplies, ste
         });
       })
       .then(response => {
-        return request(`/products/${shop_id}/allUnlinked`)
+        return request(`/products/${shop_id}/allUnlinked`);
       })
       .then(response => {
         dispatch({
@@ -174,7 +174,7 @@ export const deleteItem = (id) => (
         });
       })
       .then(response => {
-        return request(`/products/${shop_id}/allUnlinked`)
+        return request(`/products/${shop_id}/allUnlinked`);
       })
       .then(response => {
         dispatch({
@@ -218,7 +218,7 @@ export const addBundle = (name, productId, categoryId, photo, stock, items, step
         });
       })
       .then(response => {
-        return request(`/products/${shop_id}/allUnlinked`)
+        return request(`/products/${shop_id}/allUnlinked`);
       })
       .then(response => {
         dispatch({
@@ -246,7 +246,7 @@ export const editBundle = (id, name, productId, categoryId, photo, stock, items,
         });
       })
       .then(response => {
-        return request(`/products/${shop_id}/allUnlinked`)
+        return request(`/products/${shop_id}/allUnlinked`);
       })
       .then(response => {
         dispatch({
@@ -274,7 +274,7 @@ export const deleteBundle = (id) => (
         });
       })
       .then(response => {
-        return request(`/products/${shop_id}/allUnlinked`)
+        return request(`/products/${shop_id}/allUnlinked`);
       })
       .then(response => {
         dispatch({

@@ -45,7 +45,7 @@ class Products extends React.Component {
               <Switch>
                 <Route path="/products/supplies" component={Kinds} />
                 <Route path="/products/sources" component={Types} />
-                <Route path="/products" render={() => <Categories getEtsyProducts={this.props.getProductsEtsy} />} />
+                <Route path="/products" component={Categories} />
               </Switch>
             </BrowserRouter>
           </div>
@@ -54,7 +54,7 @@ class Products extends React.Component {
               <Switch>
                 <Route path="/products/sources" component={TypeControl} />
                 <Route path="/products/supplies" component={KindControl} />
-                <Route path="/products" component={CategoryControl} />
+                <Route path="/products" render={() => <CategoryControl getProductsEtsy={this.props.getProductsEtsy} />} />
               </Switch>
             </BrowserRouter>
             <Nav />
@@ -80,11 +80,11 @@ class Products extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  getProductsEtsy
+
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-
+  getProductsEtsy
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

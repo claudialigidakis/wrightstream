@@ -9,7 +9,6 @@ import { getRecentProducts } from '../../actions/products';
 // COMPONENTS
 import Product from './Product';
 
-
 // ==========
 
 class Main extends React.Component {
