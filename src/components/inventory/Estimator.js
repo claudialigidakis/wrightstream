@@ -22,7 +22,7 @@ class Estimator extends React.Component {
     super(props);
     this.state = {
       items: [],
-      bundles: [{id:1, bundle_qty: 1}],
+      bundles: [],
       inputs: [shortid.generate()],
       modal: false,
       modalClasses: 'modal',
@@ -34,7 +34,7 @@ class Estimator extends React.Component {
   clear = () => {
     this.setState({
       items: [],
-      bundles: [{id:1, bundle_qty: 1}],
+      bundles: [],
       inputs: [shortid.generate()],
       modal: false,
       modalClasses: 'modal',

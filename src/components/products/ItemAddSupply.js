@@ -84,6 +84,7 @@ class ItemAddSupply extends React.Component {
                 type="number"
                 placeholder="Quantity"
                 id="qty"
+                min="0"
                 value={this.state.qty}
                 onChange={event => {
                   this.setState({qty: Number(event.target.value)});

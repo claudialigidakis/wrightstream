@@ -32,6 +32,7 @@ class OrdersSupply extends React.Component {
               type="number"
               placeholder="0"
               id="qty"
+              min="0"
               style={{width:'50%'}}
               value={this.state.qty}
               disabled={this.state.lock}
