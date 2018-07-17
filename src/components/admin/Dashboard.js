@@ -11,21 +11,20 @@ import StaffActivity from './StaffActivity';
 // ==========
 
 class Dashboard extends React.Component {
-
-  render() {
+  render () {
     return (
-      <div className="row">
-    <div className="columns">
-        <CurrentStaff/>
-        <NewPurchases/>
-        <CompletedPurchases/>
+      <div>
+        <div className="columns">
+            <CurrentStaff />
+            <NewPurchases />
+            <CompletedPurchases />
+          </div>
+          <div className="columns">
+            <StaffActivity />
+            <CurrentPurchasesStatus />
+        </div>
       </div>
-      <div className="columns">
-        <StaffActivity/>
-        <CurrentPurchasesStatus/>
-    </div>
-  </div>
-  );
+    );
   };
 };
 

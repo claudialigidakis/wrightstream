@@ -1,0 +1,29 @@
+.admin-container {
+  padding: 3rem;
+}
+
+.card {
+  box-shadow: none;
+  border-bottom: 2px solid $mist;
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+.card-footer {
+  border-color: $slate;
+}
+
+.card-footer-item {
+  color: $quartz;
+  font-size: .8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 1rem;
+}
+
+.stat-number {
+  color: $periwinkle;
+  font-size: 3rem;
+}

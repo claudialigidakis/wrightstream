@@ -12,7 +12,6 @@ import Supplies from './admin/Supplies'
 
 
 class Admin extends React.Component {
-
   render () {
     return (
       <BrowserRouter>

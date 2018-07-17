@@ -34,20 +34,24 @@ class OrdersSource extends React.Component {
             supplies.length > 0 ? this.props.source.name : null
           }
         </h1>
-        <ul>
-          {
-            supplies.map(supply => {
-              return (
-                <OrdersSupply
-                  key={supply.supply_id}
-                  supply={supply}
-                  supplies={this.props.supplies}
-                  editSupply={this.props.editSupply}
-                />
-              );
-            })
-          }
-        </ul>
+        {
+          supplies.length > 0 ? (
+            <ul style={{padding: '.1rem 0 2rem'}}>
+              {
+                supplies.map(supply => {
+                  return (
+                    <OrdersSupply
+                      key={supply.supply_id}
+                      supply={supply}
+                      supplies={this.props.supplies}
+                      editSupply={this.props.editSupply}
+                    />
+                  );
+                })
+              }
+            </ul>
+          ) : null
+        }
       </div>
     );
   };

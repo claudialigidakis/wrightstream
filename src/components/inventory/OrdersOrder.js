@@ -17,15 +17,9 @@ class OrdersOrder extends React.Component {
 
   render () {
     return (
-      <li>
-        <button
-          className="button is-primary"
-          onClick={() => {
-            this.props.select(this.props.order.id);
-          }}
-        >
-          Order #{this.props.order.id}
-        </button>
+      <li onClick={() => {this.props.select(this.props.order.id)}}>
+        <div className="status"></div>
+        <span>Order #{this.props.order.id}</span>
       </li>
     );
   };

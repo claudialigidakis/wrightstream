@@ -19,44 +19,47 @@ class OrdersSupply extends React.Component {
 
   render () {
     return (
-      <li style={{display: 'flex'}}>
-        <span style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}>
-          <span>
+      <li style={{margin: '1rem'}}>
+        <div className="columns">
+          <div className="column is-4 is-paddingless" style={{display: 'flex', alignItems: 'center'}}>
             {
               this.props.supplies.find(supply => supply.id === this.props.supply.supply_id).name
             }
-          </span>
-          <span>
+          </div>
+          <div className="column is-4 is-paddingless" style={{display: 'flex', alignItems: 'center'}}>
             <input
               className="input"
               type="number"
               placeholder="0"
               id="qty"
               min="0"
-              style={{width:'50%'}}
+              style={{width: '100px'}}
               value={this.state.qty}
               disabled={this.state.lock}
               onChange={event => {
                 this.setState({qty: Number(event.target.value)});
                 this.props.editSupply(this.props.supply.supply_id, this.state.status, Number(event.target.value));
               }}
-            /> {this.props.supply.supply_measure_type}
-          </span>
-        </span>
-        <div className="select" style={{width: '65%'}}>
-          <select
-            id="status"
-            value={this.state.status}
-            disabled={this.state.lock}
-            onChange={event => {
-              this.setState({status: parseInt(event.target.value, 10), lock: parseInt(event.target.value, 10) === 3 ? true : false});
-              this.props.editSupply(this.props.supply.supply_id, parseInt(event.target.value, 10), this.state.qty);
-            }}
-          >
-            <option value={1}>Not ordered</option>
-            <option value={2}>Pending</option>
-            <option value={3}>Delivered</option>
-          </select>
+            />
+            <span style={{marginLeft: '.5rem'}}>{this.props.supply.supply_measure_type}</span>
+          </div>
+          <div className="column is-4 is-paddingless" style={{display: 'flex', alignItems: 'center'}}>
+            <div className="select">
+              <select
+                id="status"
+                value={this.state.status}
+                disabled={this.state.lock}
+                onChange={event => {
+                  this.setState({status: parseInt(event.target.value, 10), lock: parseInt(event.target.value, 10) === 3 ? true : false});
+                  this.props.editSupply(this.props.supply.supply_id, parseInt(event.target.value, 10), this.state.qty);
+                }}
+              >
+                <option value={1}>Not ordered</option>
+                <option value={2}>Pending</option>
+                <option value={3}>Delivered</option>
+              </select>
+            </div>
+          </div>
         </div>
       </li>
     );

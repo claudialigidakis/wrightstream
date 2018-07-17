@@ -11,17 +11,23 @@ class EstimatorSupply extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      qty: this.props.supply.stock_qty
+
     };
   };
 
   render () {
     return (
-      <li>
-        <span className="supply-qty">{this.props.supply.supply_qty}</span>
-        <span className="supply-unit">{this.props.supply.supply_measure_type}</span>
-        <span className="supply-qty">{this.props.supplies.find(supply => supply.id === this.props.supply.supply_id).name}</span>
-      </li>
+      <div className="columns">
+        <div className="column is-2 has-text-right is-paddingless">
+          <span>{this.props.supply.supply_qty}</span>
+        </div>
+        <div className="column is-1 is-paddingless" style={{marginLeft: '1rem', marginRight: '1rem'}}>
+          <span className="supply-unit">{this.props.supply.supply_measure_type}</span>
+        </div>
+        <div className="column is-paddingless">
+          <span>{this.props.supplies.find(supply => supply.id === this.props.supply.supply_id).name}</span>
+        </div>
+      </div>
     );
   };
 };

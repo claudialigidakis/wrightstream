@@ -22,7 +22,7 @@ class Orders extends React.Component {
   };
 
   select = id => {
-    this.setState({id})
+    this.setState({id});
   };
 
   editSupply = (supply_id, supply_status, supply_qty) => {
@@ -38,9 +38,9 @@ class Orders extends React.Component {
   render () {
     return (
       <div className="columns estimator-content">
-        <div className="column is-6">
+        <div className="column is-4">
           <h1 className="title is-5">Orders</h1>
-          <ul>
+          <ul className="inventory-orders">
             {
               this.props.orders.map(order => {
                 return (
@@ -54,8 +54,8 @@ class Orders extends React.Component {
             }
           </ul>
         </div>
-        <div className="column is-6">
-          <div className="estimator-supplies">
+        <div className="column is-8">
+          <div className={this.props.orders.find(order => order.id === this.state.id) ? 'estimator-supplies' : 'estimator-supplies hide'}>
             {
               this.props.orders.find(order => order.id === this.state.id) ?
               this.props.sources.map(source => {
