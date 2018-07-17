@@ -17,14 +17,15 @@ class ListsSupply extends React.Component {
 
   render () {
     return (
-      <li style={{display: 'flex', justifyContent: 'space-between'}}>
+      <li style={{display: 'flex', justifyContent: 'space-between', margin: '0 1rem'}}>
         <span>
           {
             this.props.supplies.find(supply => supply.id === this.props.supply.supply_id).name
           }
         </span>
         <span>
-          {this.props.supply.supply_qty} {this.props.supply.supply_measure_type}
+          {this.props.supply.supply_qty}
+          <span className="supply-unit has-text-left" style={{display: 'inline-block', marginLeft: '.5rem', width: '25px'}}>{this.props.supply.supply_measure_type}</span>
         </span>
       </li>
     );

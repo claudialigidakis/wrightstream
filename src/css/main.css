@@ -7699,3 +7699,69 @@ nav {
   .missing-products ul {
     font-size: .8rem;
     margin-left: .5rem; }
+
+.inventory-list li {
+  background-color: #e2e4f0;
+  margin: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 300ms ease; }
+  .inventory-list li .is-checkradio[type="checkbox"] + label span {
+    color: #76757b;
+    font-size: 1.2rem;
+    margin-left: 1rem; }
+  .inventory-list li:hover {
+    background-color: #d8dbeb; }
+
+.inventory-list li:first-child {
+  background-color: #bbc3dd; }
+  .inventory-list li:first-child .is-checkradio[type="checkbox"] + label span {
+    color: white; }
+  .inventory-list li:first-child:hover {
+    background-color: #a0abcf; }
+
+.inventory-orders li {
+  background-color: #e2e4f0;
+  margin: 1rem;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  transition: all 300ms ease;
+  display: flex;
+  align-items: center; }
+  .inventory-orders li:hover {
+    background-color: #d8dbeb; }
+  .inventory-orders li .status {
+    background-color: #ebcd6f;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px; }
+  .inventory-orders li span {
+    color: #9295a5;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-left: 1rem; }
+
+.admin-container {
+  padding: 3rem; }
+
+.card {
+  box-shadow: none;
+  border-bottom: 2px solid #e2e4f0; }
+
+.card-content {
+  padding: 1.5rem; }
+
+.card-footer {
+  border-color: #f0f1f6; }
+
+.card-footer-item {
+  color: #9295a5;
+  font-size: .8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 1rem; }
+
+.stat-number {
+  color: #bbc3dd;
+  font-size: 3rem; }

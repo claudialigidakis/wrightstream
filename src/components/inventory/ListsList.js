@@ -21,8 +21,8 @@ class ListsList extends React.Component {
 
   render () {
     return (
-      <li>
-        <input id={this.props.list.id} className="is-checkradio" type="checkbox" checked={this.state.checked} onChange={event => {event.preventDefault()}} />
+      <li onClick={() => this.props.toggle(this.props.list.id)}>
+        <input id={this.props.list.id} className="is-checkradio has-background-color is-white" type="checkbox" checked={this.state.checked} onChange={event => {event.preventDefault()}} />
         <label
           htmlFor={this.props.list.id}
           onClick={() => {
@@ -30,9 +30,8 @@ class ListsList extends React.Component {
             this.check();
           }}
         >
-          {this.props.list.name}
+          <span>{this.props.list.name}</span>
         </label>
-        <span className="lnr-label" onClick={() => this.props.toggle(this.props.list.id)}></span>
       </li>
     );
   };

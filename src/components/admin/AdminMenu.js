@@ -11,9 +11,9 @@ class AdminMenu extends React.Component {
   render () {
     return (
       <aside className="menu">
-        <p className="menu-label">
+        {/* <p className="menu-label">
           Shop Tracking
-        </p>
+        </p> */}
         <ul className="menu-list">
           <li><Link to="/admin/dashboard">Dashboard</Link></li>
           <li><Link to="/admin/staff">Staff</Link></li>

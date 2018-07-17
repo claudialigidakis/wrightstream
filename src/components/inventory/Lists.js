@@ -150,7 +150,7 @@ class Lists extends React.Component {
       <div className="columns estimator-content">
         <div className="column is-6">
           <h1 className="title is-5">Lists</h1>
-          <ul>
+          <ul className="inventory-list">
             {
               lists.map(list => {
                 return (
@@ -166,7 +166,7 @@ class Lists extends React.Component {
           </ul>
         </div>
         <div className="column is-6">
-          <div className="estimator-supplies">
+          <div className={this.props.estimatorSupplies.length > 0 ? 'estimator-supplies' : 'estimator-supplies hide'}>
             {
               this.props.sources.map(source => {
                 return (
@@ -179,6 +179,7 @@ class Lists extends React.Component {
                 );
               })
             }
+            <br />
             <div className="has-text-right">
               <button
                 className="button is-outlined is-primary"

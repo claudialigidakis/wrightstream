@@ -130,16 +130,20 @@ class Estimator extends React.Component {
         <div className="column is-6">
           <div className="estimator-supplies">
             <h1 className="title is-5">Supplies Needed</h1>
-            <ul>
+            <div style={{padding: '1rem'}}>
               {this.props.estimatorSupplies.map(supply =>
                 <EstimatorSupply
                   key={supply.supply_id}
                   supply={supply}
                 />
               )}
-            </ul>
+            </div>
             <div className="has-text-right">
-              <button className="button is-outlined is-primary" onClick={this.toggle}>Add List</button>
+              <button
+                className="button is-outlined is-primary"
+                disabled={this.props.estimatorSupplies.length === 0 || this.props.estimatorSupplies.find(supply => !supply.supply_qty) ? true : false}
+                onClick={this.toggle}
+              >Add List</button>
             </div>
           </div>
         </div>
@@ -165,7 +169,7 @@ class Estimator extends React.Component {
                     Please fill out all information correctly.
                   </p>
                 ) : null}
-                <br />
+                <br /><br />
                 <div className="control has-text-centered">
                   <button className="button is-primary is-outlined">Add List</button>
                 </div>

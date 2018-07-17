@@ -34,19 +34,23 @@ class ListsSource extends React.Component {
             supplies.length > 0 ? this.props.source.name : null
           }
         </h1>
-        <ul>
-          {
-            supplies.map(supply => {
-              return (
-                <ListsSupply
-                  key={supply.supply_id}
-                  supply={supply}
-                  supplies={this.props.supplies}
-                />
-              );
-            })
-          }
-        </ul>
+        {
+          supplies.length > 0 ? (
+            <ul style={{paddingBottom: '1rem'}}>
+              {
+                supplies.map(supply => {
+                  return (
+                    <ListsSupply
+                      key={supply.supply_id}
+                      supply={supply}
+                      supplies={this.props.supplies}
+                    />
+                  );
+                })
+              }
+            </ul>
+          ) : null
+        }
       </div>
     );
   };
