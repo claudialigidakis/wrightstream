@@ -435,14 +435,22 @@ nav {
 }
 
 .purchase-assign {
-  width: 300px;
+  width: 250px;
+  border-radius: 5px;
 
   li {
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: .6rem;
+  }
+
+  li:nth-child(2n) {
+    background-color: lighten($slate, 1%);
   }
 
   li:hover {
-    background-color: $slate;
+    background-color: $mist;
   }
 
   img {
@@ -450,6 +458,7 @@ nav {
     height: 30px;
     border-radius: 50%;
     object-fit: cover;
+    margin-right: .5rem;
   }
 }
 
