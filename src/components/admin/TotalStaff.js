@@ -18,7 +18,8 @@ class TotalStaff extends React.Component {
       <div className="column">
         <div className="card">
           <div className="card-content">
-            <div className="content has-text-centered">
+            <div className="content has-text-centered stat">
+              <span className="lnr lnr-contacts"></span>
               <span className="stat-number">{this.props.totalStaff}</span>
             </div>
           </div>

@@ -7744,24 +7744,80 @@ nav {
 
 .admin-container {
   padding: 3rem; }
-
-.card {
-  box-shadow: none;
-  border-bottom: 2px solid #e2e4f0; }
-
-.card-content {
-  padding: 1.5rem; }
-
-.card-footer {
-  border-color: #f0f1f6; }
-
-.card-footer-item {
-  color: #9295a5;
-  font-size: .8rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  padding: 1rem; }
-
-.stat-number {
-  color: #bbc3dd;
-  font-size: 3rem; }
+  .admin-container .card {
+    box-shadow: none;
+    border-bottom: 2px solid #e2e4f0; }
+  .admin-container .card-content {
+    padding: 1.5rem; }
+  .admin-container .card-footer {
+    border-color: #f0f1f6; }
+  .admin-container .card-footer-item {
+    color: #9295a5;
+    font-size: .8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 1rem; }
+  .admin-container .card-header {
+    background-color: #bbc3dd;
+    color: white;
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    padding: 1rem 1.5rem;
+    box-shadow: none;
+    border-bottom: 1px solid #f0f1f6; }
+  .admin-container .stat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem; }
+  .admin-container .lnr {
+    color: #bbc3dd;
+    font-size: 5rem;
+    display: inline-block;
+    width: 50%; }
+  .admin-container .stat-number {
+    color: #bbc3dd;
+    font-size: 3rem;
+    display: inline-block;
+    width: 50%; }
+  .admin-container .title {
+    color: #9295a5;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 1rem; }
+  .admin-container .staff-container {
+    height: 120px; }
+  .admin-container .staff-user {
+    color: #e2e4f0;
+    background-color: #636fa6;
+    font-size: .9rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+    .admin-container .staff-user img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: .25rem; }
+  .admin-container .staff-purchases {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto; }
+    .admin-container .staff-purchases ul {
+      width: 150px; }
+    .admin-container .staff-purchases li {
+      color: #76757b;
+      background-color: #e2e4f0;
+      text-align: center;
+      padding: .25rem;
+      border-radius: 5px;
+      margin: .75rem 0;
+      width: 100%; }

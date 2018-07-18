@@ -19,6 +19,7 @@ class Dashboard extends React.Component {
             <NewPurchases />
             <CompletedPurchases />
           </div>
+          <br />
           <div className="columns">
             <StaffActivity />
             <CurrentPurchasesStatus />

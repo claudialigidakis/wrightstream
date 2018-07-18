@@ -10,20 +10,20 @@ import TotalBundlesSoldChart from './TotalBundlesSoldChart'
 // ==========
 
 class Products extends React.Component {
-
-  render() {
+  render () {
     return (
-  <div>
-    <div className="columns">
-      <TotalItemsSold />
-      <TotalBundlesSold />
-      <TotalProductsSold />
-    </div>
-    <div className="columns">
-      <TotalItemsSoldChart />
-      <TotalBundlesSoldChart />
-    </div>
-  </div>
+      <div>
+        <div className="columns">
+          <TotalItemsSold />
+          <TotalBundlesSold />
+          <TotalProductsSold />
+        </div>
+        <br />
+        <div className="columns">
+          <TotalItemsSoldChart />
+          <TotalBundlesSoldChart />
+        </div>
+      </div>
     );
   };
 };

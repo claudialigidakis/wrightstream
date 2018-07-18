@@ -29,8 +29,16 @@ class StaffCompleted extends React.Component {
   render () {
     return (
       <div className="column">
-        Completed Staff Activity
-        <ColumnChart data={this.transformData()} stacked={true} />
+        <div className="card">
+          <header className="card-header">
+            Completed Staff Activity
+          </header>
+          <div className="card-content">
+            <div className="content">
+              <ColumnChart data={this.transformData()} stacked={true} />
+            </div>
+          </div>
+        </div>
       </div>
     )}
   }
