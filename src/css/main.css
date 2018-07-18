@@ -7489,16 +7489,23 @@ nav {
     height: 35px; }
 
 .purchase-assign {
-  width: 300px; }
+  width: 250px;
+  border-radius: 5px; }
   .purchase-assign li {
-    cursor: pointer; }
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: .6rem; }
+  .purchase-assign li:nth-child(2n) {
+    background-color: #f3f4f8; }
   .purchase-assign li:hover {
-    background-color: #f0f1f6; }
+    background-color: #e2e4f0; }
   .purchase-assign img {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    object-fit: cover; }
+    object-fit: cover;
+    margin-right: .5rem; }
 
 .products-table, .inventory-table {
   border-bottom: 2px solid #d9def1; }
