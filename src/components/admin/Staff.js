@@ -13,15 +13,16 @@ class Staff extends React.Component {
   render() {
     return (
       <div>
-    <div className="columns align-items-center">
-        <CurrentStaff/>
-        <TotalStaff/>
+        <div className="columns">
+          <CurrentStaff />
+          <TotalStaff />
+        </div>
+        <br />
+        <div className="columns">
+          <StaffCompleted />
+        </div>
       </div>
-        <div className="row align-items-center">
-        <StaffCompleted/>
-    </div>
-  </div>
-);
+    );
   };
 };
 

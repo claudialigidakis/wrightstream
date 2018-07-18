@@ -18,7 +18,8 @@ class InProductionPurchases extends React.Component {
       <div className="column is-4">
         <div className="card">
           <div className="card-content">
-            <div className="content has-text-centered">
+            <div className="content has-text-centered stat">
+              <span className="lnr lnr-hammer-wrench"></span>
               <span className="stat-number">{this.props.InProductionPurchases}</span>
             </div>
           </div>

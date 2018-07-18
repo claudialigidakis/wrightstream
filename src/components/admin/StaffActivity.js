@@ -14,12 +14,10 @@ class StaffActivity extends React.Component {
     this.props.getCurrentStaffActivity();
   };
 
-
-
   render () {
     return (
       <div className="column">
-        Current Staff Activity
+        <h1 className="title is-5 has-text-centered">Current Staff Activity</h1>
         {this.props.currentStaffActivity.map(activity => {
           return (
           <CurrentStaffCard
@@ -34,7 +32,6 @@ class StaffActivity extends React.Component {
       </div>
     )}
   }
-
 
   const mapStateToProps = state => ({
     currentStaffActivity: state.admin.currentStaffActivity

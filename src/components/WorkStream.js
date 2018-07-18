@@ -32,7 +32,7 @@ class WorkStream extends React.Component {
     return (
       <section className="workstream">
         <div className="columns is-marginless">
-          <div className="column is-3">
+          <div className="column">
             <h1 className="title is-4">
               Backlog
               <a onClick={this.props.getPurchasesEtsy}><span className="lnr-refresh"></span></a>
@@ -59,7 +59,7 @@ class WorkStream extends React.Component {
               Move to Pending
             </div>
           </div>
-          <div className="column is-3">
+          <div className="column">
             <h1 className="title is-4">
               Pending
             </h1>
@@ -84,7 +84,7 @@ class WorkStream extends React.Component {
               Assign
             </div>
           </div>
-          <div className="column is-3">
+          <div className="column">
             <h1 className="title is-4">
               Crafting
             </h1>
@@ -106,7 +106,7 @@ class WorkStream extends React.Component {
               }
             </div>
           </div>
-          <div className="column is-3">
+          <div className="column">
             <h1 className="title is-4">
               Finalize
             </h1>
@@ -131,7 +131,7 @@ class WorkStream extends React.Component {
               Assign
             </div>
           </div>
-          <div className="column is-3">
+          <div className="column">
             <h1 className="title is-4">
               Pick Up
             </h1>
@@ -156,7 +156,7 @@ class WorkStream extends React.Component {
               Archive
             </div>
           </div>
-          <div className="column is-3">
+          <div className="column">
             <h1 className="title is-4">
               Ship
             </h1>

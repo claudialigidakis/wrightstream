@@ -18,7 +18,8 @@ class CurrentPurchases extends React.Component {
       <div className="column is-4">
         <div className="card">
           <div className="card-content">
-            <div className="content has-text-centered">
+            <div className="content has-text-centered stat">
+              <span className="lnr lnr-receipt"></span>
               <span className="stat-number">{this.props.newPurchases}</span>
             </div>
           </div>

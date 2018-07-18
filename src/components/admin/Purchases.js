@@ -12,16 +12,18 @@ class Purchases extends React.Component {
 
   render() {
     return (
-    <div>
-    <div className="columns">
-      <NewPurchases />
-      <InProductionPurchases />
-      <CompletedPurchases />
-    </div>
-    <div className="columns">
-      <PurchaseHistory />
-    </div>
-  </div>);
+      <div>
+        <div className="columns">
+          <NewPurchases />
+          <InProductionPurchases />
+          <CompletedPurchases />
+        </div>
+        <br />
+        <div className="columns">
+          <PurchaseHistory />
+        </div>
+      </div>
+    );
   };
 };
 
