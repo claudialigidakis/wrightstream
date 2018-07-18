@@ -12,6 +12,7 @@ import PurchaseProductDetails from './PurchaseProductDetails';
 import PurchaseQuality from './PurchaseQuality';
 import PurchaseSchedule from './PurchaseSchedule';
 import PurchaseNotes from './PurchaseNotes';
+import PurchaseSayings from './PurchaseSayings';
 
 // ==========
 
@@ -257,7 +258,7 @@ class PurchaseModal extends React.Component {
           </div>
           <div className="column is-7">
             {
-              this.state.product ? <PurchaseProductDetails bundle={this.state.bundle} product={this.state.product} /> : null
+              this.state.product ? <PurchaseProductDetails bundle={this.state.bundle} product={this.state.product} /> : <PurchaseSayings purchase={this.props.purchase} />
             }
           </div>
         </div>

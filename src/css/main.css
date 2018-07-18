@@ -7588,7 +7588,8 @@ nav {
     padding: .75rem;
     min-height: 175px;
     max-height: 65vh;
-    overflow-y: auto; }
+    overflow-y: auto;
+    width: 272px; }
   .workstream .column-button {
     background-color: #bbc3dd;
     color: white;
@@ -7741,6 +7742,22 @@ nav {
     text-transform: uppercase;
     font-weight: 500;
     margin-left: 1rem; }
+
+.purchase-sayings {
+  color: #bbc3dd;
+  height: calc(100vh - 50px);
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .purchase-sayings > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+  .purchase-sayings .lnr {
+    font-size: 4rem; }
+  .purchase-sayings .saying {
+    font-size: 1.2rem;
+    margin-top: 1rem; }
 
 .admin-container {
   padding: 3rem; }
