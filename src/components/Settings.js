@@ -13,28 +13,12 @@ class Settings extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      loginUrl: '',
-      products: '',
-      purchases: ''
+      loginUrl: ''
     };
   };
 
   handleEtsyAuthClick = () => {
     window.location = this.state.loginUrl;
-  };
-
-  handleEtsyProductsClick = () => {
-    request('/etsy/findAllListingActive')
-    .then(response => {
-      this.setState({products: response.data});
-    });
-  };
-
-  handleEtsyPurchasesClick = () => {
-    request('/etsy/findAllPurchases')
-    .then(response => {
-      this.setState({purchases: response.data});
-    });
   };
 
   componentDidMount = async () => {
@@ -63,14 +47,6 @@ class Settings extends React.Component {
         <button className="button">
           Link Shopify
         </button>
-        <div>
-          <button onClick={this.handleEtsyProductsClick}>Get Products</button>
-          <button onClick={this.handleEtsyPurchasesClick}>Get Purchases</button>
-          <div>
-            {`products: ${JSON.stringify(this.state.products)}`}
-            {`purchases: ${JSON.stringify(this.state.purchases)}`}
-          </div>
-        </div>
       </div>
     );
   };
