@@ -65,13 +65,6 @@ class Settings extends React.Component {
                 <button className="button is-primary is-outlined is-fullwidth">Edit Profile</button>
               </div>
             </div>
-            <div className="card">
-              <div className="card-content">
-                <div className="content">
-                  <img className="photo" src={this.props.user.photo} alt={`${this.props.user.first_name} ${this.props.user.last_name}`} />
-                </div>
-              </div>
-            </div>
           </div>
           <div className="column is-8">
             <div>
