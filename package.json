@@ -2,7 +2,6 @@
   "name": "wrightstream",
   "version": "0.1.0",
   "description": "The ultimate workflow tool for artisans",
-  "private": true,
   "main": "./public/index.html",
   "scripts": {
     "css-deploy": "npm run css-build && npm run css-postcss",

@@ -7766,6 +7766,30 @@ nav {
     font-size: 1.2rem;
     margin-top: 1rem; }
 
+.settings {
+  padding: 3rem; }
+  .settings figure {
+    margin: 1rem auto; }
+  .settings img {
+    display: block;
+    width: 125px;
+    height: 125px;
+    margin: auto;
+    border-radius: 50%;
+    object-fit: cover; }
+  .settings li {
+    line-height: 1.8rem; }
+  .settings .fa-icon {
+    color: #b5b5b5;
+    display: inline-block;
+    margin: 0 5px;
+    text-align: center;
+    width: 20px; }
+  .settings .profile-bio {
+    font-size: .85rem;
+    margin-top: .5rem;
+    text-align: justify; }
+
 .admin-container {
   padding: 3rem; }
   .admin-container .card {

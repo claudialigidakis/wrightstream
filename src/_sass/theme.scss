@@ -862,3 +862,38 @@ nav {
     margin-top: 1rem;
   }
 }
+
+.settings {
+  padding: 3rem;
+
+  figure {
+    margin: 1rem auto;
+  }
+
+  img {
+    display: block;
+    width: 125px;
+    height: 125px;
+    margin: auto;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  li {
+    line-height: 1.8rem;
+  }
+
+  .fa-icon {
+    color: $grey-light;
+    display: inline-block;
+    margin: 0 5px;
+    text-align: center;
+    width: 20px;
+  }
+
+  .profile-bio {
+    font-size: .85rem;
+    margin-top: .5rem;
+    text-align: justify;
+  }
+}
