@@ -4,8 +4,6 @@ import React from 'react';
 // COMPONENTS
 import MostUsedData from './MostUsedData'
 import MostOrderedData from './MostOrderedData'
-// import MostUsedSupplies from './MostUsedSupplies'
-// import MostOrderedSupplies from './MostOrderedSupplies'
 
 // ==========
 

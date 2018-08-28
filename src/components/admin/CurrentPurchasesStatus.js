@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
-import { purchaseStatuses } from '../../actions/admin';
+import { purchaseStatuses } from '../../state/actions/admin';
 
 //React Charts
 import ReactChartkick, { PieChart } from 'react-chartkick'

@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
-import { getTotalItemsSoldChart } from '../../actions/admin';
+import { getTotalItemsSoldChart } from '../../state/actions/admin';
 
 //Charts
 import ReactChartkick, { BarChart } from 'react-chartkick'

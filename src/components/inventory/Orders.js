@@ -4,8 +4,8 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getOrders, editOrderSupply } from '../../actions/inventory';
-import { getSources, getSupplies } from '../../actions/products';
+import { getOrders, editOrderSupply } from '../../state/actions/inventory';
+import { getSources, getSupplies } from '../../state/actions/products';
 
 // COMPONENTS
 import OrdersOrder from './OrdersOrder';

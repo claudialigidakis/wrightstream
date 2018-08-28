@@ -1,4 +1,4 @@
-import request from '../helpers/request';
+import request from '../../helpers/request';
 
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const GET_UNLINKED_PRODUCTS = 'GET_UNLINKED_PRODUCTS';

@@ -4,9 +4,9 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getLists, getWorkstreamList, addOrder } from '../../actions/inventory';
-import { getSources, getSupplies } from '../../actions/products';
-import { estimator } from '../../actions/helper';
+import { getLists, getWorkstreamList, addOrder } from '../../state/actions/inventory';
+import { getSources, getSupplies } from '../../state/actions/products';
+import { estimator } from '../../state/actions/helper';
 
 // COMPONENTS
 import ListsList from './ListsList';

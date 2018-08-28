@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getItems, addBundle, editBundle } from '../../actions/products';
+import { getItems, addBundle, editBundle } from '../../state/actions/products';
 
 // COMPONENTS
 import BundleAddItem from './BundleAddItem';

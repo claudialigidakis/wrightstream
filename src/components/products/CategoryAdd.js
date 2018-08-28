@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { addCategory } from '../../actions/products';
+import { addCategory } from '../../state/actions/products';
 
 // ==========
 

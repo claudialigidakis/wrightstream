@@ -1,4 +1,4 @@
-import request from '../helpers/request';
+import request from '../../helpers/request';
 
 export const AUTH_ETSY = 'AUTH_ETSY';
 export const GET_PRODUCTS_ETSY = 'GET_PRODUCTS_ETSY';

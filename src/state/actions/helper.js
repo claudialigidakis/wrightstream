@@ -1,4 +1,4 @@
-import request from '../helpers/request';
+import request from '../../helpers/request';
 
 export const GET_LENGTH = 'GET_LENGTH';
 export const GET_MASS = 'GET_MASS';

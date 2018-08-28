@@ -1,4 +1,4 @@
-import request from '../helpers/request';
+import request from '../../helpers/request';
 
 export const EDIT_SUPPLY = 'EDIT_SUPPLY';
 export const EDIT_ITEM = 'EDIT_ITEM';
