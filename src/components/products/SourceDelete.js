@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { deleteSource } from '../../actions/products';
+import { deleteSource } from '../../state/actions/products';
 
 // ==========
 

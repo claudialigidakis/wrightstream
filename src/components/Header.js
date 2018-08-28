@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { userLogout } from '../actions/auth';
+import { userLogout } from '../state/actions/auth';
 
 // ==========
 

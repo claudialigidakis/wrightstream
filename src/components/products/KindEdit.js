@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { editKind } from '../../actions/products';
+import { editKind } from '../../state/actions/products';
 
 // ==========
 

@@ -4,8 +4,8 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getSupplies, getKinds, getItems, getCategories } from '../../actions/products';
-import { editSupply, editItem } from '../../actions/inventory';
+import { getSupplies, getKinds, getItems, getCategories } from '../../state/actions/products';
+import { editSupply, editItem } from '../../state/actions/inventory';
 
 // COMPONENTS
 import InventorySupply from './InventorySupply';

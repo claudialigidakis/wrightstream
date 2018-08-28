@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { addKind } from '../../actions/products';
+import { addKind } from '../../state/actions/products';
 
 // ==========
 
@@ -23,7 +23,7 @@ class KindAdd extends React.Component {
       invalid: false
     });
   };
-  
+
   handleSubmit = event => {
     event.preventDefault();
     if (!event.target.name.value) {

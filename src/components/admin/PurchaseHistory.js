@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
-import { getPurchaseHistory } from '../../actions/admin';
+import { getPurchaseHistory } from '../../state/actions/admin';
 
 //Charts
 import ReactChartkick, { LineChart } from 'react-chartkick'
@@ -24,8 +24,6 @@ transformData = () => {
     return acc
   },{})
 }
-
-
   render () {
     return (
       <div className="column">

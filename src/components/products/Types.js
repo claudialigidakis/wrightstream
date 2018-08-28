@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getTypes } from '../../actions/products';
+import { getTypes } from '../../state/actions/products';
 
 // ==========
 

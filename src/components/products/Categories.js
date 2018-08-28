@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getCategories, getUnlinkedProducts, getProducts } from '../../actions/products';
+import { getCategories, getUnlinkedProducts, getProducts } from '../../state/actions/products';
 
 // COMPONENTS
 import UnlinkedProducts from './UnlinkedProducts';
