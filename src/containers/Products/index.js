@@ -7,35 +7,35 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getProductsEtsy } from '../state/actions/stores';
+import { getProductsEtsy } from '../../state/actions/stores';
 
 // COMPONENTS
-import Nav from './products/Nav';
+import Nav from './components/Nav';
+
+import Kinds from './products/Kinds';
+import Types from './products/Types';
+import Categories from './products/Categories';
+
 import CategoryControl from './products/CategoryControl';
 import KindControl from './products/KindControl';
 import TypeControl from './products/TypeControl';
-import Main from './products/Products';
+
+// CONTAINERS
+import Main from './containers/Products';
 import Items from './products/Items';
-import Bundles from './products/Bundles';
+import Bundles from './containers/Products/containers/Bundles';
 import Category from './products/Category';
-import Categories from './products/Categories';
+
 import Supplies from './products/Supplies';
 import Kind from './products/Kind';
-import Kinds from './products/Kinds';
+
 import Sources from './products/Sources';
 import Type from './products/Type';
-import Types from './products/Types';
+
 
 // ==========
 
 class Products extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-
-    };
-  };
-
   render () {
     return (
       <BrowserRouter>
@@ -50,8 +50,8 @@ class Products extends React.Component {
               </div>
               <div className="column is-9 products-content">
                 <Switch>
-                  <Route path="/products/sources" component={TypeControl} />
                   <Route path="/products/supplies" component={KindControl} />
+                  <Route path="/products/sources" component={TypeControl} />
                   <Route path="/products" render={() => <CategoryControl getProductsEtsy={this.props.getProductsEtsy} />} />
                 </Switch>
                 <Nav />
@@ -75,12 +75,8 @@ class Products extends React.Component {
   };
 };
 
-const mapStateToProps = state => ({
-
-});
-
 const mapDispatchToProps = dispatch => bindActionCreators({
   getProductsEtsy
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Products);
+export default connect(null, mapDispatchToProps)(Products);

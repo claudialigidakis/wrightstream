@@ -14,12 +14,14 @@ import Header from './components/Header';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Settings from './components/Settings';
-import Products from './components/Products';
 import Inventory from './components/Inventory';
 import WorkStream from './components/WorkStream';
 import MyStream from './components/MyStream';
 import Admin from './components/Admin';
 import EtsyCallback from './components/EtsyCallback';
+
+// CONTAINERS
+import Products from './containers/Products';
 
 // ==========
 
