@@ -1,4 +1,5 @@
 import request from '../../helpers/request';
+import Products from '../models/products'
 
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const GET_UNLINKED_PRODUCTS = 'GET_UNLINKED_PRODUCTS';
@@ -35,457 +36,168 @@ export const EDIT_TYPE = 'EDIT_TYPE';
 export const DELETE_TYPE = 'DELETE_TYPE';
 export const GET_SOURCES_BY_TYPE = 'GET_SOURCES_BY_TYPE';
 
-export const getProducts = () => (
-  dispatch => {
-    request('/auth/token')
-    .then(response => {
-      const shop_id = response.data.shops_id;
-      request(`/products/${shop_id}/allProducts`)
-      .then(response => {
-        dispatch({
-          type: GET_PRODUCTS,
-          payload: response.data.data
-        });
-      });
-    });
-  }
-);
 
-export const getUnlinkedProducts = () => (
-  dispatch => {
-    request('/auth/token')
-    .then(response => {
-      const shop_id = response.data.shops_id;
-      request(`/products/${shop_id}/allUnlinked`)
-      .then(response => {
-        dispatch({
-          type: GET_UNLINKED_PRODUCTS,
-          payload: response.data.data
-        });
-      });
-    });
-  }
-);
+export const getProducts = () => {
+  return async (dispatch) => {
+    const payload = await Products.allProducts()
+    dispatch({ type: GET_PRODUCTS, payload });
+  };
+};
 
-export const getRecentProducts = () => (
-  dispatch => {
-    request('/auth/token')
-    .then(response => {
-      const shop_id = response.data.shops_id;
-      request(`/items/${shop_id}/allItems`)
-      // .then(resItems => {
-      //   return request(`/bundles/${shop_id}/allBundles`)
-      //   .then(resBundles => {
-      //     return resItems.data.data.concat(resBundles.data.data);
-      //   });
-      // })
-      // .then(response => {
-      //   return response.slice(response.length-6, response.length).reverse();
-      // })
-      .then(response => {
-        return response.data.data.slice(response.data.data.length-6, response.data.data.length).reverse();
-      })
-      .then(response => {
-        dispatch({
-          type: GET_RECENT_PRODUCTS,
-          payload: response
-        });
-      });
-    });
-  }
-);
+export const getUnlinkedProducts = () => {
+  return async (dispatch) => {
+    const payload = await Products.UnLinkedProducts()
+    dispatch({ type: GET_UNLINKED_PRODUCTS, payload });
+  };
+};
 
-export const getItems = () => (
-  dispatch => {
-    request('/auth/token')
-    .then(response => {
-      const shop_id = response.data.shops_id;
-      request(`/items/${shop_id}/allItems`)
-      .then(response => {
-        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
-      })
-      .then(response => {
-        dispatch({
-          type: GET_ITEMS,
-          payload: response
-        });
-      });
-    });
-  }
-);
+export const getRecentProducts = () => {
+  return async (dispatch) => {
+    const payload = await Products.recentProducts()
+    dispatch({ type: GET_RECENT_PRODUCTS, payload });
+  };
+};
 
-export const addItem = (name, productId, categoryId, photo, stock, supplies, steps) => (
-  dispatch => {
-    request('/auth/token')
-    .then(response => {
-      const shop_id = response.data.shops_id;
-      request(`/items/${shop_id}`, 'post', {name, productId, categoryId, photo, stock, supplies, steps})
-      .then(response => {
-        return request(`/items/${shop_id}/allItems`);
-      })
-      .then(response => {
-        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
-      })
-      .then(response => {
-        dispatch({
-          type: ADD_ITEM,
-          payload: response
-        });
-      })
-      .then(response => {
-        return request(`/items/${shop_id}/allItems`);
-      })
-      .then(response => {
-        return response.data.data.slice(response.data.data.length-6, response.data.data.length).reverse();
-      })
-      .then(response => {
-        dispatch({
-          type: GET_RECENT_PRODUCTS,
-          payload: response
-        });
-      })
-      .then(response => {
-        return request(`/products/${shop_id}/allUnlinked`);
-      })
-      .then(response => {
-        dispatch({
-          type: GET_UNLINKED_PRODUCTS,
-          payload: response.data.data
-        });
-      });
-    });
-  }
-);
+export const getItems = () => {
+  return async (dispatch) => {
+    const items = await Products.allItems()
+    const payload = items.sort((a, b) => a.name.localeCompare(b.name));
+    dispatch({ type: GET_ITEMS, payload });
+  };
+};
 
-export const editItem = (id, name, productId, categoryId, photo, stock, supplies, steps) => (
-  dispatch => {
-    request('/auth/token')
-    .then(response => {
-      const shop_id = response.data.shops_id;
-      request(`/items/${id}`, 'put', {name, productId, categoryId, photo, stock, supplies, steps})
-      .then(response => {
-        return request(`/items/${shop_id}/allItems`);
-      })
-      .then(response => {
-        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
-      })
-      .then(response => {
-        dispatch({
-          type: EDIT_ITEM,
-          payload: response
-        });
-      })
-      .then(response => {
-        return request(`/items/${shop_id}/allItems`);
-      })
-      .then(response => {
-        return response.data.data.slice(response.data.data.length-6, response.data.data.length).reverse();
-      })
-      .then(response => {
-        dispatch({
-          type: GET_RECENT_PRODUCTS,
-          payload: response
-        });
-      })
-      .then(response => {
-        return request(`/products/${shop_id}/allUnlinked`)
-      })
-      .then(response => {
-        dispatch({
-          type: GET_UNLINKED_PRODUCTS,
-          payload: response.data.data
-        });
-      });
-    });
-  }
-);
+export const addItem = (name, productId, categoryId, photo, stock, supplies, steps) => {
+  return async (dispatch) => {
+    const items = await Products.addItem(name, productId, categoryId, photo, stock, supplies, steps)
+    const payload = items.sort((a, b) => a.name.localeCompare(b.name));
+    dispatch({ type: ADD_ITEM, payload });
 
-export const deleteItem = id => (
-  dispatch => {
-    request('/auth/token')
-    .then(response => {
-      const shop_id = response.data.shops_id;
-      request(`/items/${id}`, 'put', {archived: true})
-      .then(response => {
-        return request(`/items/${shop_id}/allItems`);
-      })
-      .then(response => {
-        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
-      })
-      .then(response => {
-        dispatch({
-          type: DELETE_ITEM,
-          payload: response
-        });
-      })
-      .then(response => {
-        return request(`/items/${shop_id}/allItems`);
-      })
-      .then(response => {
-        return response.data.data.slice(response.data.data.length-6, response.data.data.length).reverse();
-      })
-      .then(response => {
-        dispatch({
-          type: GET_RECENT_PRODUCTS,
-          payload: response
-        });
-      })
-      .then(response => {
-        return request(`/products/${shop_id}/allUnlinked`);
-      })
-      .then(response => {
-        dispatch({
-          type: GET_UNLINKED_PRODUCTS,
-          payload: response.data.data
-        });
-      });
-    });
-  }
-);
+    const recent = await Products.recentProducts()
+    dispatch({ type: GET_RECENT_PRODUCTS, payload: recent });
 
-export const getBundles = () => (
-  dispatch => {
-    request('/auth/token')
-    .then(response => {
-      const shop_id = response.data.shops_id;
-      request(`/bundles/${shop_id}/allBundles`)
-      .then(response => {
-        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
-      })
-      .then(response => {
-        dispatch({
-          type: GET_BUNDLES,
-          payload: response
-        });
-      });
-    });
-  }
-);
+    const unlinked = await Products.UnLinkedProducts()
+    dispatch({ type: GET_UNLINKED_PRODUCTS, payload: unlinked });
+  };
+};
 
-export const addBundle = (name, productId, categoryId, photo, stock, items, steps) => (
-  dispatch => {
-    request('/auth/token')
-    .then(response => {
-      const shop_id = response.data.shops_id;
-      request(`/bundles/${shop_id}`, 'post', {name, productId, categoryId, photo, stock, items, steps})
-      .then(response => {
-        return request(`/bundles/${shop_id}/allBundles`);
-      })
-      .then(response => {
-        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
-      })
-      .then(response => {
-        dispatch({
-          type: ADD_BUNDLE,
-          payload: response
-        });
-      })
-      .then(response => {
-        return request(`/products/${shop_id}/allUnlinked`);
-      })
-      .then(response => {
-        dispatch({
-          type: GET_UNLINKED_PRODUCTS,
-          payload: response.data.data
-        });
-      });
-    });
-  }
-);
+export const editItem = (id, name, productId, categoryId, photo, stock, supplies, steps) => {
+  return async (dispatch) => {
+    const items = await Products.editItem(id, name, productId, categoryId, photo, stock, supplies, steps)
+    const payload = items.sort((a, b) => a.name.localeCompare(b.name));
+    dispatch({ type: EDIT_ITEM, payload });
 
-export const editBundle = (id, name, productId, categoryId, photo, stock, items, steps) => (
-  dispatch => {
-    request('/auth/token')
-    .then(response => {
-      const shop_id = response.data.shops_id;
-      request(`/bundles/${id}`, 'put', {name, productId, categoryId, photo, stock, items, steps})
-      .then(response => {
-        return request(`/bundles/${shop_id}/allBundles`);
-      })
-      .then(response => {
-        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
-      })
-      .then(response => {
-        dispatch({
-          type: EDIT_BUNDLE,
-          payload: response
-        });
-      })
-      .then(response => {
-        return request(`/products/${shop_id}/allUnlinked`);
-      })
-      .then(response => {
-        dispatch({
-          type: GET_UNLINKED_PRODUCTS,
-          payload: response.data.data
-        });
-      });
-    });
-  }
-);
+    const recent = await Products.recentProducts()
+    dispatch({ type: GET_RECENT_PRODUCTS, payload: recent });
 
-export const deleteBundle = id => (
-  dispatch => {
-    request('/auth/token')
-    .then(response => {
-      const shop_id = response.data.shops_id;
-      request(`/bundles/${id}`, 'put', {archived: true})
-      .then(response => {
-        return request(`/bundles/${shop_id}/allBundles`);
-      })
-      .then(response => {
-        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
-      })
-      .then(response => {
-        dispatch({
-          type: DELETE_BUNDLE,
-          payload: response
-        });
-      })
-      .then(response => {
-        return request(`/products/${shop_id}/allUnlinked`);
-      })
-      .then(response => {
-        dispatch({
-          type: GET_UNLINKED_PRODUCTS,
-          payload: response.data.data
-        });
-      });
-    });
+    const unlinked = await Products.UnLinkedProducts()
+    dispatch({ type: GET_UNLINKED_PRODUCTS, payload: unlinked });
   }
-);
+};
 
-export const getCategories = () => (
-  dispatch => {
-    request('/auth/token')
-    .then(response => {
-      const shop_id = response.data.shops_id;
-      request(`/categories/${shop_id}/allCategories`)
-      .then(response => {
-        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
-      })
-      .then(response => {
-        dispatch({
-          type: GET_CATEGORIES,
-          payload: response
-        });
-      });
-    });
-  }
-);
+export const deleteItem = (id) => {
+  return async (dispatch) => {
+    const items = await Products.deleteItem(id)
+    const payload = items.sort((a, b) => a.name.localeCompare(b.name));
+    dispatch({ type: DELETE_ITEM, payload });
 
-export const addCategory = name => (
-  dispatch => {
-    request('/auth/token')
-    .then(response => {
-      const shop_id = response.data.shops_id;
-      request(`/categories/${shop_id}`, 'post', {name})
-      .then(response => {
-        return request(`/categories/${shop_id}/allCategories`);
-      })
-      .then(response => {
-        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
-      })
-      .then(response => {
-        dispatch({
-          type: ADD_CATEGORY,
-          payload: response
-        });
-      });
-    });
-  }
-);
+    const recent = await Products.recentProducts()
+    dispatch({ type: GET_RECENT_PRODUCTS, payload: recent });
 
-export const editCategory = (id, name) => (
-  dispatch => {
-    request('/auth/token')
-    .then(response => {
-      const shop_id = response.data.shops_id;
-      request(`/categories/${id}`, 'put', {name})
-      .then(response => {
-        return request(`/categories/${shop_id}/allCategories`);
-      })
-      .then(response => {
-        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
-      })
-      .then(response => {
-        dispatch({
-          type: EDIT_CATEGORY,
-          payload: response
-        });
-      });
-    });
+    const unlinked = await Products.UnLinkedProducts()
+    dispatch({ type: GET_UNLINKED_PRODUCTS, payload: unlinked });
   }
-);
+}
 
-export const deleteCategory = id => (
-  dispatch => {
-    request('/auth/token')
-    .then(response => {
-      const shop_id = response.data.shops_id;
-      request(`/categories/${id}`, 'delete')
-      .then(response => {
-        return request(`/categories/${shop_id}/allCategories`);
-      })
-      .then(response => {
-        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
-      })
-      .then(response => {
-        dispatch({
-          type: DELETE_CATEGORY,
-          payload: response
-        });
-      });
-    });
-  }
-);
+export const getBundles = () => {
+  return async (dispatch) => {
+    const bundles = await Products.allBundles()
+    const payload = bundles.sort((a, b) => a.name.localeCompare(b.name));
+    dispatch({ type: GET_BUNDLES, payload });
+  };
+};
 
-export const getProductsByCategory = id => (
-  dispatch => {
-    request('/auth/token')
-    .then(response => {
-      const shop_id = response.data.shops_id;
-      request(`/items/${shop_id}/allItems`)
-      .then(response => {
-        return response.data.data.filter(item => item.category_id === parseInt(id, 10));
-      })
-      .then(resItems => {
-        return request(`/bundles/${shop_id}/allBundles`)
-        .then(resBundles => {
-          return resItems.concat(resBundles.data.data.filter(bundle => bundle.category_id === parseInt(id, 10)));
-        });
-      })
-      .then(response => {
-        return response.sort((a, b) => a.name.localeCompare(b.name));
-      })
-      .then(response => {
-        dispatch({
-          type: GET_PRODUCTS_BY_CATEGORY,
-          payload: response
-        });
-      });
-    });
-  }
-);
 
-export const getSupplies = () => (
-  dispatch => {
-    request('/auth/token')
-    .then(response => {
-      const shop_id = response.data.shops_id;
-      request(`/supplies/${shop_id}/allSupplies`)
-      .then(response => {
-        return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
-      })
-      .then(response => {
-        dispatch({
-          type: GET_SUPPLIES,
-          payload: response
-        });
-      });
-    });
-  }
-);
+export const addBundle = (name, productId, categoryId, photo, stock, items, steps) => {
+  return async (dispatch) => {
+    const bundles = await Products.addBundle(name, productId, categoryId, photo, stock, items, steps)
+    const payload = bundles.sort((a, b) => a.name.localeCompare(b.name));
+    dispatch({ type: ADD_BUNDLE, payload });
+
+    const unlinked = await Products.UnLinkedProducts()
+    dispatch({ type: GET_UNLINKED_PRODUCTS, payload: unlinked });
+  };
+};
+
+export const editBundle = (id, name, productId, categoryId, photo, stock, items, steps) => {
+  return async (dispatch) => {
+    const bundles = await Products.editBundle(id, name, productId, categoryId, photo, stock, items, steps)
+    const payload = bundles.sort((a, b) => a.name.localeCompare(b.name));
+    dispatch({ type: EDIT_BUNDLE, payload });
+
+    const unlinked = await Products.UnLinkedProducts()
+    dispatch({ type: GET_UNLINKED_PRODUCTS, payload: unlinked });
+  };
+};
+
+export const deleteBundle = (id) => {
+  return async (dispatch) => {
+    const bundles = await Products.deleteBundle(id)
+    const payload = bundles.sort((a, b) => a.name.localeCompare(b.name));
+    dispatch({ type: DELETE_BUNDLE, payload });
+
+    const unlinked = await Products.UnLinkedProducts()
+    dispatch({ type: GET_UNLINKED_PRODUCTS, payload: unlinked });
+  };
+};
+
+export const getCategories = () => {
+  return async (dispatch) => {
+    const categories = await Products.allCategories()
+    const payload = categories.sort((a, b) => a.name.localeCompare(b.name));
+    dispatch({ type: GET_CATEGORIES, payload });
+  };
+}
+
+export const addCategory = (name) => {
+  return async (dispatch) => {
+    const categories = await Products.addCategory(name)
+    const payload = categories.sort((a, b) => a.name.localeCompare(b.name));
+    dispatch({ type: ADD_CATEGORY, payload });
+  };
+};
+
+export const editCategory = (id, name) => {
+  return async (dispatch) => {
+    const categories = await Products.editCategory(id, name)
+    const payload = categories.sort((a, b) => a.name.localeCompare(b.name));
+    dispatch({ type: EDIT_CATEGORY, payload });
+  };
+};
+
+export const deleteCategory = (id) => {
+  return async (dispatch) => {
+    const categories = await Products.deleteCategory(id)
+    const payload = categories.sort((a, b) => a.name.localeCompare(b.name));
+    dispatch({ type: DELETE_CATEGORY, payload });
+  };
+};
+
+export const getProductsByCategory = (id) => {
+  return async (dispatch) => {
+    const payload = await Products.productsByCategory(id)
+    dispatch({ type: GET_PRODUCTS_BY_CATEGORY, payload });
+  };
+};
+
+export const getSupplies = () => {
+  return async (dispatch) => {
+    const payload = await Products.allSupplies()
+    dispatch({type: GET_SUPPLIES, payload})
+  };
+};
+
+
+
 
 export const addSupply = (name, stock, measure_type, source_id, kind_id) => (
   dispatch => {

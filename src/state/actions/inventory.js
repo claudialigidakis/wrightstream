@@ -1,6 +1,5 @@
 import Inventory from '../models/inventory'
 
-
 export const EDIT_SUPPLY = 'EDIT_SUPPLY';
 export const EDIT_ITEM = 'EDIT_ITEM';
 export const GET_LISTS = 'GET_LISTS';
