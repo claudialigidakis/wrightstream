@@ -1,7 +1,27 @@
-import axios from 'axios'
-const BASE_URL = 'https://galvanize-snacks-api.herokuapp.com/api'
+import request from '../../helpers/request';
 
-class Reviews {
+class Helper {
 
+  static lengthHelper = async () => {
+    const response = await request('/helper/length')
+    return response.data.lengthMeasures
+  }
 
-export default Reviews
+  static volume = async () => {
+    const response = await request('/helper/volume')
+    return response.data.volumeMeasures
+  }
+
+  static mass = async () => {
+    const response = await request('/helper/mass')
+    return response.data.massMeasures
+  }
+
+  static estimator = async (items, bundles) => {
+    const response = await request('/helper/orderPredictor', 'post', {items, bundles})
+    return response.data.data
+  }
+
+}
+
+export default Helper
