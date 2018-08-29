@@ -19,7 +19,6 @@ class Stores {
 
   static UnlinkedProductsEtsy = async () => {
     const shop_id = await Stores._authenticatedRequest()
-
     const response = await request(`/products/${shop_id}/allUnlinked`)
     return response.data.data
   }
@@ -31,10 +30,8 @@ class Stores {
 
   static shopPurchases = async () => {
     const shop_id = await Stores._authenticatedRequest()
-
     const response = await request(`/purchases/${shop_id}/allPurchases`)
-    const purchases = response.data.data.filter(purchase => purchase.archived === false);
-    return purchases
+    return response.data.data.filter(purchase => purchase.archived === false);
   }
 
 

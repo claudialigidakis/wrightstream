@@ -9,9 +9,14 @@ class WorkStream {
 
   static purchases = async () => {
     const shop_id = await WorkStream._authenticatedRequest()
-
     const response = await request(`/purchases/${shop_id}/allPurchases`)
     return response.data.data.filter(purchase => purchase.archived === false)
+  }
+
+  static getStaff = async () => {
+    const shop_id = await WorkStream._authenticatedRequest()
+    const staff = await request(`/shops/${shop_id}/staff`)
+    return staff.data.data
   }
 
   static changeStatus = async (purchase_id, status_id, completed, staff_id) => {
@@ -42,13 +47,6 @@ class WorkStream {
   static addNotes = async (purchase_id, notes) => {
     await request(`/purchases/${purchase_id}`, 'put', {notes})
     return WorkStream.purchases()
-  }
-
-  static getStaff = async () => {
-    const shop_id = await WorkStream._authenticatedRequest()
-
-    const staff = await request(`/shops/${shop_id}/staff`)
-    return staff.data.data
   }
 
   static assignStaff = async (purchase_id, staff_id) => {
