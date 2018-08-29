@@ -4,8 +4,8 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getPurchases, getStaff } from '../actions/workstream';
-import { getItems, getCategories } from '../actions/products';
+import { getPurchases, getStaff } from '../state/actions/workstream';
+import { getItems, getCategories } from '../state/actions/products';
 
 // COMPONENTS
 import Purchase from './workstream/Purchase';

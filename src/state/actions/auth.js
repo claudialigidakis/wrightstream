@@ -1,4 +1,4 @@
-import request from '../helpers/request';
+import request from '../../helpers/request';
 
 export const USER_LOGIN_PENDING = 'USER_LOGIN_PENDING';
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS';

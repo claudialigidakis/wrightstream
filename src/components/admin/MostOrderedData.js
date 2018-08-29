@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
-import { getMostOrderedSupplies } from '../../actions/admin';
+import { getMostOrderedSupplies } from '../../state/actions/admin';
 
 //Charts
 import ReactChartkick, { LineChart } from 'react-chartkick'

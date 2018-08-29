@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { changeStatus, assignStaff, archive } from '../../actions/workstream';
+import { changeStatus, assignStaff, archive } from '../../state/actions/workstream';
 
 // COMPONENTS
 import PurchaseStore from './PurchaseStore';

@@ -4,9 +4,9 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getItems, getSupplies } from '../../actions/products';
-import { addList } from '../../actions/inventory';
-import { estimator } from '../../actions/helper';
+import { getItems, getSupplies } from '../../state/actions/products';
+import { addList } from '../../state/actions/inventory';
+import { estimator } from '../../state/actions/helper';
 
 // COMPONENTS
 import EstimatorProduct from './EstimatorProduct';

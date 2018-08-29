@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { completeItem } from '../../actions/workstream';
+import { completeItem } from '../../state/actions/workstream';
 
 // ==========
 

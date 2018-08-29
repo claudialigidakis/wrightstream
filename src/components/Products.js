@@ -7,7 +7,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getProductsEtsy } from '../actions/stores';
+import { getProductsEtsy } from '../state/actions/stores';
 
 // COMPONENTS
 import Nav from './products/Nav';

@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getSources } from '../../actions/products';
+import { getSources } from '../../state/actions/products';
 
 // COMPONENTS
 import SupplyEdit from './SupplyEdit';

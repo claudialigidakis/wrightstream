@@ -1,4 +1,4 @@
-import request from '../helpers/request';
+import request from '../../helpers/request';
 
 export const GET_PURCHASES = 'GET_PURCHASES';
 export const CHANGE_STATUS = 'CHANGE_STATUS';
