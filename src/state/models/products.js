@@ -37,6 +37,24 @@ class Products {
     return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
   }
 
+  static allKinds = async () => {
+    const shop_id = await Products._authenticatedRequest()
+    const response = await request(`/kinds/${shop_id}/allKinds`)
+    return response.data.data
+  }
+
+  static allSources = async () => {
+    const shop_id = await Products._authenticatedRequest()
+    const response = await request(`/sources/${shop_id}/allSources`)
+    return response.data.data
+  }
+
+  static allTypes = async () => {
+    const shop_id = await Products._authenticatedRequest()
+    const response = await request(`/types/${shop_id}/allTypes`)
+    return response.data.data
+  }
+
   static UnLinkedProducts = async () => {
     const shop_id = await Products._authenticatedRequest()
     const response = await request(`/products/${shop_id}/allUnlinked`)
@@ -66,6 +84,30 @@ class Products {
     return Products.allBundles()
   }
 
+  static addSupply = async (name, stock, measure_type, source_id, kind_id) => {
+    const shop_id = await Products._authenticatedRequest()
+    await request(`/supplies/${shop_id}`, 'post', {name, stock, measure_type, source_id, kind_id})
+    return Products.allSupplies()
+  }
+
+  static addKind = async (name) => {
+    const shop_id = await Products._authenticatedRequest()
+    await request(`/kinds/${shop_id}`, 'post', {name})
+    return Products.allKinds()
+  }
+
+  static addSource = async (name, type_id, link) => {
+    const shop_id = await Products._authenticatedRequest()
+    await request(`/sources/${shop_id}`, 'post', {name, type_id, link})
+    return Products.allSources()
+  }
+
+  static addType = async (name) => {
+    const shop_id = await Products._authenticatedRequest()
+    await request(`/types/${shop_id}`, 'post', {name})
+    return Products.allTypes()
+  }
+
   static editItem = async (id, name, productId, categoryId, photo, stock, supplies, steps) => {
     await request(`/items/${id}`, 'put', {name, productId, categoryId, photo, stock, supplies, steps})
     return Products.allItems()
@@ -79,6 +121,26 @@ class Products {
   static editCategory = async (id, name) => {
     await request(`/categories/${id}`, 'put', {name})
     return Products.allCategories()
+  }
+
+  static editSupply = async (id, name, stock, measure_type, source_id, kind_id) => {
+    await request(`/supplies/${id}`, 'put', {name, stock, measure_type, source_id, kind_id})
+    return Products.allSupplies()
+  }
+
+  static editKind = async (id, name) => {
+    await request(`/kinds/${id}`, 'put', {name})
+    return Products.allKinds()
+  }
+
+  static editSource = async (id, name, link, type_id) => {
+    await request(`/sources/${id}`, 'put', {name, link, type_id})
+    return Products.allSources()
+  }
+
+  static editType = async (id, name) => {
+    await request(`/types/${id}`, 'put', {name})
+    return Products.allTypes()
   }
 
   static deleteItem = async (id) => {
@@ -96,12 +158,44 @@ class Products {
     return Products.allCategories()
   }
 
+  static deleteSupply = async (id) => {
+    await request(`/supplies/${id}`, 'delete')
+    return Products.allSupplies()
+  }
+
+  static deleteKind = async (id) => {
+    await request(`/kinds/${id}`, 'delete')
+    return Products.allKinds()
+  }
+
+  static deleteSource = async (id) => {
+    await request(`/sources/${id}`, 'delete')
+    return Products.allSources()
+  }
+
+  static deleteType = async (id) => {
+    await request(`/types/${id}`, 'delete')
+    return Products.allTypes()
+  }
+
   static productsByCategory = async (id) => {
     const items = await Products.allItems()
     const filterItems = items.filter(item => item.category_id === parseInt(id, 10));
     const bundles = await Products.allBundles()
     const concated = filterItems.concat(bundles.filter(bundle => bundle.category_id === parseInt(id, 10)));
     return concated.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  static suppliesByKind = async (id) => {
+    const supplies = await Products.allSupplies()
+    const filterSupplies = supplies.filter(supply => supply.kind_id === parseInt(id, 10));
+    return filterSupplies.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  static sourcesByType = async (id) => {
+    const sources = await Products.allSources()
+    const filterSources = sources.filter(source => source.kind_id === parseInt(id, 10));
+    return filterSources.sort((a, b) => a.name.localeCompare(b.name));
   }
 
 }
