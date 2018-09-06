@@ -6,9 +6,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // COMPONENTS
-import UnlinkedProduct from './UnlinkedProduct';
-import ItemAdd from './ItemAdd';
-import BundleAdd from './BundleAdd';
+import UnlinkedProduct from './components/UnlinkedProduct';
+import ItemAdd from '../../../ItemAdd';
+import BundleAdd from '../../../BundleAdd';
 
 // ==========
 

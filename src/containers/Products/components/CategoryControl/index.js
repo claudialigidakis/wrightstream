@@ -2,11 +2,11 @@
 import React from 'react';
 
 // COMPONENTS
-import ItemAdd from './ItemAdd';
-import BundleAdd from './BundleAdd';
-import CategoryAdd from './CategoryAdd';
-import CategoryEdit from './CategoryEdit';
-import CategoryDelete from './CategoryDelete';
+import ItemAdd from '../ItemAdd';
+import BundleAdd from '../BundleAdd';
+import CategoryAdd from '../CategoryControl/components/CategoryAdd';
+import CategoryEdit from '../CategoryControl/components/CategoryEdit';
+import CategoryDelete from '../CategoryControl/components/CategoryDelete';
 
 // ==========
 

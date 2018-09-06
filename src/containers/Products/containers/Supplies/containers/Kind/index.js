@@ -4,13 +4,13 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getSuppliesByKind } from '../../state/actions/products';
+import { getSuppliesByKind } from '../../../../../../state/actions/products';
 
 // HELPERS
-import query from '../../helpers/query';
+import query from '../../../../../../helpers/query';
 
 // COMPONENTS
-import Supply from './Supply';
+import Supply from '../../components/Supply';
 
 // ==========
 

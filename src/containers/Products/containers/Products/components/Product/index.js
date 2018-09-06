@@ -5,10 +5,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // COMPONENTS
-import ItemAdd from './ItemAdd';
-import ItemDelete from './ItemDelete';
-import BundleAdd from './BundleAdd';
-import BundleDelete from './BundleDelete';
+import ItemAdd from '../../../../components/ItemAdd';
+import ItemDelete from '../../../../components/ItemDelete';
+import BundleAdd from '../../../../components/BundleAdd';
+import BundleDelete from '../../../../components/BundleDelete';
 
 // ==========
 

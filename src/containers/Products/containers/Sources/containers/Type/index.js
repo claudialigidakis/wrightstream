@@ -4,13 +4,13 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getSourcesByType } from '../../state/actions/products';
+import { getSourcesByType } from '../../../../../../state/actions/products';
 
 // HELPERS
-import query from '../../helpers/query';
+import query from '../../../../../../helpers/query';
 
 // COMPONENTS
-import Source from './Source';
+import Source from '../../components/Source';
 
 // ==========
 

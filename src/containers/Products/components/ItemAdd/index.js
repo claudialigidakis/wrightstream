@@ -4,11 +4,11 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getSupplies, addItem, editItem } from '../../state/actions/products';
+import { getSupplies, addItem, editItem } from '../../../../state/actions/products';
 
 // COMPONENTS
-import ItemAddSupply from './ItemAddSupply';
-import ItemAddStep from './ItemAddStep';
+import ItemAddSupply from './components/ItemAddSupply';
+import ItemAddStep from './components/ItemAddStep';
 
 // MISC
 const shortid = require('shortid');

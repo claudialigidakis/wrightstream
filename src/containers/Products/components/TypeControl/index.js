@@ -2,10 +2,10 @@
 import React from 'react';
 
 // COMPONENTS
-import SourceAdd from './SourceAdd';
-import TypeAdd from './TypeAdd';
-import TypeEdit from './TypeEdit';
-import TypeDelete from './TypeDelete';
+import SourceAdd from '../SourceAdd';
+import TypeAdd from './components/TypeAdd';
+import TypeEdit from './components/TypeEdit';
+import TypeDelete from './components/TypeDelete';
 
 // ==========
 

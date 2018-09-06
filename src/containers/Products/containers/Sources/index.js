@@ -4,10 +4,10 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getSources } from '../../state/actions/products';
+import { getSources } from '../../../../state/actions/products';
 
 // COMPONENTS
-import Source from './Source';
+import Source from './components/Source';
 
 // ==========
 

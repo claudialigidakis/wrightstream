@@ -12,25 +12,25 @@ import { getProductsEtsy } from '../../state/actions/stores';
 // COMPONENTS
 import Nav from './components/Nav';
 
-import Kinds from './products/Kinds';
-import Types from './products/Types';
-import Categories from './products/Categories';
+import Kinds from './components/Kinds';
+import Types from './components/Types';
+import Categories from './components/Categories';
 
-import CategoryControl from './products/CategoryControl';
-import KindControl from './products/KindControl';
-import TypeControl from './products/TypeControl';
+import CategoryControl from './components/CategoryControl';
+import KindControl from './components/KindControl';
+import TypeControl from './components/TypeControl';
 
 // CONTAINERS
 import Main from './containers/Products';
-import Items from './products/Items';
+import Items from './containers/Products/containers/Items';
 import Bundles from './containers/Products/containers/Bundles';
-import Category from './products/Category';
+import Category from './containers/Products/containers/Category';
 
-import Supplies from './products/Supplies';
-import Kind from './products/Kind';
+import Supplies from './containers/Supplies';
+import Kind from './containers/Supplies/containers/Kind';
 
-import Sources from './products/Sources';
-import Type from './products/Type';
+import Sources from './containers/Sources';
+import Type from './containers/Sources/containers/Type';
 
 
 // ==========

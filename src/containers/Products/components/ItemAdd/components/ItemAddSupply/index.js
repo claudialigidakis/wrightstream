@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getLength, getMass, getVolume } from '../../state/actions/helper';
+import { getLength, getMass, getVolume } from '../../../../../../state/actions/helper';
 
 // ==========
 

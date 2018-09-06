@@ -2,10 +2,10 @@
 import React from 'react';
 
 // COMPONENTS
-import SupplyAdd from './SupplyAdd';
-import KindAdd from './KindAdd';
-import KindEdit from './KindEdit';
-import KindDelete from './KindDelete';
+import SupplyAdd from '../SupplyAdd';
+import KindAdd from './components//KindAdd';
+import KindEdit from './components/KindEdit';
+import KindDelete from './components/KindDelete';
 
 // ==========
 

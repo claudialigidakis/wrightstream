@@ -5,8 +5,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // COMPONENTS
-import SourceEdit from './SourceEdit';
-import SourceDelete from './SourceDelete';
+import SourceEdit from '../../../../components/SourceEdit';
+import SourceDelete from '../../../../components/SourceDelete';
 
 // ==========
 
