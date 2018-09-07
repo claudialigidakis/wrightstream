@@ -3,13 +3,16 @@ import React from 'react';
 
 // ROUTER
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import AdminMenu from './admin/AdminMenu'
+
+// COMPONENTS
+import AdminMenu from './admin/AdminMenu';
 import Dashboard from './admin/Dashboard';
 import Staff from './admin/Staff';
-import Products from './admin/Products'
-import Purchases from './admin/Purchases'
-import Supplies from './admin/Supplies'
+import Products from './admin/Products';
+import Purchases from './admin/Purchases';
+import Supplies from './admin/Supplies';
 
+// ==========
 
 class Admin extends React.Component {
   render () {
@@ -40,6 +43,5 @@ class Admin extends React.Component {
     );
   };
 };
-
 
 export default Admin;

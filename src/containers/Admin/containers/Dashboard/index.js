@@ -15,14 +15,14 @@ class Dashboard extends React.Component {
     return (
       <div>
         <div className="columns">
-            <CurrentStaff />
-            <NewPurchases />
-            <CompletedPurchases />
-          </div>
-          <br />
-          <div className="columns">
-            <StaffActivity />
-            <CurrentPurchasesStatus />
+          <CurrentStaff />
+          <NewPurchases />
+          <CompletedPurchases />
+        </div>
+        <br />
+        <div className="columns">
+          <StaffActivity />
+          <CurrentPurchasesStatus />
         </div>
       </div>
     );

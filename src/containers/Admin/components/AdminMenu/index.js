@@ -2,12 +2,11 @@
 import React from 'react';
 
 // ROUTER
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 // ==========
 
 class AdminMenu extends React.Component {
-
   render () {
     return (
       <aside className="menu">
@@ -25,7 +24,5 @@ class AdminMenu extends React.Component {
     );
   };
 };
-
-
 
 export default AdminMenu;

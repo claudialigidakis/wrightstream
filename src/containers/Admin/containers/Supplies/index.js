@@ -8,14 +8,14 @@ import MostOrderedData from './MostOrderedData'
 // ==========
 
 class Supplies extends React.Component {
-
-  render() {
+  render () {
     return (
-    <div>
-      <MostOrderedData />
-      <br />
-      <MostUsedData />
-    </div>);
+      <div>
+        <MostOrderedData />
+        <br />
+        <MostUsedData />
+      </div>
+    );
   };
 };
 

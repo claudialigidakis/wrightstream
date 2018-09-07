@@ -9,8 +9,7 @@ import StaffCompleted from './StaffCompleted';
 // ==========
 
 class Staff extends React.Component {
-
-  render() {
+  render () {
     return (
       <div>
         <div className="columns">

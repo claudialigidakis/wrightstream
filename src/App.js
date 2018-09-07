@@ -14,7 +14,6 @@ import Header from './components/Header';
 import Inventory from './components/Inventory';
 import WorkStream from './components/WorkStream';
 import MyStream from './components/MyStream';
-import Admin from './components/Admin';
 import EtsyCallback from './components/EtsyCallback';
 
 // CONTAINERS
@@ -22,6 +21,7 @@ import Products from './containers/Products';
 import Signup from './containers/Signup';
 import Login from './containers/Login';
 import Settings from './containers/Settings';
+import Admin from './containers/Admin';
 
 // ==========
 
