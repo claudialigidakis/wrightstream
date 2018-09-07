@@ -5,7 +5,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // HELPERS
-import request from '../helpers/request';
+import request from '../../helpers/request';
 
 // ==========
 

@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { userLogin } from '../state/actions/auth';
+import { userLogin } from '../../state/actions/auth';
 
 // ==========
 

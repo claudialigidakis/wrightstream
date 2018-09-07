@@ -11,9 +11,6 @@ import { getUser } from './state/actions/auth';
 
 // COMPONENTS
 import Header from './components/Header';
-import Signup from './components/Signup';
-import Login from './components/Login';
-import Settings from './components/Settings';
 import Inventory from './components/Inventory';
 import WorkStream from './components/WorkStream';
 import MyStream from './components/MyStream';
@@ -22,6 +19,9 @@ import EtsyCallback from './components/EtsyCallback';
 
 // CONTAINERS
 import Products from './containers/Products';
+import Signup from './containers/Signup';
+import Login from './containers/Login';
+import Settings from './containers/Settings';
 
 // ==========
 
