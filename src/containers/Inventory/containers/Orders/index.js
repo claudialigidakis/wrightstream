@@ -4,12 +4,12 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getOrders, editOrderSupply } from '../../state/actions/inventory';
-import { getSources, getSupplies } from '../../state/actions/products';
+import { getOrders, editOrderSupply } from '../../../../state/actions/inventory';
+import { getSources, getSupplies } from '../../../../state/actions/products';
 
 // COMPONENTS
-import OrdersOrder from './OrdersOrder';
-import OrdersSource from './OrdersSource';
+import OrdersOrder from './components/OrdersOrder';
+import OrdersSource from './components/OrdersSource';
 
 // ==========
 

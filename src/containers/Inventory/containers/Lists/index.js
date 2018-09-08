@@ -4,14 +4,14 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getLists, getWorkstreamList, addOrder } from '../../state/actions/inventory';
-import { getSources, getSupplies } from '../../state/actions/products';
-import { estimator } from '../../state/actions/helper';
+import { getLists, getWorkstreamList, addOrder } from '../../../../state/actions/inventory';
+import { getSources, getSupplies } from '../../../../state/actions/products';
+import { estimator } from '../../../../state/actions/helper';
 
 // COMPONENTS
-import ListsList from './ListsList';
-import ListsProduct from './ListsProduct';
-import ListsSource from './ListsSource';
+import ListsList from './components/ListsList';
+import ListsProduct from './components/ListsProduct';
+import ListsSource from './components/ListsSource';
 
 // ==========
 

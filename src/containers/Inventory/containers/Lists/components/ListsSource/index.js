@@ -1,23 +1,12 @@
 // REACT
 import React from 'react';
 
-// REDUX
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
 // COMPONENTS
-import ListsSupply from './ListsSupply';
+import ListsSupply from './components/ListsSupply';
 
 // ==========
 
 class ListsSource extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-
-    };
-  };
-
   render () {
     let supplies = [];
     const sourceSupplies = this.props.supplies.filter(supply => supply.source_id === this.props.source.id);
@@ -56,12 +45,4 @@ class ListsSource extends React.Component {
   };
 };
 
-const mapStateToProps = state => ({
-
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(ListsSource);
+export default ListsSource;

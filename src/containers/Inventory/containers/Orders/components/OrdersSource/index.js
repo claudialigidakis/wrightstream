@@ -1,23 +1,12 @@
 // REACT
 import React from 'react';
 
-// REDUX
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-
 // COMPONENTS
-import OrdersSupply from './OrdersSupply';
+import OrdersSupply from './components/OrdersSupply';
 
 // ==========
 
 class OrdersSource extends React.Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-
-    };
-  };
-
   render () {
     let supplies = [];
     const sourceSupplies = this.props.supplies.filter(supply => supply.source_id === this.props.source.id);
@@ -57,12 +46,4 @@ class OrdersSource extends React.Component {
   };
 };
 
-const mapStateToProps = state => ({
-
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(OrdersSource);
+export default OrdersSource;
