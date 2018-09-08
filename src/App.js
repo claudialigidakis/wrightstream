@@ -11,15 +11,17 @@ import { getUser } from './state/actions/auth';
 
 // COMPONENTS
 import Header from './components/Header';
-import Signup from './components/Signup';
-import Login from './components/Login';
-import Settings from './components/Settings';
-import Products from './components/Products';
 import Inventory from './components/Inventory';
 import WorkStream from './components/WorkStream';
 import MyStream from './components/MyStream';
-import Admin from './components/Admin';
-import EtsyCallback from './components/EtsyCallback';
+import CallbackEtsy from './components/CallbackEtsy';
+
+// CONTAINERS
+import Products from './containers/Products';
+import Signup from './containers/Signup';
+import Login from './containers/Login';
+import Settings from './containers/Settings';
+import Admin from './containers/Admin';
 
 // ==========
 
@@ -44,7 +46,7 @@ class App extends React.Component {
               <Route path="/workstream" component={WorkStream} />
               <Route path="/mystream" component={MyStream} />
               <Route path="/admin" component={Admin} />
-              <Route path="/auth/callback/etsy" component={EtsyCallback} />
+              <Route path="/auth/callback/etsy" component={CallbackEtsy} />
             </Switch>
           </div>
         </BrowserRouter>
