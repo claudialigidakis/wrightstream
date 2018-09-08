@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { addNotes } from '../../state/actions/workstream';
+import { addNotes } from '../../../../../../../../state/actions/workstream';
 
 // ==========
 

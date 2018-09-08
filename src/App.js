@@ -11,13 +11,13 @@ import { getUser } from './state/actions/auth';
 
 // COMPONENTS
 import Header from './components/Header';
-import WorkStream from './components/WorkStream';
-import MyStream from './components/MyStream';
 import CallbackEtsy from './components/CallbackEtsy';
 
 // CONTAINERS
 import Products from './containers/Products';
 import Inventory from './containers/Inventory';
+import WorkStream from './containers/WorkStream';
+import MyStream from './containers/MyStream';
 import Signup from './containers/Signup';
 import Login from './containers/Login';
 import Settings from './containers/Settings';

@@ -4,23 +4,20 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { completeBundle } from '../../state/actions/workstream';
-
-// COMPONENTS
-import PurchaseItem from './PurchaseItem';
+import { completeItem } from '../../../../../../../../../../state/actions/workstream';
 
 // ==========
 
-class PurchaseBundle extends React.Component {
+class PurchaseItem extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      checked: this.props.bundle.completed
+      checked: this.props.item.completed
     };
   };
 
   check = () => {
-    this.props.completeBundle(this.props.purchase.id, this.props.bundle.id, !this.state.checked ? this.props.purchase.staff_id : null, !this.state.checked);
+    this.props.completeItem(this.props.purchase.id, this.props.item.id, !this.state.checked ? this.props.purchase.staff_id : null, !this.state.checked);
     this.setState({checked: !this.state.checked});
   };
 
@@ -31,13 +28,18 @@ class PurchaseBundle extends React.Component {
           <div className="level-left">
             <div className="level-item">
               <div className="field">
-                <input className="is-checkradio" type="checkbox" checked={this.state.checked} onChange={event => {event.preventDefault()}} />
+                {
+                  !this.props.bundle ? <input id={this.props.item.id} className="is-checkradio" type="checkbox" checked={this.state.checked} onChange={event => {event.preventDefault()}} /> : <span className="bullet">•</span>
+                }
                 <label
-                  onClick={this.check}
+                  htmlFor={this.props.item.id}
+                  onClick={() => {
+                    if (!this.props.bundle) this.check();
+                  }}
                   className={
                     (() => {
                       if (this.props.purchase && this.props.user.id === this.props.purchase.staff_id) {
-                        if ((this.props.bundle.completed && this.props.user.id === this.props.bundle.staff_id) || this.props.bundle.completed === false) {
+                        if ((this.props.item.completed && this.props.user.id === this.props.item.staff_id) || this.props.item.completed === false) {
                           if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === false) {
                             return 'disable';
                           } else if (this.props.purchase.statuses.find(status => status.status_id === 1).completed === true && this.props.purchase.statuses.find(status => status.status_id === 2).completed === false) {
@@ -58,9 +60,9 @@ class PurchaseBundle extends React.Component {
                     })()
                   }
                 >
-                  {this.props.bundle.bundle_qty} {this.props.bundle.name}
+                  {this.props.item.item_qty} {this.props.item.name}
                 </label>
-                <span className="lnr-label" onClick={event => {this.props.toggle(this.props.bundle, true)}}></span>
+                <span className="lnr-label" onClick={() => {this.props.toggle(this.props.item, false)}}></span>
               </div>
             </div>
           </div>
@@ -68,13 +70,13 @@ class PurchaseBundle extends React.Component {
             <div className="level-item">
               <div className="purchase-profile">
                 {
-                  this.props.staff.find(staff => staff.id === this.props.bundle.staff_id) ?
+                  !this.props.bundle && this.props.staff.find(staff => staff.id === this.props.item.staff_id) ?
                   <img
                     src={
-                      this.props.staff.find(staff => staff.id === this.props.bundle.staff_id).photo
+                      this.props.staff.find(staff => staff.id === this.props.item.staff_id).photo
                     }
                     alt={
-                      `${this.props.staff.find(staff => staff.id === this.props.bundle.staff_id).first_name[0]}${this.props.staff.find(staff => staff.id === this.props.bundle.staff_id).last_name[0]}`
+                      `${this.props.staff.find(staff => staff.id === this.props.item.staff_id).first_name[0]}${this.props.staff.find(staff => staff.id === this.props.item.staff_id).last_name[0]}`
                     }
                   /> : null
                 }
@@ -82,13 +84,6 @@ class PurchaseBundle extends React.Component {
             </div>
           </div>
         </div>
-        <ul>
-          {
-            this.props.bundle.bundle_items.map(item => {
-              return <PurchaseItem key={item.id} item={item} bundle={true} toggle={this.props.toggle} />;
-            })
-          }
-        </ul>
       </li>
     );
   };
@@ -99,7 +94,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  completeBundle
+  completeItem
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(PurchaseBundle);
+export default connect(mapStateToProps, mapDispatchToProps)(PurchaseItem);

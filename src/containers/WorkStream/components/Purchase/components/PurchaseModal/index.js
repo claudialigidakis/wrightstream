@@ -2,17 +2,17 @@
 import React from 'react';
 
 // COMPONENTS
-import PurchaseStore from './PurchaseStore';
-import PurchaseStatus from './PurchaseStatus';
-import PurchasePhoto from './PurchasePhoto';
-import PurchaseProgress from './PurchaseProgress';
-import PurchaseSupplies from './PurchaseSupplies';
-import PurchaseProducts from './PurchaseProducts';
-import PurchaseProductDetails from './PurchaseProductDetails';
-import PurchaseQuality from './PurchaseQuality';
-import PurchaseSchedule from './PurchaseSchedule';
-import PurchaseNotes from './PurchaseNotes';
-import PurchaseSayings from './PurchaseSayings';
+import PurchaseStore from '../PurchaseStore';
+import PurchaseStatus from '../PurchaseStatus';
+import PurchasePhoto from '../PurchasePhoto';
+import PurchaseProgress from '../PurchaseProgress';
+import PurchaseSupplies from './components/PurchaseSupplies';
+import PurchaseProducts from './components/PurchaseProducts';
+import PurchaseProductDetails from './components/PurchaseProductDetails';
+import PurchaseQuality from './components/PurchaseQuality';
+import PurchaseSchedule from './components/PurchaseSchedule';
+import PurchaseNotes from './components/PurchaseNotes';
+import PurchaseSayings from './components/PurchaseSayings';
 
 // ==========
 

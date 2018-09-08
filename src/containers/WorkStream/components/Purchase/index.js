@@ -4,17 +4,17 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { changeStatus, assignStaff, archive } from '../../state/actions/workstream';
+import { changeStatus, assignStaff, archive } from '../../../../state/actions/workstream';
 
 // COMPONENTS
-import PurchaseStore from './PurchaseStore';
-import PurchaseStatus from './PurchaseStatus';
-import PurchasePhoto from './PurchasePhoto';
-import PurchaseProgress from './PurchaseProgress';
-import PurchaseIcon from './PurchaseIcon';
-import PurchaseAction from './PurchaseAction';
-import PurchaseModal from './PurchaseModal';
-import PurchaseAssign from './PurchaseAssign';
+import PurchaseStore from './components/PurchaseStore';
+import PurchaseStatus from './components/PurchaseStatus';
+import PurchasePhoto from './components/PurchasePhoto';
+import PurchaseProgress from './components/PurchaseProgress';
+import PurchaseIcon from './components/PurchaseIcon';
+import PurchaseAction from './components/PurchaseAction';
+import PurchaseModal from './components/PurchaseModal';
+import PurchaseAssign from './components/PurchaseAssign';
 
 // ==========
 

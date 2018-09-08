@@ -4,11 +4,11 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getPurchases, getStaff } from '../state/actions/workstream';
-import { getItems, getCategories } from '../state/actions/products';
+import { getPurchases, getStaff } from '../../state/actions/workstream';
+import { getItems, getCategories } from '../../state/actions/products';
 
 // COMPONENTS
-import Purchase from './workstream/Purchase';
+import Purchase from '../WorkStream/components/Purchase';
 
 // ==========
 
