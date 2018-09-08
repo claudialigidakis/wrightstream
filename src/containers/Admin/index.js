@@ -5,12 +5,12 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // COMPONENTS
-import AdminMenu from './admin/AdminMenu';
-import Dashboard from './admin/Dashboard';
-import Staff from './admin/Staff';
-import Products from './admin/Products';
-import Purchases from './admin/Purchases';
-import Supplies from './admin/Supplies';
+import AdminMenu from './containers/AdminMenu';
+import Dashboard from './containers/Dashboard';
+import Staff from './containers/Staff';
+import Products from './containers/Products';
+import Purchases from './containers/Purchases';
+import Supplies from './containers/Supplies';
 
 // ==========
 
