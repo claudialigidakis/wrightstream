@@ -4,12 +4,12 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getPurchasesEtsy } from '../state/actions/stores';
-import { getPurchases, getStaff } from '../state/actions/workstream';
-import { getItems, getCategories } from '../state/actions/products';
+import { getPurchasesEtsy } from '../../state/actions/stores';
+import { getPurchases, getStaff } from '../../state/actions/workstream';
+import { getItems, getCategories } from '../../state/actions/products';
 
 // COMPONENTS
-import Purchase from './workstream/Purchase';
+import Purchase from './components/Purchase';
 
 // ==========
 

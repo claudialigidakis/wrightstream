@@ -2,7 +2,7 @@
 import React from 'react';
 
 // COMPONENTS
-import PurchaseAssignStaff from './PurchaseAssignStaff';
+import PurchaseAssignStaff from './components/PurchaseAssignStaff';
 
 // ==========
 

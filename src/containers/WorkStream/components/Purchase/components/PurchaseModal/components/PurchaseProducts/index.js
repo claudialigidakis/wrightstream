@@ -2,8 +2,8 @@
 import React from 'react';
 
 // COMPONENTS
-import PurchaseItem from './PurchaseItem';
-import PurchaseBundle from './PurchaseBundle';
+import PurchaseItem from './components/PurchaseItem';
+import PurchaseBundle from './components/PurchaseBundle';
 
 // ==========
 

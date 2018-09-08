@@ -2,7 +2,7 @@
 import React from 'react';
 
 // COMPONENTS
-import PurchaseSupply from './PurchaseSupply';
+import PurchaseSupply from './components/PurchaseSupply';
 
 // ==========
 

@@ -4,10 +4,10 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { completeBundle } from '../../state/actions/workstream';
+import { completeBundle } from '../../../../../../../../../../state/actions/workstream';
 
 // COMPONENTS
-import PurchaseItem from './PurchaseItem';
+import PurchaseItem from '../PurchaseItem';
 
 // ==========
 

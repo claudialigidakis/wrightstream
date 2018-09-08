@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { schedule } from '../../state/actions/workstream';
+import { schedule } from '../../../../../../../../state/actions/workstream';
 
 // HELPERS
 const moment = require('moment');
