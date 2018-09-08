@@ -2,9 +2,9 @@
 import React from 'react';
 
 // COMPONENTS
-import CurrentStaff from './CurrentStaff';
-import TotalStaff from './TotalStaff';
-import StaffCompleted from './StaffCompleted';
+import CurrentStaff from './components/CurrentStaff';
+import TotalStaff from './components/TotalStaff';
+import StaffCompleted from './components/StaffCompleted';
 
 // ==========
 

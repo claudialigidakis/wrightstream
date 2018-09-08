@@ -2,10 +2,10 @@
 import React from 'react';
 
 // COMPONENTS
-import NewPurchases from './NewPurchases';
-import CompletedPurchases from './CompletedPurchases';
-import InProductionPurchases from './InProductionPurchases';
-import PurchaseHistory from './PurchaseHistory';
+import NewPurchases from './components/NewPurchases';
+import CompletedPurchases from './components/CompletedPurchases';
+import InProductionPurchases from './components/InProductionPurchases';
+import PurchaseHistory from './components/PurchaseHistory';
 
 // ==========
 

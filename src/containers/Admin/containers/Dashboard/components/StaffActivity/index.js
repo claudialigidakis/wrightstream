@@ -4,10 +4,10 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getCurrentStaffActivity } from '../../state/actions/admin';
+import { getCurrentStaffActivity } from '../../../../../../state/actions/admin';
 
 // COMPONENTS
-import CurrentStaffCard from './CurrentStaffCard';
+import CurrentStaffCard from './components/CurrentStaffCard';
 
 // ==========
 

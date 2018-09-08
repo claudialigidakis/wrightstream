@@ -5,7 +5,9 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // COMPONENTS
-import AdminMenu from './containers/AdminMenu';
+import AdminMenu from './components/AdminMenu';
+
+// CONTAINERS
 import Dashboard from './containers/Dashboard';
 import Staff from './containers/Staff';
 import Products from './containers/Products';

@@ -2,11 +2,11 @@
 import React from 'react';
 
 // COMPONENTS
-import TotalProductsSold from './TotalProductsSold';
-import TotalItemsSold from './TotalItemsSold';
-import TotalBundlesSold from './TotalBundlesSold';
-import TotalItemsSoldChart from './TotalItemsSoldChart';
-import TotalBundlesSoldChart from './TotalBundlesSoldChart';
+import TotalProductsSold from './components/TotalProductsSold';
+import TotalItemsSold from './components/TotalItemsSold';
+import TotalBundlesSold from './components/TotalBundlesSold';
+import TotalItemsSoldChart from './components/TotalItemsSoldChart';
+import TotalBundlesSoldChart from './components/TotalBundlesSoldChart';
 
 // ==========
 

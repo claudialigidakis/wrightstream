@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getTotalProductsSold } from '../../state/actions/admin';
+import { getTotalProductsSold } from '../../../../../../state/actions/admin';
 
 // ==========
 

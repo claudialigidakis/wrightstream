@@ -2,11 +2,11 @@
 import React from 'react';
 
 // COMPONENTS
-import CurrentStaff from './CurrentStaff';
-import NewPurchases from './NewPurchases';
-import CompletedPurchases from './CompletedPurchases';
-import CurrentPurchasesStatus from './CurrentPurchasesStatus';
-import StaffActivity from './StaffActivity';
+import CurrentStaff from '../Staff/components/CurrentStaff';
+import NewPurchases from '../Purchases/components/NewPurchases';
+import CompletedPurchases from '../Purchases/components/CompletedPurchases';
+import CurrentPurchasesStatus from './components/CurrentPurchasesStatus';
+import StaffActivity from './components/StaffActivity';
 
 // ==========
 
