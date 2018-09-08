@@ -1,54 +1,34 @@
-import request from '../../helpers/request';
+import Helper from '../models/helper'
 
 export const GET_LENGTH = 'GET_LENGTH';
 export const GET_MASS = 'GET_MASS';
 export const GET_VOLUME = 'GET_VOLUME';
 export const ESTIMATOR = 'ESTIMATOR';
 
-export const getLength = () => (
-  dispatch => {
-    request('/helper/length')
-    .then(response => {
-      dispatch({
-        type: GET_LENGTH,
-        payload: response.data.lengthMeasures
-      });
-    });
-  }
-);
+export const getLength = () => {
+  return async (dispatch) => {
+    const payload = await Helper.lengthHelper()
+    dispatch({type: GET_LENGTH, payload});
+  };
+};
 
-export const getMass = () => (
-  dispatch => {
-    request('/helper/mass')
-    .then(response => {
-      dispatch({
-        type: GET_MASS,
-        payload: response.data.massMeasures
-      });
-    });
-  }
-);
+export const getMass = () => {
+  return async (dispatch) => {
+    const payload = await Helper.mass()
+    dispatch({type: GET_MASS, payload});
+  };
+};
 
-export const getVolume = () => (
-  dispatch => {
-    request('/helper/volume')
-    .then(response => {
-      dispatch({
-        type: GET_VOLUME,
-        payload: response.data.volumeMeasures
-      });
-    });
-  }
-);
+export const getVolume = () => {
+  return async (dispatch) => {
+    const payload = await Helper.volume()
+    dispatch({type: GET_VOLUME, payload});
+  };
+};
 
-export const estimator = (items, bundles) => (
-  dispatch => {
-    request('/helper/orderPredictor', 'post', {items, bundles})
-    .then(response => {
-      dispatch({
-        type: ESTIMATOR,
-        payload: response.data.data
-      });
-    });
-  }
-);
+export const estimator = (items, bundles) => {
+  return async (dispatch) => {
+    const payload = await Helper.estimator(items, bundles)
+    dispatch({type: ESTIMATOR, payload});
+  };
+};

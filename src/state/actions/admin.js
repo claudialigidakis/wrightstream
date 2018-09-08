@@ -1,4 +1,3 @@
-import request from '../../helpers/request';
 import Admin from '../models/admin'
 
 export const GET_CURRENT_STAFF = 'GET_CURRENT_STAFF';
@@ -21,139 +20,111 @@ export const GET_PURCHASE_HISTORY = 'GET_PURCHASE_HISTORY'
 export const getMostUsedSupplies = () => {
   return async (dispatch) => {
     const payload = await Admin.mostUsedSupplies()
-    dispatch({type: GET_MOST_USED_SUPPLIES, payload})
-  }
-}
+    dispatch({type: GET_MOST_USED_SUPPLIES, payload});
+  };
+};
 
 export const getPurchaseHistory = () => {
   return async (dispatch) => {
     const payload = await Admin.purchaseHistory()
     dispatch({type: GET_PURCHASE_HISTORY, payload});
-  }
-}
+  };
+};
 
-export const getMostOrderedSupplies = () => (dispatch => {
-  request('/auth/token').then(response => {
-    const shop_id = response.data.shops_id;
-    request(`/adminSupplies/mostOrdered/${shop_id}`).then(response => {
-      dispatch({type: GET_MOST_ORDERED_SUPPLIES, payload: response.data.data});
-    });
-  });
-});
+export const getMostOrderedSupplies = () => {
+  return async dispatch => {
+    const payload = await Admin.mostOrderedSupplies()
+    dispatch({type: GET_MOST_ORDERED_SUPPLIES, payload});
+  };
+};
 
-export const getCurrentStaff = () => (dispatch => {
-  request('/auth/token').then(response => {
-    const shop_id = response.data.shops_id;
-    request(`/adminStaff/currentWorkingStaff/${shop_id}`).then(response => {
-      dispatch({type: GET_CURRENT_STAFF, payload: response.data.data});
-    });
-  });
-});
+export const getCurrentStaff = () => {
+  return async (dispatch) => {
+    const payload = await Admin.currentStaff()
+    dispatch({type: GET_CURRENT_STAFF, payload});
+  };
+};
 
-export const purchaseStatuses = () => (dispatch => {
-  request('/auth/token').then(response => {
-    const shop_id = response.data.shops_id;
-    request(`/adminPurchases/purchasesStatus/${shop_id}`).then(response => {
-      dispatch({type: GET_CURRENT_PURCHASE_STATUS, payload: response.data.data});
-    });
-  });
-});
+export const purchaseStatuses = () => {
+  return async (dispatch) => {
+    const payload = await Admin.purchaseStatuses()
+    dispatch({type: GET_CURRENT_PURCHASE_STATUS, payload});
+  };
+};
 
-export const getCurrentStaffActivity = () => (dispatch => {
-  request('/auth/token').then(response => {
-    const shop_id = response.data.shops_id;
-    request(`/adminStaff/currentStaff/${shop_id}`).then(response => {
-      dispatch({type: GET_CURRENT_STAFF_ACTIVITY, payload: response.data.data});
-    });
-  });
-});
+export const getCurrentStaffActivity = () => {
+  return async (dispatch) => {
+    const payload = await Admin.currentStaffActivity()
+    dispatch({type: GET_CURRENT_STAFF_ACTIVITY, payload});
+  };
+};
 
-export const getTotalProductsSold = () => (dispatch => {
-  request('/auth/token').then(response => {
-    const shop_id = response.data.shops_id;
-    request(`/adminProducts/totalProductSold/${shop_id}`).then(response => {
-      dispatch({type: GET_TOTAL_PRODUCTS_SOLD, payload: response.data.data});
-    });
-  });
-});
+export const getTotalProductsSold = () => {
+  return async (dispatch) => {
+    const payload = await Admin.totalProductsSold()
+    dispatch({type: GET_TOTAL_PRODUCTS_SOLD, payload});
+  };
+};
 
-export const getNewPurchases = () => (dispatch => {
-  request('/auth/token').then(response => {
-    const shop_id = response.data.shops_id;
-    request(`/adminPurchases/newPurchases/${shop_id}`).then(response => {
-      dispatch({type: GET_NEW_PURCHASES, payload: response.data.data});
-    });
-  });
-});
+export const getNewPurchases = () => {
+  return async (dispatch) => {
+    const payload = await Admin.newPurchases()
+    dispatch({type: GET_NEW_PURCHASES, payload});
+  };
+};
 
-export const getTotalStaff = () => (dispatch => {
-  request('/auth/token').then(response => {
-    const shop_id = response.data.shops_id;
-    request(`/adminStaff/totalStaff/${shop_id}`).then(response => {
-      dispatch({type: GET_TOTAL_STAFF, payload: response.data.data});
-    });
-  });
-});
+export const getTotalStaff = () => {
+  return async (dispatch) => {
+    const payload = await Admin.totalStaff()
+    dispatch({type: GET_TOTAL_STAFF, payload});
+  };
+};
 
-export const getCompletedStaff = () => (dispatch => {
-  request('/auth/token').then(response => {
-    const shop_id = response.data.shops_id;
-    request(`/adminStaff/pastStaff/${shop_id}`).then(response => {
-      dispatch({type: GET_COMPLETED_STAFF, payload: response.data.data});
-    });
-  });
-});
+export const getCompletedStaff = () => {
+  return async (dispatch) => {
+    const payload = await Admin.completedStaff()
+    dispatch({type: GET_COMPLETED_STAFF, payload});
+  };
+};
 
-export const getTotalBundlesSold = () => (dispatch => {
-  request('/auth/token').then(response => {
-    const shop_id = response.data.shops_id;
-    request(`/adminProducts/totalBundleSold/${shop_id}`).then(response => {
-      dispatch({type: GET_TOTAL_BUNDLES_SOLD, payload: response.data.data});
-    });
-  });
-});
+export const getTotalBundlesSold = () => {
+  return async (dispatch) => {
+    const payload = await Admin.totalBundlesSold()
+    dispatch({type: GET_TOTAL_BUNDLES_SOLD, payload});
+  };
+};
 
-export const getTotalItemsSold = () => (dispatch => {
-  request('/auth/token').then(response => {
-    const shop_id = response.data.shops_id;
-    request(`/adminProducts/totalItemSold/${shop_id}`).then(response => {
-      dispatch({type: GET_TOTAL_ITEMS_SOLD, payload: response.data.data});
-    });
-  });
-});
+export const getTotalItemsSold = () => {
+  return async (dispatch) => {
+    const payload = await Admin.totalItemsSold()
+    dispatch({type: GET_TOTAL_ITEMS_SOLD, payload});
+  };
+};
 
-export const getCompletedPurchases = () => (dispatch => {
-  request('/auth/token').then(response => {
-    const shop_id = response.data.shops_id;
-    request(`/adminPurchases/completedPurchases/${shop_id}`).then(response => {
-      dispatch({type: GET_COMPLETED_PURCHASES, payload: response.data.data});
-    });
-  });
-});
+export const getCompletedPurchases = () => {
+  return async (dispatch) => {
+    const payload = await Admin.completedPurchases()
+    dispatch({type: GET_COMPLETED_PURCHASES, payload});
+  };
+};
 
-export const getInProductionPurchases = () => (dispatch => {
-  request('/auth/token').then(response => {
-    const shop_id = response.data.shops_id;
-    request(`/adminPurchases/productionPurchases/${shop_id}`).then(response => {
-      dispatch({type: GET_IN_PRODUCTION_PURCHASES, payload: response.data.data});
-    });
-  });
-});
+export const getInProductionPurchases = () => {
+  return async (dispatch) => {
+    const payload = await Admin.inProductionPurchases()
+    dispatch({type: GET_IN_PRODUCTION_PURCHASES, payload});
+  };
+};
 
-export const getTotalItemsSoldChart = () => (dispatch => {
-  request('/auth/token').then(response => {
-    const shop_id = response.data.shops_id;
-    request(`/adminProducts/itemQTY/${shop_id}`).then(response => {
-      dispatch({type: GET_TOTAL_ITEMS_SOLD_CHART, payload: response.data.data});
-    });
-  });
-});
+export const getTotalItemsSoldChart = () => {
+  return async (dispatch) => {
+    const payload = await Admin.totalItemsSoldChart()
+    dispatch({type: GET_TOTAL_ITEMS_SOLD_CHART, payload});
+  };
+};
 
-export const getTotalBundlesSoldChart = () => (dispatch => {
-  request('/auth/token').then(response => {
-    const shop_id = response.data.shops_id;
-    request(`/adminProducts/bundleQTY/${shop_id}`).then(response => {
-      dispatch({type: GET_TOTAL_BUNDLES_SOLD_CHART, payload: response.data.data});
-    });
-  });
-});
+export const getTotalBundlesSoldChart = () => {
+  return async (dispatch) => {
+    const payload = await Admin.totalBundlesSoldChart()
+    dispatch({type: GET_TOTAL_BUNDLES_SOLD_CHART, payload});
+  };
+};
