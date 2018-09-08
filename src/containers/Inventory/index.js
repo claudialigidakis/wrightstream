@@ -5,15 +5,17 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // COMPONENTS
-import Nav from './inventory/Nav';
-import Main from './inventory/Inventory';
-import Estimator from './inventory/Estimator';
-import Lists from './inventory/Lists';
-import Orders from './inventory/Orders';
+import Nav from './components/Nav';
+
+// CONTAINERS
+import Main from './containers/Inventory';
+import Estimator from './containers/Estimator';
+import Lists from './containers/Lists';
+import Orders from './containers/Orders';
 
 // ==========
 
-class Products extends React.Component {
+class Inventory extends React.Component {
   render () {
     return (
       <BrowserRouter>
@@ -37,4 +39,4 @@ class Products extends React.Component {
   };
 };
 
-export default Products;
+export default Inventory;

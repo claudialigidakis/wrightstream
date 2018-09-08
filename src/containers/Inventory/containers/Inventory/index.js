@@ -4,14 +4,14 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getSupplies, getKinds, getItems, getCategories } from '../../state/actions/products';
-import { editSupply, editItem } from '../../state/actions/inventory';
+import { getSupplies, getKinds, getItems, getCategories } from '../../../../state/actions/products';
+import { editSupply, editItem } from '../../../../state/actions/inventory';
 
 // COMPONENTS
-import InventorySupply from './InventorySupply';
-import InventorySupplyUpdated from './InventorySupplyUpdated';
-import InventoryProduct from './InventoryProduct';
-import InventoryProductUpdated from './InventoryProductUpdated';
+import InventorySupply from './components/InventorySupply';
+import InventorySupplyUpdated from './components/InventorySupplyUpdated';
+import InventoryProduct from './components/InventoryProduct';
+import InventoryProductUpdated from './components/InventoryProductUpdated';
 
 // ==========
 
