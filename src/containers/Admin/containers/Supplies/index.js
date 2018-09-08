@@ -2,8 +2,8 @@
 import React from 'react';
 
 // COMPONENTS
-import MostUsedData from './MostUsedData'
-import MostOrderedData from './MostOrderedData'
+import MostUsedData from './MostUsedData';
+import MostOrderedData from './MostOrderedData';
 
 // ==========
 

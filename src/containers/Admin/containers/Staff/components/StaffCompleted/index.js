@@ -3,28 +3,28 @@ import React from 'react';
 
 // REDUX
 import { bindActionCreators } from 'redux';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { getCompletedStaff } from '../../state/actions/admin';
 
-//Charts
-import ReactChartkick, { ColumnChart } from 'react-chartkick'
-import Chart from 'chart.js'
-ReactChartkick.addAdapter(Chart)
+// CHART
+import ReactChartkick, { ColumnChart } from 'react-chartkick';
+import Chart from 'chart.js';
+ReactChartkick.addAdapter(Chart);
 
+// ==========
 
 class StaffCompleted extends React.Component {
+  transformData = () => {
+    const a = Object.keys(this.props.completedStaff);
+    return a.reduce((acc,ele) => {
+      acc[this.props.completedStaff[ele].first_name] = this.props.completedStaff[ele].completed.length;
+      return acc;
+    },{});
+  };
+
   componentDidMount () {
     this.props.getCompletedStaff();
   };
-
-  transformData = () => {
-    const a = Object.keys(this.props.completedStaff)
-    return a.reduce((acc,ele) => {
-      acc[this.props.completedStaff[ele].first_name] = this.props.completedStaff[ele].completed.length
-      return acc
-    },{})
-  }
-
 
   render () {
     return (
@@ -40,16 +40,16 @@ class StaffCompleted extends React.Component {
           </div>
         </div>
       </div>
-    )}
-  }
+    );
+  };
+};
 
+const mapStateToProps = state => ({
+  completedStaff: state.admin.completedStaff
+});
 
-  const mapStateToProps = state => ({
-    completedStaff: state.admin.completedStaff
-  });
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getCompletedStaff
+}, dispatch);
 
-  const mapDispatchToProps = dispatch => bindActionCreators({
-    getCompletedStaff
-  }, dispatch);
-
-  export default connect(mapStateToProps, mapDispatchToProps)(StaffCompleted);
+export default connect(mapStateToProps, mapDispatchToProps)(StaffCompleted);

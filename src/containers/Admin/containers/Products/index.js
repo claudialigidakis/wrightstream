@@ -2,11 +2,12 @@
 import React from 'react';
 
 // COMPONENTS
-import TotalProductsSold from './TotalProductsSold'
-import TotalItemsSold from './TotalItemsSold'
-import TotalBundlesSold from './TotalBundlesSold'
-import TotalItemsSoldChart from './TotalItemsSoldChart'
-import TotalBundlesSoldChart from './TotalBundlesSoldChart'
+import TotalProductsSold from './TotalProductsSold';
+import TotalItemsSold from './TotalItemsSold';
+import TotalBundlesSold from './TotalBundlesSold';
+import TotalItemsSoldChart from './TotalItemsSoldChart';
+import TotalBundlesSoldChart from './TotalBundlesSoldChart';
+
 // ==========
 
 class Products extends React.Component {

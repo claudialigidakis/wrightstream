@@ -2,15 +2,15 @@
 import React from 'react';
 
 // COMPONENTS
-import NewPurchases from './NewPurchases'
-import CompletedPurchases from './CompletedPurchases'
-import InProductionPurchases from './InProductionPurchases'
-import PurchaseHistory from './PurchaseHistory'
+import NewPurchases from './NewPurchases';
+import CompletedPurchases from './CompletedPurchases';
+import InProductionPurchases from './InProductionPurchases';
+import PurchaseHistory from './PurchaseHistory';
+
 // ==========
 
 class Purchases extends React.Component {
-
-  render() {
+  render () {
     return (
       <div>
         <div className="columns">

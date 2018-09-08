@@ -3,7 +3,7 @@ import React from 'react';
 
 // REDUX
 import { bindActionCreators } from 'redux';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { getCompletedPurchases } from '../../state/actions/admin';
 
 // ==========
@@ -30,7 +30,7 @@ class CompletedPurchases extends React.Component {
           </footer>
         </div>
       </div>
-    )
+    );
   };
 };
 

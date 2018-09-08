@@ -3,7 +3,7 @@ import React from 'react';
 
 // REDUX
 import { bindActionCreators } from 'redux';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { getTotalStaff } from '../../state/actions/admin';
 
 // ==========
@@ -30,7 +30,7 @@ class TotalStaff extends React.Component {
           </footer>
         </div>
       </div>
-    )
+    );
   };
 };
 

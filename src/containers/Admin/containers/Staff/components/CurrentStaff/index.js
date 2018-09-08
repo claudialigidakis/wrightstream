@@ -3,7 +3,7 @@ import React from 'react';
 
 // REDUX
 import { bindActionCreators } from 'redux';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { getCurrentStaff } from '../../state/actions/admin';
 
 // ==========

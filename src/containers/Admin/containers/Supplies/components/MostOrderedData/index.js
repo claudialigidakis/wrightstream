@@ -38,13 +38,14 @@ class MostOrderedData extends React.Component {
       </div>
     );
   };
+};
 
-  const mapStateToProps = state => ({
-    MostOrderedSupplies: state.admin.MostOrderedSupplies
-  });
+const mapStateToProps = state => ({
+  MostOrderedSupplies: state.admin.MostOrderedSupplies
+});
 
-  const mapDispatchToProps = dispatch => bindActionCreators({
-    getMostOrderedSupplies
-  }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getMostOrderedSupplies
+}, dispatch);
 
-  export default connect(mapStateToProps, mapDispatchToProps)(MostOrderedData);
+export default connect(mapStateToProps, mapDispatchToProps)(MostOrderedData);

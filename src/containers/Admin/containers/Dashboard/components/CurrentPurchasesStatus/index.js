@@ -3,26 +3,28 @@ import React from 'react';
 
 // REDUX
 import { bindActionCreators } from 'redux';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { purchaseStatuses } from '../../state/actions/admin';
 
-//React Charts
-import ReactChartkick, { PieChart } from 'react-chartkick'
-import Chart from 'chart.js'
-ReactChartkick.addAdapter(Chart)
+// CHART
+import ReactChartkick, { PieChart } from 'react-chartkick';
+import Chart from 'chart.js';
+ReactChartkick.addAdapter(Chart);
 
+// ==========
 
 class CurrentPurchasesStatus extends React.Component {
+  transformData = () => {
+    const a = Object.keys(this.props.purchaseStatus);
+    return a.reduce((acc,ele) => {
+      acc[this.props.purchaseStatus[ele].name] = this.props.purchaseStatus[ele].statusCount;
+      return acc;
+    },{});
+  };
+
   componentDidMount () {
     this.props.purchaseStatuses();
   };
-  transformData = () => {
-    const a = Object.keys(this.props.purchaseStatus)
-    return a.reduce((acc,ele) => {
-      acc[this.props.purchaseStatus[ele].name] = this.props.purchaseStatus[ele].statusCount
-      return acc
-    },{})
-  }
 
   render () {
     return (
@@ -40,16 +42,16 @@ class CurrentPurchasesStatus extends React.Component {
           </div>
         </div>
       </div>
-    )}
-  }
+    );
+  };
+};
 
+const mapStateToProps = state => ({
+  purchaseStatus: state.admin.purchaseStatus
+});
 
-  const mapStateToProps = state => ({
-    purchaseStatus: state.admin.purchaseStatus
-  });
+const mapDispatchToProps = dispatch => bindActionCreators({
+  purchaseStatuses
+}, dispatch);
 
-  const mapDispatchToProps = dispatch => bindActionCreators({
-    purchaseStatuses
-  }, dispatch);
-
-  export default connect(mapStateToProps, mapDispatchToProps)(CurrentPurchasesStatus);
+export default connect(mapStateToProps, mapDispatchToProps)(CurrentPurchasesStatus);

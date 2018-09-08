@@ -3,28 +3,28 @@ import React from 'react';
 
 // REDUX
 import { bindActionCreators } from 'redux';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { getTotalItemsSoldChart } from '../../state/actions/admin';
 
-//Charts
-import ReactChartkick, { BarChart } from 'react-chartkick'
-import Chart from 'chart.js'
-ReactChartkick.addAdapter(Chart)
+// CHART
+import ReactChartkick, { BarChart } from 'react-chartkick';
+import Chart from 'chart.js';
+ReactChartkick.addAdapter(Chart);
 
+// ==========
 
 class TotalItemsSoldChart extends React.Component {
+  transformData = () => {
+    const a = Object.keys(this.props.totalItemsSoldChart);
+    return a.reduce((acc,ele) => {
+      acc[this.props.totalItemsSoldChart[ele].name] = this.props.totalItemsSoldChart[ele].neededSupplies;
+      return acc;
+    },{});
+  };
+
   componentDidMount () {
     this.props.getTotalItemsSoldChart();
   };
-
-transformData = () => {
-  const a = Object.keys(this.props.totalItemsSoldChart)
-  return a.reduce((acc,ele) => {
-    acc[this.props.totalItemsSoldChart[ele].name] = this.props.totalItemsSoldChart[ele].neededSupplies
-    return acc
-  },{})
-}
-
 
   render () {
     return (
@@ -36,20 +36,20 @@ transformData = () => {
           <div className="card-content">
             <div className="content">
               <BarChart data={this.transformData()} />
-
             </div>
           </div>
         </div>
       </div>
-    )}
-  }
+    );
+  };
+};
 
-  const mapStateToProps = state => ({
-    totalItemsSoldChart: state.admin.totalItemsSoldChart
-  });
+const mapStateToProps = state => ({
+  totalItemsSoldChart: state.admin.totalItemsSoldChart
+});
 
-  const mapDispatchToProps = dispatch => bindActionCreators({
-    getTotalItemsSoldChart
-  }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getTotalItemsSoldChart
+}, dispatch);
 
-  export default connect(mapStateToProps, mapDispatchToProps)(TotalItemsSoldChart);
+export default connect(mapStateToProps, mapDispatchToProps)(TotalItemsSoldChart);

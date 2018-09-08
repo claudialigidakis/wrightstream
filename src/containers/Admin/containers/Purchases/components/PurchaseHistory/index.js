@@ -3,27 +3,29 @@ import React from 'react';
 
 // REDUX
 import { bindActionCreators } from 'redux';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { getPurchaseHistory } from '../../state/actions/admin';
 
-//Charts
-import ReactChartkick, { LineChart } from 'react-chartkick'
-import Chart from 'chart.js'
-ReactChartkick.addAdapter(Chart)
+// CHART
+import ReactChartkick, { LineChart } from 'react-chartkick';
+import Chart from 'chart.js';
+ReactChartkick.addAdapter(Chart);
 
+// ==========
 
 class PurchaseHistory extends React.Component {
+  transformData = () => {
+    const a = Object.keys(this.props.purchaseHistory);
+    return a.reduce((acc,ele) => {
+      acc[ele] = this.props.purchaseHistory[ele].purchaseAmount;
+      return acc;
+    },{});
+  };
+
   componentDidMount () {
     this.props.getPurchaseHistory();
   };
 
-transformData = () => {
-  const a = Object.keys(this.props.purchaseHistory)
-  return a.reduce((acc,ele) => {
-    acc[ele] = this.props.purchaseHistory[ele].purchaseAmount
-    return acc
-  },{})
-}
   render () {
     return (
       <div className="column">
@@ -38,15 +40,16 @@ transformData = () => {
           </div>
         </div>
       </div>
-    )}
-  }
+    );
+  };
+};
 
-  const mapStateToProps = state => ({
-    purchaseHistory: state.admin.purchaseHistory
-  });
+const mapStateToProps = state => ({
+  purchaseHistory: state.admin.purchaseHistory
+});
 
-  const mapDispatchToProps = dispatch => bindActionCreators({
-    getPurchaseHistory
-  }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getPurchaseHistory
+}, dispatch);
 
-  export default connect(mapStateToProps, mapDispatchToProps)(PurchaseHistory);
+export default connect(mapStateToProps, mapDispatchToProps)(PurchaseHistory);
