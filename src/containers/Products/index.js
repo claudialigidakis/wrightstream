@@ -11,11 +11,9 @@ import { getProductsEtsy } from '../../state/actions/stores';
 
 // COMPONENTS
 import Nav from './components/Nav';
-
 import Kinds from './components/Kinds';
 import Types from './components/Types';
 import Categories from './components/Categories';
-
 import CategoryControl from './components/CategoryControl';
 import KindControl from './components/KindControl';
 import TypeControl from './components/TypeControl';
@@ -25,10 +23,8 @@ import Main from './containers/Products';
 import Items from './containers/Products/containers/Items';
 import Bundles from './containers/Products/containers/Bundles';
 import Category from './containers/Products/containers/Category';
-
 import Supplies from './containers/Supplies';
 import Kind from './containers/Supplies/containers/Kind';
-
 import Sources from './containers/Sources';
 import Type from './containers/Sources/containers/Type';
 

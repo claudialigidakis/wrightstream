@@ -9,9 +9,12 @@ import { userLogin } from '../../state/actions/auth';
 // ==========
 
 class Login extends React.Component {
-  state = {
-    email: '',
-    password: ''
+  constructor (props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: ''
+    };
   };
 
   handleLogin = event => {

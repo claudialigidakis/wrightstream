@@ -9,15 +9,18 @@ import { userSignup } from '../../state/actions/auth';
 // ==========
 
 class Signup extends React.Component {
-  state = {
-    isValid: true,
-    passwordClasses: 'input',
-    shop_name: '',
-    first_name: '',
-    last_name: '',
-    email: '',
-    password: '',
-    verify_password: ''
+  constructor (props) {
+    super(props);
+    this.state = {
+      isValid: true,
+      passwordClasses: 'input',
+      shop_name: '',
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: '',
+      verify_password: ''
+    };
   };
 
   handleSignup = event => {

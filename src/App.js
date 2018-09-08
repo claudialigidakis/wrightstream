@@ -14,7 +14,7 @@ import Header from './components/Header';
 import Inventory from './components/Inventory';
 import WorkStream from './components/WorkStream';
 import MyStream from './components/MyStream';
-import EtsyCallback from './components/EtsyCallback';
+import CallbackEtsy from './components/CallbackEtsy';
 
 // CONTAINERS
 import Products from './containers/Products';
@@ -46,7 +46,7 @@ class App extends React.Component {
               <Route path="/workstream" component={WorkStream} />
               <Route path="/mystream" component={MyStream} />
               <Route path="/admin" component={Admin} />
-              <Route path="/auth/callback/etsy" component={EtsyCallback} />
+              <Route path="/auth/callback/etsy" component={CallbackEtsy} />
             </Switch>
           </div>
         </BrowserRouter>
