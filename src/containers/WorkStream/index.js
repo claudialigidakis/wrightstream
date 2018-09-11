@@ -26,7 +26,6 @@ const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
-
   return result;
 };
 
@@ -55,27 +54,26 @@ class WorkStream extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-          items: getItemss(10),
-        };
-        this.onDragEnd = this.onDragEnd.bind(this);
+      items: getItemss(10),
+    };
   };
 
-    onDragEnd(result) {
-      // dropped outside the list
-      if (!result.destination) {
-        return;
-      }
-
-      const items = reorder(
-        this.state.items,
-        result.source.index,
-        result.destination.index
-      );
-
-      this.setState({
-        items,
-      });
+  onDragEnd = result => {
+    // dropped outside the list
+    if (!result.destination) {
+      return;
     }
+
+    const items = reorder(
+      this.state.items,
+      result.source.index,
+      result.destination.index
+    );
+
+    this.setState({
+      items,
+    });
+  }
 
   componentDidMount () {
     this.props.getPurchases();
