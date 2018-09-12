@@ -83,6 +83,7 @@ class WorkStream extends React.Component {
   };
 
   render () {
+    console.log(this.props.purchases[0])
     return (
       <section className="workstream">
         <div className="columns is-marginless">
@@ -113,6 +114,19 @@ class WorkStream extends React.Component {
                               )}
                             >
                               {item.content}
+                              {
+                                (() => {
+                                  if (this.props.purchases[0]) {
+                                    return (
+                                      <Purchase
+                                        key={this.props.purchases[0].id}
+                                        purchase={this.props.purchases[0]}
+                                        staff={this.props.staff}
+                                      />
+                                    );
+                                  }
+                                })()
+                              }
                             </div>
                           )}
                         </Draggable>
