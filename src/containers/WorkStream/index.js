@@ -34,7 +34,7 @@ const grid = 8;
 const getItemStyle = (isDragging, draggableStyle) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: 'none',
-  padding: grid * 2,
+  padding: grid,
   margin: `0 0 ${grid}px 0`,
 
   // change background colour if dragging
@@ -83,7 +83,7 @@ class WorkStream extends React.Component {
   };
 
   render () {
-    console.log(this.props.purchases[0])
+    console.log('purchases', this.props.purchases[0]);
     return (
       <section className="workstream">
         <div className="columns is-marginless">
