@@ -83,7 +83,7 @@ class WorkStream extends React.Component {
   };
 
   render () {
-    console.log('purchases', this.props.purchases[0]);
+//    console.log('purchases', this.props.purchases[0]);
     return (
       <section className="workstream">
         <div className="columns is-marginless">
