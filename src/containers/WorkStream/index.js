@@ -15,8 +15,8 @@ import Purchase from './components/Purchase';
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-const getItemss = count =>
-  Array.from({ length: count }, (v, k) => k).map(k => ({
+const purchasesToItems = array =>
+  Array.from({ length: array.length }, (v, k) => k).map(k => ({
     id: `item-${k}`,
     content: `item ${k}`,
   }));
@@ -54,7 +54,7 @@ class WorkStream extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      items: getItemss(10),
+      items: purchasesToItems(this.props.purchases),
     };
   };
 
@@ -101,7 +101,7 @@ class WorkStream extends React.Component {
                       ref={provided.innerRef}
                       style={getListStyle(snapshot.isDraggingOver)}
                     >
-                      {this.state.items.map((item, index) => (
+                      {this.props.purchases.map((item, index) => (
                         <Draggable key={item.id} draggableId={item.id} index={index}>
                           {(provided, snapshot) => (
                             <div
@@ -113,20 +113,10 @@ class WorkStream extends React.Component {
                                 provided.draggableProps.style
                               )}
                             >
-                              {item.content}
-                              {
-                                (() => {
-                                  if (this.props.purchases[0]) {
-                                    return (
-                                      <Purchase
-                                        key={this.props.purchases[0].id}
-                                        purchase={this.props.purchases[0]}
-                                        staff={this.props.staff}
-                                      />
-                                    );
-                                  }
-                                })()
-                              }
+                              <Purchase
+                                purchase={item}
+                                staff={this.props.staff}
+                              />
                             </div>
                           )}
                         </Draggable>
