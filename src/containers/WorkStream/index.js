@@ -101,8 +101,8 @@ class WorkStream extends React.Component {
                       ref={provided.innerRef}
                       style={getListStyle(snapshot.isDraggingOver)}
                     >
-                      {this.props.purchases.map((item, index) => (
-                        <Draggable key={item.id} draggableId={item.id} index={index}>
+                      {this.props.purchases.map((purchase, index) => (
+                        <Draggable key={purchase.id} draggableId={purchase.id} index={index}>
                           {(provided, snapshot) => (
                             <div
                               ref={provided.innerRef}
@@ -114,7 +114,7 @@ class WorkStream extends React.Component {
                               )}
                             >
                               <Purchase
-                                purchase={item}
+                                purchase={purchase}
                                 staff={this.props.staff}
                               />
                             </div>
