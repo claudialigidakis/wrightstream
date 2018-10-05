@@ -26,14 +26,14 @@ export const editItem = (id, stock) => {
 
 export const getLists = () => {
   return async (dispatch) => {
-    const payload = await Inventory.Lists()
+    const payload = await Inventory.getLists()
     dispatch({ type: GET_LISTS, payload });
   };
 };
 
 export const getWorkstreamList = () => {
   return async (dispatch) => {
-    const payload = await Inventory.workStreamList()
+    const payload = await Inventory.getWorkstreamList()
     dispatch({ type: GET_WORKSTREAM_LIST, payload });
   };
 };
@@ -47,23 +47,22 @@ export const addList = (name, items, bundles) => {
 
 export const getOrders = () => {
   return async (dispatch) => {
-    const payload = await Inventory.Orders()
+    const payload = await Inventory.getOrders()
     dispatch({ type: GET_ORDERS, payload });
   };
 }
 
 export const addOrder = (order, history) => {
   return async (dispatch) => {
-    const payload = await Inventory.AddOrder(order)
+    const payload = await Inventory.addOrder(order)
     dispatch({ type: ADD_ORDER, payload });
     history.push('/inventory/orders');
   };
 };
 
-
 export const editOrderSupply = (order_id, supply_id, supply_status, supply_qty) => {
   return async (dispatch) => {
-    const payload = await Inventory.EditOrderSupply(order_id, supply_id, supply_status, supply_qty)
+    const payload = await Inventory.editOrderSupply(order_id, supply_id, supply_status, supply_qty)
     dispatch({ type: EDIT_ORDER_SUPPLY, payload });
   };
 };
