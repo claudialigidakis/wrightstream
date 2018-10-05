@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getKinds } from '../../../../state/actions/products';
+import { getKinds, getSuppliesByKind } from '../../../../state/actions/products';
 
 // ==========
 
@@ -33,7 +33,7 @@ class Kinds extends React.Component {
           {
             this.props.kinds.map(kind => {
               return (
-                <li key={kind.id}><Link to={`/products/supplies/kind?id=${kind.id}`}>{kind.name}</Link></li>
+                <li key={kind.id}><Link to={`/products/supplies/kind?id=${kind.id}`} onClick={() => {this.props.getSuppliesByKind(kind.id)}}>{kind.name}</Link></li>
               )
             })
           }
@@ -61,11 +61,13 @@ class Kinds extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  kinds: state.products.kinds
+  kinds: state.products.kinds,
+  suppliesByKind: state.products.suppliesByKind
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getKinds
+  getKinds,
+  getSuppliesByKind
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Kinds);

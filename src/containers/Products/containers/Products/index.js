@@ -20,10 +20,10 @@ class Main extends React.Component {
     return (
       <div className="columns">
         {
-          this.props.recentProducts.map(product => {
+          this.props.recentProducts.map((product, i) => {
             return (
               <Product
-                key={product.id}
+                key={i}
                 id={product.id}
                 product={product.supplies ? 'item' : 'bundle'}
                 name={product.name}

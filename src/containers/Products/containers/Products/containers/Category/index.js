@@ -23,10 +23,10 @@ class Category extends React.Component {
     return (
       <div className="columns">
         {
-          this.props.productsByCategory.map(product => {
+          this.props.productsByCategory.map((product, i) => {
             return (
               <Product
-                key={product.id}
+                key={i}
                 id={product.id}
                 product={product.supplies ? 'item' : 'bundle'}
                 name={product.name}

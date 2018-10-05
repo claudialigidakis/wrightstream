@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getTypes } from '../../../../state/actions/products';
+import { getTypes, getSourcesByType } from '../../../../state/actions/products';
 
 // ==========
 
@@ -23,7 +23,7 @@ class Types extends React.Component {
           Browse
         </p>
         <ul className="menu-list">
-          <li><Link to="/products/supplies">All Sources</Link></li>
+          <li><Link to="/products/sources">All Sources</Link></li>
           <li><a className="disable">Archived</a></li>
         </ul>
         <p className="menu-label">
@@ -33,7 +33,7 @@ class Types extends React.Component {
           {
             this.props.types.map(type => {
               return (
-                <li key={type.id}><Link to={`/products/sources/type?id=${type.id}`}>{type.name}</Link></li>
+                <li key={type.id}><Link to={`/products/sources/type?id=${type.id}`} onClick={() => {this.props.getSourcesByType(type.id)}}>{type.name}</Link></li>
               )
             })
           }
@@ -52,11 +52,13 @@ class Types extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  types: state.products.types
+  types: state.products.types,
+  sourcesByType: state.products.sourcesByType
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getTypes
+  getTypes,
+  getSourcesByType
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Types);

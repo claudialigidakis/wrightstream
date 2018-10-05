@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getCategories, getUnlinkedProducts, getProducts } from '../../../../state/actions/products';
+import { getCategories, getUnlinkedProducts, getProducts, getProductsByCategory } from '../../../../state/actions/products';
 
 // COMPONENTS
 import UnlinkedProducts from './components/UnlinkedProducts';
@@ -46,7 +46,9 @@ class Categories extends React.Component {
           {
             this.props.categories.map(category => {
               return (
-                <li key={category.id}><Link to={`/products/category?id=${category.id}`}>{category.name}</Link></li>
+                <li key={category.id}>
+                  <Link to={`/products/category?id=${category.id}`} onClick={() => {this.props.getProductsByCategory(category.id)}}>{category.name}</Link>
+                </li>
               )
             })
           }
@@ -76,13 +78,15 @@ class Categories extends React.Component {
 const mapStateToProps = state => ({
   categories: state.products.categories,
   unlinkedProducts: state.products.unlinkedProducts,
-  products: state.products.products
+  products: state.products.products,
+  productsByCategory: state.products.productsByCategory
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getCategories,
   getUnlinkedProducts,
-  getProducts
+  getProducts,
+  getProductsByCategory
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);
