@@ -14,7 +14,7 @@ class Auth {
     return token.data
   }
 
-  static userSignUp = async (newShop, newUser, history) => {
+  static userSignup = async (newShop, newUser, history) => {
     const addShop = await request('/shops', 'post', newShop)
     const shop_id = addShop.data.data[0].id
     const newStaff = await request(`/shops/${shop_id}/staff`, 'post', newUser)

@@ -15,10 +15,10 @@ export const authEtsy = () => {
 
 export const getProductsEtsy = () => {
   return async (dispatch) => {
-    const payload = await Stores.ProductsEtsy()
+    const payload = await Stores.productsEtsy()
     dispatch({ type: GET_PRODUCTS_ETSY, payload });
 
-    const unlinkedProductsPayload = await Stores.UnlinkedProductsEtsy()
+    const unlinkedProductsPayload = await Stores.unlinkedProductsEtsy()
     dispatch({type: GET_UNLINKED_PRODUCTS, payload: unlinkedProductsPayload})
   };
 };

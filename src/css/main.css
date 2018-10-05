@@ -7772,11 +7772,18 @@ nav {
     margin: 1rem auto; }
   .settings img {
     display: block;
-    width: 125px;
-    height: 125px;
     margin: auto;
     border-radius: 50%;
     object-fit: cover; }
+    .settings img.shop-img {
+      width: 175px;
+      height: 175px;
+      border: 5px solid #e0e2ec; }
+    .settings img.profile-img {
+      width: 125px;
+      height: 125px; }
+  .settings .menu-label {
+    color: #9295a5; }
   .settings li {
     line-height: 1.8rem; }
   .settings .fa-icon {

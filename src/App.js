@@ -21,6 +21,7 @@ import MyStream from './containers/MyStream';
 import Signup from './containers/Signup';
 import Login from './containers/Login';
 import Settings from './containers/Settings';
+import Profile from './containers/Profile';
 import Admin from './containers/Admin';
 
 // ==========
@@ -41,6 +42,7 @@ class App extends React.Component {
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
               <Route path="/settings" component={Settings} />
+              <Route path="/profile" component={Profile} />
               <Route path="/products" component={Products} />
               <Route path="/inventory" component={Inventory} />
               <Route path="/workstream" component={WorkStream} />

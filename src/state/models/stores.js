@@ -12,12 +12,12 @@ class Stores {
     return response.data.loginUrl
   }
 
-  static ProductsEtsy = async () => {
+  static productsEtsy = async () => {
     const response = await request('/etsy/findAllListingActive')
     return response.data
   }
 
-  static UnlinkedProductsEtsy = async () => {
+  static unlinkedProductsEtsy = async () => {
     const shop_id = await Stores._authenticatedRequest()
     const response = await request(`/products/${shop_id}/allUnlinked`)
     return response.data.data
