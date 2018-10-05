@@ -52,10 +52,11 @@ export const getOrders = () => {
   };
 }
 
-export const addOrder = (order) => {
+export const addOrder = (order, history) => {
   return async (dispatch) => {
     const payload = await Inventory.AddOrder(order)
     dispatch({ type: ADD_ORDER, payload });
+    history.push('/inventory/orders');
   };
 };
 

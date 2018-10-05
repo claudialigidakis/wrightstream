@@ -48,7 +48,7 @@ class Products extends React.Component {
                 <Switch>
                   <Route path="/products/supplies" component={KindControl} />
                   <Route path="/products/sources" component={TypeControl} />
-                  <Route path="/products" render={() => <CategoryControl getProductsEtsy={this.props.getProductsEtsy} />} />
+                  <Route path="/products" render={(props) => <CategoryControl getProductsEtsy={this.props.getProductsEtsy} {...props}/>} />
                 </Switch>
                 <Nav />
               <div className="products-container">
