@@ -154,6 +154,8 @@ class Signup extends React.Component {
   };
 };
 
-const mapDispatchToProps = dispatch => ({userSignup: bindActionCreators(userSignup, dispatch)});
+const mapDispatchToProps = dispatch => bindActionCreators({
+  userSignup
+}, dispatch);
 
 export default connect(null, mapDispatchToProps)(Signup);

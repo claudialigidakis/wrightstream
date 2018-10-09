@@ -872,11 +872,24 @@ nav {
 
   img {
     display: block;
-    width: 125px;
-    height: 125px;
     margin: auto;
     border-radius: 50%;
     object-fit: cover;
+
+    &.shop-img {
+      width: 175px;
+      height: 175px;
+      border: 5px solid darken($slate, 5%);
+    }
+
+    &.profile-img {
+      width: 125px;
+      height: 125px;
+    }
+  }
+
+  .menu-label {
+    color: $quartz;
   }
 
   li {

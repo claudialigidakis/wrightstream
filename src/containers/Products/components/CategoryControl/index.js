@@ -4,6 +4,7 @@ import React from 'react';
 // COMPONENTS
 import ItemAdd from '../ItemAdd';
 import BundleAdd from '../BundleAdd';
+import SupplyAdd from '../SupplyAdd';
 import CategoryAdd from '../CategoryControl/components/CategoryAdd';
 import CategoryEdit from '../CategoryControl/components/CategoryEdit';
 import CategoryDelete from '../CategoryControl/components/CategoryDelete';
@@ -16,22 +17,43 @@ class CategoryControl extends React.Component {
     this.state = {
       modal: false,
       modalClasses: 'modal',
-      action: ''
+      modalSupply: false,
+      action: '',
+      modalSupplyClasses: 'modal',
+      modalDisable: false
     };
   };
 
   toggle = event => {
-    if (!this.state.modal) {
+    if (!this.state.modalDisable) {
+      if (!this.state.modal) {
+        this.setState({
+          modal: true,
+          modalClasses: this.state.modalClasses + ' is-active',
+          action: event.target.id
+        });
+      } else {
+        this.setState({
+          modal: false,
+          modalClasses: 'modal',
+          action: ''
+        });
+      }
+    }
+  };
+
+  toggleSupply = () => {
+    if (!this.state.modalSupply) {
       this.setState({
-        modal: true,
-        modalClasses: this.state.modalClasses + ' is-active',
-        action: event.target.id
+        modalSupply: true,
+        modalSupplyClasses: this.state.modalSupplyClasses + ' is-active',
+        modalDisable: true
       });
     } else {
       this.setState({
-        modal: false,
-        modalClasses: 'modal',
-        action: ''
+        modalSupply: false,
+        modalSupplyClasses: 'modal',
+        modalDisable: false
       });
     }
   };
@@ -87,7 +109,7 @@ class CategoryControl extends React.Component {
                 (() => {
                   switch (this.state.action) {
                     case 'add-item':
-                      return <ItemAdd toggle={this.toggle} />;
+                      return <ItemAdd toggle={this.toggle} toggleSupply={this.toggleSupply} />;
                     case 'add-bundle':
                       return <BundleAdd toggle={this.toggle} />;
                     case 'add-category':
@@ -104,6 +126,15 @@ class CategoryControl extends React.Component {
             </div>
           </div>
           <button className="modal-close is-large" onClick={this.toggle}></button>
+        </div>
+        <div className={this.state.modalSupplyClasses}>
+          <div className="modal-background" onClick={this.toggleSupply}></div>
+          <div className="modal-content modal-form">
+            <div className="modal-container">
+              <SupplyAdd toggle={this.toggleSupply} />
+            </div>
+          </div>
+          <button className="modal-close is-large" onClick={this.toggleSupply}></button>
         </div>
       </div>
     );

@@ -14,7 +14,7 @@ export const userLogin = ({email, password}, history) => {
   return async (dispatch) => {
     try {
       dispatch({type: USER_LOGIN_PENDING});
-      const payload = await Auth.userLogin({email,password}, history)
+      const payload = await Auth.userLogin({email,password})
       dispatch({type: USER_LOGIN_SUCCESS, payload})
       history.push('/settings');
     } catch (err) {
@@ -28,7 +28,7 @@ export const userSignup = (newShop, newUser, history) => {
   return async (dispatch) => {
     try {
       dispatch({type: USER_SIGNUP_PENDING});
-      const payload = await Auth.userSignUp(newShop, newUser, history)
+      const payload = await Auth.userSignup(newShop, newUser)
       dispatch({type: USER_SIGNUP_SUCCESS, payload});
       history.push('/');
     } catch (err) {

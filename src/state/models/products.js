@@ -46,7 +46,7 @@ class Products {
   static allSources = async () => {
     const shop_id = await Products._authenticatedRequest()
     const response = await request(`/sources/${shop_id}/allSources`)
-    return response.data.data
+    return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
   }
 
   static allTypes = async () => {
@@ -194,7 +194,7 @@ class Products {
 
   static sourcesByType = async (id) => {
     const sources = await Products.allSources()
-    const filterSources = sources.filter(source => source.kind_id === parseInt(id, 10));
+    const filterSources = sources.filter(source => source.type_id === parseInt(id, 10));
     return filterSources.sort((a, b) => a.name.localeCompare(b.name));
   }
 

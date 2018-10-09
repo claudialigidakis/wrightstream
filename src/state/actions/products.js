@@ -1,4 +1,3 @@
-import request from '../../helpers/request';
 import Products from '../models/products'
 
 export const GET_PRODUCTS = 'GET_PRODUCTS';

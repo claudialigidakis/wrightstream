@@ -117,12 +117,12 @@ class Lists extends React.Component {
   handleSubmit = () => {
     const items = this.state.items.map(item => ({id: item.item_id, item_qty: item.item_qty}));
     const bundles = this.state.bundles.map(bundle => ({id: bundle.bundle_id, bundle_qty: bundle.bundle_qty}));
-    this.props.addOrder({items, bundles});
     this.setState({
       selected: [],
       items: [],
       bundles: []
     }, this.estimate);
+    this.props.addOrder({items, bundles}, this.props.history);
   };
 
   componentDidMount () {
@@ -134,6 +134,7 @@ class Lists extends React.Component {
   };
 
   render () {
+    console.log(this.props.testprop, 'hm')
     let workstreamItems = [];
     for (let purchase of this.props.workstreamList) {
       for (let purchaseItem of purchase.items) {
@@ -185,7 +186,10 @@ class Lists extends React.Component {
               <button
                 className="button is-outlined is-primary"
                 disabled={this.props.estimatorSupplies.length > 0 ? false : true}
-                onClick={this.handleSubmit}
+                onClick={() => {
+                  this.handleSubmit();
+                  this.props.redirectOrder('orders');
+                }}
               >Order</button>
             </div>
           </div>

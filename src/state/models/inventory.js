@@ -7,18 +7,6 @@ class Inventory {
     return authToken.data.shops_id
   }
 
-  static Lists = async () => {
-    const shop_id = await Inventory._authenticatedRequest()
-    const response = await request(`/lists/${shop_id}/allLists`);
-    return response.data.data
-  }
-
-  static Orders = async () => {
-    const shop_id = await Inventory._authenticatedRequest()
-    const response = await request(`/orders/${shop_id}/allOrders`)
-    return response.data.data
-  }
-
   static editSupply = async (id, stock_qty) => {
     const shop_id = await Inventory._authenticatedRequest()
     await request(`/supplies/${id}`, 'put', {stock_qty})
@@ -35,7 +23,13 @@ class Inventory {
     return allItems.data.data.sort((a, b) => a.name.localeCompare(b.name));
   }
 
-  static workStreamList = async () => {
+  static getLists = async () => {
+    const shop_id = await Inventory._authenticatedRequest()
+    const response = await request(`/lists/${shop_id}/allLists`);
+    return response.data.data
+  }
+
+  static getWorkstreamList = async () => {
     const shop_id = await Inventory._authenticatedRequest()
     const response = await request(`/helper/wrightStream/${shop_id}`)
     return response.data.data
@@ -44,19 +38,24 @@ class Inventory {
   static addList = async (name, items, bundles) => {
     const shop_id = await Inventory._authenticatedRequest()
     await request(`/lists/${shop_id}`, 'post', {name, items, bundles})
-    return Inventory.Lists()
+    return Inventory.getLists()
   }
 
-  static AddOrder = async (order) => {
+  static getOrders = async () => {
+    const shop_id = await Inventory._authenticatedRequest()
+    const response = await request(`/orders/${shop_id}/allOrders`)
+    return response.data.data
+  }
+
+  static addOrder = async (order) => {
     const shop_id = await Inventory._authenticatedRequest()
     await request(`/orders/${shop_id}`, 'post', {order})
-    return Inventory.Orders()
+    return Inventory.getOrders()
   }
 
-  static EditOrderSupply = async (order_id, supply_id, supply_status, supply_qty) => {
+  static editOrderSupply = async (order_id, supply_id, supply_status, supply_qty) => {
     await request(`/orders/orderSupply/${order_id}`, 'put', {supply_id, supply_status, supply_qty})
-    const orders = await Inventory.Orders()
-    return orders.sort((a, b) => a.name.localeCompare(b.name));
+    return Inventory.getOrders()
   }
 
 }

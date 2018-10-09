@@ -13,7 +13,6 @@ import './css/linearicons.css';
 
 // COMPONENTS
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 
 // ==========
 
@@ -25,4 +24,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
-registerServiceWorker();
