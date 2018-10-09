@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { getSupplies, addItem, editItem } from '../../../../state/actions/products';
+import { getSupplies, getKinds, getSources, addItem, editItem } from '../../../../state/actions/products';
 
 // COMPONENTS
 import ItemAddSupply from './components/ItemAddSupply';
@@ -137,6 +137,8 @@ class ItemAdd extends React.Component {
 
   componentDidMount () {
     this.props.getSupplies();
+    this.props.getKinds();
+    this.props.getSources();
     if (this.props.item) {
       const suppliesInputsArray = this.props.item.ingredients.map(ingredient => shortid.generate());
       this.setState({
@@ -252,6 +254,10 @@ class ItemAdd extends React.Component {
             }
           />
         )}
+        <p className="help">
+          Can't find what you are looking for? <a onClick={() => {this.props.toggleSupply()}}>Add Supply</a>.
+        </p>
+        <br />
         <h1 className="title">Steps</h1>
         {this.state.stepsInputs.map((input, i) =>
           <ItemAddStep
@@ -289,11 +295,15 @@ const mapStateToProps = state => ({
   products: state.products.products,
   unlinkedProducts: state.products.unlinkedProducts,
   categories: state.products.categories,
-  supplies: state.products.supplies
+  supplies: state.products.supplies,
+  kinds: state.products.kinds,
+  sources: state.products.sources
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getSupplies,
+  getKinds,
+  getSources,
   addItem,
   editItem
 }, dispatch);
