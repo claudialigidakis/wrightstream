@@ -9,6 +9,7 @@ import ItemAdd from '../../../../components/ItemAdd';
 import ItemDelete from '../../../../components/ItemDelete';
 import BundleAdd from '../../../../components/BundleAdd';
 import BundleDelete from '../../../../components/BundleDelete';
+import SupplyAdd from '../../../../components/SupplyAdd';
 
 // ==========
 
@@ -20,13 +21,16 @@ class Product extends React.Component {
       modalClasses: 'modal',
       modalControl: false,
       modalControlClasses: 'modal',
-      modalDisable: false,
-      action: ''
+      modalControlDisable: false,
+      action: '',
+      modalSupply: false,
+      modalSupplyClasses: 'modal',
+      modalSupplyDisable: false
     };
   };
 
   toggle = () => {
-    if (!this.state.modalDisable) {
+    if (!this.state.modalControlDisable) {
       if (!this.state.modal) {
         this.setState({
           modal: true,
@@ -42,19 +46,37 @@ class Product extends React.Component {
   };
 
   toggleControl = event => {
-    if (!this.state.modalControl) {
+    if (!this.state.modalSupplyDisable) {
+      if (!this.state.modalControl) {
+        this.setState({
+          modalControl: true,
+          modalControlClasses: this.state.modalControlClasses + ' is-active',
+          modalControlDisable: true,
+          action: event.target.id
+        });
+      } else {
+        this.setState({
+          modalControl: false,
+          modalControlClasses: 'modal',
+          modalControlDisable: false,
+          action: ''
+        });
+      }
+    }
+  };
+
+  toggleSupply = event => {
+    if (!this.state.modalSupply) {
       this.setState({
-        modalControl: true,
-        modalControlClasses: this.state.modalControlClasses + ' is-active',
-        modalDisable: true,
-        action: event.target.id
+        modalSupply: true,
+        modalSupplyClasses: this.state.modalSupplyClasses + ' is-active',
+        modalSupplyDisable: true
       });
     } else {
       this.setState({
-        modalControl: false,
-        modalControlClasses: 'modal',
-        modalDisable: false,
-        action: ''
+        modalSupply: false,
+        modalSupplyClasses: 'modal',
+        modalSupplyDisable: false
       });
     }
   };
@@ -174,7 +196,7 @@ class Product extends React.Component {
             <div className="modal-container">
               {
                 this.state.action === 'edit' ? (
-                  this.props.product === 'item' ? <ItemAdd item={this.props} toggle={this.toggleControl} /> : <BundleAdd bundle={this.props} toggle={this.toggleControl} />
+                  this.props.product === 'item' ? <ItemAdd item={this.props} toggle={this.toggleControl} toggleSupply={this.toggleSupply} /> : <BundleAdd bundle={this.props} toggle={this.toggleControl} />
                 ) : (
                   this.state.action === 'delete' ? (
                     this.props.product === 'item' ? <ItemDelete item={this.props} toggle={this.toggleControl} toggleParent={this.toggle} /> : <BundleDelete bundle={this.props} toggle={this.toggleControl} toggleParent={this.toggle} />
@@ -184,6 +206,15 @@ class Product extends React.Component {
             </div>
           </div>
           <button className="modal-close is-large"  onClick={this.toggleControl}></button>
+        </div>
+        <div className={this.state.modalSupplyClasses}>
+          <div className="modal-background" onClick={this.toggleSupply}></div>
+          <div className="modal-content modal-form">
+            <div className="modal-container">
+              <SupplyAdd toggle={this.toggleSupply} />
+            </div>
+          </div>
+          <button className="modal-close is-large" onClick={this.toggleSupply}></button>
         </div>
       </div>
     );

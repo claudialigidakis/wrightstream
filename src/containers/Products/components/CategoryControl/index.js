@@ -17,15 +17,15 @@ class CategoryControl extends React.Component {
     this.state = {
       modal: false,
       modalClasses: 'modal',
-      modalSupply: false,
       action: '',
+      modalSupply: false,
       modalSupplyClasses: 'modal',
-      modalDisable: false
+      modalSupplyDisable: false
     };
   };
 
   toggle = event => {
-    if (!this.state.modalDisable) {
+    if (!this.state.modalSupplyDisable) {
       if (!this.state.modal) {
         this.setState({
           modal: true,
@@ -47,13 +47,13 @@ class CategoryControl extends React.Component {
       this.setState({
         modalSupply: true,
         modalSupplyClasses: this.state.modalSupplyClasses + ' is-active',
-        modalDisable: true
+        modalSupplyDisable: true
       });
     } else {
       this.setState({
         modalSupply: false,
         modalSupplyClasses: 'modal',
-        modalDisable: false
+        modalSupplyDisable: false
       });
     }
   };
