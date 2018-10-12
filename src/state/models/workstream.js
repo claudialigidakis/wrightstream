@@ -7,7 +7,7 @@ class WorkStream {
     return authToken.data.shops_id
   }
 
-  static purchases = async () => {
+  static getPurchases = async () => {
     const shop_id = await WorkStream._authenticatedRequest()
     const response = await request(`/purchases/${shop_id}/allPurchases`)
     return response.data.data.filter(purchase => purchase.archived === false)

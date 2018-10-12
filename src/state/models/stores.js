@@ -1,39 +1,27 @@
 import request from '../../helpers/request';
+import Auth from './auth';
 
 class Stores {
-
-  static _authenticatedRequest = async () => {
-    const authToken = await request('/auth/token')
-    return authToken.data.shops_id
-  }
-
   static authEtsy = async () => {
-    const response = await request('/auth/etsy/loginUrl')
-    return response.data.loginUrl
-  }
+    const response = await request('/auth/etsy/loginUrl');
+    return response.data.loginUrl;
+  };
 
-  static productsEtsy = async () => {
-    const response = await request('/etsy/findAllListingActive')
-    return response.data
-  }
+  static getProductsEtsy = async () => {
+    const response = await request('/etsy/findAllListingActive');
+    return response.data;
+  };
 
-  static unlinkedProductsEtsy = async () => {
-    const shop_id = await Stores._authenticatedRequest()
-    const response = await request(`/products/${shop_id}/allUnlinked`)
-    return response.data.data
-  }
+  static getUnlinkedProductsEtsy = async () => {
+    const shop_id = await Auth._authenticatedRequest();
+    const response = await request(`/products/${shop_id}/allUnlinked`);
+    return response.data.data;
+  };
 
-  static purchaseEtsy = async () => {
-    const response = await request('/etsy/findAllPurchases')
-    return response.data
-  }
+  static getPurchasesEtsy = async () => {
+    const response = await request('/etsy/findAllPurchases');
+    return response.data;
+  };
+};
 
-  static shopPurchases = async () => {
-    const shop_id = await Stores._authenticatedRequest()
-    const response = await request(`/purchases/${shop_id}/allPurchases`)
-    return response.data.data.filter(purchase => purchase.archived === false);
-  }
-
-
-}
-export default Stores
+export default Stores;

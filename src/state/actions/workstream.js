@@ -14,7 +14,7 @@ export const ARCHIVE = 'ARCHIVE';
 
 export const getPurchases = () => {
   return async (dispatch) => {
-    const payload = await WorkStream.purchases()
+    const payload = await WorkStream.getPurchases()
     dispatch({type: GET_PURCHASES, payload});
   };
 };
