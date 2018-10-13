@@ -28,7 +28,7 @@ class Inventory {
   static addList = async (name, items, bundles) => {
     const shop_id = await Auth._authenticatedRequest();
     await request(`/lists/${shop_id}`, 'post', {name, items, bundles});
-    return this.getLists();
+    return Inventory.getLists();
   };
 
   static getOrders = async () => {
@@ -40,12 +40,12 @@ class Inventory {
   static addOrder = async (order) => {
     const shop_id = await Auth._authenticatedRequest();
     await request(`/orders/${shop_id}`, 'post', {order});
-    return this.getOrders();
+    return Inventory.getOrders();
   };
 
   static editOrderSupply = async (order_id, supply_id, supply_status, supply_qty) => {
     await request(`/orders/orderSupply/${order_id}`, 'put', {supply_id, supply_status, supply_qty});
-    return this.getOrders();
+    return Inventory.getOrders();
   };
 };
 
