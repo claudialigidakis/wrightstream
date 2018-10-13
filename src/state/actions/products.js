@@ -59,7 +59,7 @@ export const getRecentProducts = () => {
 
 export const getItems = () => {
   return async (dispatch) => {
-    const items = await Products.allItems()
+    const items = await Products.getItems()
     const payload = items.sort((a, b) => a.name.localeCompare(b.name));
     dispatch({ type: GET_ITEMS, payload });
   };
@@ -181,7 +181,7 @@ export const getProductsByCategory = (id) => {
 
 export const getSupplies = () => {
   return async (dispatch) => {
-    const payload = await Products.allSupplies()
+    const payload = await Products.getSupplies()
     dispatch({type: GET_SUPPLIES, payload})
   };
 };

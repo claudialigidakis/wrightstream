@@ -13,7 +13,7 @@ class Products {
     return response.data.data
   }
 
-  static allItems = async () => {
+  static getItems = async () => {
     const shop_id = await Products._authenticatedRequest()
     const response = await request(`/items/${shop_id}/allItems`)
     return response.data.data
@@ -31,7 +31,7 @@ class Products {
     return response.data.data
   }
 
-  static allSupplies = async () => {
+  static getSupplies = async () => {
     const shop_id = await Products._authenticatedRequest()
     const response = await request(`/supplies/${shop_id}/allSupplies`)
     return response.data.data.sort((a, b) => a.name.localeCompare(b.name));
