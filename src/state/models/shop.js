@@ -7,6 +7,12 @@ class Shop {
     const response = await request(`/shops/${shop_id}`);
     return response.data.data;
   };
+  
+  static getStaff = async () => {
+    const shop_id = await Auth._authenticatedRequest();
+    const staff = await request(`/shops/${shop_id}/staff`);
+    return staff.data.data;
+  };
 };
 
 export default Shop;
