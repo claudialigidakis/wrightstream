@@ -9,7 +9,6 @@ export const GET_ORDERS = 'GET_ORDERS';
 export const ADD_ORDER = 'ADD_ORDER';
 export const EDIT_ORDER_SUPPLY = 'EDIT_ORDER_SUPPLY';
 
-
 export const editSupply = (id, stock_qty) => {
   return async dispatch => {
     const payload = await Inventory.editSupply(id, stock_qty);

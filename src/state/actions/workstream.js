@@ -12,7 +12,6 @@ export const GET_STAFF = 'GET_STAFF';
 export const ASSIGN_STAFF = 'ASSIGN_STAFF';
 export const ARCHIVE = 'ARCHIVE';
 
-
 export const getPurchases = () => {
   return async dispatch => {
     const payload = await WorkStream.getPurchases();

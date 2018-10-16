@@ -35,7 +35,6 @@ export const EDIT_TYPE = 'EDIT_TYPE';
 export const DELETE_TYPE = 'DELETE_TYPE';
 export const GET_SOURCES_BY_TYPE = 'GET_SOURCES_BY_TYPE';
 
-
 export const getItems = () => {
   return async dispatch => {
     const payload = await Products.getItems();
