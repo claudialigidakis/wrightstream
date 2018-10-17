@@ -28,7 +28,6 @@ import Kind from './containers/Supplies/containers/Kind';
 import Sources from './containers/Sources';
 import Type from './containers/Sources/containers/Type';
 
-
 // ==========
 
 class Products extends React.Component {
