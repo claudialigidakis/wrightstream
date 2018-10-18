@@ -47,9 +47,6 @@ class Profile extends React.Component {
             </div>
           </div>
           <div className="column is-8">
-            <div>
-              hi
-            </div>
           </div>
         </div>
       </section>
