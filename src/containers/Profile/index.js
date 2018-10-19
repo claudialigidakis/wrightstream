@@ -38,7 +38,7 @@ class Profile extends React.Component {
                     </li>
                   </ul>
                   <p className="profile-bio">
-                    Lorem ipsum stuff
+                    Staff biography
                   </p>
                 </aside>
                 <hr />
