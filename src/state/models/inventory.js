@@ -15,13 +15,13 @@ class Inventory {
 
   static getLists = async () => {
     const shop_id = await Auth._authenticatedRequest();
-    const response = await request(`/lists/${shop_id}/allLists`);
+    const response = await request(`/lists/${shop_id}/all_lists`);
     return response.data.data;
   };
 
   static getWorkstreamList = async () => {
     const shop_id = await Auth._authenticatedRequest();
-    const response = await request(`/helper/wrightStream/${shop_id}`);
+    const response = await request(`/helper/wright_stream/${shop_id}`);
     return response.data.data;
   };
 
@@ -33,7 +33,7 @@ class Inventory {
 
   static getOrders = async () => {
     const shop_id = await Auth._authenticatedRequest();
-    const response = await request(`/orders/${shop_id}/allOrders`);
+    const response = await request(`/orders/${shop_id}/all_orders`);
     return response.data.data;
   };
 
@@ -44,7 +44,7 @@ class Inventory {
   };
 
   static editOrderSupply = async (order_id, supply_id, supply_status, supply_qty) => {
-    await request(`/orders/orderSupply/${order_id}`, 'put', {supply_id, supply_status, supply_qty});
+    await request(`/orders/order_supply/${order_id}`, 'put', {supply_id, supply_status, supply_qty});
     return Inventory.getOrders();
   };
 };

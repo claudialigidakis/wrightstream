@@ -4,7 +4,7 @@ import Auth from './auth';
 class WorkStream {
   static getPurchases = async () => {
     const shop_id = await Auth._authenticatedRequest();
-    const response = await request(`/purchases/${shop_id}/allPurchases`);
+    const response = await request(`/purchases/${shop_id}/all_purchases`);
     return response.data.data.filter(purchase => purchase.archived === false);
   };
 
