@@ -17,7 +17,7 @@ class Helper {
   };
 
   static estimator = async (items, bundles) => {
-    const response = await request('/helper/orderPredictor', 'post', {items, bundles});
+    const response = await request('/helper/compare_order', 'post', {items, bundles});
     return response.data.data;
   };
 };

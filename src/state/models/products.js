@@ -10,7 +10,7 @@ class Products {
 
   static addItem = async (name, productId, categoryId, photo, stock, supplies, steps) => {
     const shop_id = await Auth._authenticatedRequest();
-    await request(`/items/${shop_id}`, 'post', {name, product, category, photo, stock, supplies, steps});
+    await request(`/items/${shop_id}`, 'post', {name, productId, categoryId, photo, stock, supplies, steps});
     return Products.getItems();
   };
 
