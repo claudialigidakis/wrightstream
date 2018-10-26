@@ -15,6 +15,8 @@ class Signup extends React.Component {
       isValid: true,
       passwordClasses: 'input',
       shop_name: '',
+      shop_username: '',
+      shop_email: '',
       first_name: '',
       last_name: '',
       email: '',
@@ -57,6 +59,32 @@ class Signup extends React.Component {
                             id="shop_name"
                             value={this.state.shop_name}
                             onChange={event => this.setState({shop_name: event.target.value})}
+                            required
+                          />
+                        </p>
+                      </div>
+                      <div className="field">
+                        <p className="control">
+                          <input
+                            className="input"
+                            type="text"
+                            placeholder="Shop Username"
+                            id="shop_username"
+                            value={this.state.shop_username}
+                            onChange={event => this.setState({shop_username: event.target.value})}
+                            required
+                          />
+                        </p>
+                      </div>
+                      <div className="field">
+                        <p className="control">
+                          <input
+                            className="input"
+                            type="email"
+                            placeholder="Shop Email"
+                            id="shop_email"
+                            value={this.state.shop_email}
+                            onChange={event => this.setState({shop_email: event.target.value})}
                             required
                           />
                         </p>

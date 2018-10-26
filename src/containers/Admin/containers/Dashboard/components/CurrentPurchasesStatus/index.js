@@ -4,7 +4,7 @@ import React from 'react';
 // REDUX
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { purchaseStatuses } from '../../../../../../state/actions/admin';
+import { getPurchaseStatuses } from '../../../../../../state/actions/admin';
 
 // CHART
 import ReactChartkick, { PieChart } from 'react-chartkick';
@@ -23,7 +23,7 @@ class CurrentPurchasesStatus extends React.Component {
   };
 
   componentDidMount () {
-    this.props.purchaseStatuses();
+    this.props.getPurchaseStatuses();
   };
 
   render () {
@@ -51,7 +51,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  purchaseStatuses
+  getPurchaseStatuses
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CurrentPurchasesStatus);

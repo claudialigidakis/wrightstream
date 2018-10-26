@@ -38,7 +38,7 @@ class Profile extends React.Component {
                     </li>
                   </ul>
                   <p className="profile-bio">
-                    Lorem ipsum stuff
+                    Staff biography
                   </p>
                 </aside>
                 <hr />
@@ -47,9 +47,6 @@ class Profile extends React.Component {
             </div>
           </div>
           <div className="column is-8">
-            <div>
-              hi
-            </div>
           </div>
         </div>
       </section>

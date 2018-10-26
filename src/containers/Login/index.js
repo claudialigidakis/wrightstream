@@ -12,6 +12,7 @@ class Login extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
+      shop_username: '',
       email: '',
       password: ''
     };
@@ -30,6 +31,19 @@ class Login extends React.Component {
             <div className="columns">
               <div className="column is-4-desktop is-offset-4-desktop">
                 <form onSubmit={this.handleLogin}>
+                  <div className="field">
+                    <p className="control">
+                      <input
+                        className="input"
+                        type="text"
+                        placeholder="Shop Username"
+                        id="shop_username"
+                        value={this.state.shop_username}
+                        onChange={event => this.setState({shop_username: event.target.value})}
+                        required
+                      />
+                    </p>
+                  </div>
                   <div className="field">
                     <p className="control">
                       <input
