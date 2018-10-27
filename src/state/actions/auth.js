@@ -10,11 +10,11 @@ export const GET_USER = 'GET_USER';
 export const NOT_LOGGED_IN = 'NOT_LOGGED_IN';
 export const USER_LOGOUT = 'USER_LOGOUT';
 
-export const userLogin = ({email, password}, history) => {
+export const userLogin = ({shop_username, email, password}, history) => {
   return async dispatch => {
     try {
       dispatch({type: USER_LOGIN_PENDING});
-      const payload = await Auth.userLogin({email,password});
+      const payload = await Auth.userLogin({shop_username, email, password});
       dispatch({type: USER_LOGIN_SUCCESS, payload});
       history.push('/settings');
     } catch (err) {
